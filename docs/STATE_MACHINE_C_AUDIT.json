@@ -218,7 +218,7 @@
       "其他发布文件": "已按用户确认添加MIT LICENSE，安装包测试核验其纳入。",
       "待定": [],
       "构建配置": "ES2022 ESM + 类型声明；package.json的main、types、exports指向dist，prepack执行build。",
-      "CI": ".github/workflows/ci.yml已编写，推送到公开仓库后执行。",
+      "CI": "GitHub Actions 已通过：依赖安装、类型检查和完整测试；https://github.com/wintercn/gradual-json/actions/runs/38021152315。",
       "包名更新": {
         "包名": "gradual-json",
         "日期": "2026-10-10",
@@ -231,7 +231,7 @@
           "README.md",
           "CHANGELOG.md"
         ],
-        "验证边界": "仅更新包名及文档；上述安装包记录保留其执行时的临时身份。未发布到npm。"
+        "验证边界": "更名后已使用正式 gradual-json@0.1.0 身份完成安装包测试；正式发布结果见首版发布准备记录。"
       },
       "日志": "/private/tmp/gradual-json-0.1.0-package-tests.log",
       "版本与许可": "用户确认0.1.0、MIT、公开仓库wintercn/gradual-json。"
@@ -253,6 +253,12 @@
     "许可证": "MIT",
     "仓库": "https://github.com/wintercn/gradual-json",
     "源码变动": "本次发布仅更新元数据、许可证、文档和忽略规则，解析器源码与冻结设计文档保持既有SHA256。",
-    "状态": "发布文件和测试准备完成，正在执行GitHub推送与npm发布。"
+    "状态": "已推送公开 GitHub 仓库并发布到 npm；线上 latest 为 0.1.0，独立项目从官方注册表安装并验证渐进式解析通过。",
+    "GitHub发布": "https://github.com/wintercn/gradual-json/releases/tag/v0.1.0",
+    "npm发布": "https://www.npmjs.com/package/gradual-json/v/0.1.0",
+    "发布时间": "2026-10-10",
+    "发布包SHA1": "d12886fcad668ef8dde13676b087ec83dab2bfe8",
+    "发布包完整性": "sha512-/CY1cjX0iTRyKG+YqOIm2EUO8E48coPH+xx6rwaNG0OVBJIz616ATBCgCgVlm/MmveeD7GDnX5I5kN0edujjSg==",
+    "线上安装验证": "实际从官方 npm 注册表安装 gradual-json@0.1.0；检查字符串逐步写回、数组值挂载、根引用一致及最终解析结果，全部通过。"
   }
 }
