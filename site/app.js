@@ -1,6 +1,7 @@
-import { computed, createApp, onMounted, reactive, ref, watch } from "./assets/vue.js";
+import { computed, createApp, onMounted, reactive, ref, shallowRef, watch } from "./assets/vue.js";
 import { parse } from "./assets/parser.js";
-import scenarios from "./scenarios.js?v=1";
+import scenarios from "./scenarios.js?v=2";
+import ObjectInspector from "./object-inspector.js?v=1";
 
 const copyInstall = document.querySelector(".copy-install");
 copyInstall.addEventListener("click", async () => {
@@ -27,7 +28,8 @@ createApp({
       '输入结束并校验通过，返回这个完整对象。',
     ];
     const step = ref(0);
-    const constructed = ref("");
+    const constructed = shallowRef();
+    const revision = ref(0);
     const complete = ref(false);
     const playing = ref(true);
     const waiting = ref(false);
@@ -55,7 +57,8 @@ createApp({
       advance();
       const host = {};
       step.value = 0;
-      constructed.value = "";
+      constructed.value = undefined;
+      revision.value = 0;
       complete.value = false;
       error.value = "";
       async function* chunks() {
@@ -70,7 +73,8 @@ createApp({
           if (id !== runId) throw new DOMException("演示已重新开始", "AbortError");
           yield parts[index];
           // 解析器消费当前块后，读取普通宿主对象的实际内容用于展示。
-          constructed.value = JSON.stringify(host.data, null, 2);
+          constructed.value = host.data;
+          revision.value++;
           step.value = index + 1;
         }
       }
@@ -83,11 +87,11 @@ createApp({
     }
 
     onMounted(start);
-    return { parts, notes, step, constructed, complete, playing, waiting, error, advance, togglePlay, start };
+    return { parts, notes, step, constructed, revision, complete, playing, waiting, error, advance, togglePlay, start };
   },
-}).mount("#construction-demo");
+}).component("ObjectInspector", ObjectInspector).mount("#construction-demo");
 
-createApp(scenarios).mount("#scenarios-demo");
+createApp(scenarios).component("ObjectInspector", ObjectInspector).mount("#scenarios-demo");
 
 createApp({
   setup() {
@@ -109,7 +113,6 @@ createApp({
     const input = computed(() => samples[sample.value]);
     const running = computed(() => status.value === "streaming");
     const progress = computed(() => Math.round(received.value.length / input.value.length * 100));
-    const constructed = computed(() => JSON.stringify(host.data, null, 2));
     const items = computed(() => host.data?.items ?? []);
     const total = computed(() => items.value.reduce((sum, item) => sum + (item.price ?? 0), 0));
     const statusLabel = computed(() => ({ idle: "准备接收 · 点击开始运行", streaming: "正在接收 · 结果逐步构造", complete: "解析完成 · EOF 校验通过", stopped: "已停止 · 保留部分结果", error: "解析失败 · 无效 JSON" })[status.value]);
@@ -162,9 +165,9 @@ createApp({
       }
     }
 
-    return { host, sample, chunkSize, pace, received, latestChunks, chunkCount, status, error, input, running, progress, constructed, items, total, statusLabel, start, stop };
+    return { host, sample, chunkSize, pace, received, latestChunks, chunkCount, status, error, input, running, progress, items, total, statusLabel, start, stop };
   },
-}).mount("#demo");
+}).component("ObjectInspector", ObjectInspector).mount("#demo");
 
 createApp({
   setup() {

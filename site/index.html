@@ -11,7 +11,7 @@
   <meta property="og:url" content="https://wintercn.github.io/gradual-json/">
   <title>gradual-json · 渐进式 JSON 解析器</title>
   <link rel="icon" href="./favicon.svg?v=6" type="image/svg+xml">
-  <link rel="stylesheet" href="./style.css?v=7">
+  <link rel="stylesheet" href="./style.css?v=8">
 </head>
 <body>
   <a class="skip-link" href="#main">跳到正文</a>
@@ -49,7 +49,7 @@ await pending;</code></pre>
         <div class="construction-flow"><span aria-hidden="true">↓</span><code>parse(chunks(), host, "data")</code></div>
         <div class="construction-object">
           <div class="construction-object-heading"><code>host.data</code><span>{{ complete ? '完整对象' : '正在构造' }}</span></div>
-          <pre><code>{{ constructed }}</code></pre>
+          <div class="object-view"><object-inspector :value="constructed" :revision="revision"></object-inspector></div>
         </div>
         <p class="construction-note">{{ notes[step - 1] }}</p>
         <div class="construction-controls">
@@ -82,8 +82,8 @@ await pending;</code></pre>
             <div class="scenario-output">
               <div class="scenario-panel-heading"><span>运行效果</span><div class="scenario-run"><button type="button" v-if="running" @click="stop">停止</button><button type="button" @click="start" :disabled="running">{{ status === 'idle' ? '运行此例' : '重新运行' }}</button></div></div>
               <div class="scenario-vue-view" v-if="scenario === 'vue'"><h4>{{ host.data?.title }}</h4><ul><li v-for="(item, index) in host.data?.items" :key="index">{{ item.name }}</li></ul></div>
-              <div class="scenario-result"><p>{{ scenario === 'proxy' ? '实时生成的命令' : 'host.data' }}</p><ol class="command-list" v-if="scenario === 'proxy'"><li v-for="(entry, index) in commands" :key="index"><code>{{ entry.op }} {{ JSON.stringify(entry.path) }} = {{ JSON.stringify(entry.value) }}</code></li></ol><pre v-else><code>{{ constructed }}</code></pre></div>
-              <details class="scenario-input"><summary>{{ scenario === 'http' ? '查看字节块与解码结果' : scenario === 'sse' ? '查看 SSE 消息与 JSON 片段' : '查看输入与对象' }}</summary><template v-if="wire.length"><p>{{ scenario === 'http' ? 'UTF-8 字节块（十六进制）' : '模拟 SSE 消息' }}</p><pre><code>{{ wire.join(scenario === 'http' ? '\n' : '') }}</code></pre></template><p>送入 parse 的字符串</p><pre><code>{{ received }}</code></pre><template v-if="scenario === 'proxy'"><p>host.data</p><pre><code>{{ constructed }}</code></pre></template></details>
+              <div class="scenario-result"><p>{{ scenario === 'proxy' ? '实时生成的命令' : 'host.data' }}</p><ol class="command-list" v-if="scenario === 'proxy'"><li v-for="(entry, index) in commands" :key="index"><code>{{ entry.op }} {{ JSON.stringify(entry.path) }} = {{ JSON.stringify(entry.value) }}</code></li></ol><div class="object-view" v-else><object-inspector :value="constructed" :revision="revision"></object-inspector></div></div>
+              <details class="scenario-input"><summary>{{ scenario === 'http' ? '查看字节块与解码结果' : scenario === 'sse' ? '查看 SSE 消息与 JSON 片段' : '查看输入与对象' }}</summary><template v-if="wire.length"><p>{{ scenario === 'http' ? 'UTF-8 字节块（十六进制）' : '模拟 SSE 消息' }}</p><pre><code>{{ wire.join(scenario === 'http' ? '\n' : '') }}</code></pre></template><p>送入 parse 的字符串</p><pre><code>{{ received }}</code></pre><template v-if="scenario === 'proxy'"><p>host.data</p><div class="object-view"><object-inspector :value="constructed" :revision="revision"></object-inspector></div></template></details>
               <div class="scenario-status" role="status">{{ statusLabel }}</div><p class="scenario-error" v-if="error" role="alert">{{ error }}</p>
             </div>
           </div>
@@ -201,7 +201,7 @@ async function start() {
                 <div class="preview-tags"><span v-for="(tag, index) in host.data?.tags ?? []" :key="index">{{ tag }}</span></div>
                 <div class="preview-bottom"><span v-if="host.data?.ready !== undefined" :class="{ ready: host.data.ready === true }">ready: {{ host.data.ready }}</span><span>{{ status === 'complete' ? '输入结束 · 完整返回' : '直接读取同一个对象' }}</span></div>
               </div>
-              <details class="object-inspector"><summary>查看正在构造的对象 <span aria-hidden="true">↗</span></summary><pre><code>{{ constructed }}</code></pre></details>
+              <details class="object-inspector"><summary>查看正在构造的对象 <span aria-hidden="true">↗</span></summary><div class="object-view"><object-inspector :value="host.data"></object-inspector></div></details>
             </div>
           </div>
           <details class="demo-input"><summary><span><i class="live-dot" :class="{ active: running }"></i> 查看输入 JSON 与分块</span><span>{{ chunkCount }} 块</span></summary><pre class="stream-code"><code>{{ received }}</code><span class="stream-caret" v-if="running" aria-hidden="true">▍</span></pre><div class="chunks-heading"><span>最近收到的块</span><span>{{ received.length }} 个 UTF-16 单元</span></div><div class="chunk-list"><code v-for="chunk in latestChunks" :key="chunk.id">{{ JSON.stringify(chunk.text) }}</code></div></details>
@@ -229,6 +229,6 @@ const result = await parse(chunks());</code></pre></div></noscript>
     <section class="closing wrap"><p>源码与文档<br><span>GitHub · MIT 许可证</span></p><a class="button primary" href="https://github.com/wintercn/gradual-json" target="_blank" rel="noopener">查看仓库 <span aria-hidden="true">↗</span></a></section>
   </main>
   <footer class="footer wrap"><a class="brand" href="#"><img class="brand-mark" src="./logo.svg?v=6" alt="" width="37" height="37">gradual-json</a><span>一个渐进式 JSON 解析器。</span><div><a href="https://www.npmjs.com/package/gradual-json" target="_blank" rel="noopener">npm ↗</a><a href="https://github.com/wintercn/gradual-json" target="_blank" rel="noopener">GitHub ↗</a><a href="https://github.com/wintercn/gradual-json/blob/main/LICENSE" target="_blank" rel="noopener">MIT</a></div></footer>
-  <script type="module" src="./app.js?v=5"></script>
+  <script type="module" src="./app.js?v=6"></script>
 </body>
 </html>

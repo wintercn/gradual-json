@@ -65,7 +65,7 @@ a { color:inherit; text-decoration:none; } button { font:inherit; cursor:pointer
 .scenario-vue-view ul { margin: 12px 0 0; padding-left: 20px; color: #5c7050; font-size: 13px; line-height: 2; }
 .scenario-result { margin: 20px 23px; }
 .scenario-result>p,.scenario-input p { font: 10px var(--mono); color: #7a8871; margin-bottom: 10px; }
-.scenario-result>pre,.command-list { background: var(--dark); color: #d1f781; border-radius: 6px; padding: 17px 20px; min-height: 216px; max-height: 385px; overflow: auto; font: 12px/1.8 var(--mono); }
+.command-list { background: var(--dark); color: #d1f781; border-radius: 6px; padding: 17px 20px; min-height: 216px; max-height: 385px; overflow: auto; font: 12px/1.8 var(--mono); }
 .command-list { margin: 0; padding-left: 40px; }
 .command-list li { padding-block: 5px; border-bottom: 1px solid #354331; overflow-wrap: anywhere; }
 .command-list li::marker { color: #798d6c; font-size: 10px; }
@@ -91,6 +91,23 @@ a { color:inherit; text-decoration:none; } button { font:inherit; cursor:pointer
   .scenario-adapter pre { padding: 0; font-size: 10px; }
   .scenario-note { padding-inline: 20px; font-size: 10px; }
 }
+.object-view { background: #17251c; color: #dce8d2; border-radius: 6px; padding: 16px 20px; min-height: 216px; max-height: 385px; overflow: auto; font: 12px/1.9 var(--mono,ui-monospace,monospace); }
+.object-row { display: flex; align-items: baseline; gap: 7px; min-height: 24px; padding: 1px 3px; border-radius: 3px; }
+.object-row:hover { background: #25392b; }
+.object-branch { width: 100%; border: 0; background: transparent; text-align: left; color: inherit; font: inherit; cursor: pointer; }
+.object-arrow,.object-spacer { flex: 0 0 12px; color: #8da783; }
+.object-key { flex-shrink: 0; color: #b5c8df; }
+.object-kind { color: #a8c19b; }
+.object-count { color: #7c9470; font-size: 10px; }
+.object-children { margin-left: 15px; border-left: 1px solid #334a35; padding-left: 6px; }
+.object-value { min-width: 0; overflow-wrap: anywhere; white-space: pre-wrap; }
+.object-value.string { color: #d1f781; }
+.object-value.number,.object-value.boolean { color: #c8adf2; }
+.object-value.null { color: #85967d; }
+.construction-object>.object-view { background: transparent; border-radius: 0; min-height: 240px; max-height: 345px; }
+.object-inspector .object-view { margin-top: 12px; min-height: 0; max-height: 300px; }
+.scenario-input .object-view { min-height: 0; margin-bottom: 16px; }
+
 </style>
 </head>
 <body>
@@ -106,14 +123,14 @@ a { color:inherit; text-decoration:none; } button { font:inherit; cursor:pointer
             <div class="scenario-code">
               <div class="scenario-panel-heading"><span>接入代码</span><a href="https://gist.github.com/wintercn/b4c381987f7d70d849a62d471486935f#file-scenarios-html" target="_blank" rel="noopener">完整代码 · Gist ↗</a></div>
               <pre><code>{{ current.code }}</code></pre>
-              <template v-if="current.template"><p class="scenario-code-label">Vue 模板</p><pre><code>{{ current.template }}</code></pre><a class="scenario-detail-link" href="https://wintercn.github.io/gradual-json/#playground">查看包含嵌套对象与 computed 的完整 Vue 示例 →</a></template>
+              <template v-if="current.template"><p class="scenario-code-label">Vue 模板</p><pre><code>{{ current.template }}</code></pre><a class="scenario-detail-link" href="#playground">查看包含嵌套对象与 computed 的完整 Vue 示例 →</a></template>
               <details class="scenario-adapter" v-if="current.adapter" :key="scenario" :open="scenario === 'proxy'"><summary>{{ scenario === 'proxy' ? 'Proxy 的 get / set 实现' : '展开输入适配代码' }}</summary><pre><code>{{ current.adapter }}</code></pre></details>
             </div>
             <div class="scenario-output">
               <div class="scenario-panel-heading"><span>运行效果</span><div class="scenario-run"><button type="button" v-if="running" @click="stop">停止</button><button type="button" @click="start" :disabled="running">{{ status === 'idle' ? '运行此例' : '重新运行' }}</button></div></div>
               <div class="scenario-vue-view" v-if="scenario === 'vue'"><h4>{{ host.data?.title }}</h4><ul><li v-for="(item, index) in host.data?.items" :key="index">{{ item.name }}</li></ul></div>
-              <div class="scenario-result"><p>{{ scenario === 'proxy' ? '实时生成的命令' : 'host.data' }}</p><ol class="command-list" v-if="scenario === 'proxy'"><li v-for="(entry, index) in commands" :key="index"><code>{{ entry.op }} {{ JSON.stringify(entry.path) }} = {{ JSON.stringify(entry.value) }}</code></li></ol><pre v-else><code>{{ constructed }}</code></pre></div>
-              <details class="scenario-input"><summary>{{ scenario === 'http' ? '查看字节块与解码结果' : scenario === 'sse' ? '查看 SSE 消息与 JSON 片段' : '查看输入与对象' }}</summary><template v-if="wire.length"><p>{{ scenario === 'http' ? 'UTF-8 字节块（十六进制）' : '模拟 SSE 消息' }}</p><pre><code>{{ wire.join(scenario === 'http' ? '\n' : '') }}</code></pre></template><p>送入 parse 的字符串</p><pre><code>{{ received }}</code></pre><template v-if="scenario === 'proxy'"><p>host.data</p><pre><code>{{ constructed }}</code></pre></template></details>
+              <div class="scenario-result"><p>{{ scenario === 'proxy' ? '实时生成的命令' : 'host.data' }}</p><ol class="command-list" v-if="scenario === 'proxy'"><li v-for="(entry, index) in commands" :key="index"><code>{{ entry.op }} {{ JSON.stringify(entry.path) }} = {{ JSON.stringify(entry.value) }}</code></li></ol><div class="object-view" v-else><object-inspector :value="constructed" :revision="revision"></object-inspector></div></div>
+              <details class="scenario-input"><summary>{{ scenario === 'http' ? '查看字节块与解码结果' : scenario === 'sse' ? '查看 SSE 消息与 JSON 片段' : '查看输入与对象' }}</summary><template v-if="wire.length"><p>{{ scenario === 'http' ? 'UTF-8 字节块（十六进制）' : '模拟 SSE 消息' }}</p><pre><code>{{ wire.join(scenario === 'http' ? '\n' : '') }}</code></pre></template><p>送入 parse 的字符串</p><pre><code>{{ received }}</code></pre><template v-if="scenario === 'proxy'"><p>host.data</p><div class="object-view"><object-inspector :value="constructed" :revision="revision"></object-inspector></div></template></details>
               <div class="scenario-status" role="status">{{ statusLabel }}</div><p class="scenario-error" v-if="error" role="alert">{{ error }}</p>
             </div>
           </div>
@@ -126,6 +143,52 @@ a { color:inherit; text-decoration:none; } button { font:inherit; cursor:pointer
 <script type="module">
 import { computed, createApp, reactive, ref, shallowRef, watch } from "https://cdn.jsdelivr.net/npm/vue@3.5.22/dist/vue.esm-browser.prod.js";
 import { parse } from "https://cdn.jsdelivr.net/npm/gradual-json@0.1.1/dist/parser.js";
+
+const ObjectInspector = {
+  name: "ObjectInspector",
+  props: {
+    value: {},
+    name: { default: null },
+    depth: { default: 0 },
+    revision: { default: 0 },
+  },
+  setup(props) {
+    const expanded = ref(props.depth < 3);
+    const isContainer = computed(() => props.value !== null && typeof props.value === "object");
+    const isArray = computed(() => Array.isArray(props.value));
+    const entries = computed(() => {
+      // 普通宿主没有响应式通知；每个输入块消费后，revision 触发读取实际属性。
+      props.revision;
+      return isContainer.value ? Object.keys(props.value).map(key => ({ key, value: props.value[key] })) : [];
+    });
+    const kind = computed(() => {
+      props.revision;
+      return isArray.value ? `Array(${props.value.length})` : "Object";
+    });
+    const valueType = computed(() => props.value === null ? "null" : typeof props.value);
+    const primitive = computed(() => typeof props.value === "string"
+      ? JSON.stringify(props.value)
+      : Object.is(props.value, -0) ? "-0" : String(props.value));
+    return { expanded, isContainer, isArray, entries, kind, valueType, primitive };
+  },
+  template: `
+    <div class="object-node" v-if="value !== undefined">
+      <template v-if="isContainer">
+        <button class="object-row object-branch" type="button" :aria-expanded="expanded" :aria-label="(expanded ? '收起 ' : '展开 ') + (name ?? '根对象')" @click="expanded = !expanded">
+          <span class="object-arrow" aria-hidden="true">{{ expanded ? '▾' : '▸' }}</span>
+          <span class="object-key" v-if="name !== null">{{ name }}:</span>
+          <span class="object-kind">{{ kind }}</span>
+          <span class="object-count" v-if="!isArray">{{ entries.length ? '(' + entries.length + ')' : '{}' }}</span>
+        </button>
+        <div class="object-children" v-if="expanded">
+          <object-inspector v-for="entry in entries" :key="entry.key" :value="entry.value" :name="entry.key" :depth="depth + 1" :revision="revision"></object-inspector>
+          <div class="object-row" v-if="isArray"><span class="object-spacer"></span><span class="object-key">length:</span><span class="object-value number">{{ value.length }}</span></div>
+        </div>
+      </template>
+      <div class="object-row" v-else><span class="object-spacer"></span><span class="object-key" v-if="name !== null">{{ name }}:</span><span class="object-value" :class="valueType">{{ primitive }}</span></div>
+    </div>`,
+};
+
 
 async function* httpChunks(response) {
   if (!response.ok || !response.body) throw new Error("无法读取 JSON 响应");
@@ -199,7 +262,8 @@ createApp({
   setup() {
     const scenario = ref("vue");
     const host = shallowRef({});
-    const constructed = ref("");
+    const constructed = shallowRef();
+    const revision = ref(0);
     const received = ref("");
     const wire = ref([]);
     const commands = ref([]);
@@ -253,7 +317,8 @@ createApp({
     watch(scenario, () => {
       runId++;
       host.value = {};
-      constructed.value = "";
+      constructed.value = undefined;
+      revision.value = 0;
       received.value = "";
       wire.value = [];
       commands.value = [];
@@ -280,7 +345,8 @@ createApp({
       commands.value = [];
       const target = mode === "vue" ? reactive({}) : mode === "proxy" ? commandProxy(commands.value) : {};
       host.value = target;
-      constructed.value = "";
+      constructed.value = undefined;
+      revision.value = 0;
       received.value = "";
       wire.value = [];
       error.value = "";
@@ -343,7 +409,10 @@ createApp({
           if (id !== runId) throw new DOMException("输入已停止", "AbortError");
           received.value += chunk;
           yield chunk;
-          if (id === runId) constructed.value = JSON.stringify(target.data, null, 2);
+          if (id === runId) {
+            constructed.value = target.data;
+            revision.value++;
+          }
         }
       }
       try {
@@ -356,9 +425,9 @@ createApp({
       }
     }
 
-    return { scenario, examples, current, host, constructed, received, wire, commands, status, statusLabel, running, error, start, stop, navigate };
+    return { scenario, examples, current, host, constructed, revision, received, wire, commands, status, statusLabel, running, error, start, stop, navigate };
   },
-}).mount("#scenarios-demo");
+}).component("ObjectInspector", ObjectInspector).mount("#scenarios-demo");
 </script>
 </body>
 </html>

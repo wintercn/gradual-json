@@ -52,6 +52,23 @@
     .error { font-size: 12px; color: #a14c39; line-height: 1.8; }
     footer { margin-top: 20px; }
     @media (max-width: 700px) { main { padding: 26px 16px; } .panels { grid-template-columns: 1fr; } .preview { order: -1; } .buttons { margin-left: 0; } .input pre { min-height: 180px; } }
+.object-view { background: #17251c; color: #dce8d2; border-radius: 6px; padding: 16px 20px; min-height: 216px; max-height: 385px; overflow: auto; font: 12px/1.9 var(--mono,ui-monospace,monospace); }
+.object-row { display: flex; align-items: baseline; gap: 7px; min-height: 24px; padding: 1px 3px; border-radius: 3px; }
+.object-row:hover { background: #25392b; }
+.object-branch { width: 100%; border: 0; background: transparent; text-align: left; color: inherit; font: inherit; cursor: pointer; }
+.object-arrow,.object-spacer { flex: 0 0 12px; color: #8da783; }
+.object-key { flex-shrink: 0; color: #b5c8df; }
+.object-kind { color: #a8c19b; }
+.object-count { color: #7c9470; font-size: 10px; }
+.object-children { margin-left: 15px; border-left: 1px solid #334a35; padding-left: 6px; }
+.object-value { min-width: 0; overflow-wrap: anywhere; white-space: pre-wrap; }
+.object-value.string { color: #d1f781; }
+.object-value.number,.object-value.boolean { color: #c8adf2; }
+.object-value.null { color: #85967d; }
+.construction-object>.object-view { background: transparent; border-radius: 0; min-height: 240px; max-height: 345px; }
+.object-inspector .object-view { margin-top: 12px; min-height: 0; max-height: 300px; }
+.scenario-input .object-view { min-height: 0; margin-bottom: 16px; }
+
   </style>
 </head>
 <body>
@@ -86,7 +103,7 @@
           <div class="tags"><span v-for="(tag, index) in host.data?.tags ?? []" :key="index">{{ tag }}</span></div>
           <div class="ready" v-if="host.data?.ready !== undefined">ready: {{ host.data.ready }}</div>
         </div>
-        <details><summary>查看正在构造的对象</summary><pre>{{ constructed }}</pre></details>
+        <details class="object-inspector"><summary>查看正在构造的对象</summary><div class="object-view"><object-inspector :value="host.data"></object-inspector></div></details>
       </section>
     </div>
     <p class="error" v-if="error" role="alert">{{ error }}。此前构造的部分结果保留在宿主中。</p>
@@ -95,6 +112,52 @@
   <script type="module">
     import { computed, createApp, reactive, ref, watch } from "https://cdn.jsdelivr.net/npm/vue@3.5.22/dist/vue.esm-browser.prod.js";
     import { parse } from "https://cdn.jsdelivr.net/npm/gradual-json@0.1.1/dist/parser.js";
+
+
+const ObjectInspector = {
+  name: "ObjectInspector",
+  props: {
+    value: {},
+    name: { default: null },
+    depth: { default: 0 },
+    revision: { default: 0 },
+  },
+  setup(props) {
+    const expanded = ref(props.depth < 3);
+    const isContainer = computed(() => props.value !== null && typeof props.value === "object");
+    const isArray = computed(() => Array.isArray(props.value));
+    const entries = computed(() => {
+      // 普通宿主没有响应式通知；每个输入块消费后，revision 触发读取实际属性。
+      props.revision;
+      return isContainer.value ? Object.keys(props.value).map(key => ({ key, value: props.value[key] })) : [];
+    });
+    const kind = computed(() => {
+      props.revision;
+      return isArray.value ? `Array(${props.value.length})` : "Object";
+    });
+    const valueType = computed(() => props.value === null ? "null" : typeof props.value);
+    const primitive = computed(() => typeof props.value === "string"
+      ? JSON.stringify(props.value)
+      : Object.is(props.value, -0) ? "-0" : String(props.value));
+    return { expanded, isContainer, isArray, entries, kind, valueType, primitive };
+  },
+  template: `
+    <div class="object-node" v-if="value !== undefined">
+      <template v-if="isContainer">
+        <button class="object-row object-branch" type="button" :aria-expanded="expanded" :aria-label="(expanded ? '收起 ' : '展开 ') + (name ?? '根对象')" @click="expanded = !expanded">
+          <span class="object-arrow" aria-hidden="true">{{ expanded ? '▾' : '▸' }}</span>
+          <span class="object-key" v-if="name !== null">{{ name }}:</span>
+          <span class="object-kind">{{ kind }}</span>
+          <span class="object-count" v-if="!isArray">{{ entries.length ? '(' + entries.length + ')' : '{}' }}</span>
+        </button>
+        <div class="object-children" v-if="expanded">
+          <object-inspector v-for="entry in entries" :key="entry.key" :value="entry.value" :name="entry.key" :depth="depth + 1" :revision="revision"></object-inspector>
+          <div class="object-row" v-if="isArray"><span class="object-spacer"></span><span class="object-key">length:</span><span class="object-value number">{{ value.length }}</span></div>
+        </div>
+      </template>
+      <div class="object-row" v-else><span class="object-spacer"></span><span class="object-key" v-if="name !== null">{{ name }}:</span><span class="object-value" :class="valueType">{{ primitive }}</span></div>
+    </div>`,
+};
 
     createApp({
       setup() {
@@ -116,7 +179,6 @@
         };
         const input = computed(() => samples[sample.value]);
         const running = computed(() => status.value === "streaming");
-        const constructed = computed(() => JSON.stringify(host.data, null, 2));
         const statusLabel = computed(() => ({ idle: "准备接收", streaming: "正在接收 · 结果逐步构造", complete: "解析完成 · EOF 校验通过", stopped: "已停止 · 保留部分结果", error: "解析失败 · 无效 JSON" })[status.value]);
 
         watch(sample, () => {
@@ -166,9 +228,9 @@
           }
         }
 
-        return { host, items, total, sample, chunkSize, pace, received, chunkCount, status, error, input, running, constructed, statusLabel, start, stop };
+        return { host, items, total, sample, chunkSize, pace, received, chunkCount, status, error, input, running, statusLabel, start, stop };
       },
-    }).mount("#app");
+    }).component("ObjectInspector", ObjectInspector).mount("#app");
   </script>
 </body>
 </html>

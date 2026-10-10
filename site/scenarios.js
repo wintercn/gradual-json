@@ -73,7 +73,8 @@ export default {
   setup() {
     const scenario = ref("vue");
     const host = shallowRef({});
-    const constructed = ref("");
+    const constructed = shallowRef();
+    const revision = ref(0);
     const received = ref("");
     const wire = ref([]);
     const commands = ref([]);
@@ -127,7 +128,8 @@ export default {
     watch(scenario, () => {
       runId++;
       host.value = {};
-      constructed.value = "";
+      constructed.value = undefined;
+      revision.value = 0;
       received.value = "";
       wire.value = [];
       commands.value = [];
@@ -154,7 +156,8 @@ export default {
       commands.value = [];
       const target = mode === "vue" ? reactive({}) : mode === "proxy" ? commandProxy(commands.value) : {};
       host.value = target;
-      constructed.value = "";
+      constructed.value = undefined;
+      revision.value = 0;
       received.value = "";
       wire.value = [];
       error.value = "";
@@ -217,7 +220,10 @@ export default {
           if (id !== runId) throw new DOMException("输入已停止", "AbortError");
           received.value += chunk;
           yield chunk;
-          if (id === runId) constructed.value = JSON.stringify(target.data, null, 2);
+          if (id === runId) {
+            constructed.value = target.data;
+            revision.value++;
+          }
         }
       }
       try {
@@ -230,6 +236,6 @@ export default {
       }
     }
 
-    return { scenario, examples, current, host, constructed, received, wire, commands, status, statusLabel, running, error, start, stop, navigate };
+    return { scenario, examples, current, host, constructed, revision, received, wire, commands, status, statusLabel, running, error, start, stop, navigate };
   },
 };

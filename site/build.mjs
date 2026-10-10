@@ -10,7 +10,7 @@ await writeFile(new URL("index.html", output), html
   .replaceAll("__PACKAGE_VERSION__", pkg.version)
   .replaceAll("__SOURCE_SIZE_KB__", (source.byteLength / 1000).toFixed(1))
   .replaceAll("__SOURCE_SIZE_BYTES__", source.byteLength.toLocaleString("en-US")));
-for (const file of ["style.css", "app.js", "scenarios.js", "logo.svg", "favicon.svg"]) {
+for (const file of ["style.css", "app.js", "scenarios.js", "object-inspector.js", "logo.svg", "favicon.svg"]) {
   await cp(new URL(file, import.meta.url), new URL(file, output));
 }
 await cp(new URL("../dist/parser.js", import.meta.url), new URL("assets/parser.js", output));
