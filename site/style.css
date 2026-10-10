@@ -227,6 +227,15 @@ section {
   color: var(--muted);
 }
 
+.hero-api { margin-top: 22px; padding-block: 16px; border-block: 1px solid var(--line); }
+.hero-api-label { font-size: 10px; color: var(--green); }
+.hero-api-signature { margin-top: 8px; font: 14px/1.65 var(--mono); color: #406135; }
+.hero-api-params { margin: 12px 0 0; display: grid; gap: 7px; font-size: 12px; line-height: 1.8; }
+.hero-api-params>div { display: grid; grid-template-columns: 76px minmax(0,1fr); gap: 10px; }
+.hero-api-params dt { color: #406135; }
+.hero-api-params dd { margin: 0; color: var(--muted); overflow-wrap: anywhere; }
+.hero-api-return { margin-top: 12px; font-size: 12px; line-height: 1.8; color: var(--muted); }
+
 .hero-core {
   border-left: 2px solid #b7cba2;
   padding: 1px 0 1px 16px;
@@ -1467,9 +1476,6 @@ section {
   }
   .hero-description {
     font-size: 14px;
-  }
-  .hero-description br:last-of-type {
-    display: none;
   }
   .construction-demo {
     max-width: 550px;

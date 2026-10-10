@@ -11,7 +11,7 @@
   <meta property="og:url" content="https://wintercn.github.io/gradual-json/">
   <title>gradual-json · 渐进式 JSON 解析器</title>
   <link rel="icon" href="./favicon.svg?v=6" type="image/svg+xml">
-  <link rel="stylesheet" href="./style.css?v=16">
+  <link rel="stylesheet" href="./style.css?v=17">
 </head>
 <body>
   <a class="skip-link" href="#main">跳到正文</a>
@@ -34,18 +34,27 @@
       <div class="hero-copy">
         <p class="eyebrow"><span class="small-dot"></span> 渐进式 JSON 解析器 <span class="version">v__PACKAGE_VERSION__</span></p>
         <h1 id="hero-title">渐进式构造<br><span class="ink-underline">JSON 对象</span></h1>
-        <p class="hero-description">输入还在继续，对象已经可以读取。<br>属性、字符串和数组项随输入逐步写入，<br>后续内容继续填充同一个对象。</p>
+        <p class="hero-description">输入还在继续，对象已经可以读取。</p>
+        <div class="hero-api" aria-label="parse 接口">
+          <p class="hero-api-label">唯一接口</p>
+          <pre class="hero-api-signature"><code>parse(chunks, host?, property?)
+  → Promise&lt;JsonValue&gt;</code></pre>
+          <dl class="hero-api-params">
+            <div><dt><code>chunks</code></dt><dd><code>AsyncIterable&lt;string&gt;</code>，异步输入字符串块。</dd></div>
+            <div><dt><code>host?</code></dt><dd>接收根值的对象或 Proxy，默认新建 <code>{}</code>。</dd></div>
+            <div><dt><code>property?</code></dt><dd>根值写入的属性名，默认 <code>"root"</code>。</dd></div>
+          </dl>
+          <p class="hero-api-return">解析期间逐步写入 <code>host[property]</code>。输入结束并校验通过后，返回完整 JSON 根值；非法 JSON 以 <code>SyntaxError</code> 拒绝。</p>
+        </div>
         <pre class="hero-core"><code>import { parse } from "gradual-json";
-
 const host = {};
 async function* chunks() {
   yield '{"title":"渐进式 JSON';
   console.log(host.data.title); // "渐进式 JSON"
   yield ' 对象构造"}';
 }
-
 const result = await parse(chunks(), host, "data");
-console.log(result.title); // "渐进式 JSON 对象构造"</code></pre>
+console.log(result === host.data); // true</code></pre>
         <div class="hero-actions"><a class="button primary" href="#scenarios">查看场景示例 <span aria-hidden="true">↘</span></a><a class="text-link" href="#start">使用方式 <span aria-hidden="true">→</span></a></div>
         <div class="install-command"><span class="prompt" aria-hidden="true">$</span><code>npm install gradual-json</code><button class="copy-install" type="button" aria-label="复制安装命令"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V4H4v12h4"></path></svg></button><span class="copy-feedback" role="status"></span></div>
       </div>
