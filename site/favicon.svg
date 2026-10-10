@@ -7,15 +7,15 @@
     </g>
     <g fill="#2f643d">
       <rect x="61" y="32" width="6" height="6" rx=".8"/>
-      <rect x="69" y="40" width="5.5" height="5.5" rx=".8"/>
-      <rect x="62" y="44" width="5.5" height="5.5" rx=".8"/>
-      <rect x="73" y="49" width="4.5" height="4.5" rx=".7"/>
-      <rect x="65" y="54" width="4.5" height="4.5" rx=".7"/>
-      <rect x="71" y="61" width="4" height="4" rx=".6"/>
-      <rect x="61" y="64" width="3.5" height="3.5" rx=".6"/>
-      <rect x="76" y="67" width="3" height="3" rx=".5"/>
-      <rect x="68" y="72" width="3" height="3" rx=".5"/>
-      <rect x="75" y="76" width="2.5" height="2.5" rx=".4"/>
+      <rect x="68" y="40" width="5.5" height="5.5" rx=".8"/>
+      <rect x="60" y="44" width="5.5" height="5.5" rx=".8"/>
+      <rect x="68" y="49" width="4.5" height="4.5" rx=".7"/>
+      <rect x="59" y="54" width="4.5" height="4.5" rx=".7"/>
+      <rect x="64" y="61" width="4" height="4" rx=".6"/>
+      <rect x="53" y="64" width="3.5" height="3.5" rx=".6"/>
+      <rect x="68" y="67" width="3" height="3" rx=".5"/>
+      <rect x="59" y="72" width="3" height="3" rx=".5"/>
+      <rect x="65" y="76" width="2.5" height="2.5" rx=".4"/>
     </g>
   </g>
 </svg>
