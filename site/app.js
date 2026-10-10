@@ -49,7 +49,10 @@ createApp({
     function togglePlay() {
       playing.value = !playing.value;
       clearTimeout(timer);
-      if (playing.value && release) timer = setTimeout(advance, 1200);
+      if (playing.value) {
+        if (complete.value) timer = setTimeout(start, 1800);
+        else if (release) timer = setTimeout(advance, 1200);
+      }
     }
 
     async function start() {
@@ -80,7 +83,10 @@ createApp({
       }
       try {
         await parse(chunks(), host, "data");
-        if (id === runId) complete.value = true;
+        if (id === runId) {
+          complete.value = true;
+          if (playing.value) timer = setTimeout(start, 1800);
+        }
       } catch (cause) {
         if (id === runId) error.value = cause.message;
       }
