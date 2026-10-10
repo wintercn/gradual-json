@@ -17,14 +17,32 @@ copyInstall.addEventListener("click", async () => {
 
 createApp({
   setup() {
-    const parts = ['{', '"title":"渐', '进式 JSON","items":[', '{"name":"第一', '项"},', '{"name":"第二项","count":2}', ']}'];
+    const parts = [
+      '{',
+      '"title":"渐进式 JSON',
+      ' 对象构造","description":"输入按顺序到达，',
+      '字符串持续追加，',
+      '数组中的对象也逐项出现。","items":[',
+      '{"name":"接收异步',
+      '字符串块","count":3},',
+      '{"name":"读取正在',
+      '构造的对象","count":2},',
+      '{"name":"等待完整 JSON',
+      ' 后返回","count":1}',
+      ']}',
+    ];
     const notes = [
       '读到 {，创建并写入空对象。',
-      '字符串还没结束，title 已经写入“渐”。',
-      '继续追加 title；读到 [，写入空数组。',
+      '字符串还没结束，title 已经写入“渐进式 JSON”。',
+      'title 完成，description 已经开始写入。',
+      'description 继续追加，字符串尚未闭合。',
+      'description 完成；读到 [，写入空数组。',
       '数组中已有第一个对象，name 正在增长。',
-      '第一个数组项完成，等待后续输入。',
-      '写入第二个对象，以及完整读出的数字 count。',
+      '第一个数组项完成，写入数字 count。',
+      '创建第二个对象，逐步写入它的 name。',
+      '第二个数组项完成，写入数字 count。',
+      '创建第三个对象，name 仍在继续写入。',
+      '第三个数组项完成，等待数组与根对象闭合。',
       '输入结束并校验通过，返回这个完整对象。',
     ];
     const step = ref(0);

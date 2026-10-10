@@ -59,9 +59,9 @@ await pending;</code></pre>
         <p class="construction-error" v-if="error" role="alert">{{ error }}</p>
       </div>
       <noscript><div class="construction-demo"><p>逐块输入后，同一个对象依次变为：</p><pre><code>{}
-→ { "title": "渐" }
-→ { "title": "渐进式 JSON", "items": [] }
-→ { "title": "渐进式 JSON", "items": [{ "name": "第一项" }] }</code></pre></div></noscript>
+→ { "title": "渐进式 JSON" }
+→ { "title": "渐进式 JSON 对象构造", "description": "输入按顺序到达，" }
+→ { "title": "渐进式 JSON 对象构造", "description": "输入按顺序到达，字符串持续追加，数组中的对象也逐项出现。", "items": [] }</code></pre></div></noscript>
     </section>
 
     <section class="scenarios wrap" id="scenarios" aria-labelledby="scenarios-title">
@@ -234,6 +234,6 @@ const result = await parse(chunks());</code></pre></div></noscript>
     <section class="closing wrap"><p>源码与文档<br><span>GitHub · MIT 许可证</span></p><a class="button primary" href="https://github.com/wintercn/gradual-json" target="_blank" rel="noopener">查看仓库 <span aria-hidden="true">↗</span></a></section>
   </main>
   <footer class="footer wrap"><a class="brand" href="#"><img class="brand-mark" src="./logo.svg?v=6" alt="" width="37" height="37">gradual-json</a><span>一个渐进式 JSON 解析器。</span><div><a href="https://www.npmjs.com/package/gradual-json" target="_blank" rel="noopener">npm ↗</a><a href="https://github.com/wintercn/gradual-json" target="_blank" rel="noopener">GitHub ↗</a><a href="https://github.com/wintercn/gradual-json/blob/main/LICENSE" target="_blank" rel="noopener">MIT</a></div></footer>
-  <script type="module" src="./app.js?v=7"></script>
+  <script type="module" src="./app.js?v=8"></script>
 </body>
 </html>
