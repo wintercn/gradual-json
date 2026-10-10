@@ -14,11 +14,15 @@ for (const { file, blob } of manifest.files) {
     assert.equal(createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex'), blob);
     let input;
     try {
-      // Keep BOM characters. Invalid UTF-8 cannot be represented by this parser's character input.
+      // Keep BOM characters when decoding the byte fixtures into string input.
       input = new TextDecoder('utf-8', { fatal: true, ignoreBOM: true }).decode(bytes);
     } catch (error) {
       assert.ok(error instanceof TypeError);
-      t.skip('Invalid UTF-8 byte input; this parser accepts characters, not bytes');
+      async function* chunks() {
+        yield new TextDecoder('utf-8', { fatal: true, ignoreBOM: true }).decode(bytes);
+      }
+      await assert.rejects(parse(chunks()), TypeError);
+      t.diagnostic('UTF-8 input decoding rejected; parse propagated the input error');
       return;
     }
     const name = basename(file);
