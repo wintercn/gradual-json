@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>gradual-json：场景接入示例</title>
+<style>
+:root { --paper:#f7f8f2; --ink:#202720; --muted:#6d736a; --line:#dde0d5; --lime:#d1f781; --green:#2f643d; --dark:#17251c; --mono:"SFMono-Regular",Consolas,"Liberation Mono",monospace; }
+* { box-sizing:border-box; } body { margin:0; color:var(--ink); background:var(--paper); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",sans-serif; }
+a { color:inherit; text-decoration:none; } button { font:inherit; cursor:pointer; } button:disabled { opacity:.5; cursor:default; } button:focus-visible,a:focus-visible,summary:focus-visible { outline:3px solid #76a836; outline-offset:4px; } h2,h3,p { margin:0; } code,pre { font-family:var(--mono); } pre { margin:0; white-space:pre-wrap; overflow-wrap:anywhere; } code { font-size:.92em; } [v-cloak] { display:none; }
+.wrap { width:min(1184px,calc(100% - 80px)); margin-inline:auto; } .section-heading { display:flex; justify-content:space-between; align-items:flex-end; gap:40px; margin-bottom:37px; } .section-heading h2 { font-size:32px; line-height:1.4; margin-top:12px; } .section-heading>p { font-size:13px; line-height:1.9; color:var(--muted); } .eyebrow { font-size:11px; letter-spacing:1.6px; color:var(--green); }
+.scenarios {
+  border-top: 1px solid var(--line);
+  padding-block: 46px 60px;
+}
+
+.scenario-tabs {
+  display: grid;
+  grid-template-columns: repeat(4,minmax(0,1fr));
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.scenario-tabs button {
+  text-align: left;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 17px 19px;
+  background: #edf0e5;
+  color: #607151;
+}
+
+.scenario-tabs button.selected {
+  background: var(--dark);
+  border-color: var(--dark);
+  color: var(--lime);
+}
+
+.scenario-tabs span { display: block; font-size: 16px; font-weight: 600; }
+.scenario-tabs small { display: block; margin-top: 9px; font-size: 10px; line-height: 1.7; opacity: .8; }
+.scenario-panel { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: #fafbf6; }
+.scenario-intro { padding: 27px 28px; border-bottom: 1px solid var(--line); }
+.scenario-intro h3 { font-size: 21px; font-weight: 600; }
+.scenario-intro>p { font-size: 13px; line-height: 1.9; color: var(--muted); margin-top: 10px; }
+.scenario-flow { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 19px; }
+.scenario-flow code { background: #e9efdf; border: 1px solid #d6dfc9; color: #4d6640; padding: 6px 10px; border-radius: 4px; font-size: 10px; }
+.scenario-arrow { color: #90a180; font-size: 13px; }
+.scenario-columns { display: grid; grid-template-columns: 1.05fr 1fr; }
+.scenario-code,.scenario-output { min-width: 0; }
+.scenario-code { border-right: 1px solid var(--line); background: #f1f4ea; }
+.scenario-panel-heading { min-height: 53px; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 23px; border-bottom: 1px solid var(--line); font-size: 11px; color: #5c7050; }
+.scenario-panel-heading>a { font-size: 10px; }
+.scenario-panel-heading>a:hover,.scenario-detail-link:hover { text-decoration: underline; }
+.scenario-code pre { padding: 21px 23px; font: 12px/1.85 var(--mono); color: #4d6640; }
+.scenario-code-label { margin-inline: 23px; padding-top: 16px; border-top: 1px solid var(--line); color: #7c8871; font: 10px var(--mono); }
+.scenario-detail-link { display: block; font-size: 11px; line-height: 1.8; color: var(--green); margin: 0 23px 24px; }
+.scenario-adapter { margin: 0 23px 22px; border-top: 1px solid var(--line); }
+.scenario-adapter summary { padding-block: 15px; cursor: pointer; font-size: 11px; color: #5c7050; }
+.scenario-adapter pre { padding: 0; max-height: 380px; overflow: auto; font-size: 11px; }
+.scenario-run { display: flex; gap: 8px; }
+.scenario-run button { background: #e4eed6; color: #41652d; border: 1px solid #c7d6b4; padding: 7px 11px; border-radius: 4px; font-size: 11px; }
+.scenario-run button:hover:not(:disabled) { background: var(--lime); }
+.scenario-vue-view { margin: 20px 23px; border: 1px solid #d6dfc9; border-radius: 6px; padding: 20px; min-height: 126px; background: #eef4e4; }
+.scenario-vue-view h4 { margin: 0; min-height: 28px; font-size: 21px; color: #3d5b2e; }
+.scenario-vue-view ul { margin: 12px 0 0; padding-left: 20px; color: #5c7050; font-size: 13px; line-height: 2; }
+.scenario-result { margin: 20px 23px; }
+.scenario-result>p,.scenario-input p { font: 10px var(--mono); color: #7a8871; margin-bottom: 10px; }
+.scenario-result>pre,.command-list { background: var(--dark); color: #d1f781; border-radius: 6px; padding: 17px 20px; min-height: 216px; max-height: 385px; overflow: auto; font: 12px/1.8 var(--mono); }
+.command-list { margin: 0; padding-left: 40px; }
+.command-list li { padding-block: 5px; border-bottom: 1px solid #354331; overflow-wrap: anywhere; }
+.command-list li::marker { color: #798d6c; font-size: 10px; }
+.scenario-input { margin: 0 23px 20px; }
+.scenario-input summary { color: #627455; font-size: 11px; cursor: pointer; padding-block: 12px; }
+.scenario-input pre { background: #eaf0e1; color: #5f7252; padding: 12px; border-radius: 4px; max-height: 220px; overflow: auto; font: 11px/1.7 var(--mono); margin-bottom: 16px; }
+.scenario-status { margin: 0 23px 20px; font-size: 11px; color: #718164; }
+.scenario-error { margin: 0 23px 20px; font-size: 11px; color: #984e37; }
+.scenario-note { padding: 16px 24px; border-top: 1px solid var(--line); color: #7a8871; font-size: 11px; line-height: 1.9; background: #edf1e5; }
+@media(max-width:780px) { .wrap { width:calc(100% - 40px); } .section-heading { flex-direction:column; align-items:flex-start; gap:16px; } .section-heading h2 { font-size:28px; }   .scenarios { padding-block: 40px 45px; }
+  .scenario-tabs { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; }
+  .scenario-tabs button { padding: 14px 15px; }
+  .scenario-tabs span { font-size: 15px; }
+  .scenario-intro { padding: 22px 20px; }
+  .scenario-intro h3 { font-size: 19px; line-height: 1.6; }
+  .scenario-intro>p { font-size: 12px; }
+  .scenario-flow { gap: 6px; }
+  .scenario-flow code { padding: 5px 7px; font-size: 9px; }
+  .scenario-columns { grid-template-columns: 1fr; }
+  .scenario-code { border-right: 0; border-bottom: 1px solid var(--line); }
+  .scenario-panel-heading { padding-inline: 20px; }
+  .scenario-code pre { padding-inline: 20px; font-size: 11px; }
+  .scenario-adapter pre { padding: 0; font-size: 10px; }
+  .scenario-note { padding-inline: 20px; font-size: 10px; }
+}
+</style>
+</head>
+<body>
+    <section class="scenarios wrap" id="scenarios" aria-labelledby="scenarios-title">
+      <div class="section-heading"><div><p class="eyebrow">接入示例</p><h2 id="scenarios-title">适配不同场景</h2></div><p>从 HTTP、SSE 接收输入，<br>写入 Vue 对象，或通过 Proxy 生成命令。</p></div>
+      <div id="scenarios-demo" v-cloak>
+        <div class="scenario-tabs" role="tablist" aria-label="接入场景">
+          <button v-for="item in examples" :key="item.id" :id="'scenario-tab-' + item.id" role="tab" :aria-selected="scenario === item.id" :tabindex="scenario === item.id ? 0 : -1" aria-controls="scenario-panel" :class="{ selected: scenario === item.id }" @click="scenario = item.id" @keydown="navigate($event, item.id)"><span>{{ item.label }}</span><small>{{ item.flow[0] }} → {{ item.flow[item.flow.length - 1] }}</small></button>
+        </div>
+        <div id="scenario-panel" class="scenario-panel" role="tabpanel" :aria-labelledby="'scenario-tab-' + scenario">
+          <div class="scenario-intro"><h3>{{ current.title }}</h3><p>{{ current.description }}</p><div class="scenario-flow"><template v-for="(part, index) in current.flow" :key="index"><span v-if="index" class="scenario-arrow" aria-hidden="true">→</span><code>{{ part }}</code></template></div></div>
+          <div class="scenario-columns">
+            <div class="scenario-code">
+              <div class="scenario-panel-heading"><span>接入代码</span><a href="https://gist.github.com/wintercn/b4c381987f7d70d849a62d471486935f#file-scenarios-html" target="_blank" rel="noopener">完整代码 · Gist ↗</a></div>
+              <pre><code>{{ current.code }}</code></pre>
+              <template v-if="current.template"><p class="scenario-code-label">Vue 模板</p><pre><code>{{ current.template }}</code></pre><a class="scenario-detail-link" href="https://wintercn.github.io/gradual-json/#playground">查看包含嵌套对象与 computed 的完整 Vue 示例 →</a></template>
+              <details class="scenario-adapter" v-if="current.adapter" :key="scenario" :open="scenario === 'proxy'"><summary>{{ scenario === 'proxy' ? 'Proxy 的 get / set 实现' : '展开输入适配代码' }}</summary><pre><code>{{ current.adapter }}</code></pre></details>
+            </div>
+            <div class="scenario-output">
+              <div class="scenario-panel-heading"><span>运行效果</span><div class="scenario-run"><button type="button" v-if="running" @click="stop">停止</button><button type="button" @click="start" :disabled="running">{{ status === 'idle' ? '运行此例' : '重新运行' }}</button></div></div>
+              <div class="scenario-vue-view" v-if="scenario === 'vue'"><h4>{{ host.data?.title }}</h4><ul><li v-for="(item, index) in host.data?.items" :key="index">{{ item.name }}</li></ul></div>
+              <div class="scenario-result"><p>{{ scenario === 'proxy' ? '实时生成的命令' : 'host.data' }}</p><ol class="command-list" v-if="scenario === 'proxy'"><li v-for="(entry, index) in commands" :key="index"><code>{{ entry.op }} {{ JSON.stringify(entry.path) }} = {{ JSON.stringify(entry.value) }}</code></li></ol><pre v-else><code>{{ constructed }}</code></pre></div>
+              <details class="scenario-input"><summary>{{ scenario === 'http' ? '查看字节块与解码结果' : scenario === 'sse' ? '查看 SSE 消息与 JSON 片段' : '查看输入与对象' }}</summary><template v-if="wire.length"><p>{{ scenario === 'http' ? 'UTF-8 字节块（十六进制）' : '模拟 SSE 消息' }}</p><pre><code>{{ wire.join(scenario === 'http' ? '\n' : '') }}</code></pre></template><p>送入 parse 的字符串</p><pre><code>{{ received }}</code></pre><template v-if="scenario === 'proxy'"><p>host.data</p><pre><code>{{ constructed }}</code></pre></template></details>
+              <div class="scenario-status" role="status">{{ statusLabel }}</div><p class="scenario-error" v-if="error" role="alert">{{ error }}</p>
+            </div>
+          </div>
+          <p class="scenario-note">{{ current.note }}</p>
+        </div>
+      </div>
+      <noscript><p>Vue：传入 reactive 宿主对象；HTTP：解码响应体后输入；SSE：按消息顺序输入 JSON 片段；Proxy：在 get / set 中代理子对象并记录赋值。</p></noscript>
+    </section>
+
+<script type="module">
+import { computed, createApp, reactive, ref, shallowRef, watch } from "https://cdn.jsdelivr.net/npm/vue@3.5.22/dist/vue.esm-browser.prod.js";
+import { parse } from "https://cdn.jsdelivr.net/npm/gradual-json@0.1.1/dist/parser.js";
+
+async function* httpChunks(response) {
+  if (!response.ok || !response.body) throw new Error("无法读取 JSON 响应");
+  const reader = response.body.pipeThrough(new TextDecoderStream()).getReader();
+  try {
+    while (true) {
+      const { value, done } = await reader.read();
+      if (done) return;
+      yield value;
+    }
+  } finally {
+    try { await reader.cancel(); }
+    finally { reader.releaseLock(); }
+  }
+}
+
+async function* sseChunks(source) {
+  const queue = [];
+  let wake;
+  let ended = false;
+  let failure;
+  const message = event => { queue.push(event.data); wake?.(); };
+  const end = () => { ended = true; source.close(); wake?.(); };
+  const error = () => { failure = new Error("SSE 输入中断"); end(); };
+  source.addEventListener("message", message);
+  source.addEventListener("end", end);
+  source.addEventListener("error", error);
+  try {
+    while (true) {
+      if (failure) throw failure;
+      if (queue.length) { yield queue.shift(); continue; }
+      if (ended) return;
+      await new Promise(resolve => { wake = resolve; });
+      wake = undefined;
+    }
+  } finally {
+    source.close();
+    source.removeEventListener("message", message);
+    source.removeEventListener("end", end);
+    source.removeEventListener("error", error);
+  }
+}
+
+function commandProxy(commands) {
+  const proxies = new WeakMap();
+  function observe(target, path) {
+    if (proxies.has(target)) return proxies.get(target);
+    const proxy = new Proxy(target, {
+      get(target, key) {
+        const value = target[key];
+        return value !== null && typeof value === "object"
+          ? observe(value, [...path, String(key)]) : value;
+      },
+      set(target, key, value) {
+        target[key] = value;
+        commands.push({
+          op: "set",
+          path: [...path, String(key)],
+          value: structuredClone(value),
+        });
+        return true;
+      },
+    });
+    proxies.set(target, proxy);
+    return proxy;
+  }
+  return observe({}, []);
+}
+
+createApp({
+  setup() {
+    const scenario = ref("vue");
+    const host = shallowRef({});
+    const constructed = ref("");
+    const received = ref("");
+    const wire = ref([]);
+    const commands = ref([]);
+    const status = ref("idle");
+    const error = ref("");
+    let runId = 0;
+    const parts = ['{', '"title":"渐', '进式 JSON","items":[', '{"name":"第一', '项"},', '{"name":"第二项"}', '],"ready":true}'];
+    const examples = [
+      {
+        id: "vue", label: "Vue", title: "对象写入，页面随之更新",
+        description: "把 reactive 对象传入解析器。模板读取同一个对象，字符串逐步显示，数组项逐步加入。",
+        flow: ["字符串块", "parse", "reactive 对象", "Vue 模板"],
+        note: "本地异步生成器逐块输入，实际写入 Vue 深层响应式对象。",
+        code: 'import { reactive } from "vue";\nimport { parse } from "gradual-json";\n\nconst host = reactive({});\nawait parse(chunks(), host, "data");',
+        template: '<h3>{{ host.data?.title }}</h3>\n<ul>\n  <li v-for="(item, i) in host.data?.items" :key="i">\n    {{ item.name }}\n  </li>\n</ul>',
+      },
+      {
+        id: "http", label: "HTTP", title: "响应还在传输，对象开始构造",
+        description: "读取 fetch 的响应体，用 TextDecoderStream 解码字节，再把字符串块交给 parse。中文的 UTF-8 字节可以跨块到达。",
+        flow: ["response.body", "UTF-8 解码", "parse", "host.data"],
+        note: "演示在浏览器内模拟延时响应体，刻意拆开中文的 UTF-8 字节；实际调用解码器和解析器。",
+        code: 'import { parse } from "gradual-json";\n\nconst response = await fetch("/data.json");\nconst host = {};\nawait parse(httpChunks(response), host, "data");',
+        adapter: httpChunks.toString(),
+      },
+      {
+        id: "sse", label: "SSE", title: "把消息中的 JSON 片段接成输入流",
+        description: "EventSource 处理 SSE 协议，应用把每条 message.data 中的 JSON 文本片段按顺序送入 parse。",
+        flow: ["EventSource", "message.data", "parse", "host.data"],
+        note: "演示模拟 message 和 end 事件。此例约定每条 message 携带同一份 JSON 的一个片段，服务端用 end 事件结束输入。",
+        code: 'import { parse } from "gradual-json";\n\nconst source = new EventSource("/events");\nconst host = {};\nawait parse(sseChunks(source), host, "data");',
+        adapter: sseChunks.toString(),
+      },
+      {
+        id: "proxy", label: "Proxy → 命令", title: "把深层赋值记录为命令序列",
+        description: "用 Proxy 的 set 记录路径和值，get 返回子对象的代理。对象创建、字符串追加和数组写入都能转成命令。",
+        flow: ["字符串块", "parse", "Proxy.set", "命令序列"],
+        note: "命令由应用层 Proxy 生成。每条命令保存写入当时的值，可按顺序重放到另一个对象。",
+        code: 'import { parse } from "gradual-json";\n\nconst commands = [];\nconst host = commandProxy(commands);\nawait parse(chunks(), host, "data");\n\n// { op: "set", path: ["data", "title"], value: "渐" }',
+        adapter: commandProxy.toString(),
+      },
+    ];
+    const current = computed(() => examples.find(item => item.id === scenario.value));
+    const running = computed(() => status.value === "streaming");
+    const statusLabel = computed(() => ({ idle: "点击运行此例", streaming: "正在输入 · 逐步写入", stopped: "已停止 · 保留部分结果", complete: "输入结束 · 完整返回", error: "输入失败" })[status.value]);
+
+    function stop() {
+      runId++;
+      status.value = "stopped";
+    }
+
+    watch(scenario, () => {
+      runId++;
+      host.value = {};
+      constructed.value = "";
+      received.value = "";
+      wire.value = [];
+      commands.value = [];
+      error.value = "";
+      status.value = "idle";
+    });
+
+    function navigate(event, id) {
+      const index = examples.findIndex(item => item.id === id);
+      let next;
+      if (event.key === "ArrowRight") next = (index + 1) % examples.length;
+      else if (event.key === "ArrowLeft") next = (index + examples.length - 1) % examples.length;
+      else if (event.key === "Home") next = 0;
+      else if (event.key === "End") next = examples.length - 1;
+      else return;
+      event.preventDefault();
+      scenario.value = examples[next].id;
+      document.getElementById("scenario-tab-" + scenario.value).focus();
+    }
+
+    async function start() {
+      const id = ++runId;
+      const mode = scenario.value;
+      commands.value = [];
+      const target = mode === "vue" ? reactive({}) : mode === "proxy" ? commandProxy(commands.value) : {};
+      host.value = target;
+      constructed.value = "";
+      received.value = "";
+      wire.value = [];
+      error.value = "";
+      status.value = "streaming";
+
+      async function pause() {
+        await new Promise(resolve => setTimeout(resolve, 450));
+        if (id !== runId) throw new DOMException("输入已停止", "AbortError");
+      }
+
+      async function* localChunks() {
+        for (const part of parts) { await pause(); yield part; }
+      }
+
+      let source;
+      if (mode === "http") {
+        const bytes = new TextEncoder().encode(parts.join(""));
+        const sizes = [11, 1, 5, 9, 7, 10, 8];
+        let offset = 0;
+        let index = 0;
+        let canceled = false;
+        const body = new ReadableStream({
+          async pull(controller) {
+            await pause();
+            if (canceled) return;
+            if (offset === bytes.length) { controller.close(); return; }
+            const chunk = bytes.slice(offset, offset + sizes[index++ % sizes.length]);
+            offset += chunk.length;
+            wire.value.push(Array.from(chunk, byte => byte.toString(16).padStart(2, "0")).join(" "));
+            controller.enqueue(chunk);
+          },
+          cancel() { canceled = true; },
+        });
+        source = httpChunks(new Response(body));
+      } else if (mode === "sse") {
+        const events = new EventTarget();
+        let closed = false;
+        events.close = () => { closed = true; };
+        source = sseChunks(events);
+        (async () => {
+          try {
+            for (const part of parts) {
+              await pause();
+              if (closed) return;
+              wire.value.push("data: " + part + "\n\n");
+              events.dispatchEvent(new MessageEvent("message", { data: part }));
+            }
+            wire.value.push("event: end\ndata: \n\n");
+            events.dispatchEvent(new Event("end"));
+          } catch {
+            if (!closed) events.dispatchEvent(new Event("error"));
+          }
+        })();
+      } else {
+        source = localChunks();
+      }
+
+      async function* chunks() {
+        for await (const chunk of source) {
+          if (id !== runId) throw new DOMException("输入已停止", "AbortError");
+          received.value += chunk;
+          yield chunk;
+          if (id === runId) constructed.value = JSON.stringify(target.data, null, 2);
+        }
+      }
+      try {
+        await parse(chunks(), target, "data");
+        if (id === runId) status.value = "complete";
+      } catch (cause) {
+        if (id !== runId) return;
+        status.value = "error";
+        error.value = cause.message;
+      }
+    }
+
+    return { scenario, examples, current, host, constructed, received, wire, commands, status, statusLabel, running, error, start, stop, navigate };
+  },
+}).mount("#scenarios-demo");
+</script>
+</body>
+</html>

@@ -1,5 +1,6 @@
 import { computed, createApp, onMounted, reactive, ref, watch } from "./assets/vue.js";
 import { parse } from "./assets/parser.js";
+import scenarios from "./scenarios.js?v=1";
 
 const copyInstall = document.querySelector(".copy-install");
 copyInstall.addEventListener("click", async () => {
@@ -85,6 +86,8 @@ createApp({
     return { parts, notes, step, constructed, complete, playing, waiting, error, advance, togglePlay, start };
   },
 }).mount("#construction-demo");
+
+createApp(scenarios).mount("#scenarios-demo");
 
 createApp({
   setup() {

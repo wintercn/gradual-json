@@ -1,0 +1,235 @@
+import { computed, reactive, ref, shallowRef, watch } from "./assets/vue.js";
+import { parse } from "./assets/parser.js";
+
+export async function* httpChunks(response) {
+  if (!response.ok || !response.body) throw new Error("无法读取 JSON 响应");
+  const reader = response.body.pipeThrough(new TextDecoderStream()).getReader();
+  try {
+    while (true) {
+      const { value, done } = await reader.read();
+      if (done) return;
+      yield value;
+    }
+  } finally {
+    try { await reader.cancel(); }
+    finally { reader.releaseLock(); }
+  }
+}
+
+export async function* sseChunks(source) {
+  const queue = [];
+  let wake;
+  let ended = false;
+  let failure;
+  const message = event => { queue.push(event.data); wake?.(); };
+  const end = () => { ended = true; source.close(); wake?.(); };
+  const error = () => { failure = new Error("SSE 输入中断"); end(); };
+  source.addEventListener("message", message);
+  source.addEventListener("end", end);
+  source.addEventListener("error", error);
+  try {
+    while (true) {
+      if (failure) throw failure;
+      if (queue.length) { yield queue.shift(); continue; }
+      if (ended) return;
+      await new Promise(resolve => { wake = resolve; });
+      wake = undefined;
+    }
+  } finally {
+    source.close();
+    source.removeEventListener("message", message);
+    source.removeEventListener("end", end);
+    source.removeEventListener("error", error);
+  }
+}
+
+export function commandProxy(commands) {
+  const proxies = new WeakMap();
+  function observe(target, path) {
+    if (proxies.has(target)) return proxies.get(target);
+    const proxy = new Proxy(target, {
+      get(target, key) {
+        const value = target[key];
+        return value !== null && typeof value === "object"
+          ? observe(value, [...path, String(key)]) : value;
+      },
+      set(target, key, value) {
+        target[key] = value;
+        commands.push({
+          op: "set",
+          path: [...path, String(key)],
+          value: structuredClone(value),
+        });
+        return true;
+      },
+    });
+    proxies.set(target, proxy);
+    return proxy;
+  }
+  return observe({}, []);
+}
+
+export default {
+  setup() {
+    const scenario = ref("vue");
+    const host = shallowRef({});
+    const constructed = ref("");
+    const received = ref("");
+    const wire = ref([]);
+    const commands = ref([]);
+    const status = ref("idle");
+    const error = ref("");
+    let runId = 0;
+    const parts = ['{', '"title":"渐', '进式 JSON","items":[', '{"name":"第一', '项"},', '{"name":"第二项"}', '],"ready":true}'];
+    const examples = [
+      {
+        id: "vue", label: "Vue", title: "对象写入，页面随之更新",
+        description: "把 reactive 对象传入解析器。模板读取同一个对象，字符串逐步显示，数组项逐步加入。",
+        flow: ["字符串块", "parse", "reactive 对象", "Vue 模板"],
+        note: "本地异步生成器逐块输入，实际写入 Vue 深层响应式对象。",
+        code: 'import { reactive } from "vue";\nimport { parse } from "gradual-json";\n\nconst host = reactive({});\nawait parse(chunks(), host, "data");',
+        template: '<h3>{{ host.data?.title }}</h3>\n<ul>\n  <li v-for="(item, i) in host.data?.items" :key="i">\n    {{ item.name }}\n  </li>\n</ul>',
+      },
+      {
+        id: "http", label: "HTTP", title: "响应还在传输，对象开始构造",
+        description: "读取 fetch 的响应体，用 TextDecoderStream 解码字节，再把字符串块交给 parse。中文的 UTF-8 字节可以跨块到达。",
+        flow: ["response.body", "UTF-8 解码", "parse", "host.data"],
+        note: "演示在浏览器内模拟延时响应体，刻意拆开中文的 UTF-8 字节；实际调用解码器和解析器。",
+        code: 'import { parse } from "gradual-json";\n\nconst response = await fetch("/data.json");\nconst host = {};\nawait parse(httpChunks(response), host, "data");',
+        adapter: httpChunks.toString(),
+      },
+      {
+        id: "sse", label: "SSE", title: "把消息中的 JSON 片段接成输入流",
+        description: "EventSource 处理 SSE 协议，应用把每条 message.data 中的 JSON 文本片段按顺序送入 parse。",
+        flow: ["EventSource", "message.data", "parse", "host.data"],
+        note: "演示模拟 message 和 end 事件。此例约定每条 message 携带同一份 JSON 的一个片段，服务端用 end 事件结束输入。",
+        code: 'import { parse } from "gradual-json";\n\nconst source = new EventSource("/events");\nconst host = {};\nawait parse(sseChunks(source), host, "data");',
+        adapter: sseChunks.toString(),
+      },
+      {
+        id: "proxy", label: "Proxy → 命令", title: "把深层赋值记录为命令序列",
+        description: "用 Proxy 的 set 记录路径和值，get 返回子对象的代理。对象创建、字符串追加和数组写入都能转成命令。",
+        flow: ["字符串块", "parse", "Proxy.set", "命令序列"],
+        note: "命令由应用层 Proxy 生成。每条命令保存写入当时的值，可按顺序重放到另一个对象。",
+        code: 'import { parse } from "gradual-json";\n\nconst commands = [];\nconst host = commandProxy(commands);\nawait parse(chunks(), host, "data");\n\n// { op: "set", path: ["data", "title"], value: "渐" }',
+        adapter: commandProxy.toString(),
+      },
+    ];
+    const current = computed(() => examples.find(item => item.id === scenario.value));
+    const running = computed(() => status.value === "streaming");
+    const statusLabel = computed(() => ({ idle: "点击运行此例", streaming: "正在输入 · 逐步写入", stopped: "已停止 · 保留部分结果", complete: "输入结束 · 完整返回", error: "输入失败" })[status.value]);
+
+    function stop() {
+      runId++;
+      status.value = "stopped";
+    }
+
+    watch(scenario, () => {
+      runId++;
+      host.value = {};
+      constructed.value = "";
+      received.value = "";
+      wire.value = [];
+      commands.value = [];
+      error.value = "";
+      status.value = "idle";
+    });
+
+    function navigate(event, id) {
+      const index = examples.findIndex(item => item.id === id);
+      let next;
+      if (event.key === "ArrowRight") next = (index + 1) % examples.length;
+      else if (event.key === "ArrowLeft") next = (index + examples.length - 1) % examples.length;
+      else if (event.key === "Home") next = 0;
+      else if (event.key === "End") next = examples.length - 1;
+      else return;
+      event.preventDefault();
+      scenario.value = examples[next].id;
+      document.getElementById("scenario-tab-" + scenario.value).focus();
+    }
+
+    async function start() {
+      const id = ++runId;
+      const mode = scenario.value;
+      commands.value = [];
+      const target = mode === "vue" ? reactive({}) : mode === "proxy" ? commandProxy(commands.value) : {};
+      host.value = target;
+      constructed.value = "";
+      received.value = "";
+      wire.value = [];
+      error.value = "";
+      status.value = "streaming";
+
+      async function pause() {
+        await new Promise(resolve => setTimeout(resolve, 450));
+        if (id !== runId) throw new DOMException("输入已停止", "AbortError");
+      }
+
+      async function* localChunks() {
+        for (const part of parts) { await pause(); yield part; }
+      }
+
+      let source;
+      if (mode === "http") {
+        const bytes = new TextEncoder().encode(parts.join(""));
+        const sizes = [11, 1, 5, 9, 7, 10, 8];
+        let offset = 0;
+        let index = 0;
+        let canceled = false;
+        const body = new ReadableStream({
+          async pull(controller) {
+            await pause();
+            if (canceled) return;
+            if (offset === bytes.length) { controller.close(); return; }
+            const chunk = bytes.slice(offset, offset + sizes[index++ % sizes.length]);
+            offset += chunk.length;
+            wire.value.push(Array.from(chunk, byte => byte.toString(16).padStart(2, "0")).join(" "));
+            controller.enqueue(chunk);
+          },
+          cancel() { canceled = true; },
+        });
+        source = httpChunks(new Response(body));
+      } else if (mode === "sse") {
+        const events = new EventTarget();
+        let closed = false;
+        events.close = () => { closed = true; };
+        source = sseChunks(events);
+        (async () => {
+          try {
+            for (const part of parts) {
+              await pause();
+              if (closed) return;
+              wire.value.push("data: " + part + "\n\n");
+              events.dispatchEvent(new MessageEvent("message", { data: part }));
+            }
+            wire.value.push("event: end\ndata: \n\n");
+            events.dispatchEvent(new Event("end"));
+          } catch {
+            if (!closed) events.dispatchEvent(new Event("error"));
+          }
+        })();
+      } else {
+        source = localChunks();
+      }
+
+      async function* chunks() {
+        for await (const chunk of source) {
+          if (id !== runId) throw new DOMException("输入已停止", "AbortError");
+          received.value += chunk;
+          yield chunk;
+          if (id === runId) constructed.value = JSON.stringify(target.data, null, 2);
+        }
+      }
+      try {
+        await parse(chunks(), target, "data");
+        if (id === runId) status.value = "complete";
+      } catch (cause) {
+        if (id !== runId) return;
+        status.value = "error";
+        error.value = cause.message;
+      }
+    }
+
+    return { scenario, examples, current, host, constructed, received, wire, commands, status, statusLabel, running, error, start, stop, navigate };
+  },
+};

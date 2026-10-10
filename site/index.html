@@ -11,14 +11,14 @@
   <meta property="og:url" content="https://wintercn.github.io/gradual-json/">
   <title>gradual-json · 渐进式 JSON 解析器</title>
   <link rel="icon" href="./favicon.svg?v=6" type="image/svg+xml">
-  <link rel="stylesheet" href="./style.css?v=4">
+  <link rel="stylesheet" href="./style.css?v=5">
 </head>
 <body>
   <a class="skip-link" href="#main">跳到正文</a>
   <header class="header wrap">
     <a class="brand" href="#" aria-label="gradual-json 首页"><img class="brand-mark" src="./logo.svg?v=6" alt="" width="37" height="37">gradual-json</a>
     <nav aria-label="主导航">
-      <a href="#construction">构造过程</a><a href="#playground">Vue 示例</a><a href="#start">使用方式</a>
+      <a href="#construction">构造过程</a><a href="#scenarios">场景适配</a><a href="#start">使用方式</a>
       <a class="repo-link" href="https://github.com/wintercn/gradual-json" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
     </nav>
   </header>
@@ -33,7 +33,7 @@
 const pending = parse(chunks(), host, "data");
 // host.data 随输入逐步构造
 await pending;</code></pre>
-        <div class="hero-actions"><a class="button primary" href="#playground">查看 Vue 协同 <span aria-hidden="true">↘</span></a><a class="text-link" href="#start">使用方式 <span aria-hidden="true">→</span></a></div>
+        <div class="hero-actions"><a class="button primary" href="#scenarios">查看场景示例 <span aria-hidden="true">↘</span></a><a class="text-link" href="#start">使用方式 <span aria-hidden="true">→</span></a></div>
         <div class="install-command"><span class="prompt" aria-hidden="true">$</span><code>npm install gradual-json</code><button class="copy-install" type="button" aria-label="复制安装命令"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V4H4v12h4"></path></svg></button><span class="copy-feedback" role="status"></span></div>
         <p class="hero-meta">TypeScript <span>·</span> ESM <span>·</span> 无运行时依赖 <span>·</span> MIT</p>
       </div>
@@ -56,6 +56,35 @@ await pending;</code></pre>
 → { "title": "渐" }
 → { "title": "渐进式 JSON", "items": [] }
 → { "title": "渐进式 JSON", "items": [{ "name": "第一项" }] }</code></pre></div></noscript>
+    </section>
+
+    <section class="scenarios wrap" id="scenarios" aria-labelledby="scenarios-title">
+      <div class="section-heading"><div><p class="eyebrow">接入示例</p><h2 id="scenarios-title">适配不同场景</h2></div><p>从 HTTP、SSE 接收输入，<br>写入 Vue 对象，或通过 Proxy 生成命令。</p></div>
+      <div id="scenarios-demo" v-cloak>
+        <div class="scenario-tabs" role="tablist" aria-label="接入场景">
+          <button v-for="item in examples" :key="item.id" :id="'scenario-tab-' + item.id" role="tab" :aria-selected="scenario === item.id" :tabindex="scenario === item.id ? 0 : -1" aria-controls="scenario-panel" :class="{ selected: scenario === item.id }" @click="scenario = item.id" @keydown="navigate($event, item.id)"><span>{{ item.label }}</span><small>{{ item.flow[0] }} → {{ item.flow[item.flow.length - 1] }}</small></button>
+        </div>
+        <div id="scenario-panel" class="scenario-panel" role="tabpanel" :aria-labelledby="'scenario-tab-' + scenario">
+          <div class="scenario-intro"><h3>{{ current.title }}</h3><p>{{ current.description }}</p><div class="scenario-flow"><template v-for="(part, index) in current.flow" :key="index"><span v-if="index" class="scenario-arrow" aria-hidden="true">→</span><code>{{ part }}</code></template></div></div>
+          <div class="scenario-columns">
+            <div class="scenario-code">
+              <div class="scenario-panel-heading"><span>接入代码</span><a href="https://gist.github.com/wintercn/b4c381987f7d70d849a62d471486935f#file-scenarios-html" target="_blank" rel="noopener">完整代码 · Gist ↗</a></div>
+              <pre><code>{{ current.code }}</code></pre>
+              <template v-if="current.template"><p class="scenario-code-label">Vue 模板</p><pre><code>{{ current.template }}</code></pre><a class="scenario-detail-link" href="#playground">查看包含嵌套对象与 computed 的完整 Vue 示例 →</a></template>
+              <details class="scenario-adapter" v-if="current.adapter" :key="scenario" :open="scenario === 'proxy'"><summary>{{ scenario === 'proxy' ? 'Proxy 的 get / set 实现' : '展开输入适配代码' }}</summary><pre><code>{{ current.adapter }}</code></pre></details>
+            </div>
+            <div class="scenario-output">
+              <div class="scenario-panel-heading"><span>运行效果</span><div class="scenario-run"><button type="button" v-if="running" @click="stop">停止</button><button type="button" @click="start" :disabled="running">{{ status === 'idle' ? '运行此例' : '重新运行' }}</button></div></div>
+              <div class="scenario-vue-view" v-if="scenario === 'vue'"><h4>{{ host.data?.title }}</h4><ul><li v-for="(item, index) in host.data?.items" :key="index">{{ item.name }}</li></ul></div>
+              <div class="scenario-result"><p>{{ scenario === 'proxy' ? '实时生成的命令' : 'host.data' }}</p><ol class="command-list" v-if="scenario === 'proxy'"><li v-for="(entry, index) in commands" :key="index"><code>{{ entry.op }} {{ JSON.stringify(entry.path) }} = {{ JSON.stringify(entry.value) }}</code></li></ol><pre v-else><code>{{ constructed }}</code></pre></div>
+              <details class="scenario-input"><summary>{{ scenario === 'http' ? '查看字节块与解码结果' : scenario === 'sse' ? '查看 SSE 消息与 JSON 片段' : '查看输入与对象' }}</summary><template v-if="wire.length"><p>{{ scenario === 'http' ? 'UTF-8 字节块（十六进制）' : '模拟 SSE 消息' }}</p><pre><code>{{ wire.join(scenario === 'http' ? '\n' : '') }}</code></pre></template><p>送入 parse 的字符串</p><pre><code>{{ received }}</code></pre><template v-if="scenario === 'proxy'"><p>host.data</p><pre><code>{{ constructed }}</code></pre></template></details>
+              <div class="scenario-status" role="status">{{ statusLabel }}</div><p class="scenario-error" v-if="error" role="alert">{{ error }}</p>
+            </div>
+          </div>
+          <p class="scenario-note">{{ current.note }}</p>
+        </div>
+      </div>
+      <noscript><p>Vue：传入 reactive 宿主对象；HTTP：解码响应体后输入；SSE：按消息顺序输入 JSON 片段；Proxy：在 get / set 中代理子对象并记录赋值。</p></noscript>
     </section>
 
     <section class="features wrap" id="features" aria-labelledby="features-title">
@@ -162,6 +191,6 @@ const result = await parse(chunks());</code></pre></div></noscript>
     <section class="closing wrap"><p>源码与文档<br><span>GitHub · MIT 许可证</span></p><a class="button primary" href="https://github.com/wintercn/gradual-json" target="_blank" rel="noopener">查看仓库 <span aria-hidden="true">↗</span></a></section>
   </main>
   <footer class="footer wrap"><a class="brand" href="#"><img class="brand-mark" src="./logo.svg?v=6" alt="" width="37" height="37">gradual-json</a><span>一个渐进式 JSON 解析器。</span><div><a href="https://www.npmjs.com/package/gradual-json" target="_blank" rel="noopener">npm ↗</a><a href="https://github.com/wintercn/gradual-json" target="_blank" rel="noopener">GitHub ↗</a><a href="https://github.com/wintercn/gradual-json/blob/main/LICENSE" target="_blank" rel="noopener">MIT</a></div></footer>
-  <script type="module" src="./app.js?v=4"></script>
+  <script type="module" src="./app.js?v=5"></script>
 </body>
 </html>

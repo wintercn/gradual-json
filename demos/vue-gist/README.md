@@ -31,4 +31,12 @@ import { parse } from "gradual-json";
 
 完整示例的 `chunks()` 是本地异步生成器，用于让分块到达过程可见。用于真实响应时，可将输入来源替换成解码后的异步字符串块，保持 `parse(chunks, host, "data")` 这一步。
 
+## Vue、HTTP、SSE 与 Proxy 接入
+
+`scenarios.html` 是另外一个完整可运行页面。在同一目录运行上述静态服务，打开 <http://127.0.0.1:8080/scenarios.html>，切换四个场景并点击“运行此例”。接入代码、适配代码、模板、样式和演示逻辑都在这个文件中。
+
+HTTP 演示在浏览器内模拟延时 `Response`，使用真实 `ReadableStream` 和 `TextDecoderStream`，并将中文的 UTF-8 字节拆开。真实接入把响应替换成 `fetch` 的返回值即可。SSE 演示模拟 `message` 与 `end` 事件；这个例子约定每个 `message.data` 是同一份 JSON 的文本片段，服务端用自定义 `end` 事件结束输入。真实接入将事件源替换成 `EventSource`。
+
+Proxy 示例通过 `get` 代理深层对象、`set` 记录命令，保存每次写入当时的路径和值。命令按顺序赋值，可重放出相同对象；命令由应用生成。
+
 项目：<https://github.com/wintercn/gradual-json> · 首页：<https://wintercn.github.io/gradual-json/> · MIT
