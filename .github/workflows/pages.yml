@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'site/**'
+      - 'bench/**'
       - 'src/**'
       - 'package.json'
       - 'package-lock.json'
@@ -34,7 +35,11 @@ jobs:
         with:
           node-version: '24'
           cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            bench/package-lock.json
       - run: npm ci
+      - run: npm ci --prefix bench
       - run: npm run site:build
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4

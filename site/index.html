@@ -11,7 +11,7 @@
   <meta property="og:url" content="https://wintercn.github.io/gradual-json/">
   <title>gradual-json · 渐进式 JSON 解析器</title>
   <link rel="icon" href="./favicon.svg?v=6" type="image/svg+xml">
-  <link rel="stylesheet" href="./style.css?v=15">
+  <link rel="stylesheet" href="./style.css?v=16">
 </head>
 <body>
   <a class="skip-link" href="#main">跳到正文</a>
@@ -104,48 +104,40 @@ console.log(result.title); // "渐进式 JSON 对象构造"</code></pre>
         <div><strong>1,096</strong><span>测试通过</span></div><div><strong>0</strong><span>测试失败</span></div><div><strong>345</strong><span>上游字符串测试文件</span></div>
       </div>
       <p class="quality-test-note">Node 24.21.0 · 覆盖 JSON 语法、分块、Vue 协同与发布包。<a href="https://github.com/wintercn/gradual-json/blob/main/test/README.md#jsontestsuite" target="_blank" rel="noopener">测试范围 ↗</a></p>
-      <div class="quality-performance">
-        <div class="performance-heading"><h3>性能对比</h3><span>4,096 字符块</span></div>
-        <figure class="benchmark-chart">
-          <figcaption>完整解析耗时 · 条形越短，耗时越低 · 各组独立刻度</figcaption>
-          <div class="benchmark-legend" aria-label="库与版本">
-            <span class="benchmark-gradual"><i aria-hidden="true"></i><code>gradual-json</code><small>0.1.1</small></span>
-            <span class="benchmark-river"><i aria-hidden="true"></i><code>jsonriver</code><small>1.1.1</small></span>
-            <span class="benchmark-streamparser"><i aria-hidden="true"></i><code>@streamparser/json</code><small>0.0.26 · partial</small></span>
+      <div id="benchmark-demo" v-cloak>
+        <div class="quality-performance" :aria-busy="running">
+          <div class="performance-heading"><h3>本机性能对比</h3><span>4,096 字符块</span></div>
+          <div class="benchmark-controls">
+            <button type="button" class="benchmark-run" :disabled="running" @click="start">{{ running ? '测试中…' : status === 'idle' ? '开始本机测试' : '重新测试' }}</button>
+            <button type="button" v-if="running" @click="stop">停止</button>
+            <button type="button" v-if="results" @click="download">下载每轮数据</button>
+            <span role="status" :class="{ 'benchmark-error': status === 'error' }">{{ message }}</span>
           </div>
-          <div class="benchmark-cases">
-            <div class="benchmark-case" data-benchmark="records">
-              <h4>2,500 条嵌套记录<small>485,421 B</small></h4>
-              <div class="benchmark-bars">
-                <div class="benchmark-bar benchmark-gradual"><div class="benchmark-bar-label"><code>gradual-json</code><span>3.924 ms</span></div><div class="benchmark-track" aria-hidden="true"><i style="width:56.0595%"></i></div></div>
-                <div class="benchmark-bar benchmark-river"><div class="benchmark-bar-label"><code>jsonriver</code><span>4.837 ms</span></div><div class="benchmark-track" aria-hidden="true"><i style="width:69.0958%"></i></div></div>
-                <div class="benchmark-bar benchmark-streamparser"><div class="benchmark-bar-label"><code>@streamparser/json</code><span>6.035 ms</span></div><div class="benchmark-track" aria-hidden="true"><i style="width:86.2101%"></i></div></div>
-              </div>
-              <div class="benchmark-axis" aria-hidden="true"><span>0</span><span>3.5</span><span>7 ms</span></div>
+          <figure class="benchmark-chart">
+            <figcaption>完整解析耗时 · 条形越短，耗时越低 · 各组独立刻度</figcaption>
+            <div class="benchmark-legend" aria-label="库与版本">
+              <span class="benchmark-gradual"><i aria-hidden="true"></i><code>gradual-json</code><small>__PACKAGE_VERSION__</small></span>
+              <span class="benchmark-river"><i aria-hidden="true"></i><code>jsonriver</code><small>1.1.1</small></span>
+              <span class="benchmark-streamparser"><i aria-hidden="true"></i><code>@streamparser/json</code><small>0.0.26 · partial</small></span>
             </div>
-            <div class="benchmark-case" data-benchmark="long_string">
-              <h4>长字符串<small>262,155 B</small></h4>
-              <div class="benchmark-bars">
-                <div class="benchmark-bar benchmark-gradual"><div class="benchmark-bar-label"><code>gradual-json</code><span>0.157 ms</span></div><div class="benchmark-track" aria-hidden="true"><i style="width:31.475%"></i></div></div>
-                <div class="benchmark-bar benchmark-river"><div class="benchmark-bar-label"><code>jsonriver</code><span>0.479 ms</span></div><div class="benchmark-track" aria-hidden="true"><i style="width:95.875%"></i></div></div>
-                <div class="benchmark-bar benchmark-streamparser"><div class="benchmark-bar-label"><code>@streamparser/json</code><span>0.430 ms</span></div><div class="benchmark-track" aria-hidden="true"><i style="width:85.95%"></i></div></div>
+            <div class="benchmark-cases">
+              <div class="benchmark-case" v-for="item in cases" :key="item.id" :data-benchmark="item.id">
+                <h4>{{ item.title }}<small>{{ item.bytes ? item.bytes.toLocaleString('en-US') + ' B' : '—' }}</small></h4>
+                <div class="benchmark-bars">
+                  <div class="benchmark-bar" v-for="method in methods" :key="method.id" :class="method.className">
+                    <div class="benchmark-bar-label"><code>{{ method.label }}</code><span>{{ item.medianMs ? item.medianMs[method.id].toFixed(3) + ' ms' : '—' }}</span></div>
+                    <div class="benchmark-track" aria-hidden="true"><i :style="{ width: (item.medianMs ? item.medianMs[method.id] / scale(item) * 100 : 0) + '%' }"></i></div>
+                  </div>
+                </div>
+                <div class="benchmark-axis" aria-hidden="true"><span>0</span><span>{{ item.medianMs ? Number((scale(item) / 2).toPrecision(3)) : '—' }}</span><span>{{ item.medianMs ? Number(scale(item).toPrecision(3)) + ' ms' : '—' }}</span></div>
               </div>
-              <div class="benchmark-axis" aria-hidden="true"><span>0</span><span>0.25</span><span>0.5 ms</span></div>
             </div>
-            <div class="benchmark-case" data-benchmark="numbers">
-              <h4>50,000 个数字<small>328,901 B</small></h4>
-              <div class="benchmark-bars">
-                <div class="benchmark-bar benchmark-gradual"><div class="benchmark-bar-label"><code>gradual-json</code><span>6.103 ms</span></div><div class="benchmark-track" aria-hidden="true"><i style="width:76.2896%"></i></div></div>
-                <div class="benchmark-bar benchmark-river"><div class="benchmark-bar-label"><code>jsonriver</code><span>5.230 ms</span></div><div class="benchmark-track" aria-hidden="true"><i style="width:65.3755%"></i></div></div>
-                <div class="benchmark-bar benchmark-streamparser"><div class="benchmark-bar-label"><code>@streamparser/json</code><span>7.887 ms</span></div><div class="benchmark-track" aria-hidden="true"><i style="width:98.5839%"></i></div></div>
-              </div>
-              <div class="benchmark-axis" aria-hidden="true"><span>0</span><span>4</span><span>8 ms</span></div>
-            </div>
-          </div>
-        </figure>
-        <p class="performance-note">各库的中间更新粒度与语法语义不同；图中比较有效输入的完整解析耗时。</p>
+          </figure>
+          <p class="performance-note">各库的中间更新粒度与语法语义不同；图中比较有效输入的完整解析耗时。</p>
+        </div>
+        <div class="quality-method"><p>在当前设备的浏览器中运行。ASCII JSON，4,096 字符块，预热 3 次、轮换顺序测量 11 次，取中位数。计时前核对完整结果；不含库加载、网络等待、输入解码或 Vue 更新。<span v-if="measuredAt">本机测量时间：{{ measuredAt }}。</span></p><div><a href="https://github.com/wintercn/gradual-json/blob/main/site/performance-worker.js" target="_blank" rel="noopener">测量代码 ↗</a></div></div>
       </div>
-      <div class="quality-method"><p>测量于 2026-10-10 · Node 24.21.0 / macOS arm64 / Apple M3 Max。ASCII JSON，4,096 字符块，预热 3 次、轮换顺序测量 11 次，取中位数。先核对完整结果；耗时包含完整解析，不含网络等待、解码或 Vue 更新。</p><div><a href="https://github.com/wintercn/gradual-json/blob/main/bench/README.md" target="_blank" rel="noopener">测量方法与复现 ↗</a><a href="https://github.com/wintercn/gradual-json/blob/main/bench/results.json" target="_blank" rel="noopener">原始数据 ↗</a></div></div>
+      <noscript><p>启用 JavaScript 后，可在当前浏览器中运行性能测试。</p></noscript>
     </section>
 
     <section class="playground-section" id="playground" aria-labelledby="playground-title">
@@ -239,6 +231,6 @@ const result = await parse(chunks());</code></pre></div></noscript>
     <section class="closing wrap"><p>源码与文档<br><span>GitHub · MIT 许可证</span></p><a class="button primary" href="https://github.com/wintercn/gradual-json" target="_blank" rel="noopener">查看仓库 <span aria-hidden="true">↗</span></a></section>
   </main>
   <footer class="footer wrap"><a class="brand" href="#"><img class="brand-mark" src="./logo.svg?v=6" alt="" width="37" height="37">gradual-json</a><span>一个渐进式 JSON 解析器。</span><div><a href="https://www.npmjs.com/package/gradual-json" target="_blank" rel="noopener">npm ↗</a><a href="https://github.com/wintercn/gradual-json" target="_blank" rel="noopener">GitHub ↗</a><a href="https://github.com/wintercn/gradual-json/blob/main/LICENSE" target="_blank" rel="noopener">MIT</a></div></footer>
-  <script type="module" src="./app.js?v=10"></script>
+  <script type="module" src="./app.js?v=11"></script>
 </body>
 </html>

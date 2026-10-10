@@ -1135,6 +1135,11 @@ section {
 .performance-heading { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
 .performance-heading h3 { color: #d1f781; }
 .performance-heading>span { font: 9px var(--mono); color: #91a283; white-space: nowrap; }
+.benchmark-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 18px; min-height: 34px; }
+.benchmark-controls button { padding: 8px 12px; background: #26392a; border: 1px solid #53684a; border-radius: 4px; color: #dce8d2; font-size: 11px; }
+.benchmark-controls .benchmark-run { background: var(--lime); border-color: var(--lime); color: #25432b; font-weight: 600; }
+.benchmark-controls>span { color: #aab8a0; font-size: 11px; }
+.benchmark-controls>.benchmark-error { color: #efb79c; }
 .quality-performance>p { font-size: 11px; line-height: 1.9; color: #aab8a0; }
 .benchmark-chart { margin: 22px 0 0; }
 .benchmark-chart figcaption { font-size: 11px; color: #aab8a0; }

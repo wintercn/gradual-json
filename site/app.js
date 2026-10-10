@@ -2,6 +2,7 @@ import { computed, createApp, onMounted, reactive, ref, shallowRef, watch } from
 import { parse } from "./assets/parser.js";
 import scenarios from "./scenarios.js?v=2";
 import ObjectInspector from "./object-inspector.js?v=1";
+import performanceBenchmark from "./performance.js?v=1";
 
 const copyInstall = document.querySelector(".copy-install");
 copyInstall.addEventListener("click", async () => {
@@ -106,6 +107,7 @@ createApp({
 }).component("ObjectInspector", ObjectInspector).mount("#construction-demo");
 
 createApp(scenarios).component("ObjectInspector", ObjectInspector).mount("#scenarios-demo");
+createApp(performanceBenchmark).mount("#benchmark-demo");
 
 createApp({
   setup() {
