@@ -20,16 +20,18 @@ npm run typecheck
 
 | 来源 | 接入内容 | 版本与许可 |
 | --- | --- | --- |
-| [nst/JSONTestSuite](https://github.com/nst/JSONTestSuite) | 318 个语法文件及 22 个值转换文件，共 340 个原始文件 | 固定提交 `1ef36fa01286573e846ac449e8683f8833c5b26a`；MIT |
+| [nst/JSONTestSuite](https://github.com/nst/JSONTestSuite) | 保留 340 个原始文件，使用其中适用于字符串接口的 312 个 | 固定提交 `1ef36fa01286573e846ac449e8683f8833c5b26a`；MIT |
 | [TC39 Test262 JSON.parse](https://github.com/tc39/test262/tree/main/test/built-ins/JSON/parse) | 31 个 `15.12.1.1*` 词法语法文件，加 `invalid-whitespace.js`、`text-negative-zero.js`，共 33 个原始文件 | 每个文件固定到 Git blob SHA；BSD |
 
 上游文件原样保存在 `fixtures/`，许可文件随套组保留。两个 `manifest.json` 记录文件路径和 Git blob SHA，测试运行时核验内容，防止数据被意外修改。
 
 ### JSONTestSuite
 
-`jsontestsuite.test.mjs` 保留上游分类：95 个 `y_` 文件必须接受，188 个 `n_` 文件必须拒绝，35 个 `i_` 文件允许接受或拒绝，并报告实际选择。22 个 `test_transform` 文件以 JavaScript 的 `JSON.parse` 作为值转换参考。
+`parse` 接收已解码的 JavaScript 字符串块，不接收字节，也不校验字符编码。JSONTestSuite 中 312 个文件适用于这一接口：95 个 `y_` 文件必须接受，176 个 `n_` 文件必须拒绝，22 个 `i_` 文件允许接受或拒绝，并报告实际选择；19 个 `test_transform` 文件以 JavaScript 的 `JSON.parse` 作为值转换参考。
 
-文件先按严格 UTF-8 解码，保留 BOM 字符。312 个可解码文件进入 JSON 语法与值检查。另外 28 个文件不能按 UTF-8 解码，包含 12 个 `n_`、13 个 `i_` 和 3 个值转换文件；这些文件在异步输入迭代器中解码，断言 `parse` 以 `TypeError` 拒绝，验证输入解码错误的传递。这 28 项是输入适配检查，不是 JSON 语法检查。全部原始文件均执行断言，没有跳过。
+另有 28 个原始字节文件不能按 UTF-8 解码，包含 12 个 `n_`、13 个 `i_` 和 3 个值转换文件。这些文件保留并核验原始摘要，但不注册为解析器测试，不计入通过、失败或跳过数量。[完整名单](jsontestsuite.test.mjs)在 `byteFixtures` 中逐项固定；不会根据测试失败或解码失败动态排除文件，也不会把坏字节替换后冒充原始文件的解析测试。
+
+适用文件在测试中解码为字符串，保留 BOM 字符；任何意外解码错误都会导致测试失败。字符串中的孤立代理码元及相应 `\uXXXX` 转义仍在解析器测试范围内。两个上游套组共使用 345 个适用文件（312 + 33）；保留的原始文件总数为 373。
 
 ### Test262
 
