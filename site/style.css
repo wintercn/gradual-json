@@ -449,14 +449,6 @@ section {
 .object-inspector .object-view { margin-top: 12px; min-height: 0; max-height: 300px; }
 .scenario-input .object-view { min-height: 0; margin-bottom: 16px; }
 
-.construction-note {
-  min-height: 36px;
-  margin-top: 14px;
-  font-size: 11px;
-  line-height: 1.7;
-  color: #52664a;
-}
-
 .preview-caret {
   display: inline-block;
   width: 2px;
@@ -477,6 +469,7 @@ section {
 
 .construction-controls {
   border-top: 1px solid #d3dcc7;
+  margin-top: 14px;
   padding-top: 12px;
   flex-wrap: wrap;
   font-size: 10px;

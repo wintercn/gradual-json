@@ -31,20 +31,6 @@ createApp({
       ' 后返回","count":1}',
       ']}',
     ];
-    const notes = [
-      '读到 {，创建并写入空对象。',
-      '字符串还没结束，title 已经写入“渐进式 JSON”。',
-      'title 完成，description 已经开始写入。',
-      'description 继续追加，字符串尚未闭合。',
-      'description 完成；读到 [，写入空数组。',
-      '数组中已有第一个对象，name 正在增长。',
-      '第一个数组项完成，写入数字 count。',
-      '创建第二个对象，逐步写入它的 name。',
-      '第二个数组项完成，写入数字 count。',
-      '创建第三个对象，name 仍在继续写入。',
-      '第三个数组项完成，等待数组与根对象闭合。',
-      '输入结束并校验通过，返回这个完整对象。',
-    ];
     const step = ref(0);
     const input = ref();
     watch(step, () => {
@@ -115,7 +101,7 @@ createApp({
     }
 
     onMounted(start);
-    return { parts, notes, step, input, constructed, revision, complete, playing, waiting, error, advance, togglePlay, start };
+    return { parts, step, input, constructed, revision, complete, playing, waiting, error, advance, togglePlay, start };
   },
 }).component("ObjectInspector", ObjectInspector).mount("#construction-demo");
 
