@@ -11,7 +11,7 @@
   <meta property="og:url" content="https://wintercn.github.io/gradual-json/">
   <title>gradual-json · 渐进式 JSON 解析器</title>
   <link rel="icon" href="./favicon.svg?v=6" type="image/svg+xml">
-  <link rel="stylesheet" href="./style.css?v=10">
+  <link rel="stylesheet" href="./style.css?v=11">
 </head>
 <body>
   <a class="skip-link" href="#main">跳到正文</a>
@@ -94,24 +94,19 @@ await pending;</code></pre>
     </section>
 
     <section class="quality wrap" id="quality" aria-labelledby="quality-title">
-      <div class="section-heading"><div><p class="eyebrow">验证与调优</p><h2 id="quality-title">测试与性能</h2></div><p>验证语法、分块、Vue 代理和发布包。<br>性能变化用相同输入、相同分块方式测量。</p></div>
+      <div class="section-heading"><div><p class="eyebrow">测试与测量</p><h2 id="quality-title">测试与性能</h2></div><p>验证语法、分块、Vue 代理和发布包。<br>相同输入与分块方式下的完整解析耗时。</p></div>
       <div class="quality-stats" aria-label="测试结果">
         <div><strong>1,124</strong><span>测试通过</span></div><div><strong>0</strong><span>测试失败</span></div><div><strong>373</strong><span>上游原始测试文件</span></div>
       </div>
       <p class="quality-test-note">Node 24.21.0 · 全部测试执行断言，覆盖 JSON 语法、输入解码错误、分块、Vue 协同与发布包。<a href="https://github.com/wintercn/gradual-json/blob/main/test/README.md#jsontestsuite" target="_blank" rel="noopener">测试范围 ↗</a></p>
       <div class="quality-performance">
-        <div class="performance-heading"><h3>连续普通字符，整段处理</h3><span>v0.1.0 → v0.1.1</span></div>
-        <p>在主循环用正则读取连续普通字符；字符串值整段追加后写回。减少状态调用与拼接；引号、转义和控制字符继续由原状态函数处理。</p>
-        <div class="benchmark-scroll"><table class="benchmark-table"><caption>完整解析耗时 · ms，越低越好</caption><thead><tr><th scope="col">输入</th><th scope="col">调优前</th><th scope="col">调优后</th></tr></thead><tbody>
-          <tr><th scope="row">2,500 条嵌套记录<small>485,421 B</small></th><td>8.317</td><td class="benchmark-current">3.924</td></tr>
-          <tr><th scope="row">长字符串<small>262,155 B</small></th><td>3.929</td><td class="benchmark-current">0.157</td></tr>
-          <tr><th scope="row">50,000 个数字<small>328,901 B</small></th><td>5.844</td><td class="benchmark-current">6.103</td></tr>
+        <div class="performance-heading"><h3>性能对比</h3><span>4,096 字符块</span></div>
+        <div class="benchmark-scroll"><table class="benchmark-table competitor-table"><caption>完整解析耗时 · ms，越低越好</caption><thead><tr><th scope="col">输入</th><th scope="col">gradual-json<small>0.1.1</small></th><th scope="col">jsonriver<small>1.1.1</small></th><th scope="col">@streamparser/json<small>0.0.26 · partial</small></th></tr></thead><tbody>
+          <tr><th scope="row">2,500 条嵌套记录<small>485,421 B</small></th><td class="benchmark-current">3.924</td><td>4.837</td><td>6.035</td></tr>
+          <tr><th scope="row">长字符串<small>262,155 B</small></th><td class="benchmark-current">0.157</td><td>0.479</td><td>0.430</td></tr>
+          <tr><th scope="row">50,000 个数字<small>328,901 B</small></th><td class="benchmark-current">6.103</td><td>5.230</td><td>7.887</td></tr>
         </tbody></table></div>
-        <p class="performance-result">长字符串耗时约为原来的 1/25，嵌套记录约为 1/2。数字数组没有改善，仍保留在对照中。</p>
-        <details class="performance-details"><summary>与 jsonriver、@streamparser/json 的同场测量</summary><div class="benchmark-scroll"><table class="benchmark-table competitor-table"><caption>同一轮测量 · ms，越低越好</caption><thead><tr><th scope="col">输入</th><th scope="col">gradual-json<small>0.1.1</small></th><th scope="col">jsonriver<small>1.1.1</small></th><th scope="col">@streamparser/json<small>0.0.26 · partial</small></th></tr></thead><tbody>
-          <tr><th scope="row">嵌套记录</th><td class="benchmark-current">3.924</td><td>4.837</td><td>6.035</td></tr><tr><th scope="row">长字符串</th><td class="benchmark-current">0.157</td><td>0.479</td><td>0.430</td></tr><tr><th scope="row">数字数组</th><td class="benchmark-current">6.103</td><td>5.230</td><td>7.887</td></tr>
-        </tbody></table></div><p>这三个输入中，数字数组慢于 jsonriver。各库的中间更新粒度与语法语义不同，表格比较有效输入的完整解析耗时。</p></details>
-        <a class="performance-source" href="https://github.com/wintercn/gradual-json/blob/main/src/parser.ts#L522" target="_blank" rel="noopener">查看主循环中的 shortcut ↗</a>
+        <p class="performance-note">各库的中间更新粒度与语法语义不同；表格比较有效输入的完整解析耗时。</p>
       </div>
       <div class="quality-method"><p>测量于 2026-10-10 · Node 24.21.0 / macOS arm64 / Apple M3 Max。ASCII JSON，4,096 字符块，预热 3 次、轮换顺序测量 11 次，取中位数。先核对完整结果；耗时包含完整解析，不含网络等待、解码或 Vue 更新。</p><div><a href="https://github.com/wintercn/gradual-json/blob/main/bench/README.md" target="_blank" rel="noopener">测量方法与复现 ↗</a><a href="https://github.com/wintercn/gradual-json/blob/main/bench/results.json" target="_blank" rel="noopener">原始数据 ↗</a></div></div>
     </section>
