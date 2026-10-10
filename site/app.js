@@ -1,4 +1,4 @@
-import { computed, createApp, reactive, ref, watch } from "./assets/vue.js";
+import { computed, createApp, onMounted, reactive, ref, watch } from "./assets/vue.js";
 import { parse } from "./assets/parser.js";
 
 const copyInstall = document.querySelector(".copy-install");
@@ -12,6 +12,79 @@ copyInstall.addEventListener("click", async () => {
   }
   setTimeout(() => { feedback.textContent = ""; }, 2200);
 });
+
+createApp({
+  setup() {
+    const parts = ['{', '"title":"渐', '进式 JSON","items":[', '{"name":"第一', '项"},', '{"name":"第二项","count":2}', ']}'];
+    const notes = [
+      '读到 {，创建并写入空对象。',
+      '字符串还没结束，title 已经写入“渐”。',
+      '继续追加 title；读到 [，写入空数组。',
+      '数组中已有第一个对象，name 正在增长。',
+      '第一个数组项完成，等待后续输入。',
+      '写入第二个对象，以及完整读出的数字 count。',
+      '输入结束并校验通过，返回这个完整对象。',
+    ];
+    const step = ref(0);
+    const constructed = ref("");
+    const complete = ref(false);
+    const playing = ref(true);
+    const waiting = ref(false);
+    const error = ref("");
+    let runId = 0;
+    let release;
+    let timer;
+
+    function advance() {
+      clearTimeout(timer);
+      const resume = release;
+      release = undefined;
+      waiting.value = false;
+      resume?.();
+    }
+
+    function togglePlay() {
+      playing.value = !playing.value;
+      clearTimeout(timer);
+      if (playing.value && release) timer = setTimeout(advance, 1200);
+    }
+
+    async function start() {
+      const id = ++runId;
+      advance();
+      const host = {};
+      step.value = 0;
+      constructed.value = "";
+      complete.value = false;
+      error.value = "";
+      async function* chunks() {
+        for (let index = 0; index < parts.length; index++) {
+          if (index > 0) {
+            await new Promise(resolve => {
+              release = resolve;
+              waiting.value = true;
+              if (playing.value) timer = setTimeout(advance, 1200);
+            });
+          }
+          if (id !== runId) throw new DOMException("演示已重新开始", "AbortError");
+          yield parts[index];
+          // 解析器消费当前块后，读取普通宿主对象的实际内容用于展示。
+          constructed.value = JSON.stringify(host.data, null, 2);
+          step.value = index + 1;
+        }
+      }
+      try {
+        await parse(chunks(), host, "data");
+        if (id === runId) complete.value = true;
+      } catch (cause) {
+        if (id === runId) error.value = cause.message;
+      }
+    }
+
+    onMounted(start);
+    return { parts, notes, step, constructed, complete, playing, waiting, error, advance, togglePlay, start };
+  },
+}).mount("#construction-demo");
 
 createApp({
   setup() {
