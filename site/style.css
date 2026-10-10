@@ -336,18 +336,6 @@ section {
   color: var(--green);
 }
 
-.hero-meta {
-  margin-top: 22px;
-  font: 11px var(--mono);
-  color: #677357;
-  letter-spacing: .1px;
-}
-
-.hero-meta span {
-  padding: 0 9px;
-  color: #a0a68e;
-}
-
 .hero-copy,
 .construction-demo,
 .code-example {
@@ -511,18 +499,15 @@ section {
 }
 
 .facts {
-  border-block: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
   display: grid;
-  grid-template-columns: repeat(4,1fr);
-  padding: 26px 0 27px;
-  margin-bottom: 0;
+  grid-template-columns: .75fr 1fr 1.15fr 1.4fr .7fr;
+  padding: 25px 0 24px;
 }
 
 .facts>div {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding-left: 25px;
+  min-width: 0;
+  padding-left: 28px;
   border-left: 1px solid var(--line);
 }
 
@@ -532,9 +517,14 @@ section {
 }
 
 .facts strong {
-  font: 500 31px var(--mono);
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  min-height: 39px;
+  font: 500 32px/1.2 var(--mono);
   letter-spacing: -1px;
   white-space: nowrap;
+  color: #406135;
 }
 
 .facts strong small {
@@ -542,9 +532,15 @@ section {
 }
 
 .facts span {
+  display: block;
+  margin-top: 11px;
   font-size: 11px;
   color: var(--muted);
 }
+
+.facts-environment strong { font: 550 22px/1.7 var(--sans); letter-spacing: -.6px; gap: 5px; }
+.facts-environment strong small { font-size: 16px; color: #859377; }
+.facts a:hover { color: var(--green); text-decoration: underline; }
 
 .playground-section {
   background: var(--dark);
@@ -1557,7 +1553,6 @@ section {
     padding: 19px;
   }
   .facts>div {
-    gap: 10px;
     padding-left: 16px;
   }
   .facts strong {
@@ -1566,6 +1561,7 @@ section {
   .facts span {
     font-size: 10px;
   }
+  .facts-environment strong { font-size: 18px; }
   .section-heading h2 {
     font-size: 28px;
   }
@@ -1662,8 +1658,8 @@ section {
   }
   .facts {
     grid-template-columns: 1fr 1fr;
-    gap: 25px 0;
-    padding-block: 26px;
+    gap: 22px 0;
+    padding-block: 22px;
   }
   .facts>div {
     border: 0;
@@ -1676,8 +1672,11 @@ section {
     border-left: 1px solid var(--line);
   }
   .facts strong {
-    min-width: 44px;
+    min-height: 34px;
   }
+  .facts>div:last-child { grid-column: 1/-1; display: flex; align-items: center; gap: 20px; border-top: 1px solid var(--line); padding-top: 17px; }
+  .facts>div:last-child span { margin-top: 0; }
+  .facts-environment strong { line-height: 1.8; }
   .section-heading {
     align-items: flex-start;
     flex-direction: column;
@@ -1927,9 +1926,6 @@ section {
   }
   .facts strong {
     font-size: 25px;
-  }
-  .facts>div {
-    gap: 8px;
   }
   .section-heading h2 {
     font-size: 24px;

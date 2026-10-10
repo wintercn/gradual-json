@@ -5,7 +5,11 @@ const pkg = JSON.parse(await readFile(new URL("../package.json", import.meta.url
 await rm(output, { recursive: true, force: true });
 await mkdir(new URL("assets/", output), { recursive: true });
 const html = await readFile(new URL("./index.html", import.meta.url), "utf8");
-await writeFile(new URL("index.html", output), html.replaceAll("__PACKAGE_VERSION__", pkg.version));
+const source = await readFile(new URL("../src/parser.ts", import.meta.url));
+await writeFile(new URL("index.html", output), html
+  .replaceAll("__PACKAGE_VERSION__", pkg.version)
+  .replaceAll("__SOURCE_SIZE_KB__", (source.byteLength / 1000).toFixed(1))
+  .replaceAll("__SOURCE_SIZE_BYTES__", source.byteLength.toLocaleString("en-US")));
 for (const file of ["style.css", "app.js", "scenarios.js", "logo.svg", "favicon.svg"]) {
   await cp(new URL(file, import.meta.url), new URL(file, output));
 }
