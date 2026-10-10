@@ -30,6 +30,7 @@
     "test": "node --test test/*.test.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test:package": "node --test test/package.test.mjs",
+    "site:build": "npm run build && node site/build.mjs",
     "demo:chars": "node demos/async-chars.mjs",
     "demo:node": "node demos/node-stream.mjs",
     "demo:vue": "node demos/server.mjs"

@@ -1,0 +1,17 @@
+# GitHub Pages 首页
+
+页面源文件在本目录，部署到 https://wintercn.github.io/gradual-json/ 。
+
+```sh
+npm ci
+npm run site:build
+python3 -m http.server 4174 --bind 127.0.0.1 --directory .pages-dist
+```
+
+打开 http://127.0.0.1:4174/ 查看本机预览。
+
+`site:build` 构建项目解析器，并将静态页面、解析器产物和现有 Vue 依赖的浏览器 ESM 版本复制到 `.pages-dist/`。解析器与 Vue 都在本站加载，不依赖外部 CDN；Vue 的 MIT 许可一并复制。生成目录不会提交到 Git，也不会加入 npm 发布文件。
+
+演示用本地异步生成器模拟输入块到达，实际调用项目的 `parse`，将根值写入 Vue 深层响应式宿主。支持字符或块输入、不同速度、跨块转义、错误输入、停止与重播。它不模拟网络性能，也不提供服务端 HTTP 流。
+
+`.github/workflows/pages.yml` 在 `main` 上相关文件变更时重新构建并部署，也可以手动运行。所有本地资源使用相对路径，支持 GitHub Pages 项目子路径。

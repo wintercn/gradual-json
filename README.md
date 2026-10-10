@@ -4,6 +4,8 @@
 
 项目仓库：[wintercn/gradual-json](https://github.com/wintercn/gradual-json)。采用 [MIT 许可证](LICENSE)。
 
+功能介绍与在线流式演示：[项目首页](https://wintercn.github.io/gradual-json/)。
+
 ## 安装与基本用法
 
 ```sh
