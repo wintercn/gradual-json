@@ -1,0 +1,8 @@
+node_modules/
+dist/
+coverage/
+*.tgz
+sources/
+AGENTS.md
+.npmrc
+.DS_Store

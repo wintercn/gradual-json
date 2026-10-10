@@ -1,0 +1,1366 @@
+{
+  "repository": "https://github.com/nst/JSONTestSuite",
+  "commit": "1ef36fa01286573e846ac449e8683f8833c5b26a",
+  "files": [
+    {
+      "file": "test_parsing/i_number_double_huge_neg_exp.json",
+      "blob": "ae4c7b71f6206d80c6384554debde6b1e38767b7"
+    },
+    {
+      "file": "test_parsing/i_number_huge_exp.json",
+      "blob": "9b5efa236823a23731547906d50d9c9c62ee6c76"
+    },
+    {
+      "file": "test_parsing/i_number_neg_int_huge_exp.json",
+      "blob": "3abd58a5c41aaddb634ec694b4241cb7e8ad9d58"
+    },
+    {
+      "file": "test_parsing/i_number_pos_double_huge_exp.json",
+      "blob": "e10a7eb62a55e326cbed3fa818a9ccd1e6a5ecc0"
+    },
+    {
+      "file": "test_parsing/i_number_real_neg_overflow.json",
+      "blob": "3d628a9943f95232dc3f505dc18b4bc27f6f8e95"
+    },
+    {
+      "file": "test_parsing/i_number_real_pos_overflow.json",
+      "blob": "54d7d3dcdb19bcac7c96db2a2adb69b1ec3c3815"
+    },
+    {
+      "file": "test_parsing/i_number_real_underflow.json",
+      "blob": "c5236eb26bfdd2630badb9b5b74fe28cc0b7b0fe"
+    },
+    {
+      "file": "test_parsing/i_number_too_big_neg_int.json",
+      "blob": "dfa384619749d0adef1864258c92815354473408"
+    },
+    {
+      "file": "test_parsing/i_number_too_big_pos_int.json",
+      "blob": "338a8c3c0be7f808c60455bffaf309dfa4192031"
+    },
+    {
+      "file": "test_parsing/i_number_very_big_negative_int.json",
+      "blob": "e2d9738c23900be4bde7fb44557836de41f45d8c"
+    },
+    {
+      "file": "test_parsing/i_object_key_lone_2nd_surrogate.json",
+      "blob": "5be7ebaf98d45091488cf8e01587bbc164c828b6"
+    },
+    {
+      "file": "test_parsing/i_string_1st_surrogate_but_2nd_missing.json",
+      "blob": "3b9e37c67aa09a84814228a2628369eae1bba702"
+    },
+    {
+      "file": "test_parsing/i_string_1st_valid_surrogate_2nd_invalid.json",
+      "blob": "487592832ed21d1e28e722714ef2e4d1c56b8a46"
+    },
+    {
+      "file": "test_parsing/i_string_UTF-16LE_with_BOM.json",
+      "blob": "2a79c0629a49133d8f715bddbef19cfb3ef025bd"
+    },
+    {
+      "file": "test_parsing/i_string_UTF-8_invalid_sequence.json",
+      "blob": "e2a968a15942f8e223dfaf99afe9d1b9a95a6ad1"
+    },
+    {
+      "file": "test_parsing/i_string_UTF8_surrogate_U+D800.json",
+      "blob": "916bff920fa10198a34c299a3f80fd68758078b6"
+    },
+    {
+      "file": "test_parsing/i_string_incomplete_surrogate_and_escape_valid.json",
+      "blob": "3cb11d2294b0b008aea8c13de04a5689afc04302"
+    },
+    {
+      "file": "test_parsing/i_string_incomplete_surrogate_pair.json",
+      "blob": "38ec23bb0a95981c66e0b69e4d579b51991f3046"
+    },
+    {
+      "file": "test_parsing/i_string_incomplete_surrogates_escape_valid.json",
+      "blob": "c9cd6f6c31da5dadedc90f846f81065b277d5ed5"
+    },
+    {
+      "file": "test_parsing/i_string_invalid_lonely_surrogate.json",
+      "blob": "3abbd8d8d789934e41a04b61f1da03494c06ee06"
+    },
+    {
+      "file": "test_parsing/i_string_invalid_surrogate.json",
+      "blob": "ffddc04f52fb1fda32a7f394d23b8a951bb3bb93"
+    },
+    {
+      "file": "test_parsing/i_string_invalid_utf-8.json",
+      "blob": "8e45a7ecae23f802486746853bb5c162840113b0"
+    },
+    {
+      "file": "test_parsing/i_string_inverted_surrogates_U+1D11E.json",
+      "blob": "0d5456cc38f4bef734184447b81280fa0242b184"
+    },
+    {
+      "file": "test_parsing/i_string_iso_latin_1.json",
+      "blob": "9389c982311c531b5fb30552183252a55164442e"
+    },
+    {
+      "file": "test_parsing/i_string_lone_second_surrogate.json",
+      "blob": "1dbd397f3924f275414f4ef43346e5d7c66da02d"
+    },
+    {
+      "file": "test_parsing/i_string_lone_utf8_continuation_byte.json",
+      "blob": "729337c0a3548fc95517753083866fe0acdee74d"
+    },
+    {
+      "file": "test_parsing/i_string_not_in_unicode_range.json",
+      "blob": "df90a2916c67e3ee3be24c036a6c1155f60dc9a7"
+    },
+    {
+      "file": "test_parsing/i_string_overlong_sequence_2_bytes.json",
+      "blob": "c8cee5e0a1208d8afdea430cd47354c504d7da37"
+    },
+    {
+      "file": "test_parsing/i_string_overlong_sequence_6_bytes.json",
+      "blob": "9a91da791a9e090cb77afdf81043a9f8bbf21e1d"
+    },
+    {
+      "file": "test_parsing/i_string_overlong_sequence_6_bytes_null.json",
+      "blob": "d24fffdd9821dd625b5d1c9ce70f52f4de199703"
+    },
+    {
+      "file": "test_parsing/i_string_truncated-utf-8.json",
+      "blob": "63c7777fb1837120d3a6dd876d1ecd62dae3d7c6"
+    },
+    {
+      "file": "test_parsing/i_string_utf16BE_no_BOM.json",
+      "blob": "57e5392ff6309134268c7e3ec2a9289b99ff7148"
+    },
+    {
+      "file": "test_parsing/i_string_utf16LE_no_BOM.json",
+      "blob": "c49c1b25d8e5819591993d4d45e4649a46c1b3e0"
+    },
+    {
+      "file": "test_parsing/i_structure_500_nested_arrays.json",
+      "blob": "7118405898f560b39ac2b11ee6e309c1c95ce445"
+    },
+    {
+      "file": "test_parsing/i_structure_UTF-8_BOM_empty_object.json",
+      "blob": "22fdca1b2686f070aa5bfa58fedfe845487c0183"
+    },
+    {
+      "file": "test_parsing/n_array_1_true_without_comma.json",
+      "blob": "c14e3f6b1e9d78c387f175957024f8db6efe8d84"
+    },
+    {
+      "file": "test_parsing/n_array_a_invalid_utf8.json",
+      "blob": "38a86e2e65125b4ae8d74697119f7d891b7e9ef8"
+    },
+    {
+      "file": "test_parsing/n_array_colon_instead_of_comma.json",
+      "blob": "0d02ad448332e6a7fbe2b1b2a0b34b0c75d634c1"
+    },
+    {
+      "file": "test_parsing/n_array_comma_after_close.json",
+      "blob": "2ccba8d95033a98df515265ffc5bde3ac7d60151"
+    },
+    {
+      "file": "test_parsing/n_array_comma_and_number.json",
+      "blob": "d2c84e374a2a0109083ad65e0acaea9c8738c8d0"
+    },
+    {
+      "file": "test_parsing/n_array_double_comma.json",
+      "blob": "0431712bc1db2660039def8fd4478092ad34f467"
+    },
+    {
+      "file": "test_parsing/n_array_double_extra_comma.json",
+      "blob": "3f01d31292387adb01092d33a6ef4ddc7aa822a4"
+    },
+    {
+      "file": "test_parsing/n_array_extra_close.json",
+      "blob": "c12f9fae1cbe5183c0dc95a756e8e235565467a6"
+    },
+    {
+      "file": "test_parsing/n_array_extra_comma.json",
+      "blob": "5f8ce18e4b2af42723aec840059ac80be93787c3"
+    },
+    {
+      "file": "test_parsing/n_array_incomplete.json",
+      "blob": "cc65b0b512a041036e3128cde6c1839ed85620d6"
+    },
+    {
+      "file": "test_parsing/n_array_incomplete_invalid_value.json",
+      "blob": "c21a8f6cff9b4802335f0658378fa806a97e84f2"
+    },
+    {
+      "file": "test_parsing/n_array_inner_array_no_comma.json",
+      "blob": "c70b716471b702480c5badebaed22d163f09bd6a"
+    },
+    {
+      "file": "test_parsing/n_array_invalid_utf8.json",
+      "blob": "6099d3441a416c87b4bbb09fe80afaf3a1c52649"
+    },
+    {
+      "file": "test_parsing/n_array_items_separated_by_semicolon.json",
+      "blob": "d4bd7314ca87e5a0749a56db87056aa7c1fca0a2"
+    },
+    {
+      "file": "test_parsing/n_array_just_comma.json",
+      "blob": "9d7077c6804aef704c98a8dbb2e87b8fa162c027"
+    },
+    {
+      "file": "test_parsing/n_array_just_minus.json",
+      "blob": "29501c6ca23d45e3bbe25ec9eecdd8c95c41accd"
+    },
+    {
+      "file": "test_parsing/n_array_missing_value.json",
+      "blob": "3a6ba86f3ab505cb048528b35a8e4748c0df9899"
+    },
+    {
+      "file": "test_parsing/n_array_newlines_unclosed.json",
+      "blob": "646680065295a7098b86693cfa291b0ec1dafa15"
+    },
+    {
+      "file": "test_parsing/n_array_number_and_comma.json",
+      "blob": "13f6f1d18a447f3d1eda70e2f7dcddc4536dd372"
+    },
+    {
+      "file": "test_parsing/n_array_number_and_several_commas.json",
+      "blob": "0ac408cb8aebf504696948806cdba28a575c6cc7"
+    },
+    {
+      "file": "test_parsing/n_array_spaces_vertical_tab_formfeed.json",
+      "blob": "6cd7cf5855d7e54529a90c91952145cf6e32fb57"
+    },
+    {
+      "file": "test_parsing/n_array_star_inside.json",
+      "blob": "5a5194647ade1f6185ffb8330d8cf1356164ce95"
+    },
+    {
+      "file": "test_parsing/n_array_unclosed.json",
+      "blob": "0607330590114fc85ef24b9d21bbbdd452188e0c"
+    },
+    {
+      "file": "test_parsing/n_array_unclosed_trailing_comma.json",
+      "blob": "6604698ffcd41d837cb7926bab10eb8e9bb13d80"
+    },
+    {
+      "file": "test_parsing/n_array_unclosed_with_new_lines.json",
+      "blob": "4f61de3fb1d0cb6341854ce43a3727d565feb97b"
+    },
+    {
+      "file": "test_parsing/n_array_unclosed_with_object_inside.json",
+      "blob": "043a87e2db923c53271bb949a7f37097a8b48da3"
+    },
+    {
+      "file": "test_parsing/n_incomplete_false.json",
+      "blob": "eb18c6a1437ef496109cf4b7ba822c6d7356af2a"
+    },
+    {
+      "file": "test_parsing/n_incomplete_null.json",
+      "blob": "c18ef5385103b474bbedf262dcbe8705b22626b4"
+    },
+    {
+      "file": "test_parsing/n_incomplete_true.json",
+      "blob": "f451ac6d2e7ad1481dd2a748356d15d5537a7b33"
+    },
+    {
+      "file": "test_parsing/n_multidigit_number_then_00.json",
+      "blob": "c22507b864f7f089c91c1eb85b1b15cc63b943a6"
+    },
+    {
+      "file": "test_parsing/n_number_++.json",
+      "blob": "bdb62aaf4d90d7c915e504f3f9cf41d2a5b7aad0"
+    },
+    {
+      "file": "test_parsing/n_number_+1.json",
+      "blob": "3cbe58c92b1d5f2af13413feda695c348b49976f"
+    },
+    {
+      "file": "test_parsing/n_number_+Inf.json",
+      "blob": "871ae14d535f65e1d03d146eb1497135ff5c1976"
+    },
+    {
+      "file": "test_parsing/n_number_-01.json",
+      "blob": "0df32bac8076cf851b77576f177ccbb54331598e"
+    },
+    {
+      "file": "test_parsing/n_number_-1.0..json",
+      "blob": "7cf55a85a7395e61647e30048bf84184aa835ae3"
+    },
+    {
+      "file": "test_parsing/n_number_-2..json",
+      "blob": "9be84365d096e60c1dc25c706b895841ce110663"
+    },
+    {
+      "file": "test_parsing/n_number_-NaN.json",
+      "blob": "f61615d404ea984d194869d97c4906298a7ac77f"
+    },
+    {
+      "file": "test_parsing/n_number_.-1.json",
+      "blob": "1c9f2dd1b71d20d3f1840f1954dcaa3131ee13ff"
+    },
+    {
+      "file": "test_parsing/n_number_.2e-3.json",
+      "blob": "c6c976f2577655b877af4ee89f1bed047960c5d2"
+    },
+    {
+      "file": "test_parsing/n_number_0.1.2.json",
+      "blob": "c83a25621e311f4e2f387d854a17dd7be9920ce3"
+    },
+    {
+      "file": "test_parsing/n_number_0.3e+.json",
+      "blob": "a55a1bfefa33d8103d2d35c835e6556871e9a3e0"
+    },
+    {
+      "file": "test_parsing/n_number_0.3e.json",
+      "blob": "3dd5df4b3a8568d6c044a97371fa427616be7969"
+    },
+    {
+      "file": "test_parsing/n_number_0.e1.json",
+      "blob": "c92c71ccb23f3b42426fc694ec7edbac5685460a"
+    },
+    {
+      "file": "test_parsing/n_number_0_capital_E+.json",
+      "blob": "3ba2c7d6d093ac6083515f463238d0899ad6fb82"
+    },
+    {
+      "file": "test_parsing/n_number_0_capital_E.json",
+      "blob": "5301840d1c31cd93cbd57662046e6dbc98a06b9c"
+    },
+    {
+      "file": "test_parsing/n_number_0e+.json",
+      "blob": "8ab0bc4b8b2c73b616a45931d05720555a2f7762"
+    },
+    {
+      "file": "test_parsing/n_number_0e.json",
+      "blob": "47ec421bb6242648e80b2b465049acbae1e6e44a"
+    },
+    {
+      "file": "test_parsing/n_number_1.0e+.json",
+      "blob": "cd84b9f69e3bc5a1dd5a679394dffdaa47c752cf"
+    },
+    {
+      "file": "test_parsing/n_number_1.0e-.json",
+      "blob": "4eb7afa0f99c8dd624da89b4332f4d9d744ed953"
+    },
+    {
+      "file": "test_parsing/n_number_1.0e.json",
+      "blob": "21753f4c745f63c3b7b9e5aee2e851dcfcdd3dad"
+    },
+    {
+      "file": "test_parsing/n_number_1_000.json",
+      "blob": "7b18b66b38ef13a02db8c9e88315071fbcb42543"
+    },
+    {
+      "file": "test_parsing/n_number_1eE2.json",
+      "blob": "4318a341d710ce59238bc382a8acda05615394f6"
+    },
+    {
+      "file": "test_parsing/n_number_2.e+3.json",
+      "blob": "4442f394dd73642f4e9f5a74cf58e4e555bd5dd1"
+    },
+    {
+      "file": "test_parsing/n_number_2.e-3.json",
+      "blob": "a65060edfcfda2e0593af3407b7b495d8bfc0215"
+    },
+    {
+      "file": "test_parsing/n_number_2.e3.json",
+      "blob": "66f7cf701bc28c626cb6c8c0f23e9be4d20d4491"
+    },
+    {
+      "file": "test_parsing/n_number_9.e+.json",
+      "blob": "732a7b11ce60bd78f4eed3bdb873258ff401e493"
+    },
+    {
+      "file": "test_parsing/n_number_Inf.json",
+      "blob": "c40c734c3cde1eb2977be6ff0de3c4b9b739e3f5"
+    },
+    {
+      "file": "test_parsing/n_number_NaN.json",
+      "blob": "4992317909e5996ea562cc31542f3e379df06490"
+    },
+    {
+      "file": "test_parsing/n_number_U+FF11_fullwidth_digit_one.json",
+      "blob": "b14587e5ebbb26893d9fa73679a9a711ad6cb1a4"
+    },
+    {
+      "file": "test_parsing/n_number_expression.json",
+      "blob": "76fdbc8a4999fc6b991eefd286ddeda0166d2e49"
+    },
+    {
+      "file": "test_parsing/n_number_hex_1_digit.json",
+      "blob": "3b214880c6305b6115733a376fc665102f1fbd5d"
+    },
+    {
+      "file": "test_parsing/n_number_hex_2_digits.json",
+      "blob": "83e516ab0e34e1049a7c449f0452d4df18e8720d"
+    },
+    {
+      "file": "test_parsing/n_number_infinity.json",
+      "blob": "8c2baf783a8e324d9b5237fe34f54c1b05b38ca8"
+    },
+    {
+      "file": "test_parsing/n_number_invalid+-.json",
+      "blob": "1cce602b518fc6e7f164a58cc710def27e64b8a5"
+    },
+    {
+      "file": "test_parsing/n_number_invalid-negative-real.json",
+      "blob": "5fc3c1efb60c6409a105ab5db9fccda02bbee9ad"
+    },
+    {
+      "file": "test_parsing/n_number_invalid-utf-8-in-bigger-int.json",
+      "blob": "3b97e580e85978940c8464e8a6269d5361178708"
+    },
+    {
+      "file": "test_parsing/n_number_invalid-utf-8-in-exponent.json",
+      "blob": "ea35d723cdee07956707363cc82d72cf7baf11e7"
+    },
+    {
+      "file": "test_parsing/n_number_invalid-utf-8-in-int.json",
+      "blob": "371226e4cd938db1044ddb74f0d2d15ae96c224b"
+    },
+    {
+      "file": "test_parsing/n_number_minus_infinity.json",
+      "blob": "cf4133d22d68a57a95a75ab553913a52aa5052b7"
+    },
+    {
+      "file": "test_parsing/n_number_minus_sign_with_trailing_garbage.json",
+      "blob": "a6d8e78e7ce3da51fe28d914f3108d5399f1c714"
+    },
+    {
+      "file": "test_parsing/n_number_minus_space_1.json",
+      "blob": "9a5ebedf67977623cd3371d2a1e5eaeb4af74e55"
+    },
+    {
+      "file": "test_parsing/n_number_neg_int_starting_with_zero.json",
+      "blob": "67af0960af7900c18590bc02195b1ff238c6b7d0"
+    },
+    {
+      "file": "test_parsing/n_number_neg_real_without_int_part.json",
+      "blob": "1f2a43496ed90654c015169da2c8383523511c60"
+    },
+    {
+      "file": "test_parsing/n_number_neg_with_garbage_at_end.json",
+      "blob": "2aa73119fbbc44ad7e16aa233279b5356c73fe58"
+    },
+    {
+      "file": "test_parsing/n_number_real_garbage_after_e.json",
+      "blob": "9213dfca8de99a4fdbd5557ebd19bf3d4acd8c24"
+    },
+    {
+      "file": "test_parsing/n_number_real_with_invalid_utf8_after_e.json",
+      "blob": "1e52ef964cf091cc08cee43f43e6acdbcdbd7c22"
+    },
+    {
+      "file": "test_parsing/n_number_real_without_fractional_part.json",
+      "blob": "1de287cf892dcdbc0f7f4a06fe12cf6740aa15eb"
+    },
+    {
+      "file": "test_parsing/n_number_starting_with_dot.json",
+      "blob": "f682dbdce039c78d57ab946e5cb23e0a615077dd"
+    },
+    {
+      "file": "test_parsing/n_number_with_alpha.json",
+      "blob": "1e42d81822b2e751851db8e10cb0843b824c3ca6"
+    },
+    {
+      "file": "test_parsing/n_number_with_alpha_char.json",
+      "blob": "b79daccb8a6ca48206c7e77916ce9b684f512c79"
+    },
+    {
+      "file": "test_parsing/n_number_with_leading_zero.json",
+      "blob": "7106da1f3b857f492deb93dad0173c54867dd0fc"
+    },
+    {
+      "file": "test_parsing/n_object_bad_value.json",
+      "blob": "a03a8c03b72ac33f087a5669e9ac08497d80025a"
+    },
+    {
+      "file": "test_parsing/n_object_bracket_key.json",
+      "blob": "cc443b483214c609447d3b400b8a198ad68e623a"
+    },
+    {
+      "file": "test_parsing/n_object_comma_instead_of_colon.json",
+      "blob": "8d56377087d2fc98464c84c5818c1344a0a10b26"
+    },
+    {
+      "file": "test_parsing/n_object_double_colon.json",
+      "blob": "80e8c7b89a905b5f905c290df8a3fb071f0b625f"
+    },
+    {
+      "file": "test_parsing/n_object_emoji.json",
+      "blob": "cb4078eaa101b55375f481005570dd1ca790cc87"
+    },
+    {
+      "file": "test_parsing/n_object_garbage_at_end.json",
+      "blob": "80c42cbadcfc7780f7745a354fdfe4c2e900e160"
+    },
+    {
+      "file": "test_parsing/n_object_key_with_single_quotes.json",
+      "blob": "77c32759962b50bfd6245c6b8c08ac63d7fbeaea"
+    },
+    {
+      "file": "test_parsing/n_object_lone_continuation_byte_in_key_and_trailing_comma.json",
+      "blob": "aa2cb637cd36db6937630c88960051331aadf212"
+    },
+    {
+      "file": "test_parsing/n_object_missing_colon.json",
+      "blob": "b98eff62da4fdb53f49904dad42444018457f4f3"
+    },
+    {
+      "file": "test_parsing/n_object_missing_key.json",
+      "blob": "b4fb0f528edbee90eb4e209607c207765859f825"
+    },
+    {
+      "file": "test_parsing/n_object_missing_semicolon.json",
+      "blob": "e3451384f81a9e797f683df3008b77ea61a3f510"
+    },
+    {
+      "file": "test_parsing/n_object_missing_value.json",
+      "blob": "3ef538a60e6941ee16c9a36c6aac6e3d0cf5b82a"
+    },
+    {
+      "file": "test_parsing/n_object_no-colon.json",
+      "blob": "f3797b357646f777701cebd2211792fa9d1f553f"
+    },
+    {
+      "file": "test_parsing/n_object_non_string_key.json",
+      "blob": "b9945b34b44994a3d8381bf3e0ae134c53b9db8e"
+    },
+    {
+      "file": "test_parsing/n_object_non_string_key_but_huge_number_instead.json",
+      "blob": "b37fa86c0e0288d3428279d6187018631b979787"
+    },
+    {
+      "file": "test_parsing/n_object_repeated_null_null.json",
+      "blob": "f7d2959d0d48755a811901b56c567e0b8176e1a8"
+    },
+    {
+      "file": "test_parsing/n_object_several_trailing_commas.json",
+      "blob": "3c9afe8dc90dced0a40500b3d5e67c920770bc6b"
+    },
+    {
+      "file": "test_parsing/n_object_single_quote.json",
+      "blob": "e5cdf976ad63b0bad5723671e77a44343d1dc731"
+    },
+    {
+      "file": "test_parsing/n_object_trailing_comma.json",
+      "blob": "a4b02509459f5bc83e32f8b846676edfda646cdd"
+    },
+    {
+      "file": "test_parsing/n_object_trailing_comment.json",
+      "blob": "a372c6553d2ecb253575d4cd738632a6cb0c0e95"
+    },
+    {
+      "file": "test_parsing/n_object_trailing_comment_open.json",
+      "blob": "d557f41ca452945f05786438efc629457ac35c1b"
+    },
+    {
+      "file": "test_parsing/n_object_trailing_comment_slash_open.json",
+      "blob": "e335136c0796ad07a1fb84dfdbd0ee778cfe707a"
+    },
+    {
+      "file": "test_parsing/n_object_trailing_comment_slash_open_incomplete.json",
+      "blob": "d892e49f1767b77cf04605f070a05b378f3a5e06"
+    },
+    {
+      "file": "test_parsing/n_object_two_commas_in_a_row.json",
+      "blob": "7c639ae64969ae66d364185fc82b4e0f23914dff"
+    },
+    {
+      "file": "test_parsing/n_object_unquoted_key.json",
+      "blob": "8ba137293c3a707999fd66725a53f1d9937bbc2e"
+    },
+    {
+      "file": "test_parsing/n_object_unterminated-value.json",
+      "blob": "7fe699a6a3fe52df97646b471a0c8081b2bd3321"
+    },
+    {
+      "file": "test_parsing/n_object_with_single_string.json",
+      "blob": "d63f7fbb7e3cd746c84710f6638a0febf20352f6"
+    },
+    {
+      "file": "test_parsing/n_object_with_trailing_garbage.json",
+      "blob": "787c8f0a8c035e461aa753ce3ecae18cdd95a87c"
+    },
+    {
+      "file": "test_parsing/n_single_space.json",
+      "blob": "0519ecba6ea913e21689ec692e81e9e4973fbf73"
+    },
+    {
+      "file": "test_parsing/n_string_1_surrogate_then_escape.json",
+      "blob": "acec66d8f4bf264526f427b9038b5f4bf85a3eaa"
+    },
+    {
+      "file": "test_parsing/n_string_1_surrogate_then_escape_u.json",
+      "blob": "e834b05e9637d0b3189464186d3a7ee9e1214978"
+    },
+    {
+      "file": "test_parsing/n_string_1_surrogate_then_escape_u1.json",
+      "blob": "a04cd348928dba0dea7a7c8af90205e0e7d52e8d"
+    },
+    {
+      "file": "test_parsing/n_string_1_surrogate_then_escape_u1x.json",
+      "blob": "bfbd234098fe52ae050e2d95c3a5fe9fd67c3485"
+    },
+    {
+      "file": "test_parsing/n_string_accentuated_char_no_quotes.json",
+      "blob": "fd6895693f5241468c8a701d222860848e6be545"
+    },
+    {
+      "file": "test_parsing/n_string_backslash_00.json",
+      "blob": "b5bf267b5d4ee922d20cec1543b66d1530ff76cf"
+    },
+    {
+      "file": "test_parsing/n_string_escape_x.json",
+      "blob": "fae291938d9d67fc066c243735c237812f6006d8"
+    },
+    {
+      "file": "test_parsing/n_string_escaped_backslash_bad.json",
+      "blob": "016fcb47ef5293a5cc9a33324ec31f48ea64b462"
+    },
+    {
+      "file": "test_parsing/n_string_escaped_ctrl_char_tab.json",
+      "blob": "f35ea382bb0329cef057c1c8efde314ab75628c0"
+    },
+    {
+      "file": "test_parsing/n_string_escaped_emoji.json",
+      "blob": "a27775421363d0d29bfd91b635c281d0ece8ce4e"
+    },
+    {
+      "file": "test_parsing/n_string_incomplete_escape.json",
+      "blob": "3415c33ca8ab97f2e99a48fccfc6cf2b539858bb"
+    },
+    {
+      "file": "test_parsing/n_string_incomplete_escaped_character.json",
+      "blob": "0f2197ea29019cb285e7094012f1ea6ea2b43030"
+    },
+    {
+      "file": "test_parsing/n_string_incomplete_surrogate.json",
+      "blob": "75504a65618800de9bb3ce331ed8ab908be4b862"
+    },
+    {
+      "file": "test_parsing/n_string_incomplete_surrogate_escape_invalid.json",
+      "blob": "bd9656060df48ef1fbdd812aea91eb3cc7481892"
+    },
+    {
+      "file": "test_parsing/n_string_invalid-utf-8-in-escape.json",
+      "blob": "0c43006430d3f1ac0aab03bc28e2662b5bc1cdb3"
+    },
+    {
+      "file": "test_parsing/n_string_invalid_backslash_esc.json",
+      "blob": "d1eb60921a087f2d280095449a3ba8fddaa10de5"
+    },
+    {
+      "file": "test_parsing/n_string_invalid_unicode_escape.json",
+      "blob": "7608cb6ba8963b18edb28c25de2d6687a96d5ea5"
+    },
+    {
+      "file": "test_parsing/n_string_invalid_utf8_after_escape.json",
+      "blob": "2f757a25b545d34d5967e179ce4bee4041cae803"
+    },
+    {
+      "file": "test_parsing/n_string_leading_uescaped_thinspace.json",
+      "blob": "7b297c6365afa450937464baa9032ddbcf1bf372"
+    },
+    {
+      "file": "test_parsing/n_string_no_quotes_with_bad_escape.json",
+      "blob": "01bc70abae62b7b63ba4a14bed2e7634b81df7d5"
+    },
+    {
+      "file": "test_parsing/n_string_single_doublequote.json",
+      "blob": "9d68933c44f13985b9eb19159da6eb3ff0e574bf"
+    },
+    {
+      "file": "test_parsing/n_string_single_quote.json",
+      "blob": "caff239bfc36297da08828095105bb497b8aef2a"
+    },
+    {
+      "file": "test_parsing/n_string_single_string_no_double_quotes.json",
+      "blob": "f2ba8f84ab5c1bce84a7b441cb1959cfc7093b7f"
+    },
+    {
+      "file": "test_parsing/n_string_start_escape_unclosed.json",
+      "blob": "db62a46fcbc6581c688232bd829538c8cf052b25"
+    },
+    {
+      "file": "test_parsing/n_string_unescaped_ctrl_char.json",
+      "blob": "9f21348071d3d736bdd469f159cea674c09237af"
+    },
+    {
+      "file": "test_parsing/n_string_unescaped_newline.json",
+      "blob": "700d3608691497127d3fb6a136a980d1c79c00fd"
+    },
+    {
+      "file": "test_parsing/n_string_unescaped_tab.json",
+      "blob": "160264a2d9958e20093ccac30f817799b9d84ba5"
+    },
+    {
+      "file": "test_parsing/n_string_unicode_CapitalU.json",
+      "blob": "17332bb174cbae2986af1ae5558760fc668084f3"
+    },
+    {
+      "file": "test_parsing/n_string_with_trailing_garbage.json",
+      "blob": "efe3bd272c4e6e7bc411159031cf41a4f7beec36"
+    },
+    {
+      "file": "test_parsing/n_structure_100000_opening_arrays.json",
+      "blob": "a4823eeccebc71878f53f69f8fa1c2aca525dff9"
+    },
+    {
+      "file": "test_parsing/n_structure_U+2060_word_joined.json",
+      "blob": "81156a6996ed2bb2624451d02177129089ee3a84"
+    },
+    {
+      "file": "test_parsing/n_structure_UTF8_BOM_no_data.json",
+      "blob": "5f282702bb03ef11d7184d19c80927b47f919764"
+    },
+    {
+      "file": "test_parsing/n_structure_angle_bracket_..json",
+      "blob": "a56fef0b021f3577a9a4848bef0e914034d410af"
+    },
+    {
+      "file": "test_parsing/n_structure_angle_bracket_null.json",
+      "blob": "617f2625493431a22e0087f8cfb07f42b61ae78d"
+    },
+    {
+      "file": "test_parsing/n_structure_array_trailing_garbage.json",
+      "blob": "5a745e6f3c363a090d9f617541c1902111c8d244"
+    },
+    {
+      "file": "test_parsing/n_structure_array_with_extra_array_close.json",
+      "blob": "6cfb1398d2245215bd409c4ea63fa24aa9f11db9"
+    },
+    {
+      "file": "test_parsing/n_structure_array_with_unclosed_string.json",
+      "blob": "ba6b1788b672af910a78527d200119948ff14518"
+    },
+    {
+      "file": "test_parsing/n_structure_ascii-unicode-identifier.json",
+      "blob": "ef2ab62fe763c076ab2fa6f9a5fb4c24455db93f"
+    },
+    {
+      "file": "test_parsing/n_structure_capitalized_True.json",
+      "blob": "7cd88469ab3d4b2881e6b9b110f12f5b67bb6912"
+    },
+    {
+      "file": "test_parsing/n_structure_close_unopened_array.json",
+      "blob": "d2af0c646a8fc38c44c6ef61e627644fc277d580"
+    },
+    {
+      "file": "test_parsing/n_structure_comma_instead_of_closing_brace.json",
+      "blob": "ac61b820068b498dede80c2447dbf166d237ce6a"
+    },
+    {
+      "file": "test_parsing/n_structure_double_array.json",
+      "blob": "058d1626e5af5794c19404efdd1225c513b3b994"
+    },
+    {
+      "file": "test_parsing/n_structure_end_array.json",
+      "blob": "54caf60b13678be3b856d9d9d5b1aa16b6cbe8fe"
+    },
+    {
+      "file": "test_parsing/n_structure_incomplete_UTF8_BOM.json",
+      "blob": "bfcdd514f330c988639ee0557f340eedfd11048b"
+    },
+    {
+      "file": "test_parsing/n_structure_lone-invalid-utf-8.json",
+      "blob": "8b1296cad20a66969613992eb9e0eb493a1b21fa"
+    },
+    {
+      "file": "test_parsing/n_structure_lone-open-bracket.json",
+      "blob": "8e2f0bef135ba8e52e4110b6a5b0ebf19a528ca4"
+    },
+    {
+      "file": "test_parsing/n_structure_no_data.json",
+      "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "file": "test_parsing/n_structure_null-byte-outside-string.json",
+      "blob": "326db14422a756e9bd39221edf37b844cb8471c7"
+    },
+    {
+      "file": "test_parsing/n_structure_number_with_trailing_garbage.json",
+      "blob": "0746539d246c41682d820a487de30e94b0c6c48f"
+    },
+    {
+      "file": "test_parsing/n_structure_object_followed_by_closing_object.json",
+      "blob": "aa9ebaec57098cdf08aac730bdd6e795e1fb4898"
+    },
+    {
+      "file": "test_parsing/n_structure_object_unclosed_no_value.json",
+      "blob": "17d045147fe57df74b6124eca7bd2d82b5e86405"
+    },
+    {
+      "file": "test_parsing/n_structure_object_with_comment.json",
+      "blob": "ed1b569b70490c39d2fff7ee0ba8aade7d651375"
+    },
+    {
+      "file": "test_parsing/n_structure_object_with_trailing_garbage.json",
+      "blob": "9ca2336d745105bde00d22bc7da79f855d6ac75a"
+    },
+    {
+      "file": "test_parsing/n_structure_open_array_apostrophe.json",
+      "blob": "8bebe3af09a75bc13e2616252ee10e865e6aa8ee"
+    },
+    {
+      "file": "test_parsing/n_structure_open_array_comma.json",
+      "blob": "6295fdc36db0fbedd5b26392835cd2fa20879058"
+    },
+    {
+      "file": "test_parsing/n_structure_open_array_object.json",
+      "blob": "e870445b2e253122ffcf780230b255af4aa75351"
+    },
+    {
+      "file": "test_parsing/n_structure_open_array_open_object.json",
+      "blob": "7a63c8c57c8ad55be4664fed5da00f18aaa43bbb"
+    },
+    {
+      "file": "test_parsing/n_structure_open_array_open_string.json",
+      "blob": "9822a6baf7e54f0d5dee95bfca62219d3d153faa"
+    },
+    {
+      "file": "test_parsing/n_structure_open_array_string.json",
+      "blob": "42a61936202107586f84df6cfdbe73a0f43dbe96"
+    },
+    {
+      "file": "test_parsing/n_structure_open_object.json",
+      "blob": "81750b96f9d83b395f285233d54ec0c9df9ab93d"
+    },
+    {
+      "file": "test_parsing/n_structure_open_object_close_array.json",
+      "blob": "eebc700a1013570d2d56088db48f212ed3a5c4c3"
+    },
+    {
+      "file": "test_parsing/n_structure_open_object_comma.json",
+      "blob": "47bc9106f86af641a092c5e77e9e40751f604cc1"
+    },
+    {
+      "file": "test_parsing/n_structure_open_object_open_array.json",
+      "blob": "381ede5dea5fd5c59a3561ed8744e18a43fd1d1a"
+    },
+    {
+      "file": "test_parsing/n_structure_open_object_open_string.json",
+      "blob": "328c30cd782a9010c7702bbd7740e5af05099a98"
+    },
+    {
+      "file": "test_parsing/n_structure_open_object_string_with_apostrophes.json",
+      "blob": "9dba17090cf69e0ff3ffebcd3327d0c5aa9b43c8"
+    },
+    {
+      "file": "test_parsing/n_structure_open_open.json",
+      "blob": "841fd5f8640e71e388dd3c543a2f89cfd54331f9"
+    },
+    {
+      "file": "test_parsing/n_structure_single_eacute.json",
+      "blob": "92a39f398b80310c58aa2574dd97a3e35527b73b"
+    },
+    {
+      "file": "test_parsing/n_structure_single_star.json",
+      "blob": "f59ec20aabf5842d237244ece8c81ab184faeac1"
+    },
+    {
+      "file": "test_parsing/n_structure_trailing_#.json",
+      "blob": "8986110875af2a2549e805951ce8b547a3efcb08"
+    },
+    {
+      "file": "test_parsing/n_structure_uescaped_LF_before_string.json",
+      "blob": "df2f0f242244f80750158758527e093d4b305316"
+    },
+    {
+      "file": "test_parsing/n_structure_unclosed_array.json",
+      "blob": "11209515c8ddab65d820e49bcdcad667c97222b6"
+    },
+    {
+      "file": "test_parsing/n_structure_unclosed_array_partial_null.json",
+      "blob": "0d591762c127fe5bb4e046e96d3e3ab00489dd31"
+    },
+    {
+      "file": "test_parsing/n_structure_unclosed_array_unfinished_false.json",
+      "blob": "a2ff8504a9c6320d6e55f7e611218d8f736f6d3c"
+    },
+    {
+      "file": "test_parsing/n_structure_unclosed_array_unfinished_true.json",
+      "blob": "3149e8f5a7a54110a41d50f7fd13dfcd7adbc66a"
+    },
+    {
+      "file": "test_parsing/n_structure_unclosed_object.json",
+      "blob": "694d69dbd00cd60c9a9650055e2a146ab27d068b"
+    },
+    {
+      "file": "test_parsing/n_structure_unicode-identifier.json",
+      "blob": "7284aea33d3ff489faae06977fa136995b2b00fb"
+    },
+    {
+      "file": "test_parsing/n_structure_whitespace_U+2060_word_joiner.json",
+      "blob": "81156a6996ed2bb2624451d02177129089ee3a84"
+    },
+    {
+      "file": "test_parsing/n_structure_whitespace_formfeed.json",
+      "blob": "a9ea535d1bbe5e1359937f2f56304eda8b2b6924"
+    },
+    {
+      "file": "test_parsing/y_array_arraysWithSpaces.json",
+      "blob": "582290798f434cdcbda3e23b73fdf8f245850ebc"
+    },
+    {
+      "file": "test_parsing/y_array_empty-string.json",
+      "blob": "93b6be2bccada2d5d43ea4665373a3bf6f93c11a"
+    },
+    {
+      "file": "test_parsing/y_array_empty.json",
+      "blob": "0637a088a01e8ddab3bf3fa98dbe804cbde1a0dc"
+    },
+    {
+      "file": "test_parsing/y_array_ending_with_newline.json",
+      "blob": "eac5f7b46e041d0164e7e54e32f5cbd3494d7a8b"
+    },
+    {
+      "file": "test_parsing/y_array_false.json",
+      "blob": "67b2f07601e43fe51952b8bf8b9366bf44a8679d"
+    },
+    {
+      "file": "test_parsing/y_array_heterogeneous.json",
+      "blob": "d3c1e264845e127e5cae80658814a518cbd86c37"
+    },
+    {
+      "file": "test_parsing/y_array_null.json",
+      "blob": "500db4a86aa30072b5b264d7757986e759205514"
+    },
+    {
+      "file": "test_parsing/y_array_with_1_and_newline.json",
+      "blob": "994825500ae359e1501a7ea3a07e0f671b2869e1"
+    },
+    {
+      "file": "test_parsing/y_array_with_leading_space.json",
+      "blob": "18bfe6422c78154bf80e886250dc033371d4b613"
+    },
+    {
+      "file": "test_parsing/y_array_with_several_null.json",
+      "blob": "99f6c5d1d88392b22f7952cf326ca27056ebe328"
+    },
+    {
+      "file": "test_parsing/y_array_with_trailing_space.json",
+      "blob": "de9e7a94492d287d340b352f0e2d85336c6baf3d"
+    },
+    {
+      "file": "test_parsing/y_number.json",
+      "blob": "e5f5cc3340d2c0582ed2b74ff456fc9f4cf1dcfe"
+    },
+    {
+      "file": "test_parsing/y_number_0e+1.json",
+      "blob": "d1d3967065cf8552e6284fd54cfe61340badbf48"
+    },
+    {
+      "file": "test_parsing/y_number_0e1.json",
+      "blob": "3283a7936514dae3dddeec7c2cb0c82bfda4c4fd"
+    },
+    {
+      "file": "test_parsing/y_number_after_space.json",
+      "blob": "623570d96040f8781a84becb1dd21f0db5fd5b2e"
+    },
+    {
+      "file": "test_parsing/y_number_double_close_to_zero.json",
+      "blob": "96555ff7823030dc1fea6e2c67fe1b0eb0b0b0c5"
+    },
+    {
+      "file": "test_parsing/y_number_int_with_exp.json",
+      "blob": "a4ca9e754fb065e777d52119d8589a49adf443f6"
+    },
+    {
+      "file": "test_parsing/y_number_minus_zero.json",
+      "blob": "37af1312ab5df0ee60d9a59045d8abfc8d8c5e5e"
+    },
+    {
+      "file": "test_parsing/y_number_negative_int.json",
+      "blob": "8e30f8bd96600f064f059a86141d2684e6afbf9e"
+    },
+    {
+      "file": "test_parsing/y_number_negative_one.json",
+      "blob": "99d21a2a0f0973a72b2824c007e751044cb7a7dd"
+    },
+    {
+      "file": "test_parsing/y_number_negative_zero.json",
+      "blob": "37af1312ab5df0ee60d9a59045d8abfc8d8c5e5e"
+    },
+    {
+      "file": "test_parsing/y_number_real_capital_e.json",
+      "blob": "6edbdfcb180d1df3e4cc0adecae0446ba2eecf95"
+    },
+    {
+      "file": "test_parsing/y_number_real_capital_e_neg_exp.json",
+      "blob": "0a01bd3ef4ca4a48da753b7ba2951a9cb8b2569d"
+    },
+    {
+      "file": "test_parsing/y_number_real_capital_e_pos_exp.json",
+      "blob": "5a8fc0972425492f9452108aa6b7ada7e7435e75"
+    },
+    {
+      "file": "test_parsing/y_number_real_exponent.json",
+      "blob": "da2522d61a1e076ef1da42dc6fb4468abb714ab5"
+    },
+    {
+      "file": "test_parsing/y_number_real_fraction_exponent.json",
+      "blob": "3944a7a454b3c5eddf476f018085d4f9a7fcc6b2"
+    },
+    {
+      "file": "test_parsing/y_number_real_neg_exp.json",
+      "blob": "ca40d3c25538cc103c2b05755f948130cf907fff"
+    },
+    {
+      "file": "test_parsing/y_number_real_pos_exponent.json",
+      "blob": "343601d51fddd2c6075923f823846dead724200e"
+    },
+    {
+      "file": "test_parsing/y_number_simple_int.json",
+      "blob": "e47f69afcf456a7d560a43824b75a02cc713e876"
+    },
+    {
+      "file": "test_parsing/y_number_simple_real.json",
+      "blob": "b02878e5fc195b6c5b420fbde19dba89f5471c93"
+    },
+    {
+      "file": "test_parsing/y_object.json",
+      "blob": "78262eda3fa93f3b64a8909b3524bc089f4e4b17"
+    },
+    {
+      "file": "test_parsing/y_object_basic.json",
+      "blob": "646bbe7bb1f847d721513aa7e848adecd939b123"
+    },
+    {
+      "file": "test_parsing/y_object_duplicated_key.json",
+      "blob": "bbc2e1ce433c3bc54eaff8bfc9082d680660081d"
+    },
+    {
+      "file": "test_parsing/y_object_duplicated_key_and_value.json",
+      "blob": "211581c207170e916b545ca628b123c281a9b362"
+    },
+    {
+      "file": "test_parsing/y_object_empty.json",
+      "blob": "9e26dfeeb6e641a33dae4961196235bdb965b21b"
+    },
+    {
+      "file": "test_parsing/y_object_empty_key.json",
+      "blob": "c0013d3b8bd2a4a438eb20687378df7718832455"
+    },
+    {
+      "file": "test_parsing/y_object_escaped_null_in_key.json",
+      "blob": "593f0f67f9cb79b7e9ef9bf814aef975a689bee5"
+    },
+    {
+      "file": "test_parsing/y_object_extreme_numbers.json",
+      "blob": "a0d3531c32f99425ee788d8e133605263280dd12"
+    },
+    {
+      "file": "test_parsing/y_object_long_strings.json",
+      "blob": "bdc4a08719ef9bf7af1ff9a182d6dcccff7d5758"
+    },
+    {
+      "file": "test_parsing/y_object_simple.json",
+      "blob": "dacac917fb7b16e119761d81c0a5da19ccca0848"
+    },
+    {
+      "file": "test_parsing/y_object_string_unicode.json",
+      "blob": "8effdb297c78e3037c2fb658c7dba4c7beae071f"
+    },
+    {
+      "file": "test_parsing/y_object_with_newlines.json",
+      "blob": "246ec6b34d5e0cad77b278e9ba7266129c572cc2"
+    },
+    {
+      "file": "test_parsing/y_string_1_2_3_bytes_UTF-8_sequences.json",
+      "blob": "9967ddeb8b11c03afde77519962d26cdea8a5330"
+    },
+    {
+      "file": "test_parsing/y_string_accepted_surrogate_pair.json",
+      "blob": "996875cc8c96cb52b1b3110c59600b39f2439791"
+    },
+    {
+      "file": "test_parsing/y_string_accepted_surrogate_pairs.json",
+      "blob": "3401021ecef54e06ad1660e62d2b59a68f743418"
+    },
+    {
+      "file": "test_parsing/y_string_allowed_escapes.json",
+      "blob": "7f495532fb378241fcf5f70eae2eafc7d5c0f8b9"
+    },
+    {
+      "file": "test_parsing/y_string_backslash_and_u_escaped_zero.json",
+      "blob": "d4439eda73ac829ee7b081216924a3170e682ce6"
+    },
+    {
+      "file": "test_parsing/y_string_backslash_doublequotes.json",
+      "blob": "ae03243b674279820c9f03ed9004ab6a86ecf997"
+    },
+    {
+      "file": "test_parsing/y_string_comments.json",
+      "blob": "2260c20c2f864fef383cb6218b9a6159b340a194"
+    },
+    {
+      "file": "test_parsing/y_string_double_escape_a.json",
+      "blob": "6715d6f4049fdb801ea437202db054704c73add1"
+    },
+    {
+      "file": "test_parsing/y_string_double_escape_n.json",
+      "blob": "44ca56c4d942c4e6f3c8dc00f4312932679ad95f"
+    },
+    {
+      "file": "test_parsing/y_string_escaped_control_character.json",
+      "blob": "5b014a9c25b59c73df9c3d37fd7c49af07973ca5"
+    },
+    {
+      "file": "test_parsing/y_string_escaped_noncharacter.json",
+      "blob": "2ff52e2c50bc51b0e701bbc59b48e218236bb621"
+    },
+    {
+      "file": "test_parsing/y_string_in_array.json",
+      "blob": "21d7ae4cd80b48226071646343b050086ca5cf0b"
+    },
+    {
+      "file": "test_parsing/y_string_in_array_with_leading_space.json",
+      "blob": "9e1887c1e4d20309085eb593c1e4d74b750673d7"
+    },
+    {
+      "file": "test_parsing/y_string_last_surrogates_1_and_2.json",
+      "blob": "3919cef765793878fe4d86fb3a88676a6b1f465e"
+    },
+    {
+      "file": "test_parsing/y_string_nbsp_uescaped.json",
+      "blob": "2085ab1a1c77939993b1a46c2f045c01ddfd8885"
+    },
+    {
+      "file": "test_parsing/y_string_nonCharacterInUTF-8_U+10FFFF.json",
+      "blob": "059e4d9dd0f4c17638154740cd35c5a9b8f4746e"
+    },
+    {
+      "file": "test_parsing/y_string_nonCharacterInUTF-8_U+FFFF.json",
+      "blob": "4c913bd41a08173d10cd35ee4ba088fa257b8995"
+    },
+    {
+      "file": "test_parsing/y_string_null_escape.json",
+      "blob": "c1ad844043e6bc69e2cbed1510a2ae2b866a91e5"
+    },
+    {
+      "file": "test_parsing/y_string_one-byte-utf-8.json",
+      "blob": "157185923ac7ce222e03aa60ba821bc55ef425e9"
+    },
+    {
+      "file": "test_parsing/y_string_pi.json",
+      "blob": "9df11ae88bde2fc2e8dcf41b1cf4bcdc6c7942eb"
+    },
+    {
+      "file": "test_parsing/y_string_reservedCharacterInUTF-8_U+1BFFF.json",
+      "blob": "10a33a1717ecb2304fc230f62fe8b0ed7ee6f18b"
+    },
+    {
+      "file": "test_parsing/y_string_simple_ascii.json",
+      "blob": "8cadf7d051df50af9f673aaf9d72d9a7ba02aa17"
+    },
+    {
+      "file": "test_parsing/y_string_space.json",
+      "blob": "efd782cc3250c45fa7ce371b9e3e1885c1464b90"
+    },
+    {
+      "file": "test_parsing/y_string_surrogates_U+1D11E_MUSICAL_SYMBOL_G_CLEF.json",
+      "blob": "7620b66559f39389ee483ddfb83f77ccbecf9f28"
+    },
+    {
+      "file": "test_parsing/y_string_three-byte-utf-8.json",
+      "blob": "108f1d67dffc4e03bb7fac2548dddf8565ab72a2"
+    },
+    {
+      "file": "test_parsing/y_string_two-byte-utf-8.json",
+      "blob": "461503c31001eb3cecc29680a8990c1648a0387a"
+    },
+    {
+      "file": "test_parsing/y_string_u+2028_line_sep.json",
+      "blob": "897b6021af7283a377001ef4d1ff4de25eb6d670"
+    },
+    {
+      "file": "test_parsing/y_string_u+2029_par_sep.json",
+      "blob": "8cd998c89ea3945f84522bd60b9e0cd03587b2a2"
+    },
+    {
+      "file": "test_parsing/y_string_uEscape.json",
+      "blob": "f7b41a02fa5e237898c7f97ece859d8ceee81000"
+    },
+    {
+      "file": "test_parsing/y_string_uescaped_newline.json",
+      "blob": "3a5a220b69cca1d43319ef3ac50dcb83650cb39e"
+    },
+    {
+      "file": "test_parsing/y_string_unescaped_char_delete.json",
+      "blob": "7d064f498715e6a7170624322051f44b176223ae"
+    },
+    {
+      "file": "test_parsing/y_string_unicode.json",
+      "blob": "3598095b79bef33585e51b9b31ab60a6fd3441d8"
+    },
+    {
+      "file": "test_parsing/y_string_unicodeEscapedBackslash.json",
+      "blob": "0bb3b51e7eae7a26c1df2b10f664c6fca8f753b4"
+    },
+    {
+      "file": "test_parsing/y_string_unicode_2.json",
+      "blob": "a7dcb97683f70b7cfeb3d8c6c4d82898c55f231a"
+    },
+    {
+      "file": "test_parsing/y_string_unicode_U+10FFFE_nonchar.json",
+      "blob": "9a8370b96a1c6558254bf161581c609f1a03b6ee"
+    },
+    {
+      "file": "test_parsing/y_string_unicode_U+1FFFE_nonchar.json",
+      "blob": "c51f8ae45c3c41c280c479717c4c8399bde64c5c"
+    },
+    {
+      "file": "test_parsing/y_string_unicode_U+200B_ZERO_WIDTH_SPACE.json",
+      "blob": "626d5f81572d473b8a7a2dd63741c10bb3734be3"
+    },
+    {
+      "file": "test_parsing/y_string_unicode_U+2064_invisible_plus.json",
+      "blob": "1e23972c65e3241cdeac2af7ee9f7642608d3713"
+    },
+    {
+      "file": "test_parsing/y_string_unicode_U+FDD0_nonchar.json",
+      "blob": "18ef151b4f21bc5c7e63bdd32b0913a41d974d43"
+    },
+    {
+      "file": "test_parsing/y_string_unicode_U+FFFE_nonchar.json",
+      "blob": "13d261fdad594026f07721e6da4a55119499b266"
+    },
+    {
+      "file": "test_parsing/y_string_unicode_escaped_double_quote.json",
+      "blob": "4e6257856dd21896b3a14de19d0984bf16161674"
+    },
+    {
+      "file": "test_parsing/y_string_utf8.json",
+      "blob": "40878435f978f644d2080bb250808314a06a4195"
+    },
+    {
+      "file": "test_parsing/y_string_with_del_character.json",
+      "blob": "8bd24907d9ea5208e1ca4504296d4b74ba40fd3e"
+    },
+    {
+      "file": "test_parsing/y_structure_lonely_false.json",
+      "blob": "02e4a84d62c4b0fe9cca60bba7b9799f78f1f7ed"
+    },
+    {
+      "file": "test_parsing/y_structure_lonely_int.json",
+      "blob": "f70d7bba4ae1f07682e0358bd7a2068094fc023b"
+    },
+    {
+      "file": "test_parsing/y_structure_lonely_negative_real.json",
+      "blob": "b5135a207deeb5528379b1d4575020a7319b2d15"
+    },
+    {
+      "file": "test_parsing/y_structure_lonely_null.json",
+      "blob": "ec747fa47ddb81e9bf2d282011ed32aa4c59f932"
+    },
+    {
+      "file": "test_parsing/y_structure_lonely_string.json",
+      "blob": "b6e982ca96aa4debcc635f23f433319d5f9fefc2"
+    },
+    {
+      "file": "test_parsing/y_structure_lonely_true.json",
+      "blob": "f32a5804e292d30bedf68f62d32fb75d87e99fd9"
+    },
+    {
+      "file": "test_parsing/y_structure_string_empty.json",
+      "blob": "3cc762b5501e0d558314aecc7aed03c835319ff9"
+    },
+    {
+      "file": "test_parsing/y_structure_trailing_newline.json",
+      "blob": "0c3426d4c2870f140a6209de21bc860254288f7b"
+    },
+    {
+      "file": "test_parsing/y_structure_true_in_array.json",
+      "blob": "de601e305f4ffb659d0994b872a127295e7971c7"
+    },
+    {
+      "file": "test_parsing/y_structure_whitespace_array.json",
+      "blob": "2bedf7f2de5c2f1f3427e047fd591fed953f0cd0"
+    },
+    {
+      "file": "test_transform/number_-9223372036854775808.json",
+      "blob": "f8853ff83d5ea9f05fe570742b57fa05f1b743f6"
+    },
+    {
+      "file": "test_transform/number_-9223372036854775809.json",
+      "blob": "5dca91fde6d676be54d1d75ef451423d181053ae"
+    },
+    {
+      "file": "test_transform/number_1.0.json",
+      "blob": "0ea64a68f2d174ad014e4098ee5cf47c8789feac"
+    },
+    {
+      "file": "test_transform/number_1.000000000000000005.json",
+      "blob": "4c3849de2c622219ffd8e0d64944de4040758797"
+    },
+    {
+      "file": "test_transform/number_1000000000000000.json",
+      "blob": "cd38afa77680566fa7bba5de32f4d5fd0922f901"
+    },
+    {
+      "file": "test_transform/number_10000000000000000999.json",
+      "blob": "fa37dfa7c6ca32f55c8387253328226e22c3ccfc"
+    },
+    {
+      "file": "test_transform/number_1e-999.json",
+      "blob": "61ce7529afad2964a2de1139c77a3c1c6c3d3fae"
+    },
+    {
+      "file": "test_transform/number_1e6.json",
+      "blob": "b55cfc4b2fa7a9777d1b2586f98610e5303a725f"
+    },
+    {
+      "file": "test_transform/number_9223372036854775807.json",
+      "blob": "f899e4c407ba158f11ff8d1dc25109a4557b9374"
+    },
+    {
+      "file": "test_transform/number_9223372036854775808.json",
+      "blob": "15757d3e5d29a45aeec931de789449b7b656f888"
+    },
+    {
+      "file": "test_transform/object_key_nfc_nfd.json",
+      "blob": "e4cbc1dc114dbd4f1b56c197c794bfb9cd12006a"
+    },
+    {
+      "file": "test_transform/object_key_nfd_nfc.json",
+      "blob": "b04ece18df7073cb59682e4aab3580ea841fdfea"
+    },
+    {
+      "file": "test_transform/object_same_key_different_values.json",
+      "blob": "0c4547df378beee590fa31f78ca172de2d95bc6c"
+    },
+    {
+      "file": "test_transform/object_same_key_same_value.json",
+      "blob": "e1070184de79c5401b81b1d9c760d5ed9f3f6f3c"
+    },
+    {
+      "file": "test_transform/object_same_key_unclear_values.json",
+      "blob": "8a76bd4ffeeeeadf4f6fc3a433283050a8059874"
+    },
+    {
+      "file": "test_transform/string_1_escaped_invalid_codepoint.json",
+      "blob": "8e6247319f54c0406efb2f3c8bbebca03d27f084"
+    },
+    {
+      "file": "test_transform/string_1_invalid_codepoint.json",
+      "blob": "916bff920fa10198a34c299a3f80fd68758078b6"
+    },
+    {
+      "file": "test_transform/string_2_escaped_invalid_codepoints.json",
+      "blob": "93568e2c776ce05a36d904850935f55ca29df150"
+    },
+    {
+      "file": "test_transform/string_2_invalid_codepoints.json",
+      "blob": "043a72e813cfb286cfbb461bdc284cb588f9b441"
+    },
+    {
+      "file": "test_transform/string_3_escaped_invalid_codepoints.json",
+      "blob": "407dc657508035c128dbfc7189db6d3dff95eac8"
+    },
+    {
+      "file": "test_transform/string_3_invalid_codepoints.json",
+      "blob": "2fcb0927d1039c0caeb7757baf9b780e83d2de43"
+    },
+    {
+      "file": "test_transform/string_with_escaped_NULL.json",
+      "blob": "8ca2be59e6029795dcb8836ea54d1b99f4ac33d2"
+    }
+  ]
+}

@@ -1,0 +1,258 @@
+{
+  "文档": "STATE_MACHINE_DESIGN.md",
+  "文档SHA256": "5222b0244eea07c9e8edacc74400096dc4c23488bd22053c1417aa504eb901cb",
+  "核对日期": "2026-10-10",
+  "参考实现": "https://github.com/douglascrockford/JSON-c/blob/master/JSON_checker.c",
+  "结论": "在参考实现可到达的语法上下文中，文档状态覆盖完整。除允许全部根值所需的根起始扩展外，字符转移、下一状态及语法栈效果一致。根数字还需要在 EOF 完成。",
+  "方法": "文档阶段将语法规则转写为临时模型，与编译的 C 比较；原核对结果保留。本次按用户最新指导重写，在实际状态调用位置观察临时编译副本，与 C 比较转移、拒绝及栈变化，并用 JSON.parse 核对值。最新数据见实现核对。",
+  "状态数量": {
+    "参考实现": 31,
+    "设计文档": 30,
+    "原因": "GO 与 VA 合并为 VA",
+    "当前实现": 36,
+    "实现扩展原因": "按用户最新要求，键字符串与值字符串各自拥有独立状态链，新增6个键专用状态；保留单层状态函数机器。"
+  },
+  "状态对应": {
+    "GO": "VA",
+    "OK": "OK",
+    "OB": "OB",
+    "KE": "KE",
+    "CO": "CO",
+    "VA": "VA",
+    "AR": "AR",
+    "ST": "ST",
+    "ES": "ES",
+    "U1": "U1",
+    "U2": "U2",
+    "U3": "U3",
+    "U4": "U4",
+    "MI": "MI",
+    "ZE": "ZE",
+    "IN": "IN",
+    "FR": "FR",
+    "FS": "FS",
+    "E1": "E1",
+    "E2": "E2",
+    "E3": "E3",
+    "T1": "T1",
+    "T2": "T2",
+    "T3": "T3",
+    "F1": "F1",
+    "F2": "F2",
+    "F3": "F3",
+    "F4": "F4",
+    "N1": "N1",
+    "N2": "N2",
+    "N3": "N3"
+  },
+  "核对结果": {
+    "可到达的状态与栈顶模式组合": 64,
+    "每个组合检查的字符": 136,
+    "字符范围": "全部 ASCII 0..127，另含 U+0080、U+00E9、U+4F60、U+D800、U+DC00、U+FFFF、U+1F600、U+10FFFF；这些非 ASCII 字符在 C 中同属 C_ETC。",
+    "字符转移检查": 8704,
+    "根起始预期差异": 15,
+    "根起始扩展字符": [
+      "\"",
+      "-",
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "f",
+      "n",
+      "t"
+    ],
+    "非预期转移差异": 0,
+    "EOF检查": 64,
+    "非预期EOF接受结果差异": 0,
+    "完整或错误输入的不同测试文本": 7816,
+    "非预期整文档接受结果差异": 0,
+    "与严格JSON参考解析器的接受结果差异": 0,
+    "根简单值成功用例": 17,
+    "根值错误用例": 20
+  },
+  "语法差异": [
+    {
+      "位置": "GO / VA → VA",
+      "参考实现": "GO 只接受根对象或根数组；VA 接受任意子值。",
+      "设计文档": "VA 同时处理根值与子值，允许根字符串、数字、布尔值和 null。",
+      "依据": "RFC 8259 第 2 节：JSON-text = ws value ws。"
+    },
+    {
+      "位置": "ZE / IN / FS / E3 的 EOF",
+      "参考实现": "done 只在 OK 且栈只剩 MODE_DONE 时接受，不在数字状态进行 EOF 收尾。",
+      "设计文档": "完整数字状态在 EOF 提交数字，再检查 OK 的根与容器条件。12 成功，[12 仍失败；不完整数字仍失败。",
+      "原因": "根数字支持需要 EOF 收尾。"
+    }
+  ],
+  "重点条件": [
+    "FR 是小数点之后必须读取第一位数字的状态；FS 表示已经读取至少一位小数。两者不能合并，否则会错误接受 1.。",
+    "E1、E2、E3 分别对应指数起始、指数符号之后、已有指数数字；1e、1e+、1e- 均拒绝。",
+    "AR 允许空数组；VA 不允许数组逗号后立即闭合。",
+    "OB 允许空对象；KE 不允许对象尾逗号。",
+    "数字分隔字符在同一步执行 OK 的父层检查，[1} 和 {\"a\":1] 均拒绝。",
+    "对象键与值字符串使用各自的状态链。KST闭键进入CO，ST闭值进入OK；各自的转义和Unicode状态返回各自字符串状态，没有额外布尔标志。"
+  ],
+  "核对边界": [
+    "比较字符来源契约允许的字符，且参考 C 的深度容量足够；来源参数类型与人为深度限制不属于这里的语法等价结论。",
+    "C 只校验语法，不构造对象或输出指令；实际容器写入、解码值和指令行为无法由这个 C 对照直接验证。",
+    "原 C 核对用于设计验证，没有修改生产解析器；后续按用户要求仅更换文档状态名称、命名说明和来源说明，逐字比对确认语法规则相同。"
+  ],
+  "核对时文档SHA256": "e303e6a2936be760fc2795e7cb4124f913735f0ac97925f366c6154b1ceb4a74",
+  "命名更新": {
+    "命名风格": "沿用 C 的大写短名，每个名字仍表示状态函数。",
+    "根起始": "原根起始和值起始保持合并，统一命名 VA，不新增 GO 状态。",
+    "保留状态数": 30,
+    "验证": "逐字核对：除状态名称、命名说明和来源说明外，文档与原核对版本完全一致；原字符转移及 EOF 核对结果继续适用。"
+  },
+  "旧实现处理": {
+    "状态": "已按用户要求删除",
+    "删除范围": [
+      "src",
+      "test",
+      "examples",
+      "dist",
+      "package.json",
+      "package-lock.json",
+      "tsconfig.json"
+    ],
+    "原因": "状态函数之外的辅助函数及抽象未经用户批准。",
+    "后续约束": "按用户指导执行，不自行增加状态函数之外的函数或抽象。"
+  },
+  "实现状态": {
+    "状态": "已按用户最新明确设计修改",
+    "文件": "src/parser.ts",
+    "范围": "一个内聚模块；类型随解析器定义；仅async parse入口及36个普通状态函数。",
+    "约束": "状态分支直接完成所有动作，无额外自定义函数、类、回调、归一化或包装接口。",
+    "与旧文档的覆盖关系": "最新用户指导覆盖数值字符表示、辅助函数、自定义错误类、Instruction 输出、EOF 非输入约定、根值存储、同步字符输入及字符串值写入时机；JSON语法状态和普通字符转移保留。",
+    "字符来源": "ChunkSource = AsyncIterable<string>；for await...of 取得字符串块，块内按索引逐UTF-16单元送入状态函数，空块自然跳过，无入口字符校验。",
+    "EOF": "唯一 const EOF = Symbol(\"EOF\")；数字完整状态在 EOF 写入后调用 OK(EOF)，OK 判定栈仅剩根宿主才完成；入口只在输入结束后发送 EOF。",
+    "根值存储": "containers 初始化为 [host as JsonObject]，pendingKey 初始化为 property；宿主与属性名是两个独立可选参数。公开宿主类型为object，允许普通interface、可选属性及undefined初始值。容器开始时挂载，字符串值从空串开始逐步写回，数字、布尔及null完整才写入；返回该属性的根值。",
+    "接口": "async parse(chunks: ChunkSource, host: object = {}, property: string = \"root\"): Promise<JsonValue>；完整输入与EOF校验成功后返回本次JSON根值。",
+    "输出": "已按用户指导删除全部 Instruction、双槽缓存与 yield；异步 parse 通过 Promise 返回 JSON 根值或拒绝解析错误。",
+    "错误定位": "已按用户要求删除行列、CRLF和offset计数；删除两处错误包装，状态函数的原生SyntaxError直接传播。",
+    "属性写入": "按用户明确取舍，14处 Object.defineProperty 全部替换为直接赋值；用户接受 __proto__ 的赋值语义差异。",
+    "容器入栈": "按用户指导，先写入父容器，再从该属性或数组末项读取并入栈；深层 Vue reactive 宿主返回的代理用于后续写入。",
+    "字符串写入": "OB/KE开键进入KST；键转义KES、Unicode KU1-KU4只积累键，闭合写pendingKey并返回CO。VA开值进入ST，值转义ES、Unicode U1-U4逐步写回当前属性或数组末槽，值闭合返回OK。删除readingKey及以pendingKey是否undefined推断键和值的判断。"
+  },
+  "实现核对": {
+    "状态函数": 36,
+    "异步解析入口": 1,
+    "额外函数": 0,
+    "C字符转移核对": 8704,
+    "非预期转移差异": 0,
+    "C输入核对": 7816,
+    "非预期接受差异": 0,
+    "JSON_parse结果核对": 4390,
+    "按用户取舍排除值等价核对的__proto__文档": 12,
+    "状态EOF见证": 36,
+    "根简单值用例": 17,
+    "其他行为核对": "Strict types, structure, Symbol EOF in 36 states, async input and Promise return after EOF, no Instruction, optional host/property including empty key, immediate container attachment, incremental strings and complete number/boolean/null writes, root boundaries, async source closing/errors, deep nesting, ordinary property semantics (user accepts __proto__ assignment behavior), string chunks and UTF-16 units, separate key and value string states, direct state errors, corpus values",
+    "源码SHA256": "75eea82a0e7b832f510231faca39488de4b3fb2e642f09c0e2dd10aba163a627",
+    "设计文档SHA256": "5222b0244eea07c9e8edacc74400096dc4c23488bd22053c1417aa504eb901cb",
+    "JSON_parse接受核对": 15632,
+    "临时验证材料": "/private/tmp/json-chunks-c-audit/check-direct-assignment.cjs、check-direct-assignment.py、results.json；/private/tmp/json-release-c-audit.log、json-release-tests.log、json-release-package-tests.log。",
+    "类型检查": "通过",
+    "边界行为": "通过；单字符块、多字符块、空块、任意两块切分位置、跨块转义及数字、块内逐UTF-16单元写入Vue代理、EOF后才完成Promise、可选宿主及空属性名、返回引用、即时挂载、数字/布尔/null完整写入、错误拒绝及来源关闭。按用户取舍，不要求__proto__的值构造与JSON.parse等价。",
+    "状态函数以外的运行函数": "仅用户指定的 async parse，无额外异步驱动函数。",
+    "本次源码差异": "发布准备仅将公开host参数从JsonObject放宽为object，并在栈初始化处作JsonObject类型断言，更新入口注释；运行逻辑未改变。保留既有字符串块输入、literal变量、36个状态函数及Symbol EOF，无新增运行函数、模式或选项。",
+    "Vue响应式核对": {
+      "VueVersion": "3.5.22",
+      "测试文件": "test/vue.test.mjs",
+      "单元测试数量": 11,
+      "通过": 11,
+      "失败": 0,
+      "覆盖": "容器挂载与代理身份；根、对象属性和数组槽位的逐字符字符串 effect；空串、多数组项、全部简单转义、Unicode与代理对；对象键完整后才确定；数字/布尔/null完整写入；非法和未闭合字符串保留部分并拒绝，来源关闭及无位置包装的原生错误；EOF Promise与watchEffect/nextTick。",
+      "输入": "UTF-16单元；原文中的高、低代理也分别送入并断言中间字符串。"
+    },
+    "上游测试套组": {
+      "测试总数": 1107,
+      "通过": 1079,
+      "失败": 0,
+      "跳过": 28,
+      "输入": "UTF-16单个码元及4096码元字符串块两种分块方式；373个上游原始文件保持原样。",
+      "跳过原因": "既有非法UTF-8字节输入不属于字符串块接口；原文件保留。"
+    },
+    "浏览器演示": "实际 Vue 页面在输入停于未闭合的 {\"title\":\"流式 时，宿主与标题均已显示流式；停止保留部分结果，无浏览器错误。",
+    "字符入口": "for await逐项取字符串块，块内按索引读取UTF-16单元，空块跳过；单字符块兼容，不判断代理对是否完整。",
+    "C核对方法": "实际状态函数调用的36个状态按键/值语法上下文映射到C的同名字符串状态与模式；比较字符接受、下一状态、父层模式及栈深变化。没有以布尔标志或pendingKey值推断字符串种类。",
+    "分块接口测试": {
+      "测试文件": "test/chunks.test.mjs",
+      "测试总数": 3,
+      "通过": 3,
+      "失败": 0,
+      "覆盖": "任意两块切分位置、不同块长、空块、跨块转义和数字、块内逐码元的Vue更新、错误时关闭来源。"
+    },
+    "本次单元测试验证汇总": {
+      "测试总数": 1122,
+      "通过": 1094,
+      "失败": 0,
+      "跳过": 28,
+      "日志": "/private/tmp/gradual-json-final-tests.log",
+      "执行方式": "本次完整npm test单轮运行通过全部适用用例。随后针对正式0.1.0版本、MIT LICENSE和仓库元数据单独复跑安装包测试通过。",
+      "跳过原因": "28项非法UTF-8字节输入不属于已解码字符串块接口；原始文件保留。"
+    },
+    "发布安装包核对": {
+      "测试文件": "test/package.test.mjs",
+      "通过": 1,
+      "失败": 0,
+      "身份": "正式包名与版本gradual-json@0.1.0；未使用占位名称或版本，临时独立项目已离线安装此身份的实际压缩包。",
+      "发布文件": [
+        "CHANGELOG.md",
+        "LICENSE",
+        "README.md",
+        "dist/parser.d.ts",
+        "dist/parser.js",
+        "package.json"
+      ],
+      "压缩后字节": 7622,
+      "覆盖": "构建、发布白名单、离线安装压缩包、包根ESM导入、零运行依赖、Node Readable UTF-8分块、Vue深层代理及逐步字符串、Bundler与NodeNext严格消费者类型、隔离标准JS环境ESM执行。",
+      "环境": "Node.js 24.21.0、TypeScript 5.4.5、Vue 3.5.22；未声明完整浏览器支持矩阵。",
+      "Vue类型边界": "读取深层reactive的递归JsonValue属性在本环境触发TS2589；当前README与类型测试用具体Data结构声明Vue宿主，实际代理运行测试通过。",
+      "其他发布文件": "已按用户确认添加MIT LICENSE，安装包测试核验其纳入。",
+      "待定": [],
+      "构建配置": "ES2022 ESM + 类型声明；package.json的main、types、exports指向dist，prepack执行build。",
+      "CI": ".github/workflows/ci.yml已编写，推送到公开仓库后执行。",
+      "包名更新": {
+        "包名": "gradual-json",
+        "日期": "2026-10-10",
+        "查询来源": "https://registry.npmjs.org/gradual-json",
+        "查询结果": "HTTP 404，返回Not found；查询时未注册同名包。",
+        "选择依据": "用户要求更名；gradual表示逐步的，保留渐进式JSON含义。",
+        "文件": [
+          "package.json",
+          "package-lock.json",
+          "README.md",
+          "CHANGELOG.md"
+        ],
+        "验证边界": "仅更新包名及文档；上述安装包记录保留其执行时的临时身份。未发布到npm。"
+      },
+      "日志": "/private/tmp/gradual-json-0.1.0-package-tests.log",
+      "版本与许可": "用户确认0.1.0、MIT、公开仓库wintercn/gradual-json。"
+    }
+  },
+  "实现字符串状态对应": {
+    "键字符串": {
+      "KST": "C ST / mode 2",
+      "KES": "C ES / mode 2",
+      "KU1": "C U1 / mode 2",
+      "KU2": "C U2 / mode 2",
+      "KU3": "C U3 / mode 2",
+      "KU4": "C U4 / mode 2"
+    },
+    "值字符串": "ST/ES/U1-U4对应C同名状态的数组或对象值上下文；根字符串沿用已有扩展。"
+  },
+  "首版发布准备": {
+    "版本": "0.1.0",
+    "许可证": "MIT",
+    "仓库": "https://github.com/wintercn/gradual-json",
+    "源码变动": "本次发布仅更新元数据、许可证、文档和忽略规则，解析器源码与冻结设计文档保持既有SHA256。",
+    "状态": "发布文件和测试准备完成，正在执行GitHub推送与npm发布。"
+  }
+}

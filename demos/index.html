@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>JSON 流式观察</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="/style.css">
+    <script type="module" src="/app.js"></script>
+  </head>
+  <body>
+    <main id="app" v-cloak>
+      <header>
+        <span class="eyebrow">JSON 流式观察</span>
+        <h1>看见 JSON 逐步成形</h1>
+        <p>空容器立即创建，字符串随字符增长；数字、布尔和空值完整后再写入。</p>
+      </header>
+
+      <section class="controls" aria-label="演示控制">
+        <fieldset :disabled="running">
+          <legend>输入来源</legend>
+          <label><input type="radio" v-model="mode" value="local"> 本地延时字符流</label>
+          <label><input type="radio" v-model="mode" value="http"> HTTP 分块响应</label>
+        </fieldset>
+        <label class="speed">速度
+          <select v-model="speed" :disabled="running">
+            <option value="slow">慢速</option>
+            <option value="normal">标准</option>
+            <option value="fast">快速</option>
+          </select>
+        </label>
+        <div class="buttons">
+          <button class="primary" @click="start" :disabled="running">开始演示</button>
+          <button @click="stop" :disabled="!running">停止</button>
+        </div>
+      </section>
+
+      <div class="status" role="status" aria-live="polite">
+        <span class="dot" :class="{ running, complete: completed }"></span>
+        <span>{{ status }}</span>
+        <span class="count">已接收 {{ receivedCount }} 个字符</span>
+      </div>
+
+      <section class="panels">
+        <article class="panel">
+          <div class="panel-heading"><h2>已收到的输入</h2><span>随字符到达</span></div>
+          <pre>{{ received || '等待输入…' }}</pre>
+        </article>
+        <article class="panel">
+          <div class="panel-heading"><h2>正在构造的对象</h2><span>同一个响应式引用</span></div>
+          <pre>{{ constructed }}</pre>
+        </article>
+      </section>
+
+      <section class="content-card">
+        <div class="panel-heading"><h2>随数据出现的内容</h2><span>{{ items.length }} 个数组项</span></div>
+        <h3>{{ host.data?.title ?? '标题仍在接收…' }}</h3>
+        <div class="author">
+          <span>{{ host.data?.author?.name ?? '等待作者信息' }}</span>
+          <span class="tag" v-if="host.data?.author?.active === true">作者已启用</span>
+          <span class="muted" v-if="noteReady">备注：空值</span>
+        </div>
+        <div class="items">
+          <article class="item" v-for="(item, index) in items" :key="index">
+            <span class="item-number">{{ String(index + 1).padStart(2, '0') }}</span>
+            <div class="item-body">
+              <h4>{{ item.label ?? '项目已创建，等待名称…' }}</h4>
+              <div class="tags"><span class="tag" v-for="tag in item.tags ?? []" :key="tag">{{ tag }}</span></div>
+              <span class="muted" v-if="item.available === false">暂未上架</span>
+            </div>
+            <span class="price">{{ item.price === undefined ? '等待价格' : '¥ ' + item.price }}</span>
+          </article>
+          <p class="empty" v-if="items.length === 0">数组项一创建，就会出现在这里。</p>
+        </div>
+      </section>
+      <footer>停止会保留已构造的部分；只有输入结束且校验通过，才显示“解析完成”。</footer>
+    </main>
+  </body>
+</html>

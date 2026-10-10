@@ -1,0 +1,56 @@
+{
+  "name": "gradual-json",
+  "description": "Parse async JSON string chunks into progressively constructed objects, including reactive proxies.",
+  "type": "module",
+  "main": "./dist/parser.js",
+  "types": "./dist/parser.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/parser.d.ts",
+      "import": "./dist/parser.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "keywords": [
+    "json",
+    "streaming",
+    "parser",
+    "typescript",
+    "vue"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prepack": "npm run build",
+    "test": "node --test test/*.test.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test:package": "node --test test/package.test.mjs",
+    "demo:chars": "node demos/async-chars.mjs",
+    "demo:node": "node demos/node-stream.mjs",
+    "demo:vue": "node demos/server.mjs"
+  },
+  "devDependencies": {
+    "typescript": "5.4.5",
+    "vue": "3.5.22"
+  },
+  "version": "0.1.0",
+  "license": "MIT",
+  "author": "Shaofei Cheng",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wintercn/gradual-json.git"
+  },
+  "homepage": "https://github.com/wintercn/gradual-json#readme",
+  "bugs": {
+    "url": "https://github.com/wintercn/gradual-json/issues"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  }
+}

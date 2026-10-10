@@ -1,0 +1,1339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="3232" height="2987" viewBox="0 0 3232 2987" role="img" aria-labelledby="diagram-title diagram-description">
+<title id="diagram-title">JSON 原始状态转移图 — 31 个状态</title>
+<desc id="diagram-description">根据 JSON_checker.c 2016-11-11 原始表生成。31 个圆形状态节点、84 条按相同目标合并的输入转移、8 个菱形栈动作。四个区域属于同一个状态机，跨区方框是指向同名状态或动作的引用，可点击跳转。所有未列出的输入均拒绝。引用、菱形和 ACCEPT 不增加状态。</desc>
+<metadata id="machine-definition">{&quot;source&quot;:&quot;docs/JSON_STATE_MACHINE.md&quot;,&quot;originalSourceUrl&quot;:&quot;https://github.com/douglascrockford/JSON-c/blob/master/JSON_checker.c&quot;,&quot;version&quot;:&quot;2016-11-11&quot;,&quot;sourceSha256&quot;:&quot;52ad1349b5ffb5bf4ea52ea64f2dc3b877ece16f909c11d5e69813a96418c279&quot;,&quot;states&quot;:[&quot;GO&quot;,&quot;OK&quot;,&quot;OB&quot;,&quot;KE&quot;,&quot;CO&quot;,&quot;VA&quot;,&quot;AR&quot;,&quot;ST&quot;,&quot;ES&quot;,&quot;U1&quot;,&quot;U2&quot;,&quot;U3&quot;,&quot;U4&quot;,&quot;MI&quot;,&quot;ZE&quot;,&quot;IN&quot;,&quot;FR&quot;,&quot;FS&quot;,&quot;E1&quot;,&quot;E2&quot;,&quot;E3&quot;,&quot;T1&quot;,&quot;T2&quot;,&quot;T3&quot;,&quot;F1&quot;,&quot;F2&quot;,&quot;F3&quot;,&quot;F4&quot;,&quot;N1&quot;,&quot;N2&quot;,&quot;N3&quot;],&quot;classes&quot;:[&quot;C_SPACE&quot;,&quot;C_WHITE&quot;,&quot;C_LCURB&quot;,&quot;C_RCURB&quot;,&quot;C_LSQRB&quot;,&quot;C_RSQRB&quot;,&quot;C_COLON&quot;,&quot;C_COMMA&quot;,&quot;C_QUOTE&quot;,&quot;C_BACKS&quot;,&quot;C_SLASH&quot;,&quot;C_PLUS&quot;,&quot;C_MINUS&quot;,&quot;C_POINT&quot;,&quot;C_ZERO&quot;,&quot;C_DIGIT&quot;,&quot;C_LOW_A&quot;,&quot;C_LOW_B&quot;,&quot;C_LOW_C&quot;,&quot;C_LOW_D&quot;,&quot;C_LOW_E&quot;,&quot;C_LOW_F&quot;,&quot;C_LOW_L&quot;,&quot;C_LOW_N&quot;,&quot;C_LOW_R&quot;,&quot;C_LOW_S&quot;,&quot;C_LOW_T&quot;,&quot;C_LOW_U&quot;,&quot;C_ABCDF&quot;,&quot;C_E&quot;,&quot;C_ETC&quot;],&quot;asciiClass&quot;:[&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;C_WHITE&quot;,&quot;C_WHITE&quot;,&quot;__&quot;,&quot;__&quot;,&quot;C_WHITE&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;C_SPACE&quot;,&quot;C_ETC&quot;,&quot;C_QUOTE&quot;,&quot;C_ETC&quot;,&quot;C_ETC&quot;,&quot;C_ETC&quot;,&quot;C_ETC&quot;,&quot;C_ETC&quot;,&quot;C_ETC&quot;,&quot;C_ETC&quot;,&quot;C_ETC&quot;,&quot;C_PLUS&quot;,&quot;C_COMMA&quot;,&quot;C_MINUS&quot;,&quot;C_POINT&quot;,&quot;C_SLASH&quot;,&quot;C_ZERO&quot;,&quot;C_DIGIT&quot;,&quot;C_DIGIT&quot;,&quot;C_DIGIT&quot;,&quot;C_DIGIT&quot;,&quot;C_DIGIT&quot;,&quot;C_DIGIT&quot;,&quot;C_DIGIT&quot;,&quot;C_DIGIT&quot;,&quot;C_DIGIT&quot;,&quot;C_COLON&quot;,&quot;C_ETC&quot;,&quot;C_ETC&quot;,&quot;C_ETC&quot;,&quot;C_ETC&quot;,&quot;C_ETC&quot;,&quot;C_ETC&quot;,&quot;C_ABCDF&quot;,&quot;C_ABCDF&quot;,&quot;C_ABCDF&quot;,&quot;C_ABCDF&quot;,&quot;C_E&quot;,&quot;C_ABCDF&quot;,&quot;C_ETC&quot;,&quot;C_ETC&quot;,&quot;C_ETC&quot;,&quot;C_ETC&quot;,&quot;C_ETC&quot;,&quot;C_ETC&quot;,&quot;C_ETC&quot;,&quot;C_ETC&quot;,&quot;C_ETC&quot;,&quot;C_ETC&quot;,&quot;C_ETC&quot;,&quot;C_ETC&quot;,&quot;C_ETC&quot;,&quot;C_ETC&quot;,&quot;C_ETC&quot;,&quot;C_ETC&quot;,&quot;C_ETC&quot;,&quot;C_ETC&quot;,&quot;C_ETC&quot;,&quot;C_ETC&quot;,&quot;C_LSQRB&quot;,&quot;C_BACKS&quot;,&quot;C_RSQRB&quot;,&quot;C_ETC&quot;,&quot;C_ETC&quot;,&quot;C_ETC&quot;,&quot;C_LOW_A&quot;,&quot;C_LOW_B&quot;,&quot;C_LOW_C&quot;,&quot;C_LOW_D&quot;,&quot;C_LOW_E&quot;,&quot;C_LOW_F&quot;,&quot;C_ETC&quot;,&quot;C_ETC&quot;,&quot;C_ETC&quot;,&quot;C_ETC&quot;,&quot;C_ETC&quot;,&quot;C_LOW_L&quot;,&quot;C_ETC&quot;,&quot;C_LOW_N&quot;,&quot;C_ETC&quot;,&quot;C_ETC&quot;,&quot;C_ETC&quot;,&quot;C_LOW_R&quot;,&quot;C_LOW_S&quot;,&quot;C_LOW_T&quot;,&quot;C_LOW_U&quot;,&quot;C_ETC&quot;,&quot;C_ETC&quot;,&quot;C_ETC&quot;,&quot;C_ETC&quot;,&quot;C_ETC&quot;,&quot;C_LCURB&quot;,&quot;C_ETC&quot;,&quot;C_RCURB&quot;,&quot;C_ETC&quot;,&quot;C_ETC&quot;],&quot;matrix&quot;:[[&quot;GO&quot;,&quot;GO&quot;,&quot;-6&quot;,&quot;__&quot;,&quot;-5&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;],[&quot;OK&quot;,&quot;OK&quot;,&quot;__&quot;,&quot;-8&quot;,&quot;__&quot;,&quot;-7&quot;,&quot;__&quot;,&quot;-3&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;],[&quot;OB&quot;,&quot;OB&quot;,&quot;__&quot;,&quot;-9&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;ST&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;],[&quot;KE&quot;,&quot;KE&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;ST&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;],[&quot;CO&quot;,&quot;CO&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;-2&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;],[&quot;VA&quot;,&quot;VA&quot;,&quot;-6&quot;,&quot;__&quot;,&quot;-5&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;ST&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;MI&quot;,&quot;__&quot;,&quot;ZE&quot;,&quot;IN&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;F1&quot;,&quot;__&quot;,&quot;N1&quot;,&quot;__&quot;,&quot;__&quot;,&quot;T1&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;],[&quot;AR&quot;,&quot;AR&quot;,&quot;-6&quot;,&quot;__&quot;,&quot;-5&quot;,&quot;-7&quot;,&quot;__&quot;,&quot;__&quot;,&quot;ST&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;MI&quot;,&quot;__&quot;,&quot;ZE&quot;,&quot;IN&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;F1&quot;,&quot;__&quot;,&quot;N1&quot;,&quot;__&quot;,&quot;__&quot;,&quot;T1&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;],[&quot;ST&quot;,&quot;__&quot;,&quot;ST&quot;,&quot;ST&quot;,&quot;ST&quot;,&quot;ST&quot;,&quot;ST&quot;,&quot;ST&quot;,&quot;-4&quot;,&quot;ES&quot;,&quot;ST&quot;,&quot;ST&quot;,&quot;ST&quot;,&quot;ST&quot;,&quot;ST&quot;,&quot;ST&quot;,&quot;ST&quot;,&quot;ST&quot;,&quot;ST&quot;,&quot;ST&quot;,&quot;ST&quot;,&quot;ST&quot;,&quot;ST&quot;,&quot;ST&quot;,&quot;ST&quot;,&quot;ST&quot;,&quot;ST&quot;,&quot;ST&quot;,&quot;ST&quot;,&quot;ST&quot;,&quot;ST&quot;],[&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;ST&quot;,&quot;ST&quot;,&quot;ST&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;ST&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;ST&quot;,&quot;__&quot;,&quot;ST&quot;,&quot;ST&quot;,&quot;__&quot;,&quot;ST&quot;,&quot;U1&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;],[&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;U2&quot;,&quot;U2&quot;,&quot;U2&quot;,&quot;U2&quot;,&quot;U2&quot;,&quot;U2&quot;,&quot;U2&quot;,&quot;U2&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;U2&quot;,&quot;U2&quot;,&quot;__&quot;],[&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;U3&quot;,&quot;U3&quot;,&quot;U3&quot;,&quot;U3&quot;,&quot;U3&quot;,&quot;U3&quot;,&quot;U3&quot;,&quot;U3&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;U3&quot;,&quot;U3&quot;,&quot;__&quot;],[&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;U4&quot;,&quot;U4&quot;,&quot;U4&quot;,&quot;U4&quot;,&quot;U4&quot;,&quot;U4&quot;,&quot;U4&quot;,&quot;U4&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;U4&quot;,&quot;U4&quot;,&quot;__&quot;],[&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;ST&quot;,&quot;ST&quot;,&quot;ST&quot;,&quot;ST&quot;,&quot;ST&quot;,&quot;ST&quot;,&quot;ST&quot;,&quot;ST&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;ST&quot;,&quot;ST&quot;,&quot;__&quot;],[&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;ZE&quot;,&quot;IN&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;],[&quot;OK&quot;,&quot;OK&quot;,&quot;__&quot;,&quot;-8&quot;,&quot;__&quot;,&quot;-7&quot;,&quot;__&quot;,&quot;-3&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;FR&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;E1&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;E1&quot;,&quot;__&quot;],[&quot;OK&quot;,&quot;OK&quot;,&quot;__&quot;,&quot;-8&quot;,&quot;__&quot;,&quot;-7&quot;,&quot;__&quot;,&quot;-3&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;FR&quot;,&quot;IN&quot;,&quot;IN&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;E1&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;E1&quot;,&quot;__&quot;],[&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;FS&quot;,&quot;FS&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;],[&quot;OK&quot;,&quot;OK&quot;,&quot;__&quot;,&quot;-8&quot;,&quot;__&quot;,&quot;-7&quot;,&quot;__&quot;,&quot;-3&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;FS&quot;,&quot;FS&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;E1&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;E1&quot;,&quot;__&quot;],[&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;E2&quot;,&quot;E2&quot;,&quot;__&quot;,&quot;E3&quot;,&quot;E3&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;],[&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;E3&quot;,&quot;E3&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;],[&quot;OK&quot;,&quot;OK&quot;,&quot;__&quot;,&quot;-8&quot;,&quot;__&quot;,&quot;-7&quot;,&quot;__&quot;,&quot;-3&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;E3&quot;,&quot;E3&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;],[&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;T2&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;],[&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;T3&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;],[&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;OK&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;],[&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;F2&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;],[&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;F3&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;],[&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;F4&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;],[&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;OK&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;],[&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;N2&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;],[&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;N3&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;],[&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;OK&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;,&quot;__&quot;]],&quot;displayedTransitions&quot;:[{&quot;source&quot;:&quot;GO&quot;,&quot;target&quot;:&quot;GO&quot;,&quot;classes&quot;:[&quot;C_SPACE&quot;,&quot;C_WHITE&quot;],&quot;label&quot;:&quot;WS&quot;},{&quot;source&quot;:&quot;GO&quot;,&quot;target&quot;:&quot;-6&quot;,&quot;classes&quot;:[&quot;C_LCURB&quot;],&quot;label&quot;:&quot;{&quot;},{&quot;source&quot;:&quot;GO&quot;,&quot;target&quot;:&quot;-5&quot;,&quot;classes&quot;:[&quot;C_LSQRB&quot;],&quot;label&quot;:&quot;[&quot;},{&quot;source&quot;:&quot;OK&quot;,&quot;target&quot;:&quot;OK&quot;,&quot;classes&quot;:[&quot;C_SPACE&quot;,&quot;C_WHITE&quot;],&quot;label&quot;:&quot;WS&quot;},{&quot;source&quot;:&quot;OK&quot;,&quot;target&quot;:&quot;-8&quot;,&quot;classes&quot;:[&quot;C_RCURB&quot;],&quot;label&quot;:&quot;}&quot;},{&quot;source&quot;:&quot;OK&quot;,&quot;target&quot;:&quot;-7&quot;,&quot;classes&quot;:[&quot;C_RSQRB&quot;],&quot;label&quot;:&quot;]&quot;},{&quot;source&quot;:&quot;OK&quot;,&quot;target&quot;:&quot;-3&quot;,&quot;classes&quot;:[&quot;C_COMMA&quot;],&quot;label&quot;:&quot;,&quot;},{&quot;source&quot;:&quot;OB&quot;,&quot;target&quot;:&quot;OB&quot;,&quot;classes&quot;:[&quot;C_SPACE&quot;,&quot;C_WHITE&quot;],&quot;label&quot;:&quot;WS&quot;},{&quot;source&quot;:&quot;OB&quot;,&quot;target&quot;:&quot;-9&quot;,&quot;classes&quot;:[&quot;C_RCURB&quot;],&quot;label&quot;:&quot;}&quot;},{&quot;source&quot;:&quot;OB&quot;,&quot;target&quot;:&quot;ST&quot;,&quot;classes&quot;:[&quot;C_QUOTE&quot;],&quot;label&quot;:&quot;\&quot;&quot;},{&quot;source&quot;:&quot;KE&quot;,&quot;target&quot;:&quot;KE&quot;,&quot;classes&quot;:[&quot;C_SPACE&quot;,&quot;C_WHITE&quot;],&quot;label&quot;:&quot;WS&quot;},{&quot;source&quot;:&quot;KE&quot;,&quot;target&quot;:&quot;ST&quot;,&quot;classes&quot;:[&quot;C_QUOTE&quot;],&quot;label&quot;:&quot;\&quot;&quot;},{&quot;source&quot;:&quot;CO&quot;,&quot;target&quot;:&quot;CO&quot;,&quot;classes&quot;:[&quot;C_SPACE&quot;,&quot;C_WHITE&quot;],&quot;label&quot;:&quot;WS&quot;},{&quot;source&quot;:&quot;CO&quot;,&quot;target&quot;:&quot;-2&quot;,&quot;classes&quot;:[&quot;C_COLON&quot;],&quot;label&quot;:&quot;:&quot;},{&quot;source&quot;:&quot;VA&quot;,&quot;target&quot;:&quot;VA&quot;,&quot;classes&quot;:[&quot;C_SPACE&quot;,&quot;C_WHITE&quot;],&quot;label&quot;:&quot;WS&quot;},{&quot;source&quot;:&quot;VA&quot;,&quot;target&quot;:&quot;-6&quot;,&quot;classes&quot;:[&quot;C_LCURB&quot;],&quot;label&quot;:&quot;{&quot;},{&quot;source&quot;:&quot;VA&quot;,&quot;target&quot;:&quot;-5&quot;,&quot;classes&quot;:[&quot;C_LSQRB&quot;],&quot;label&quot;:&quot;[&quot;},{&quot;source&quot;:&quot;VA&quot;,&quot;target&quot;:&quot;ST&quot;,&quot;classes&quot;:[&quot;C_QUOTE&quot;],&quot;label&quot;:&quot;\&quot;&quot;},{&quot;source&quot;:&quot;VA&quot;,&quot;target&quot;:&quot;MI&quot;,&quot;classes&quot;:[&quot;C_MINUS&quot;],&quot;label&quot;:&quot;-&quot;},{&quot;source&quot;:&quot;VA&quot;,&quot;target&quot;:&quot;ZE&quot;,&quot;classes&quot;:[&quot;C_ZERO&quot;],&quot;label&quot;:&quot;0&quot;},{&quot;source&quot;:&quot;VA&quot;,&quot;target&quot;:&quot;IN&quot;,&quot;classes&quot;:[&quot;C_DIGIT&quot;],&quot;label&quot;:&quot;1–9&quot;},{&quot;source&quot;:&quot;VA&quot;,&quot;target&quot;:&quot;F1&quot;,&quot;classes&quot;:[&quot;C_LOW_F&quot;],&quot;label&quot;:&quot;f&quot;},{&quot;source&quot;:&quot;VA&quot;,&quot;target&quot;:&quot;N1&quot;,&quot;classes&quot;:[&quot;C_LOW_N&quot;],&quot;label&quot;:&quot;n&quot;},{&quot;source&quot;:&quot;VA&quot;,&quot;target&quot;:&quot;T1&quot;,&quot;classes&quot;:[&quot;C_LOW_T&quot;],&quot;label&quot;:&quot;t&quot;},{&quot;source&quot;:&quot;AR&quot;,&quot;target&quot;:&quot;AR&quot;,&quot;classes&quot;:[&quot;C_SPACE&quot;,&quot;C_WHITE&quot;],&quot;label&quot;:&quot;WS&quot;},{&quot;source&quot;:&quot;AR&quot;,&quot;target&quot;:&quot;-6&quot;,&quot;classes&quot;:[&quot;C_LCURB&quot;],&quot;label&quot;:&quot;{&quot;},{&quot;source&quot;:&quot;AR&quot;,&quot;target&quot;:&quot;-5&quot;,&quot;classes&quot;:[&quot;C_LSQRB&quot;],&quot;label&quot;:&quot;[&quot;},{&quot;source&quot;:&quot;AR&quot;,&quot;target&quot;:&quot;-7&quot;,&quot;classes&quot;:[&quot;C_RSQRB&quot;],&quot;label&quot;:&quot;]&quot;},{&quot;source&quot;:&quot;AR&quot;,&quot;target&quot;:&quot;ST&quot;,&quot;classes&quot;:[&quot;C_QUOTE&quot;],&quot;label&quot;:&quot;\&quot;&quot;},{&quot;source&quot;:&quot;AR&quot;,&quot;target&quot;:&quot;MI&quot;,&quot;classes&quot;:[&quot;C_MINUS&quot;],&quot;label&quot;:&quot;-&quot;},{&quot;source&quot;:&quot;AR&quot;,&quot;target&quot;:&quot;ZE&quot;,&quot;classes&quot;:[&quot;C_ZERO&quot;],&quot;label&quot;:&quot;0&quot;},{&quot;source&quot;:&quot;AR&quot;,&quot;target&quot;:&quot;IN&quot;,&quot;classes&quot;:[&quot;C_DIGIT&quot;],&quot;label&quot;:&quot;1–9&quot;},{&quot;source&quot;:&quot;AR&quot;,&quot;target&quot;:&quot;F1&quot;,&quot;classes&quot;:[&quot;C_LOW_F&quot;],&quot;label&quot;:&quot;f&quot;},{&quot;source&quot;:&quot;AR&quot;,&quot;target&quot;:&quot;N1&quot;,&quot;classes&quot;:[&quot;C_LOW_N&quot;],&quot;label&quot;:&quot;n&quot;},{&quot;source&quot;:&quot;AR&quot;,&quot;target&quot;:&quot;T1&quot;,&quot;classes&quot;:[&quot;C_LOW_T&quot;],&quot;label&quot;:&quot;t&quot;},{&quot;source&quot;:&quot;ST&quot;,&quot;target&quot;:&quot;ST&quot;,&quot;classes&quot;:[&quot;C_SPACE&quot;,&quot;C_LCURB&quot;,&quot;C_RCURB&quot;,&quot;C_LSQRB&quot;,&quot;C_RSQRB&quot;,&quot;C_COLON&quot;,&quot;C_COMMA&quot;,&quot;C_SLASH&quot;,&quot;C_PLUS&quot;,&quot;C_MINUS&quot;,&quot;C_POINT&quot;,&quot;C_ZERO&quot;,&quot;C_DIGIT&quot;,&quot;C_LOW_A&quot;,&quot;C_LOW_B&quot;,&quot;C_LOW_C&quot;,&quot;C_LOW_D&quot;,&quot;C_LOW_E&quot;,&quot;C_LOW_F&quot;,&quot;C_LOW_L&quot;,&quot;C_LOW_N&quot;,&quot;C_LOW_R&quot;,&quot;C_LOW_S&quot;,&quot;C_LOW_T&quot;,&quot;C_LOW_U&quot;,&quot;C_ABCDF&quot;,&quot;C_E&quot;,&quot;C_ETC&quot;],&quot;label&quot;:&quot;CHAR&quot;},{&quot;source&quot;:&quot;ST&quot;,&quot;target&quot;:&quot;-4&quot;,&quot;classes&quot;:[&quot;C_QUOTE&quot;],&quot;label&quot;:&quot;\&quot;&quot;},{&quot;source&quot;:&quot;ST&quot;,&quot;target&quot;:&quot;ES&quot;,&quot;classes&quot;:[&quot;C_BACKS&quot;],&quot;label&quot;:&quot;\\&quot;},{&quot;source&quot;:&quot;ES&quot;,&quot;target&quot;:&quot;ST&quot;,&quot;classes&quot;:[&quot;C_QUOTE&quot;,&quot;C_BACKS&quot;,&quot;C_SLASH&quot;,&quot;C_LOW_B&quot;,&quot;C_LOW_F&quot;,&quot;C_LOW_N&quot;,&quot;C_LOW_R&quot;,&quot;C_LOW_T&quot;],&quot;label&quot;:&quot;ESC&quot;},{&quot;source&quot;:&quot;ES&quot;,&quot;target&quot;:&quot;U1&quot;,&quot;classes&quot;:[&quot;C_LOW_U&quot;],&quot;label&quot;:&quot;u&quot;},{&quot;source&quot;:&quot;U1&quot;,&quot;target&quot;:&quot;U2&quot;,&quot;classes&quot;:[&quot;C_ZERO&quot;,&quot;C_DIGIT&quot;,&quot;C_LOW_A&quot;,&quot;C_LOW_B&quot;,&quot;C_LOW_C&quot;,&quot;C_LOW_D&quot;,&quot;C_LOW_E&quot;,&quot;C_LOW_F&quot;,&quot;C_ABCDF&quot;,&quot;C_E&quot;],&quot;label&quot;:&quot;HEX&quot;},{&quot;source&quot;:&quot;U2&quot;,&quot;target&quot;:&quot;U3&quot;,&quot;classes&quot;:[&quot;C_ZERO&quot;,&quot;C_DIGIT&quot;,&quot;C_LOW_A&quot;,&quot;C_LOW_B&quot;,&quot;C_LOW_C&quot;,&quot;C_LOW_D&quot;,&quot;C_LOW_E&quot;,&quot;C_LOW_F&quot;,&quot;C_ABCDF&quot;,&quot;C_E&quot;],&quot;label&quot;:&quot;HEX&quot;},{&quot;source&quot;:&quot;U3&quot;,&quot;target&quot;:&quot;U4&quot;,&quot;classes&quot;:[&quot;C_ZERO&quot;,&quot;C_DIGIT&quot;,&quot;C_LOW_A&quot;,&quot;C_LOW_B&quot;,&quot;C_LOW_C&quot;,&quot;C_LOW_D&quot;,&quot;C_LOW_E&quot;,&quot;C_LOW_F&quot;,&quot;C_ABCDF&quot;,&quot;C_E&quot;],&quot;label&quot;:&quot;HEX&quot;},{&quot;source&quot;:&quot;U4&quot;,&quot;target&quot;:&quot;ST&quot;,&quot;classes&quot;:[&quot;C_ZERO&quot;,&quot;C_DIGIT&quot;,&quot;C_LOW_A&quot;,&quot;C_LOW_B&quot;,&quot;C_LOW_C&quot;,&quot;C_LOW_D&quot;,&quot;C_LOW_E&quot;,&quot;C_LOW_F&quot;,&quot;C_ABCDF&quot;,&quot;C_E&quot;],&quot;label&quot;:&quot;HEX&quot;},{&quot;source&quot;:&quot;MI&quot;,&quot;target&quot;:&quot;ZE&quot;,&quot;classes&quot;:[&quot;C_ZERO&quot;],&quot;label&quot;:&quot;0&quot;},{&quot;source&quot;:&quot;MI&quot;,&quot;target&quot;:&quot;IN&quot;,&quot;classes&quot;:[&quot;C_DIGIT&quot;],&quot;label&quot;:&quot;1–9&quot;},{&quot;source&quot;:&quot;ZE&quot;,&quot;target&quot;:&quot;OK&quot;,&quot;classes&quot;:[&quot;C_SPACE&quot;,&quot;C_WHITE&quot;],&quot;label&quot;:&quot;WS&quot;},{&quot;source&quot;:&quot;ZE&quot;,&quot;target&quot;:&quot;-8&quot;,&quot;classes&quot;:[&quot;C_RCURB&quot;],&quot;label&quot;:&quot;}&quot;},{&quot;source&quot;:&quot;ZE&quot;,&quot;target&quot;:&quot;-7&quot;,&quot;classes&quot;:[&quot;C_RSQRB&quot;],&quot;label&quot;:&quot;]&quot;},{&quot;source&quot;:&quot;ZE&quot;,&quot;target&quot;:&quot;-3&quot;,&quot;classes&quot;:[&quot;C_COMMA&quot;],&quot;label&quot;:&quot;,&quot;},{&quot;source&quot;:&quot;ZE&quot;,&quot;target&quot;:&quot;FR&quot;,&quot;classes&quot;:[&quot;C_POINT&quot;],&quot;label&quot;:&quot;.&quot;},{&quot;source&quot;:&quot;ZE&quot;,&quot;target&quot;:&quot;E1&quot;,&quot;classes&quot;:[&quot;C_LOW_E&quot;,&quot;C_E&quot;],&quot;label&quot;:&quot;e / E&quot;},{&quot;source&quot;:&quot;IN&quot;,&quot;target&quot;:&quot;OK&quot;,&quot;classes&quot;:[&quot;C_SPACE&quot;,&quot;C_WHITE&quot;],&quot;label&quot;:&quot;WS&quot;},{&quot;source&quot;:&quot;IN&quot;,&quot;target&quot;:&quot;-8&quot;,&quot;classes&quot;:[&quot;C_RCURB&quot;],&quot;label&quot;:&quot;}&quot;},{&quot;source&quot;:&quot;IN&quot;,&quot;target&quot;:&quot;-7&quot;,&quot;classes&quot;:[&quot;C_RSQRB&quot;],&quot;label&quot;:&quot;]&quot;},{&quot;source&quot;:&quot;IN&quot;,&quot;target&quot;:&quot;-3&quot;,&quot;classes&quot;:[&quot;C_COMMA&quot;],&quot;label&quot;:&quot;,&quot;},{&quot;source&quot;:&quot;IN&quot;,&quot;target&quot;:&quot;FR&quot;,&quot;classes&quot;:[&quot;C_POINT&quot;],&quot;label&quot;:&quot;.&quot;},{&quot;source&quot;:&quot;IN&quot;,&quot;target&quot;:&quot;IN&quot;,&quot;classes&quot;:[&quot;C_ZERO&quot;,&quot;C_DIGIT&quot;],&quot;label&quot;:&quot;0–9&quot;},{&quot;source&quot;:&quot;IN&quot;,&quot;target&quot;:&quot;E1&quot;,&quot;classes&quot;:[&quot;C_LOW_E&quot;,&quot;C_E&quot;],&quot;label&quot;:&quot;e / E&quot;},{&quot;source&quot;:&quot;FR&quot;,&quot;target&quot;:&quot;FS&quot;,&quot;classes&quot;:[&quot;C_ZERO&quot;,&quot;C_DIGIT&quot;],&quot;label&quot;:&quot;0–9&quot;},{&quot;source&quot;:&quot;FS&quot;,&quot;target&quot;:&quot;OK&quot;,&quot;classes&quot;:[&quot;C_SPACE&quot;,&quot;C_WHITE&quot;],&quot;label&quot;:&quot;WS&quot;},{&quot;source&quot;:&quot;FS&quot;,&quot;target&quot;:&quot;-8&quot;,&quot;classes&quot;:[&quot;C_RCURB&quot;],&quot;label&quot;:&quot;}&quot;},{&quot;source&quot;:&quot;FS&quot;,&quot;target&quot;:&quot;-7&quot;,&quot;classes&quot;:[&quot;C_RSQRB&quot;],&quot;label&quot;:&quot;]&quot;},{&quot;source&quot;:&quot;FS&quot;,&quot;target&quot;:&quot;-3&quot;,&quot;classes&quot;:[&quot;C_COMMA&quot;],&quot;label&quot;:&quot;,&quot;},{&quot;source&quot;:&quot;FS&quot;,&quot;target&quot;:&quot;FS&quot;,&quot;classes&quot;:[&quot;C_ZERO&quot;,&quot;C_DIGIT&quot;],&quot;label&quot;:&quot;0–9&quot;},{&quot;source&quot;:&quot;FS&quot;,&quot;target&quot;:&quot;E1&quot;,&quot;classes&quot;:[&quot;C_LOW_E&quot;,&quot;C_E&quot;],&quot;label&quot;:&quot;e / E&quot;},{&quot;source&quot;:&quot;E1&quot;,&quot;target&quot;:&quot;E2&quot;,&quot;classes&quot;:[&quot;C_PLUS&quot;,&quot;C_MINUS&quot;],&quot;label&quot;:&quot;+ / -&quot;},{&quot;source&quot;:&quot;E1&quot;,&quot;target&quot;:&quot;E3&quot;,&quot;classes&quot;:[&quot;C_ZERO&quot;,&quot;C_DIGIT&quot;],&quot;label&quot;:&quot;0–9&quot;},{&quot;source&quot;:&quot;E2&quot;,&quot;target&quot;:&quot;E3&quot;,&quot;classes&quot;:[&quot;C_ZERO&quot;,&quot;C_DIGIT&quot;],&quot;label&quot;:&quot;0–9&quot;},{&quot;source&quot;:&quot;E3&quot;,&quot;target&quot;:&quot;OK&quot;,&quot;classes&quot;:[&quot;C_SPACE&quot;,&quot;C_WHITE&quot;],&quot;label&quot;:&quot;WS&quot;},{&quot;source&quot;:&quot;E3&quot;,&quot;target&quot;:&quot;-8&quot;,&quot;classes&quot;:[&quot;C_RCURB&quot;],&quot;label&quot;:&quot;}&quot;},{&quot;source&quot;:&quot;E3&quot;,&quot;target&quot;:&quot;-7&quot;,&quot;classes&quot;:[&quot;C_RSQRB&quot;],&quot;label&quot;:&quot;]&quot;},{&quot;source&quot;:&quot;E3&quot;,&quot;target&quot;:&quot;-3&quot;,&quot;classes&quot;:[&quot;C_COMMA&quot;],&quot;label&quot;:&quot;,&quot;},{&quot;source&quot;:&quot;E3&quot;,&quot;target&quot;:&quot;E3&quot;,&quot;classes&quot;:[&quot;C_ZERO&quot;,&quot;C_DIGIT&quot;],&quot;label&quot;:&quot;0–9&quot;},{&quot;source&quot;:&quot;T1&quot;,&quot;target&quot;:&quot;T2&quot;,&quot;classes&quot;:[&quot;C_LOW_R&quot;],&quot;label&quot;:&quot;r&quot;},{&quot;source&quot;:&quot;T2&quot;,&quot;target&quot;:&quot;T3&quot;,&quot;classes&quot;:[&quot;C_LOW_U&quot;],&quot;label&quot;:&quot;u&quot;},{&quot;source&quot;:&quot;T3&quot;,&quot;target&quot;:&quot;OK&quot;,&quot;classes&quot;:[&quot;C_LOW_E&quot;],&quot;label&quot;:&quot;e&quot;},{&quot;source&quot;:&quot;F1&quot;,&quot;target&quot;:&quot;F2&quot;,&quot;classes&quot;:[&quot;C_LOW_A&quot;],&quot;label&quot;:&quot;a&quot;},{&quot;source&quot;:&quot;F2&quot;,&quot;target&quot;:&quot;F3&quot;,&quot;classes&quot;:[&quot;C_LOW_L&quot;],&quot;label&quot;:&quot;l&quot;},{&quot;source&quot;:&quot;F3&quot;,&quot;target&quot;:&quot;F4&quot;,&quot;classes&quot;:[&quot;C_LOW_S&quot;],&quot;label&quot;:&quot;s&quot;},{&quot;source&quot;:&quot;F4&quot;,&quot;target&quot;:&quot;OK&quot;,&quot;classes&quot;:[&quot;C_LOW_E&quot;],&quot;label&quot;:&quot;e&quot;},{&quot;source&quot;:&quot;N1&quot;,&quot;target&quot;:&quot;N2&quot;,&quot;classes&quot;:[&quot;C_LOW_U&quot;],&quot;label&quot;:&quot;u&quot;},{&quot;source&quot;:&quot;N2&quot;,&quot;target&quot;:&quot;N3&quot;,&quot;classes&quot;:[&quot;C_LOW_L&quot;],&quot;label&quot;:&quot;l&quot;},{&quot;source&quot;:&quot;N3&quot;,&quot;target&quot;:&quot;OK&quot;,&quot;classes&quot;:[&quot;C_LOW_L&quot;],&quot;label&quot;:&quot;l&quot;}],&quot;stackActions&quot;:[{&quot;id&quot;:&quot;-9&quot;,&quot;label&quot;:&quot;-9\nempty }&quot;,&quot;to&quot;:[[&quot;OK&quot;,&quot;pop(KEY)&quot;]]},{&quot;id&quot;:&quot;-8&quot;,&quot;label&quot;:&quot;-8\n}&quot;,&quot;to&quot;:[[&quot;OK&quot;,&quot;pop(OBJECT)&quot;]]},{&quot;id&quot;:&quot;-7&quot;,&quot;label&quot;:&quot;-7\n]&quot;,&quot;to&quot;:[[&quot;OK&quot;,&quot;pop(ARRAY)&quot;]]},{&quot;id&quot;:&quot;-6&quot;,&quot;label&quot;:&quot;-6\n{&quot;,&quot;to&quot;:[[&quot;OB&quot;,&quot;push(KEY)&quot;]]},{&quot;id&quot;:&quot;-5&quot;,&quot;label&quot;:&quot;-5\n[&quot;,&quot;to&quot;:[[&quot;AR&quot;,&quot;push(ARRAY)&quot;]]},{&quot;id&quot;:&quot;-4&quot;,&quot;label&quot;:&quot;-4\n\&quot;&quot;,&quot;to&quot;:[[&quot;CO&quot;,&quot;top = KEY&quot;],[&quot;OK&quot;,&quot;top = ARRAY / OBJECT&quot;]]},{&quot;id&quot;:&quot;-3&quot;,&quot;label&quot;:&quot;-3\n,&quot;,&quot;to&quot;:[[&quot;KE&quot;,&quot;OBJECT → KEY&quot;],[&quot;VA&quot;,&quot;top = ARRAY&quot;]]},{&quot;id&quot;:&quot;-2&quot;,&quot;label&quot;:&quot;-2\n:&quot;,&quot;to&quot;:[[&quot;VA&quot;,&quot;KEY → OBJECT&quot;]]}]}</metadata>
+<metadata id="original-license">/*
+Copyright (c) 2005 JSON.org
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the &quot;Software&quot;), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+The Software shall be used for Good, not Evil.
+
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/</metadata>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<g font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif"><text x="48" y="61" font-size="36" fill="#172b4d" font-weight="700">JSON 状态转移图</text><text x="48" y="99" font-size="19" fill="#334155" >JSON_checker.c · 2016-11-11 · 原始 31 个状态 / 31 类输入字符 / 完整 31 × 31 转移表</text><text x="48" y="135" font-size="18" fill="#334155" >圆形：原始状态    菱形：栈动作    虚线方框：跨区引用，可点击跳到同名状态或动作    实线：输入    虚线：动作结果 / EOF</text><text x="48" y="163" font-size="18" fill="#334155" >初始：state = GO，stack = [MODE_DONE]。原版本 GO 只接受对象或数组作为根值。</text><text x="48" y="190" font-size="18" fill="#334155" >四个区域只是排版分区；31 个状态各定义一次。引用方框中的“→ 名称”就是该条转移的目标。</text><rect x="48" y="206" width="1941" height="1406" rx="12" fill="#fbfcfe" stroke="#dfe5ed"/><text x="76" y="244" font-size="25" fill="#172b4d" font-weight="700">结构 · 7 个状态</text><text x="76" y="274" font-size="17" fill="#334155" >对象 / 数组语法；值的起始字符指向各区的同名状态。</text><svg x="84" y="327" width="1869" height="1249" viewBox="0.00 0.00 1869.00 1249.00">
+<g id="graph-syntax" class="graph" transform="scale(1 1) rotate(0) translate(14.4 1234.88)">
+<title>syntax</title>
+<!-- GO&#45;&gt;GO -->
+<g id="transition&#45;GO&#45;GO" class="edge">
+<title>GO&#45;&gt;GO</title>
+<g id="a_transition&#45;GO&#45;GO"><a xlink:title="GO + C_SPACE | C_WHITE → GO">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M22.52,-101.52C20.36,-120.1 23.89,-137.4 33.12,-137.4 40.69,-137.4 44.42,-125.76 44.33,-111.32"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="47.14,-111.44 43.85,-103.63 41.55,-111.79 47.14,-111.44"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="33.12" y="-142.2" font-family="Arial" font-size="16.00" fill="#334155">WS</text>
+</g>
+<!-- GO&#45;&gt;action6 -->
+<g id="transition&#45;GO&#45;action6" class="edge">
+<title>GO&#45;&gt;action6</title>
+<g id="a_transition&#45;GO&#45;action6"><a xlink:title="GO + C_LCURB → &#45;6">
+<path fill="none" stroke="#b77937" stroke-width="1.4" d="M45.39,-100.63C66.76,-160.06 113.14,-289.03 136.95,-355.24"/>
+<polygon fill="#b77937" stroke="#b77937" stroke-width="1.4" points="134.23,-355.97 139.57,-362.55 139.5,-354.07 134.23,-355.97"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="92.91" y="-237.58" font-family="Arial" font-size="16.00" fill="#334155">{</text>
+</g>
+<!-- GO&#45;&gt;action5 -->
+<g id="transition&#45;GO&#45;action5" class="edge">
+<title>GO&#45;&gt;action5</title>
+<g id="a_transition&#45;GO&#45;action5"><a xlink:title="GO + C_LSQRB → &#45;5">
+<path fill="none" stroke="#b77937" stroke-width="1.4" d="M64.56,-57.48C88.01,-49.46 121.43,-40.28 151.7,-40.28 151.7,-40.28 151.7,-40.28 1229.33,-40.28 1324.7,-40.28 1389.34,-152.62 1417.71,-214.51"/>
+<polygon fill="#b77937" stroke="#b77937" stroke-width="1.4" points="1415.1,-215.53 1420.93,-221.69 1420.21,-213.24 1415.1,-215.53"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="634.85" y="-45.08" font-family="Arial" font-size="16.00" fill="#334155">[</text>
+</g>
+<!-- OK&#45;&gt;OK -->
+<g id="transition&#45;OK&#45;OK" class="edge">
+<title>OK&#45;&gt;OK</title>
+<g id="a_transition&#45;OK&#45;OK"><a xlink:title="OK + C_SPACE | C_WHITE → OK">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M710.88,-1027.04C706.6,-1046.53 711.86,-1065.4 726.65,-1065.4 738.9,-1065.4 744.61,-1052.46 743.79,-1036.94"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="746.58,-1036.69 742.71,-1029.14 741.03,-1037.45 746.58,-1036.69"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="726.65" y="-1070.2" font-family="Arial" font-size="16.00" fill="#334155">WS</text>
+</g>
+<!-- OK&#45;&gt;action8 -->
+<g id="transition&#45;OK&#45;action8" class="edge">
+<title>OK&#45;&gt;action8</title>
+<g id="a_transition&#45;OK&#45;action8"><a xlink:title="OK + C_RCURB → &#45;8">
+<path fill="none" stroke="#b77937" stroke-width="1.4" d="M741.49,-1027.34C750.93,-1044.3 765.11,-1064.24 783.77,-1075.28 831.78,-1103.68 897.88,-1105.74 939.91,-1103.42"/>
+<polygon fill="#b77937" stroke="#b77937" stroke-width="1.4" points="939.87,-1106.23 947.67,-1102.91 939.5,-1100.64 939.87,-1106.23"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="846.45" y="-1108.82" font-family="Arial" font-size="16.00" fill="#334155">}</text>
+</g>
+<!-- OK&#45;&gt;action7 -->
+<g id="transition&#45;OK&#45;action7" class="edge">
+<title>OK&#45;&gt;action7</title>
+<g id="a_transition&#45;OK&#45;action7"><a xlink:title="OK + C_RSQRB → &#45;7">
+<path fill="none" stroke="#b77937" stroke-width="1.4" d="M733.57,-1030.26C740.61,-1060.39 755.2,-1104.23 783.77,-1131.28 851.16,-1195.08 887.69,-1201.28 980.49,-1201.28 980.49,-1201.28 980.49,-1201.28 1650.77,-1201.28 1728.69,-1201.28 1770.27,-1103.08 1788.43,-1042.95"/>
+<polygon fill="#b77937" stroke="#b77937" stroke-width="1.4" points="1791.11,-1043.78 1790.66,-1035.32 1785.73,-1042.21 1791.11,-1043.78"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="1331.69" y="-1206.08" font-family="Arial" font-size="16.00" fill="#334155">]</text>
+</g>
+<!-- OK&#45;&gt;action3 -->
+<g id="transition&#45;OK&#45;action3" class="edge">
+<title>OK&#45;&gt;action3</title>
+<g id="a_transition&#45;OK&#45;action3"><a xlink:title="OK + C_COMMA → &#45;3">
+<path fill="none" stroke="#b77937" stroke-width="1.4" d="M751.58,-974.51C761.02,-966.5 772.34,-958.03 783.77,-952.08 834.8,-925.54 899.9,-909.86 940.91,-901.91"/>
+<polygon fill="#b77937" stroke="#b77937" stroke-width="1.4" points="941.36,-904.68 948.71,-900.45 940.33,-899.17 941.36,-904.68"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="846.45" y="-956.88" font-family="Arial" font-size="16.00" fill="#334155">,</text>
+</g>
+<!-- OK&#45;&gt;accepted -->
+<g id="finish&#45;check" class="edge">
+<title>OK&#45;&gt;accepted</title>
+<path fill="none" stroke="#3b8b57" stroke-width="1.4" stroke-dasharray="5,2" d="M737.6,-965.29C746.58,-940.39 761.78,-906.14 783.77,-882.08 823.85,-838.22 883.86,-805.19 927.06,-785.23"/>
+<polygon fill="#3b8b57" stroke="#3b8b57" stroke-width="1.4" points="927.95,-787.9 934.08,-782.05 925.64,-782.8 927.95,-787.9"/>
+<text xml:space="preserve" text-anchor="middle" x="846.45" y="-886.88" font-family="Arial" font-size="16.00" fill="#3b8b57">EOF: pop(DONE)</text>
+</g>
+<!-- OB&#45;&gt;OB -->
+<g id="transition&#45;OB&#45;OB" class="edge">
+<title>OB&#45;&gt;OB</title>
+<g id="a_transition&#45;OB&#45;OB"><a xlink:title="OB + C_SPACE | C_WHITE → OB">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M333.72,-694.52C331.55,-713.1 335.09,-730.4 344.31,-730.4 351.88,-730.4 355.62,-718.76 355.52,-704.32"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="358.33,-704.44 355.04,-696.63 352.74,-704.79 358.33,-704.44"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="344.31" y="-735.2" font-family="Arial" font-size="16.00" fill="#334155">WS</text>
+</g>
+<!-- OB&#45;&gt;action9 -->
+<g id="transition&#45;OB&#45;action9" class="edge">
+<title>OB&#45;&gt;action9</title>
+<g id="a_transition&#45;OB&#45;action9"><a xlink:title="OB + C_RCURB → &#45;9">
+<path fill="none" stroke="#b77937" stroke-width="1.4" d="M364.58,-689.01C391.61,-726.5 441.02,-795.04 472.77,-839.08"/>
+<polygon fill="#b77937" stroke="#b77937" stroke-width="1.4" points="470.49,-840.7 477.44,-845.56 475.03,-837.43 470.49,-840.7"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="404.1" y="-750.14" font-family="Arial" font-size="16.00" fill="#334155">}</text>
+</g>
+<!-- OB&#45;&gt;ref_syntax_ST -->
+<g id="transition&#45;OB&#45;ST" class="edge">
+<title>OB&#45;&gt;ref_syntax_ST</title>
+<g id="a_transition&#45;OB&#45;ST"><a xlink:title="OB + C_QUOTE → ST">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M378.12,-662.28C409.91,-662.28 459.5,-662.28 502.47,-662.28 502.47,-662.28 502.47,-662.28 847.45,-662.28 859.45,-662.28 1694.9,-747.68 1706.89,-748.28 1720.71,-748.97 1724.49,-751.2 1738.02,-748.28 1744.52,-746.88 1751.17,-744.73 1757.57,-742.24"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="1758.5,-744.89 1764.79,-739.21 1756.33,-739.72 1758.5,-744.89"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="1112.53" y="-699.14" font-family="Arial" font-size="16.00" fill="#334155">&quot;</text>
+</g>
+<!-- KE&#45;&gt;KE -->
+<g id="transition&#45;KE&#45;KE" class="edge">
+<title>KE&#45;&gt;KE</title>
+<g id="a_transition&#45;KE&#45;KE"><a xlink:title="KE + C_SPACE | C_WHITE → KE">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M1314.11,-856.33C1308.97,-876.07 1314.83,-895.4 1331.69,-895.4 1345.78,-895.4 1352.19,-881.9 1350.91,-865.93"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="1353.74,-865.84 1349.63,-858.42 1348.22,-866.78 1353.74,-865.84"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="1331.69" y="-900.2" font-family="Arial" font-size="16.00" fill="#334155">WS</text>
+</g>
+<!-- KE&#45;&gt;ref_syntax_ST -->
+<g id="transition&#45;KE&#45;ST" class="edge">
+<title>KE&#45;&gt;ref_syntax_ST</title>
+<g id="a_transition&#45;KE&#45;ST"><a xlink:title="KE + C_QUOTE → ST">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M1364.98,-832.95C1436.79,-843.91 1613.26,-861.53 1738.02,-796.28 1758.82,-785.4 1775.17,-764.18 1785.83,-746.92"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="1788.16,-748.47 1789.8,-740.16 1783.33,-745.63 1788.16,-748.47"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="1542.41" y="-848.46" font-family="Arial" font-size="16.00" fill="#334155">&quot;</text>
+</g>
+<!-- CO&#45;&gt;CO -->
+<g id="transition&#45;CO&#45;CO" class="edge">
+<title>CO&#45;&gt;CO</title>
+<g id="a_transition&#45;CO&#45;CO"><a xlink:title="CO + C_SPACE | C_WHITE → CO">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M710.88,-402.04C706.6,-421.53 711.86,-440.4 726.65,-440.4 738.9,-440.4 744.61,-427.46 743.79,-411.94"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="746.58,-411.69 742.71,-404.14 741.03,-412.45 746.58,-411.69"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="726.65" y="-445.2" font-family="Arial" font-size="16.00" fill="#334155">WS</text>
+</g>
+<!-- CO&#45;&gt;action2 -->
+<g id="transition&#45;CO&#45;action2" class="edge">
+<title>CO&#45;&gt;action2</title>
+<g id="a_transition&#45;CO&#45;action2"><a xlink:title="CO + C_COLON → &#45;2">
+<path fill="none" stroke="#b77937" stroke-width="1.4" d="M760.45,-374.74C806.32,-378.19 889.62,-384.45 939.53,-388.2"/>
+<polygon fill="#b77937" stroke="#b77937" stroke-width="1.4" points="939.04,-390.97 947.23,-388.78 939.46,-385.39 939.04,-390.97"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="846.45" y="-390.47" font-family="Arial" font-size="16.00" fill="#334155">:</text>
+</g>
+<!-- VA&#45;&gt;VA -->
+<g id="transition&#45;VA&#45;VA" class="edge">
+<title>VA&#45;&gt;VA</title>
+<g id="a_transition&#45;VA&#45;VA"><a xlink:title="VA + C_SPACE | C_WHITE → VA">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M1210.75,-456.33C1205.62,-476.07 1211.48,-495.4 1228.33,-495.4 1242.42,-495.4 1248.83,-481.9 1247.55,-465.93"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="1250.38,-465.84 1246.27,-458.42 1244.86,-466.78 1250.38,-465.84"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="1228.33" y="-500.2" font-family="Arial" font-size="16.00" fill="#334155">WS</text>
+</g>
+<!-- VA&#45;&gt;action6 -->
+<g id="transition&#45;VA&#45;action6" class="edge">
+<title>VA&#45;&gt;action6</title>
+<g id="a_transition&#45;VA&#45;action6"><a xlink:title="VA + C_LCURB → &#45;6">
+<path fill="none" stroke="#b77937" stroke-width="1.4" d="M1197.54,-441.2C1152.17,-461.1 1062.56,-495.28 982.49,-495.28 343.31,-495.28 343.31,-495.28 343.31,-495.28 279.61,-495.28 216.15,-450.84 181.21,-421.5"/>
+<polygon fill="#b77937" stroke="#b77937" stroke-width="1.4" points="183.28,-419.6 175.39,-416.51 179.64,-423.85 183.28,-419.6"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="634.85" y="-500.08" font-family="Arial" font-size="16.00" fill="#334155">{</text>
+</g>
+<!-- VA&#45;&gt;action5 -->
+<g id="transition&#45;VA&#45;action5" class="edge">
+<title>VA&#45;&gt;action5</title>
+<g id="a_transition&#45;VA&#45;action5"><a xlink:title="VA + C_LSQRB → &#45;5">
+<path fill="none" stroke="#b77937" stroke-width="1.4" d="M1253.55,-405.05C1263.03,-397.1 1274.29,-388.52 1285.45,-382.08 1323.62,-360.04 1344.11,-374.54 1377.93,-346.28 1394.83,-332.15 1408.06,-311.56 1417.41,-293.44"/>
+<polygon fill="#b77937" stroke="#b77937" stroke-width="1.4" points="1419.72,-295.09 1420.75,-286.68 1414.7,-292.61 1419.72,-295.09"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="1331.69" y="-386.88" font-family="Arial" font-size="16.00" fill="#334155">[</text>
+</g>
+<!-- VA&#45;&gt;ref_syntax_ST -->
+<g id="transition&#45;VA&#45;ST" class="edge">
+<title>VA&#45;&gt;ref_syntax_ST</title>
+<g id="a_transition&#45;VA&#45;ST"><a xlink:title="VA + C_QUOTE → ST">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M1239.47,-459.02C1248.28,-481.97 1263.18,-512.18 1285.45,-531.28 1447.51,-670.26 1540.03,-612.43 1738.02,-692.28 1742.68,-694.16 1747.51,-696.19 1752.32,-698.27"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="1751.1,-700.8 1759.55,-701.45 1753.36,-695.67 1751.1,-700.8"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="1542.41" y="-654.65" font-family="Arial" font-size="16.00" fill="#334155">&quot;</text>
+</g>
+<!-- VA&#45;&gt;ref_syntax_MI -->
+<g id="transition&#45;VA&#45;MI" class="edge">
+<title>VA&#45;&gt;ref_syntax_MI</title>
+<g id="a_transition&#45;VA&#45;MI"><a xlink:title="VA + C_MINUS → MI">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M1262.09,-427.14C1337.17,-426.3 1527.21,-421.23 1682.89,-392.28 1705.92,-388 1730.87,-380.89 1751.79,-374.2"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="1752.65,-376.86 1759.39,-371.72 1750.92,-371.54 1752.65,-376.86"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="1542.41" y="-421.33" font-family="Arial" font-size="16.00" fill="#334155">&#45;</text>
+</g>
+<!-- VA&#45;&gt;ref_syntax_ZE -->
+<g id="transition&#45;VA&#45;ZE" class="edge">
+<title>VA&#45;&gt;ref_syntax_ZE</title>
+<g id="a_transition&#45;VA&#45;ZE"><a xlink:title="VA + C_ZERO → ZE">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M1241.09,-396.13C1263.22,-342.46 1316.67,-233.97 1401.93,-188.28 1521.49,-124.21 1571.27,-178.95 1706.89,-176.28 1720.72,-176.01 1724.64,-172.76 1738.02,-176.28 1747.78,-178.85 1757.61,-183.35 1766.48,-188.28"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="1764.85,-190.57 1773.17,-192.22 1767.7,-185.74 1764.85,-190.57"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="1542.41" y="-170.52" font-family="Arial" font-size="16.00" fill="#334155">0</text>
+</g>
+<!-- VA&#45;&gt;ref_syntax_IN -->
+<g id="transition&#45;VA&#45;IN" class="edge">
+<title>VA&#45;&gt;ref_syntax_IN</title>
+<g id="a_transition&#45;VA&#45;IN"><a xlink:title="VA + C_DIGIT → IN">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M1248.09,-454.77C1257.79,-466.78 1270.7,-479.8 1285.45,-487.28 1441.05,-566.19 1656.13,-561.13 1751.28,-554.03"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="1751.33,-556.83 1759.08,-553.42 1750.89,-551.25 1751.33,-556.83"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="1542.41" y="-561.11" font-family="Arial" font-size="16.00" fill="#334155">1–9</text>
+</g>
+<!-- VA&#45;&gt;ref_syntax_F1 -->
+<g id="transition&#45;VA&#45;F1" class="edge">
+<title>VA&#45;&gt;ref_syntax_F1</title>
+<g id="a_transition&#45;VA&#45;F1"><a xlink:title="VA + C_LOW_F → F1">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M1257.91,-443.38C1266.5,-447.42 1276.13,-451.2 1285.45,-453.28 1457.86,-491.71 1506.49,-462.53 1682.89,-453.28 1705.39,-452.1 1730.25,-449.89 1751.25,-447.76"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="1751.44,-450.56 1759.11,-446.94 1750.87,-444.99 1751.44,-450.56"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="1542.41" y="-475.22" font-family="Arial" font-size="16.00" fill="#334155">f</text>
+</g>
+<!-- VA&#45;&gt;ref_syntax_N1 -->
+<g id="transition&#45;VA&#45;N1" class="edge">
+<title>VA&#45;&gt;ref_syntax_N1</title>
+<g id="a_transition&#45;VA&#45;N1"><a xlink:title="VA + C_LOW_N → N1">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M1231.26,-393.68C1235.98,-323.21 1250.35,-163.17 1285.45,-123.28 1404.98,12.53 1648.21,1.5 1751.63,-10.34"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="1751.11,-13.09 1759.38,-11.26 1751.77,-7.53 1751.11,-13.09"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="1542.41" y="-20.97" font-family="Arial" font-size="16.00" fill="#334155">n</text>
+</g>
+<!-- VA&#45;&gt;ref_syntax_T1 -->
+<g id="transition&#45;VA&#45;T1" class="edge">
+<title>VA&#45;&gt;ref_syntax_T1</title>
+<g id="a_transition&#45;VA&#45;T1"><a xlink:title="VA + C_LOW_T → T1">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M1233.5,-394.06C1241.23,-337.38 1259.4,-225.3 1285.45,-196.28 1405.63,-62.4 1647.98,-79.46 1751.37,-94"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="1750.81,-96.75 1759.13,-95.13 1751.62,-91.21 1750.81,-96.75"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="1542.41" y="-98.3" font-family="Arial" font-size="16.00" fill="#334155">t</text>
+</g>
+<!-- AR&#45;&gt;AR -->
+<g id="transition&#45;AR&#45;AR" class="edge">
+<title>AR&#45;&gt;AR</title>
+<g id="a_transition&#45;AR&#45;AR"><a xlink:title="AR + C_SPACE | C_WHITE → AR">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M1637.04,-335.46C1634.1,-354.44 1638.34,-372.4 1649.77,-372.4 1659.14,-372.4 1663.68,-360.31 1663.38,-345.49"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="1666.17,-345.29 1662.68,-337.57 1660.6,-345.79 1666.17,-345.29"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="1649.77" y="-377.2" font-family="Arial" font-size="16.00" fill="#334155">WS</text>
+</g>
+<!-- AR&#45;&gt;action7 -->
+<g id="transition&#45;AR&#45;action7" class="edge">
+<title>AR&#45;&gt;action7</title>
+<g id="a_transition&#45;AR&#45;action7"><a xlink:title="AR + C_RSQRB → &#45;7">
+<path fill="none" stroke="#b77937" stroke-width="1.4" d="M1656.94,-337.14C1666.97,-390.1 1687.61,-497.58 1706.89,-588.28 1734.98,-720.53 1771.25,-876.08 1789.06,-951.57"/>
+<polygon fill="#b77937" stroke="#b77937" stroke-width="1.4" points="1786.29,-952.04 1790.85,-959.18 1791.74,-950.75 1786.29,-952.04"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="1722.45" y="-728.28" font-family="Arial" font-size="16.00" fill="#334155">]</text>
+</g>
+<!-- AR&#45;&gt;action6 -->
+<g id="transition&#45;AR&#45;action6" class="edge">
+<title>AR&#45;&gt;action6</title>
+<g id="a_transition&#45;AR&#45;action6"><a xlink:title="AR + C_LCURB → &#45;6">
+<path fill="none" stroke="#b77937" stroke-width="1.4" d="M1617.25,-313.48C1609.29,-315.43 1600.71,-317.22 1592.65,-318.28 1537.78,-325.47 1523.5,-319.84 1468.17,-320.28 1438.73,-320.52 1431.23,-323.14 1401.93,-320.28 1324.12,-312.69 1307.52,-286.28 1229.33,-286.28 343.31,-286.28 343.31,-286.28 343.31,-286.28 277.4,-286.28 213.9,-336.62 179.7,-369.19"/>
+<polygon fill="#b77937" stroke="#b77937" stroke-width="1.4" points="178.16,-366.78 174.38,-374.37 182.07,-370.8 178.16,-366.78"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="846.45" y="-291.08" font-family="Arial" font-size="16.00" fill="#334155">{</text>
+</g>
+<!-- AR&#45;&gt;action5 -->
+<g id="transition&#45;AR&#45;action5" class="edge">
+<title>AR&#45;&gt;action5</title>
+<g id="a_transition&#45;AR&#45;action5"><a xlink:title="AR + C_LSQRB → &#45;5">
+<path fill="none" stroke="#b77937" stroke-width="1.4" d="M1630.22,-276.81C1620.56,-264.99 1607.63,-252.45 1592.65,-246.08 1554.27,-229.77 1505.76,-235.91 1472.98,-243.48"/>
+<polygon fill="#b77937" stroke="#b77937" stroke-width="1.4" points="1472.5,-240.71 1465.4,-245.34 1473.84,-246.15 1472.5,-240.71"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="1542.41" y="-250.88" font-family="Arial" font-size="16.00" fill="#334155">[</text>
+</g>
+<!-- AR&#45;&gt;ref_syntax_ST -->
+<g id="transition&#45;AR&#45;ST" class="edge">
+<title>AR&#45;&gt;ref_syntax_ST</title>
+<g id="a_transition&#45;AR&#45;ST"><a xlink:title="AR + C_QUOTE → ST">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M1660.16,-336.33C1670.82,-372.13 1689.05,-431.71 1706.89,-482.28 1734.11,-559.49 1770.42,-649.06 1788.57,-693.05"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="1785.91,-693.94 1791.55,-700.26 1791.08,-691.8 1785.91,-693.94"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="1722.45" y="-566.17" font-family="Arial" font-size="16.00" fill="#334155">&quot;</text>
+</g>
+<!-- AR&#45;&gt;ref_syntax_MI -->
+<g id="transition&#45;AR&#45;MI" class="edge">
+<title>AR&#45;&gt;ref_syntax_MI</title>
+<g id="a_transition&#45;AR&#45;MI"><a xlink:title="AR + C_MINUS → MI">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M1683.24,-310.04C1699.91,-313.49 1720.36,-318.5 1738.02,-325.08 1745.28,-327.79 1752.78,-331.15 1759.94,-334.68"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="1758.5,-337.09 1766.9,-338.23 1761.04,-332.1 1758.5,-337.09"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="1722.45" y="-329.88" font-family="Arial" font-size="16.00" fill="#334155">&#45;</text>
+</g>
+<!-- AR&#45;&gt;ref_syntax_ZE -->
+<g id="transition&#45;AR&#45;ZE" class="edge">
+<title>AR&#45;&gt;ref_syntax_ZE</title>
+<g id="a_transition&#45;AR&#45;ZE"><a xlink:title="AR + C_ZERO → ZE">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M1678.82,-286.79C1702.47,-272.04 1736.52,-250.81 1762.49,-234.61"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="1763.85,-237.06 1769.16,-230.45 1760.89,-232.31 1763.85,-237.06"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="1722.45" y="-273.64" font-family="Arial" font-size="16.00" fill="#334155">0</text>
+</g>
+<!-- AR&#45;&gt;ref_syntax_IN -->
+<g id="transition&#45;AR&#45;IN" class="edge">
+<title>AR&#45;&gt;ref_syntax_IN</title>
+<g id="a_transition&#45;AR&#45;IN"><a xlink:title="AR + C_DIGIT → IN">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M1665.81,-333.8C1676.74,-354.84 1692.14,-383.63 1706.89,-408.28 1731.44,-449.34 1762.47,-495.32 1781.75,-523.28"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="1779.28,-524.63 1786.13,-529.61 1783.88,-521.44 1779.28,-524.63"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="1722.45" y="-460.34" font-family="Arial" font-size="16.00" fill="#334155">1–9</text>
+</g>
+<!-- AR&#45;&gt;ref_syntax_F1 -->
+<g id="transition&#45;AR&#45;F1" class="edge">
+<title>AR&#45;&gt;ref_syntax_F1</title>
+<g id="a_transition&#45;AR&#45;F1"><a xlink:title="AR + C_LOW_F → F1">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M1675.06,-326.76C1702.03,-351.72 1745.43,-391.88 1773.3,-417.67"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="1771.05,-419.4 1778.82,-422.78 1774.85,-415.29 1771.05,-419.4"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="1722.45" y="-386.34" font-family="Arial" font-size="16.00" fill="#334155">f</text>
+</g>
+<!-- AR&#45;&gt;ref_syntax_N1 -->
+<g id="transition&#45;AR&#45;N1" class="edge">
+<title>AR&#45;&gt;ref_syntax_N1</title>
+<g id="a_transition&#45;AR&#45;N1"><a xlink:title="AR + C_LOW_N → N1">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M1661.04,-272.26C1671.22,-241.94 1687.98,-195.48 1706.89,-157.08 1727.57,-115.06 1735.6,-105.95 1762.02,-67.28 1767.52,-59.22 1773.82,-50.68 1779.67,-42.98"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="1781.84,-44.75 1784.5,-36.7 1777.4,-41.34 1781.84,-44.75"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="1722.45" y="-161.88" font-family="Arial" font-size="16.00" fill="#334155">n</text>
+</g>
+<!-- AR&#45;&gt;ref_syntax_T1 -->
+<g id="transition&#45;AR&#45;T1" class="edge">
+<title>AR&#45;&gt;ref_syntax_T1</title>
+<g id="a_transition&#45;AR&#45;T1"><a xlink:title="AR + C_LOW_T → T1">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M1669.77,-277C1680.54,-261.66 1694.34,-242.21 1706.89,-225.08 1731.74,-191.16 1761.15,-152.59 1780.14,-127.87"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="1782.21,-129.77 1784.87,-121.72 1777.77,-126.36 1782.21,-129.77"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="1722.45" y="-229.88" font-family="Arial" font-size="16.00" fill="#334155">t</text>
+</g>
+<!-- action9&#45;&gt;OK -->
+<g id="result&#45;action9&#45;OK" class="edge">
+<title>action9&#45;&gt;OK</title>
+<path fill="none" stroke="#b77937" stroke-width="1.4" stroke-dasharray="5,2" d="M545.29,-901.88C586.06,-923.44 648.19,-956.31 687.85,-977.29"/>
+<polygon fill="#b77937" stroke="#b77937" stroke-width="1.4" points="686.44,-979.71 694.82,-980.97 689.06,-974.76 686.44,-979.71"/>
+<text xml:space="preserve" text-anchor="middle" x="634.85" y="-970.7" font-family="Arial" font-size="16.00" fill="#935719">pop(KEY)</text>
+</g>
+<!-- action8&#45;&gt;OK -->
+<g id="result&#45;action8&#45;OK" class="edge">
+<title>action8&#45;&gt;OK</title>
+<path fill="none" stroke="#b77937" stroke-width="1.4" stroke-dasharray="5,2" d="M959.94,-1081.35C946.34,-1070.32 927.66,-1056.7 909.13,-1048.08 857.01,-1023.84 838.89,-1032.58 783.77,-1016.28 778.65,-1014.77 773.31,-1013.09 768.03,-1011.37"/>
+<polygon fill="#b77937" stroke="#b77937" stroke-width="1.4" points="769.17,-1008.8 760.69,-1008.93 767.4,-1014.11 769.17,-1008.8"/>
+<text xml:space="preserve" text-anchor="middle" x="846.45" y="-1052.88" font-family="Arial" font-size="16.00" fill="#935719">pop(OBJECT)</text>
+</g>
+<!-- action7&#45;&gt;OK -->
+<g id="result&#45;action7&#45;OK" class="edge">
+<title>action7&#45;&gt;OK</title>
+<path fill="none" stroke="#b77937" stroke-width="1.4" stroke-dasharray="5,2" d="M1767.02,-997.28C1736.8,-997.28 1690.77,-997.28 1650.77,-997.28 980.49,-997.28 980.49,-997.28 980.49,-997.28 906.57,-997.28 820.49,-997.28 770.24,-997.28"/>
+<polygon fill="#b77937" stroke="#b77937" stroke-width="1.4" points="770.5,-994.48 762.5,-997.28 770.5,-1000.08 770.5,-994.48"/>
+<text xml:space="preserve" text-anchor="middle" x="1331.69" y="-1002.08" font-family="Arial" font-size="16.00" fill="#935719">pop(ARRAY)</text>
+</g>
+<!-- action6&#45;&gt;OB -->
+<g id="result&#45;action6&#45;OB" class="edge">
+<title>action6&#45;&gt;OB</title>
+<path fill="none" stroke="#b77937" stroke-width="1.4" stroke-dasharray="5,2" d="M164.78,-428.63C174.54,-454.82 190.24,-492.03 209.82,-521.28 238.96,-564.79 281.88,-607.41 311.14,-634.2"/>
+<polygon fill="#b77937" stroke="#b77937" stroke-width="1.4" points="308.89,-635.94 316.69,-639.24 312.65,-631.79 308.89,-635.94"/>
+<text xml:space="preserve" text-anchor="middle" x="248.51" y="-613.63" font-family="Arial" font-size="16.00" fill="#935719">push(KEY)</text>
+</g>
+<!-- action5&#45;&gt;AR -->
+<g id="result&#45;action5&#45;AR" class="edge">
+<title>action5&#45;&gt;AR</title>
+<path fill="none" stroke="#b77937" stroke-width="1.4" stroke-dasharray="5,2" d="M1463.97,-261.98C1472.95,-264.4 1482.96,-267.02 1492.17,-269.28 1530.86,-278.77 1575.2,-288.58 1606.8,-295.39"/>
+<polygon fill="#b77937" stroke="#b77937" stroke-width="1.4" points="1606.1,-298.11 1614.51,-297.05 1607.28,-292.63 1606.1,-298.11"/>
+<text xml:space="preserve" text-anchor="middle" x="1542.41" y="-296.32" font-family="Arial" font-size="16.00" fill="#935719">push(ARRAY)</text>
+</g>
+<!-- action3&#45;&gt;KE -->
+<g id="result&#45;action3&#45;KE" class="edge">
+<title>action3&#45;&gt;KE</title>
+<path fill="none" stroke="#b77937" stroke-width="1.4" stroke-dasharray="5,2" d="M1011.58,-889.6C1073.24,-877.56 1217.29,-849.43 1288.83,-835.45"/>
+<polygon fill="#b77937" stroke="#b77937" stroke-width="1.4" points="1289.04,-838.27 1296.35,-833.99 1287.96,-832.77 1289.04,-838.27"/>
+<text xml:space="preserve" text-anchor="middle" x="1112.53" y="-885.39" font-family="Arial" font-size="16.00" fill="#935719">OBJECT → KEY</text>
+</g>
+<!-- action3&#45;&gt;VA -->
+<g id="result&#45;action3&#45;VA" class="edge">
+<title>action3&#45;&gt;VA</title>
+<path fill="none" stroke="#b77937" stroke-width="1.4" stroke-dasharray="5,2" d="M1001.37,-874.56C1011.48,-862.28 1023.19,-845.91 1029.85,-829.28 1058.28,-758.37 1022.51,-728.75 1053.85,-659.08 1086.86,-585.72 1124.35,-586.67 1171.21,-521.28 1184.06,-503.36 1196.79,-482.37 1206.87,-464.78"/>
+<polygon fill="#b77937" stroke="#b77937" stroke-width="1.4" points="1209.04,-466.63 1210.55,-458.29 1204.16,-463.87 1209.04,-466.63"/>
+<text xml:space="preserve" text-anchor="middle" x="1112.53" y="-663.88" font-family="Arial" font-size="16.00" fill="#935719">top = ARRAY</text>
+</g>
+<!-- action2&#45;&gt;VA -->
+<g id="result&#45;action2&#45;VA" class="edge">
+<title>action2&#45;&gt;VA</title>
+<path fill="none" stroke="#b77937" stroke-width="1.4" stroke-dasharray="5,2" d="M1012.51,-395.69C1055.76,-402.05 1135.78,-413.82 1185.01,-421.06"/>
+<polygon fill="#b77937" stroke="#b77937" stroke-width="1.4" points="1184.31,-423.78 1192.63,-422.18 1185.12,-418.24 1184.31,-423.78"/>
+<text xml:space="preserve" text-anchor="middle" x="1112.53" y="-423.38" font-family="Arial" font-size="16.00" fill="#935719">KEY → OBJECT</text>
+</g>
+<!-- GO -->
+<g id="state&#45;GO" class="node">
+<title>GO</title>
+<ellipse fill="#eaf1ff" stroke="#3564a5" stroke-width="1.7" cx="33.12" cy="-69.28" rx="33.12" ry="33.12"/>
+<text xml:space="preserve" text-anchor="middle" x="33.12" y="-62.38" font-family="Arial" font-size="23.00">GO</text>
+</g>
+<!-- OK -->
+<g id="state&#45;OK" class="node">
+<title>OK</title>
+<ellipse fill="#eaf1ff" stroke="#3564a5" stroke-width="1.7" cx="726.65" cy="-997.28" rx="33.12" ry="33.12"/>
+<text xml:space="preserve" text-anchor="middle" x="726.65" y="-990.38" font-family="Arial" font-size="23.00">OK</text>
+</g>
+<!-- OB -->
+<g id="state&#45;OB" class="node">
+<title>OB</title>
+<ellipse fill="#eaf1ff" stroke="#3564a5" stroke-width="1.7" cx="344.31" cy="-662.28" rx="33.12" ry="33.12"/>
+<text xml:space="preserve" text-anchor="middle" x="344.31" y="-655.38" font-family="Arial" font-size="23.00">OB</text>
+</g>
+<!-- KE -->
+<g id="state&#45;KE" class="node">
+<title>KE</title>
+<ellipse fill="#eaf1ff" stroke="#3564a5" stroke-width="1.7" cx="1331.69" cy="-827.28" rx="33.12" ry="33.12"/>
+<text xml:space="preserve" text-anchor="middle" x="1331.69" y="-820.38" font-family="Arial" font-size="23.00">KE</text>
+</g>
+<!-- CO -->
+<g id="state&#45;CO" class="node">
+<title>CO</title>
+<ellipse fill="#eaf1ff" stroke="#3564a5" stroke-width="1.7" cx="726.65" cy="-372.28" rx="33.12" ry="33.12"/>
+<text xml:space="preserve" text-anchor="middle" x="726.65" y="-365.38" font-family="Arial" font-size="23.00">CO</text>
+</g>
+<!-- VA -->
+<g id="state&#45;VA" class="node">
+<title>VA</title>
+<ellipse fill="#eaf1ff" stroke="#3564a5" stroke-width="1.7" cx="1228.33" cy="-427.28" rx="33.12" ry="33.12"/>
+<text xml:space="preserve" text-anchor="middle" x="1228.33" y="-420.38" font-family="Arial" font-size="23.00">VA</text>
+</g>
+<!-- AR -->
+<g id="state&#45;AR" class="node">
+<title>AR</title>
+<ellipse fill="#eaf1ff" stroke="#3564a5" stroke-width="1.7" cx="1649.77" cy="-304.28" rx="33.12" ry="33.12"/>
+<text xml:space="preserve" text-anchor="middle" x="1649.77" y="-297.38" font-family="Arial" font-size="23.00">AR</text>
+</g>
+<!-- action9 -->
+<g id="action&#45;9" class="node">
+<title>action9</title>
+<polygon fill="#fff5e6" stroke="#b77937" stroke-width="1.7" points="503.47,-929.08 430.77,-880.28 503.47,-831.48 576.16,-880.28 503.47,-929.08"/>
+<text xml:space="preserve" text-anchor="middle" x="503.47" y="-885.38" font-family="Arial" font-size="17.00">&#45;9</text>
+<text xml:space="preserve" text-anchor="middle" x="503.47" y="-864.98" font-family="Arial" font-size="17.00">empty }</text>
+</g>
+<!-- action8 -->
+<g id="action&#45;8" class="node">
+<title>action8</title>
+<polygon fill="#fff5e6" stroke="#b77937" stroke-width="1.7" points="981.49,-1148.08 948.37,-1099.28 981.49,-1050.48 1014.61,-1099.28 981.49,-1148.08"/>
+<text xml:space="preserve" text-anchor="middle" x="981.49" y="-1104.38" font-family="Arial" font-size="17.00">&#45;8</text>
+<text xml:space="preserve" text-anchor="middle" x="981.49" y="-1083.98" font-family="Arial" font-size="17.00">}</text>
+</g>
+<!-- action7 -->
+<g id="action&#45;7" class="node">
+<title>action7</title>
+<polygon fill="#fff5e6" stroke="#b77937" stroke-width="1.7" points="1800.9,-1046.08 1767.78,-997.28 1800.9,-948.48 1834.02,-997.28 1800.9,-1046.08"/>
+<text xml:space="preserve" text-anchor="middle" x="1800.9" y="-1002.38" font-family="Arial" font-size="17.00">&#45;7</text>
+<text xml:space="preserve" text-anchor="middle" x="1800.9" y="-981.98" font-family="Arial" font-size="17.00">]</text>
+</g>
+<!-- action6 -->
+<g id="action&#45;6" class="node">
+<title>action6</title>
+<polygon fill="#fff5e6" stroke="#b77937" stroke-width="1.7" points="152.7,-445.08 119.58,-396.28 152.7,-347.48 185.82,-396.28 152.7,-445.08"/>
+<text xml:space="preserve" text-anchor="middle" x="152.7" y="-401.38" font-family="Arial" font-size="17.00">&#45;6</text>
+<text xml:space="preserve" text-anchor="middle" x="152.7" y="-380.98" font-family="Arial" font-size="17.00">{</text>
+</g>
+<!-- action5 -->
+<g id="action&#45;5" class="node">
+<title>action5</title>
+<polygon fill="#fff5e6" stroke="#b77937" stroke-width="1.7" points="1435.05,-303.08 1401.93,-254.28 1435.05,-205.48 1468.17,-254.28 1435.05,-303.08"/>
+<text xml:space="preserve" text-anchor="middle" x="1435.05" y="-259.38" font-family="Arial" font-size="17.00">&#45;5</text>
+<text xml:space="preserve" text-anchor="middle" x="1435.05" y="-238.98" font-family="Arial" font-size="17.00">[</text>
+</g>
+<!-- action3 -->
+<g id="action&#45;3" class="node">
+<title>action3</title>
+<polygon fill="#fff5e6" stroke="#b77937" stroke-width="1.7" points="981.49,-944.08 948.37,-895.28 981.49,-846.48 1014.61,-895.28 981.49,-944.08"/>
+<text xml:space="preserve" text-anchor="middle" x="981.49" y="-900.38" font-family="Arial" font-size="17.00">&#45;3</text>
+<text xml:space="preserve" text-anchor="middle" x="981.49" y="-879.98" font-family="Arial" font-size="17.00">,</text>
+</g>
+<!-- action2 -->
+<g id="action&#45;2" class="node">
+<title>action2</title>
+<polygon fill="#fff5e6" stroke="#b77937" stroke-width="1.7" points="981.49,-440.08 948.37,-391.28 981.49,-342.48 1014.61,-391.28 981.49,-440.08"/>
+<text xml:space="preserve" text-anchor="middle" x="981.49" y="-396.38" font-family="Arial" font-size="17.00">&#45;2</text>
+<text xml:space="preserve" text-anchor="middle" x="981.49" y="-375.98" font-family="Arial" font-size="17.00">:</text>
+</g>
+<!-- ref_syntax_ST -->
+<g id="reference&#45;syntax&#45;ST" class="node">
+<title>ref_syntax_ST</title>
+<g id="a_reference&#45;syntax&#45;ST"><a xlink:href="#state-ST" xlink:title="跨区引用：ST，不是新状态">
+<path fill="#ffffff" stroke="#25826c" stroke-width="1.7" stroke-dasharray="5,2" d="M1828.26,-737.56C1828.26,-737.56 1773.54,-737.56 1773.54,-737.56 1767.78,-737.56 1762.02,-731.8 1762.02,-726.04 1762.02,-726.04 1762.02,-714.52 1762.02,-714.52 1762.02,-708.76 1767.78,-703 1773.54,-703 1773.54,-703 1828.26,-703 1828.26,-703 1834.02,-703 1839.78,-708.76 1839.78,-714.52 1839.78,-714.52 1839.78,-726.04 1839.78,-726.04 1839.78,-731.8 1834.02,-737.56 1828.26,-737.56"/>
+<text xml:space="preserve" text-anchor="middle" x="1800.9" y="-714.88" font-family="Arial" font-size="18.00">→ ST</text>
+</a>
+</g>
+</g>
+<!-- ref_syntax_MI -->
+<g id="reference&#45;syntax&#45;MI" class="node">
+<title>ref_syntax_MI</title>
+<g id="a_reference&#45;syntax&#45;MI"><a xlink:href="#state-MI" xlink:title="跨区引用：MI，不是新状态">
+<path fill="#ffffff" stroke="#aa7328" stroke-width="1.7" stroke-dasharray="5,2" d="M1828.26,-374.56C1828.26,-374.56 1773.54,-374.56 1773.54,-374.56 1767.78,-374.56 1762.02,-368.8 1762.02,-363.04 1762.02,-363.04 1762.02,-351.52 1762.02,-351.52 1762.02,-345.76 1767.78,-340 1773.54,-340 1773.54,-340 1828.26,-340 1828.26,-340 1834.02,-340 1839.78,-345.76 1839.78,-351.52 1839.78,-351.52 1839.78,-363.04 1839.78,-363.04 1839.78,-368.8 1834.02,-374.56 1828.26,-374.56"/>
+<text xml:space="preserve" text-anchor="middle" x="1800.9" y="-351.88" font-family="Arial" font-size="18.00">→ MI</text>
+</a>
+</g>
+</g>
+<!-- ref_syntax_ZE -->
+<g id="reference&#45;syntax&#45;ZE" class="node">
+<title>ref_syntax_ZE</title>
+<g id="a_reference&#45;syntax&#45;ZE"><a xlink:href="#state-ZE" xlink:title="跨区引用：ZE，不是新状态">
+<path fill="#ffffff" stroke="#aa7328" stroke-width="1.7" stroke-dasharray="5,2" d="M1828.26,-228.56C1828.26,-228.56 1773.54,-228.56 1773.54,-228.56 1767.78,-228.56 1762.02,-222.8 1762.02,-217.04 1762.02,-217.04 1762.02,-205.52 1762.02,-205.52 1762.02,-199.76 1767.78,-194 1773.54,-194 1773.54,-194 1828.26,-194 1828.26,-194 1834.02,-194 1839.78,-199.76 1839.78,-205.52 1839.78,-205.52 1839.78,-217.04 1839.78,-217.04 1839.78,-222.8 1834.02,-228.56 1828.26,-228.56"/>
+<text xml:space="preserve" text-anchor="middle" x="1800.9" y="-205.88" font-family="Arial" font-size="18.00">→ ZE</text>
+</a>
+</g>
+</g>
+<!-- ref_syntax_IN -->
+<g id="reference&#45;syntax&#45;IN" class="node">
+<title>ref_syntax_IN</title>
+<g id="a_reference&#45;syntax&#45;IN"><a xlink:href="#state-IN" xlink:title="跨区引用：IN，不是新状态">
+<path fill="#ffffff" stroke="#aa7328" stroke-width="1.7" stroke-dasharray="5,2" d="M1828.26,-566.56C1828.26,-566.56 1773.54,-566.56 1773.54,-566.56 1767.78,-566.56 1762.02,-560.8 1762.02,-555.04 1762.02,-555.04 1762.02,-543.52 1762.02,-543.52 1762.02,-537.76 1767.78,-532 1773.54,-532 1773.54,-532 1828.26,-532 1828.26,-532 1834.02,-532 1839.78,-537.76 1839.78,-543.52 1839.78,-543.52 1839.78,-555.04 1839.78,-555.04 1839.78,-560.8 1834.02,-566.56 1828.26,-566.56"/>
+<text xml:space="preserve" text-anchor="middle" x="1800.9" y="-543.88" font-family="Arial" font-size="18.00">→ IN</text>
+</a>
+</g>
+</g>
+<!-- ref_syntax_F1 -->
+<g id="reference&#45;syntax&#45;F1" class="node">
+<title>ref_syntax_F1</title>
+<g id="a_reference&#45;syntax&#45;F1"><a xlink:href="#state-F1" xlink:title="跨区引用：F1，不是新状态">
+<path fill="#ffffff" stroke="#7955a3" stroke-width="1.7" stroke-dasharray="5,2" d="M1828.26,-459.56C1828.26,-459.56 1773.54,-459.56 1773.54,-459.56 1767.78,-459.56 1762.02,-453.8 1762.02,-448.04 1762.02,-448.04 1762.02,-436.52 1762.02,-436.52 1762.02,-430.76 1767.78,-425 1773.54,-425 1773.54,-425 1828.26,-425 1828.26,-425 1834.02,-425 1839.78,-430.76 1839.78,-436.52 1839.78,-436.52 1839.78,-448.04 1839.78,-448.04 1839.78,-453.8 1834.02,-459.56 1828.26,-459.56"/>
+<text xml:space="preserve" text-anchor="middle" x="1800.9" y="-436.88" font-family="Arial" font-size="18.00">→ F1</text>
+</a>
+</g>
+</g>
+<!-- ref_syntax_N1 -->
+<g id="reference&#45;syntax&#45;N1" class="node">
+<title>ref_syntax_N1</title>
+<g id="a_reference&#45;syntax&#45;N1"><a xlink:href="#state-N1" xlink:title="跨区引用：N1，不是新状态">
+<path fill="#ffffff" stroke="#7955a3" stroke-width="1.7" stroke-dasharray="5,2" d="M1828.26,-34.56C1828.26,-34.56 1773.54,-34.56 1773.54,-34.56 1767.78,-34.56 1762.02,-28.8 1762.02,-23.04 1762.02,-23.04 1762.02,-11.52 1762.02,-11.52 1762.02,-5.76 1767.78,0 1773.54,0 1773.54,0 1828.26,0 1828.26,0 1834.02,0 1839.78,-5.76 1839.78,-11.52 1839.78,-11.52 1839.78,-23.04 1839.78,-23.04 1839.78,-28.8 1834.02,-34.56 1828.26,-34.56"/>
+<text xml:space="preserve" text-anchor="middle" x="1800.9" y="-11.88" font-family="Arial" font-size="18.00">→ N1</text>
+</a>
+</g>
+</g>
+<!-- ref_syntax_T1 -->
+<g id="reference&#45;syntax&#45;T1" class="node">
+<title>ref_syntax_T1</title>
+<g id="a_reference&#45;syntax&#45;T1"><a xlink:href="#state-T1" xlink:title="跨区引用：T1，不是新状态">
+<path fill="#ffffff" stroke="#7955a3" stroke-width="1.7" stroke-dasharray="5,2" d="M1828.26,-119.56C1828.26,-119.56 1773.54,-119.56 1773.54,-119.56 1767.78,-119.56 1762.02,-113.8 1762.02,-108.04 1762.02,-108.04 1762.02,-96.52 1762.02,-96.52 1762.02,-90.76 1767.78,-85 1773.54,-85 1773.54,-85 1828.26,-85 1828.26,-85 1834.02,-85 1839.78,-90.76 1839.78,-96.52 1839.78,-96.52 1839.78,-108.04 1839.78,-108.04 1839.78,-113.8 1834.02,-119.56 1828.26,-119.56"/>
+<text xml:space="preserve" text-anchor="middle" x="1800.9" y="-96.88" font-family="Arial" font-size="18.00">→ T1</text>
+</a>
+</g>
+</g>
+<!-- accepted -->
+<g id="outcome&#45;accepted" class="node">
+<title>accepted</title>
+<ellipse fill="#e3f4e8" stroke="#3b8b57" stroke-width="1.7" cx="981.49" cy="-763.28" rx="44.36" ry="44.36"/>
+<ellipse fill="none" stroke="#3b8b57" stroke-width="1.7" cx="981.49" cy="-763.28" rx="48.36" ry="48.36"/>
+<text xml:space="preserve" text-anchor="middle" x="981.49" y="-758.48" font-family="Arial" font-size="16.00">ACCEPT</text>
+</g>
+</g>
+</svg><rect x="2019" y="206" width="1165" height="1406" rx="12" fill="#fbfcfe" stroke="#dfe5ed"/><text x="2047" y="244" font-size="25" fill="#172b4d" font-weight="700">数字 · 8 个状态</text><text x="2047" y="274" font-size="17" fill="#334155" >WS、}、]、, 会按原表分别转入 OK 或栈动作。</text><svg x="2055" y="327" width="1093" height="1163" viewBox="0.00 0.00 1093.00 1163.00">
+<g id="graph-number" class="graph" transform="scale(1 1) rotate(0) translate(14.4 1148.6)">
+<title>number</title>
+<!-- MI&#45;&gt;ZE -->
+<g id="transition&#45;MI&#45;ZE" class="edge">
+<title>MI&#45;&gt;ZE</title>
+<g id="a_transition&#45;MI&#45;ZE"><a xlink:title="MI + C_ZERO → ZE">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M63.83,-536.5C85.55,-547.11 115.21,-561.59 138.79,-573.1"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="137.5,-575.59 145.92,-576.58 139.96,-570.56 137.5,-575.59"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="105.81" y="-568.07" font-family="Arial" font-size="16.00" fill="#334155">0</text>
+</g>
+<!-- MI&#45;&gt;IN -->
+<g id="transition&#45;MI&#45;IN" class="edge">
+<title>MI&#45;&gt;IN</title>
+<g id="a_transition&#45;MI&#45;IN"><a xlink:title="MI + C_DIGIT → IN">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M63.83,-507.91C85.55,-497.61 115.21,-483.54 138.79,-472.36"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="139.88,-474.94 145.91,-468.98 137.48,-469.88 139.88,-474.94"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="105.81" y="-498.89" font-family="Arial" font-size="16.00" fill="#334155">1–9</text>
+</g>
+<!-- ZE&#45;&gt;FR -->
+<g id="transition&#45;ZE&#45;FR" class="edge">
+<title>ZE&#45;&gt;FR</title>
+<g id="a_transition&#45;ZE&#45;FR"><a xlink:title="ZE + C_POINT → FR">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M207.74,-575.3C223.25,-566.13 242.66,-554.65 259.35,-544.78"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="260.5,-547.35 265.96,-540.87 257.65,-542.53 260.5,-547.35"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="237.84" y="-562.3" font-family="Arial" font-size="16.00" fill="#334155">.</text>
+</g>
+<!-- ZE&#45;&gt;E1 -->
+<g id="transition&#45;ZE&#45;E1" class="edge">
+<title>ZE&#45;&gt;E1</title>
+<g id="a_transition&#45;ZE&#45;E1"><a xlink:title="ZE + C_LOW_E | C_E → E1">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M179.63,-625.7C180.75,-707.71 188.72,-909.78 240.06,-892 406.02,-834.54 525.54,-643.8 570.66,-561.43"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="573.07,-562.87 574.41,-554.5 568.14,-560.2 573.07,-562.87"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="370.75" y="-833.26" font-family="Arial" font-size="16.00" fill="#334155">e / E</text>
+</g>
+<!-- ZE&#45;&gt;ref_number_OK -->
+<g id="transition&#45;ZE&#45;OK" class="edge">
+<title>ZE&#45;&gt;ref_number_OK</title>
+<g id="a_transition&#45;ZE&#45;OK"><a xlink:title="ZE + C_SPACE | C_WHITE → OK">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M181.3,-625.69C187.67,-727.66 213.38,-1026 296.18,-1026 296.18,-1026 296.18,-1026 518.9,-1026 726.95,-1026 797.13,-1001.91 961.98,-875 984.51,-857.66 1001.52,-829.7 1011.95,-808.95"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="1014.4,-810.32 1015.36,-801.9 1009.36,-807.89 1014.4,-810.32"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="591.47" y="-1030.46" font-family="Arial" font-size="16.00" fill="#334155">WS</text>
+</g>
+<!-- ZE&#45;&gt;ref_number_action8 -->
+<g id="transition&#45;ZE&#45;action8" class="edge">
+<title>ZE&#45;&gt;ref_number_action8</title>
+<g id="a_transition&#45;ZE&#45;action8"><a xlink:title="ZE + C_RCURB → &#45;8">
+<path fill="none" stroke="#b77937" stroke-width="1.4" d="M198.36,-564.82C202.99,-557.57 207.73,-549.63 211.61,-542 225,-515.66 214.27,-500.43 235.61,-480 393.18,-329.17 485.36,-358.36 700.6,-323 729.65,-318.23 738.32,-315.69 766.84,-323 850.02,-344.34 853.03,-394.66 936.21,-416 948.82,-419.23 962.75,-419.54 975.73,-418.5"/>
+<polygon fill="#b77937" stroke="#b77937" stroke-width="1.4" points="975.66,-421.33 983.32,-417.7 975.07,-415.76 975.66,-421.33"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="591.47" y="-345.93" font-family="Arial" font-size="16.00" fill="#334155">}</text>
+</g>
+<!-- ZE&#45;&gt;ref_number_action7 -->
+<g id="transition&#45;ZE&#45;action7" class="edge">
+<title>ZE&#45;&gt;ref_number_action7</title>
+<g id="a_transition&#45;ZE&#45;action7"><a xlink:title="ZE + C_RSQRB → &#45;7">
+<path fill="none" stroke="#b77937" stroke-width="1.4" d="M198.65,-564.96C203.28,-557.72 207.95,-549.74 211.61,-542 240.77,-480.44 215.08,-445.33 264.06,-398 466.21,-202.66 841.71,-213.88 975.21,-224.92"/>
+<polygon fill="#b77937" stroke="#b77937" stroke-width="1.4" points="974.82,-227.7 983.03,-225.6 975.3,-222.12 974.82,-227.7"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="591.47" y="-254.57" font-family="Arial" font-size="16.00" fill="#334155">]</text>
+</g>
+<!-- ZE&#45;&gt;ref_number_action3 -->
+<g id="transition&#45;ZE&#45;action3" class="edge">
+<title>ZE&#45;&gt;ref_number_action3</title>
+<g id="a_transition&#45;ZE&#45;action3"><a xlink:title="ZE + C_COMMA → &#45;3">
+<path fill="none" stroke="#b77937" stroke-width="1.4" d="M179.78,-625.91C181.68,-741.81 195.59,-1115 296.18,-1115 296.18,-1115 296.18,-1115 880.09,-1115 947.33,-1115 992.88,-1035.47 1012.67,-992.23"/>
+<polygon fill="#b77937" stroke="#b77937" stroke-width="1.4" points="1015.18,-993.48 1015.86,-985.03 1010.06,-991.21 1015.18,-993.48"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="591.47" y="-1119.8" font-family="Arial" font-size="16.00" fill="#334155">,</text>
+</g>
+<!-- IN&#45;&gt;IN -->
+<g id="transition&#45;IN&#45;IN" class="edge">
+<title>IN&#45;&gt;IN</title>
+<g id="a_transition&#45;IN&#45;IN"><a xlink:title="IN + C_ZERO | C_DIGIT → IN">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M167.98,-486.24C165.83,-504.82 169.34,-522.12 178.49,-522.12 186,-522.12 189.71,-510.48 189.62,-496.04"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="192.43,-496.16 189.14,-488.35 186.84,-496.51 192.43,-496.16"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="178.49" y="-526.92" font-family="Arial" font-size="16.00" fill="#334155">0–9</text>
+</g>
+<!-- IN&#45;&gt;FR -->
+<g id="transition&#45;IN&#45;FR" class="edge">
+<title>IN&#45;&gt;FR</title>
+<g id="a_transition&#45;IN&#45;FR"><a xlink:title="IN + C_POINT → FR">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M207.74,-470.7C223.25,-479.87 242.66,-491.35 259.35,-501.22"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="257.65,-503.47 265.96,-505.13 260.5,-498.65 257.65,-503.47"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="237.84" y="-493.3" font-family="Arial" font-size="16.00" fill="#334155">.</text>
+</g>
+<!-- IN&#45;&gt;E1 -->
+<g id="transition&#45;IN&#45;E1" class="edge">
+<title>IN&#45;&gt;E1</title>
+<g id="a_transition&#45;IN&#45;E1"><a xlink:title="IN + C_LOW_E | C_E → E1">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M212.26,-452.15C267.75,-449.87 383.36,-448.77 477.44,-472 503.78,-478.5 531.57,-490.96 553.01,-501.93"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="551.52,-504.31 559.9,-505.54 554.11,-499.35 551.52,-504.31"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="370.75" y="-461.34" font-family="Arial" font-size="16.00" fill="#334155">e / E</text>
+</g>
+<!-- IN&#45;&gt;ref_number_OK -->
+<g id="transition&#45;IN&#45;OK" class="edge">
+<title>IN&#45;&gt;ref_number_OK</title>
+<g id="a_transition&#45;IN&#45;OK"><a xlink:title="IN + C_SPACE | C_WHITE → OK">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M191.55,-485.19C205.76,-521.43 228.37,-577.29 235.61,-585 394.1,-753.54 475.5,-765.55 700.6,-819 796.66,-841.81 912.23,-816.23 975.9,-797.7"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="976.38,-800.48 983.25,-795.51 974.79,-795.11 976.38,-800.48"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="591.47" y="-805.45" font-family="Arial" font-size="16.00" fill="#334155">WS</text>
+</g>
+<!-- IN&#45;&gt;ref_number_action8 -->
+<g id="transition&#45;IN&#45;action8" class="edge">
+<title>IN&#45;&gt;ref_number_action8</title>
+<g id="a_transition&#45;IN&#45;action8"><a xlink:title="IN + C_RCURB → &#45;8">
+<path fill="none" stroke="#b77937" stroke-width="1.4" d="M182.93,-420.64C193.12,-330.54 226.91,-89 296.18,-89 296.18,-89 296.18,-89 592.47,-89 789.11,-89 954.51,-306.13 1006.71,-382.67"/>
+<polygon fill="#b77937" stroke="#b77937" stroke-width="1.4" points="1004.26,-384.05 1011.05,-389.12 1008.9,-380.92 1004.26,-384.05"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="591.47" y="-93.8" font-family="Arial" font-size="16.00" fill="#334155">}</text>
+</g>
+<!-- IN&#45;&gt;ref_number_action7 -->
+<g id="transition&#45;IN&#45;action7" class="edge">
+<title>IN&#45;&gt;ref_number_action7</title>
+<g id="a_transition&#45;IN&#45;action7"><a xlink:title="IN + C_RSQRB → &#45;7">
+<path fill="none" stroke="#b77937" stroke-width="1.4" d="M180.91,-420.25C186.23,-315.03 209.41,0 296.18,0 296.18,0 296.18,0 880.09,0 974.46,0 1009.19,-140.95 1019.82,-202.17"/>
+<polygon fill="#b77937" stroke="#b77937" stroke-width="1.4" points="1017.02,-202.42 1021.09,-209.86 1022.55,-201.51 1017.02,-202.42"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="591.47" y="-4.8" font-family="Arial" font-size="16.00" fill="#334155">]</text>
+</g>
+<!-- IN&#45;&gt;ref_number_action3 -->
+<g id="transition&#45;IN&#45;action3" class="edge">
+<title>IN&#45;&gt;ref_number_action3</title>
+<g id="a_transition&#45;IN&#45;action3"><a xlink:title="IN + C_COMMA → &#45;3">
+<path fill="none" stroke="#b77937" stroke-width="1.4" d="M191.33,-485.32C197.5,-501.84 205.1,-522.47 211.61,-541 232.26,-599.78 223.11,-624.05 264.06,-671 457.97,-893.31 840.24,-948.53 975.25,-961.36"/>
+<polygon fill="#b77937" stroke="#b77937" stroke-width="1.4" points="974.96,-964.14 983.18,-962.08 975.47,-958.57 974.96,-964.14"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="591.47" y="-893.2" font-family="Arial" font-size="16.00" fill="#334155">,</text>
+</g>
+<!-- FR&#45;&gt;FS -->
+<g id="transition&#45;FR&#45;FS" class="edge">
+<title>FR&#45;&gt;FS</title>
+<g id="a_transition&#45;FR&#45;FS"><a xlink:title="FR + C_ZERO | C_DIGIT → FS">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M331.11,-523C351.71,-523 378.46,-523 400.67,-523"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="400.4,-525.8 408.4,-523 400.4,-520.2 400.4,-525.8"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="370.75" y="-527.8" font-family="Arial" font-size="16.00" fill="#334155">0–9</text>
+</g>
+<!-- FS&#45;&gt;FS -->
+<g id="transition&#45;FS&#45;FS" class="edge">
+<title>FS&#45;&gt;FS</title>
+<g id="a_transition&#45;FS&#45;FS"><a xlink:title="FS + C_ZERO | C_DIGIT → FS">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M431.45,-554.18C428.46,-573.16 432.76,-591.12 444.32,-591.12 453.81,-591.12 458.41,-579.03 458.11,-564.21"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="460.9,-564.01 457.39,-556.29 455.32,-564.51 460.9,-564.01"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="444.32" y="-595.92" font-family="Arial" font-size="16.00" fill="#334155">0–9</text>
+</g>
+<!-- FS&#45;&gt;E1 -->
+<g id="transition&#45;FS&#45;E1" class="edge">
+<title>FS&#45;&gt;E1</title>
+<g id="a_transition&#45;FS&#45;E1"><a xlink:title="FS + C_LOW_E | C_E → E1">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M478.26,-523C498.86,-523 525.6,-523 547.82,-523"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="547.55,-525.8 555.55,-523 547.55,-520.2 547.55,-525.8"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="517.9" y="-527.8" font-family="Arial" font-size="16.00" fill="#334155">e / E</text>
+</g>
+<!-- FS&#45;&gt;ref_number_OK -->
+<g id="transition&#45;FS&#45;OK" class="edge">
+<title>FS&#45;&gt;ref_number_OK</title>
+<g id="a_transition&#45;FS&#45;OK"><a xlink:title="FS + C_SPACE | C_WHITE → OK">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M474.95,-537.46C483.48,-541.57 492.81,-546.01 501.44,-550 675.39,-630.45 884.19,-721.54 976.27,-761.44"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="974.94,-763.92 983.4,-764.53 977.17,-758.78 974.94,-763.92"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="733.72" y="-673.74" font-family="Arial" font-size="16.00" fill="#334155">WS</text>
+</g>
+<!-- FS&#45;&gt;ref_number_action8 -->
+<g id="transition&#45;FS&#45;action8" class="edge">
+<title>FS&#45;&gt;ref_number_action8</title>
+<g id="a_transition&#45;FS&#45;action8"><a xlink:title="FS + C_RCURB → &#45;8">
+<path fill="none" stroke="#b77937" stroke-width="1.4" d="M474.24,-507.36C496.6,-495.91 528.65,-480.88 558.35,-472 721.26,-423.27 766.95,-428.27 936.21,-412 948.89,-410.78 962.64,-410.04 975.41,-409.59"/>
+<polygon fill="#b77937" stroke="#b77937" stroke-width="1.4" points="975.37,-412.39 983.28,-409.36 975.2,-406.8 975.37,-412.39"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="733.72" y="-441.28" font-family="Arial" font-size="16.00" fill="#334155">}</text>
+</g>
+<!-- FS&#45;&gt;ref_number_action7 -->
+<g id="transition&#45;FS&#45;action7" class="edge">
+<title>FS&#45;&gt;ref_number_action7</title>
+<g id="a_transition&#45;FS&#45;action7"><a xlink:title="FS + C_RSQRB → &#45;7">
+<path fill="none" stroke="#b77937" stroke-width="1.4" d="M468.3,-499.19C477.98,-489.97 489.71,-479.79 501.44,-472 663.51,-364.49 881,-280.61 976.05,-246.55"/>
+<polygon fill="#b77937" stroke="#b77937" stroke-width="1.4" points="976.81,-249.25 983.41,-243.92 974.93,-243.97 976.81,-249.25"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="733.72" y="-364.12" font-family="Arial" font-size="16.00" fill="#334155">]</text>
+</g>
+<!-- FS&#45;&gt;ref_number_action3 -->
+<g id="transition&#45;FS&#45;action3" class="edge">
+<title>FS&#45;&gt;ref_number_action3</title>
+<g id="a_transition&#45;FS&#45;action3"><a xlink:title="FS + C_COMMA → &#45;3">
+<path fill="none" stroke="#b77937" stroke-width="1.4" d="M467,-548.24C477.03,-559.37 489.38,-572.31 501.44,-583 671.74,-733.9 899.52,-885.1 987.27,-941.7"/>
+<polygon fill="#b77937" stroke="#b77937" stroke-width="1.4" points="985.54,-943.91 993.78,-945.89 988.57,-939.2 985.54,-943.91"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="733.72" y="-796.11" font-family="Arial" font-size="16.00" fill="#334155">,</text>
+</g>
+<!-- E1&#45;&gt;E2 -->
+<g id="transition&#45;E1&#45;E2" class="edge">
+<title>E1&#45;&gt;E2</title>
+<g id="a_transition&#45;E1&#45;E2"><a xlink:title="E1 + C_PLUS | C_MINUS → E2">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M622.56,-536.52C643.36,-545.86 671.22,-558.37 693.72,-568.48"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="692.3,-570.91 700.75,-571.64 694.6,-565.81 692.3,-570.91"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="662.59" y="-564.94" font-family="Arial" font-size="16.00" fill="#334155">+ / &#45;</text>
+</g>
+<!-- E1&#45;&gt;E3 -->
+<g id="transition&#45;E1&#45;E3" class="edge">
+<title>E1&#45;&gt;E3</title>
+<g id="a_transition&#45;E1&#45;E3"><a xlink:title="E1 + C_ZERO | C_DIGIT → E3">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M624.55,-516.2C659.98,-509.95 718.42,-503.36 766.84,-515.8 794.42,-522.89 822.5,-538.41 843.55,-552.05"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="841.85,-554.28 850.06,-556.38 844.95,-549.62 841.85,-554.28"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="733.72" y="-520.6" font-family="Arial" font-size="16.00" fill="#334155">0–9</text>
+</g>
+<!-- E2&#45;&gt;E3 -->
+<g id="transition&#45;E2&#45;E3" class="edge">
+<title>E2&#45;&gt;E3</title>
+<g id="a_transition&#45;E2&#45;E3"><a xlink:title="E2 + C_ZERO | C_DIGIT → E3">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M767.61,-583.94C787.74,-582.67 813.7,-581.04 835.4,-579.68"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="835.43,-582.48 843.24,-579.19 835.08,-576.89 835.43,-582.48"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="806.4" y="-587.11" font-family="Arial" font-size="16.00" fill="#334155">0–9</text>
+</g>
+<!-- E3&#45;&gt;E3 -->
+<g id="transition&#45;E3&#45;E3" class="edge">
+<title>E3&#45;&gt;E3</title>
+<g id="a_transition&#45;E3&#45;E3"><a xlink:title="E3 + C_ZERO | C_DIGIT → E3">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M866.79,-608.53C864.05,-627.38 868.15,-645.12 879.09,-645.12 888.06,-645.12 892.44,-633.18 892.21,-618.49"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="895.01,-618.39 891.57,-610.64 889.43,-618.85 895.01,-618.39"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="879.09" y="-649.92" font-family="Arial" font-size="16.00" fill="#334155">0–9</text>
+</g>
+<!-- E3&#45;&gt;ref_number_OK -->
+<g id="transition&#45;E3&#45;OK" class="edge">
+<title>E3&#45;&gt;ref_number_OK</title>
+<g id="a_transition&#45;E3&#45;OK"><a xlink:title="E3 + C_SPACE | C_WHITE → OK">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M912.04,-583.58C928.86,-588.52 948.7,-596.91 961.98,-610.8 1000.52,-651.09 1015.33,-717.15 1020.81,-754.33"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="1017.99,-754.36 1021.84,-761.91 1023.54,-753.6 1017.99,-754.36"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="949.1" y="-615.6" font-family="Arial" font-size="16.00" fill="#334155">WS</text>
+</g>
+<!-- E3&#45;&gt;ref_number_action8 -->
+<g id="transition&#45;E3&#45;action8" class="edge">
+<title>E3&#45;&gt;ref_number_action8</title>
+<g id="a_transition&#45;E3&#45;action8"><a xlink:title="E3 + C_RCURB → &#45;8">
+<path fill="none" stroke="#b77937" stroke-width="1.4" d="M908.17,-560.23C925.14,-549.15 946.42,-533.48 961.98,-516 983.46,-491.88 1001.07,-459.14 1011.94,-436.25"/>
+<polygon fill="#b77937" stroke="#b77937" stroke-width="1.4" points="1014.47,-437.46 1015.29,-429.02 1009.39,-435.1 1014.47,-437.46"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="949.1" y="-543.75" font-family="Arial" font-size="16.00" fill="#334155">}</text>
+</g>
+<!-- E3&#45;&gt;ref_number_action7 -->
+<g id="transition&#45;E3&#45;action7" class="edge">
+<title>E3&#45;&gt;ref_number_action7</title>
+<g id="a_transition&#45;E3&#45;action7"><a xlink:title="E3 + C_RSQRB → &#45;7">
+<path fill="none" stroke="#b77937" stroke-width="1.4" d="M892.85,-546.21C920.7,-479 986.52,-320.12 1012.78,-256.76"/>
+<polygon fill="#b77937" stroke="#b77937" stroke-width="1.4" points="1015.21,-258.21 1015.68,-249.74 1010.04,-256.06 1015.21,-258.21"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="949.1" y="-439.38" font-family="Arial" font-size="16.00" fill="#334155">]</text>
+</g>
+<!-- E3&#45;&gt;ref_number_action3 -->
+<g id="transition&#45;E3&#45;action3" class="edge">
+<title>E3&#45;&gt;ref_number_action3</title>
+<g id="a_transition&#45;E3&#45;action3"><a xlink:title="E3 + C_COMMA → &#45;3">
+<path fill="none" stroke="#b77937" stroke-width="1.4" d="M891.74,-608.42C919.25,-682.69 987.93,-868.02 1013.8,-937.83"/>
+<polygon fill="#b77937" stroke="#b77937" stroke-width="1.4" points="1011.01,-938.37 1016.42,-944.9 1016.26,-936.43 1011.01,-938.37"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="949.1" y="-799.03" font-family="Arial" font-size="16.00" fill="#334155">,</text>
+</g>
+<!-- MI -->
+<g id="state&#45;MI" class="node">
+<title>MI</title>
+<ellipse fill="#fff2df" stroke="#aa7328" stroke-width="1.7" cx="33.12" cy="-522" rx="33.12" ry="33.12"/>
+<text xml:space="preserve" text-anchor="middle" x="33.12" y="-515.1" font-family="Arial" font-size="23.00">MI</text>
+</g>
+<!-- ZE -->
+<g id="state&#45;ZE" class="node">
+<title>ZE</title>
+<ellipse fill="#fff2df" stroke="#aa7328" stroke-width="1.7" cx="178.49" cy="-592" rx="33.12" ry="33.12"/>
+<text xml:space="preserve" text-anchor="middle" x="178.49" y="-585.1" font-family="Arial" font-size="23.00">ZE</text>
+</g>
+<!-- IN -->
+<g id="state&#45;IN" class="node">
+<title>IN</title>
+<ellipse fill="#fff2df" stroke="#aa7328" stroke-width="1.7" cx="178.49" cy="-454" rx="33.12" ry="33.12"/>
+<text xml:space="preserve" text-anchor="middle" x="178.49" y="-447.1" font-family="Arial" font-size="23.00">IN</text>
+</g>
+<!-- FR -->
+<g id="state&#45;FR" class="node">
+<title>FR</title>
+<ellipse fill="#fff2df" stroke="#aa7328" stroke-width="1.7" cx="297.18" cy="-523" rx="33.12" ry="33.12"/>
+<text xml:space="preserve" text-anchor="middle" x="297.18" y="-516.1" font-family="Arial" font-size="23.00">FR</text>
+</g>
+<!-- FS -->
+<g id="state&#45;FS" class="node">
+<title>FS</title>
+<ellipse fill="#fff2df" stroke="#aa7328" stroke-width="1.7" cx="444.32" cy="-523" rx="33.12" ry="33.12"/>
+<text xml:space="preserve" text-anchor="middle" x="444.32" y="-516.1" font-family="Arial" font-size="23.00">FS</text>
+</g>
+<!-- E1 -->
+<g id="state&#45;E1" class="node">
+<title>E1</title>
+<ellipse fill="#fff2df" stroke="#aa7328" stroke-width="1.7" cx="591.47" cy="-523" rx="33.12" ry="33.12"/>
+<text xml:space="preserve" text-anchor="middle" x="591.47" y="-516.1" font-family="Arial" font-size="23.00">E1</text>
+</g>
+<!-- E2 -->
+<g id="state&#45;E2" class="node">
+<title>E2</title>
+<ellipse fill="#fff2df" stroke="#aa7328" stroke-width="1.7" cx="733.72" cy="-586" rx="33.12" ry="33.12"/>
+<text xml:space="preserve" text-anchor="middle" x="733.72" y="-579.1" font-family="Arial" font-size="23.00">E2</text>
+</g>
+<!-- E3 -->
+<g id="state&#45;E3" class="node">
+<title>E3</title>
+<ellipse fill="#fff2df" stroke="#aa7328" stroke-width="1.7" cx="879.09" cy="-577" rx="33.12" ry="33.12"/>
+<text xml:space="preserve" text-anchor="middle" x="879.09" y="-570.1" font-family="Arial" font-size="23.00">E3</text>
+</g>
+<!-- ref_number_OK -->
+<g id="reference&#45;number&#45;OK" class="node">
+<title>ref_number_OK</title>
+<g id="a_reference&#45;number&#45;OK"><a xlink:href="#state-OK" xlink:title="跨区引用：OK，不是新状态">
+<path fill="#ffffff" stroke="#3564a5" stroke-width="1.7" stroke-dasharray="5,2" d="M1052.22,-799.28C1052.22,-799.28 997.5,-799.28 997.5,-799.28 991.74,-799.28 985.98,-793.52 985.98,-787.76 985.98,-787.76 985.98,-776.24 985.98,-776.24 985.98,-770.48 991.74,-764.72 997.5,-764.72 997.5,-764.72 1052.22,-764.72 1052.22,-764.72 1057.98,-764.72 1063.74,-770.48 1063.74,-776.24 1063.74,-776.24 1063.74,-787.76 1063.74,-787.76 1063.74,-793.52 1057.98,-799.28 1052.22,-799.28"/>
+<text xml:space="preserve" text-anchor="middle" x="1024.86" y="-776.6" font-family="Arial" font-size="18.00">→ OK</text>
+</a>
+</g>
+</g>
+<!-- ref_number_action8 -->
+<g id="reference&#45;number&#45;action8" class="node">
+<title>ref_number_action8</title>
+<g id="a_reference&#45;number&#45;action8"><a xlink:href="#action-8" xlink:title="跨区引用：&#45;8，不是新状态">
+<path fill="#ffffff" stroke="#b77937" stroke-width="1.7" stroke-dasharray="5,2" d="M1052.22,-426.28C1052.22,-426.28 997.5,-426.28 997.5,-426.28 991.74,-426.28 985.98,-420.52 985.98,-414.76 985.98,-414.76 985.98,-403.24 985.98,-403.24 985.98,-397.48 991.74,-391.72 997.5,-391.72 997.5,-391.72 1052.22,-391.72 1052.22,-391.72 1057.98,-391.72 1063.74,-397.48 1063.74,-403.24 1063.74,-403.24 1063.74,-414.76 1063.74,-414.76 1063.74,-420.52 1057.98,-426.28 1052.22,-426.28"/>
+<text xml:space="preserve" text-anchor="middle" x="1024.86" y="-403.6" font-family="Arial" font-size="18.00">→ &#45;8</text>
+</a>
+</g>
+</g>
+<!-- ref_number_action7 -->
+<g id="reference&#45;number&#45;action7" class="node">
+<title>ref_number_action7</title>
+<g id="a_reference&#45;number&#45;action7"><a xlink:href="#action-7" xlink:title="跨区引用：&#45;7，不是新状态">
+<path fill="#ffffff" stroke="#b77937" stroke-width="1.7" stroke-dasharray="5,2" d="M1052.22,-247.28C1052.22,-247.28 997.5,-247.28 997.5,-247.28 991.74,-247.28 985.98,-241.52 985.98,-235.76 985.98,-235.76 985.98,-224.24 985.98,-224.24 985.98,-218.48 991.74,-212.72 997.5,-212.72 997.5,-212.72 1052.22,-212.72 1052.22,-212.72 1057.98,-212.72 1063.74,-218.48 1063.74,-224.24 1063.74,-224.24 1063.74,-235.76 1063.74,-235.76 1063.74,-241.52 1057.98,-247.28 1052.22,-247.28"/>
+<text xml:space="preserve" text-anchor="middle" x="1024.86" y="-224.6" font-family="Arial" font-size="18.00">→ &#45;7</text>
+</a>
+</g>
+</g>
+<!-- ref_number_action3 -->
+<g id="reference&#45;number&#45;action3" class="node">
+<title>ref_number_action3</title>
+<g id="a_reference&#45;number&#45;action3"><a xlink:href="#action-3" xlink:title="跨区引用：&#45;3，不是新状态">
+<path fill="#ffffff" stroke="#b77937" stroke-width="1.7" stroke-dasharray="5,2" d="M1052.22,-982.28C1052.22,-982.28 997.5,-982.28 997.5,-982.28 991.74,-982.28 985.98,-976.52 985.98,-970.76 985.98,-970.76 985.98,-959.24 985.98,-959.24 985.98,-953.48 991.74,-947.72 997.5,-947.72 997.5,-947.72 1052.22,-947.72 1052.22,-947.72 1057.98,-947.72 1063.74,-953.48 1063.74,-959.24 1063.74,-959.24 1063.74,-970.76 1063.74,-970.76 1063.74,-976.52 1057.98,-982.28 1052.22,-982.28"/>
+<text xml:space="preserve" text-anchor="middle" x="1024.86" y="-959.6" font-family="Arial" font-size="18.00">→ &#45;3</text>
+</a>
+</g>
+</g>
+</g>
+</svg><rect x="48" y="1642" width="1941" height="454" rx="12" fill="#fbfcfe" stroke="#dfe5ed"/><text x="76" y="1680" font-size="25" fill="#172b4d" font-weight="700">字符串 · 6 个状态</text><text x="76" y="1710" font-size="17" fill="#334155" >键和值共用 ST；结束引号由 -4 根据栈顶决定下一状态。</text><svg x="528" y="1763" width="981" height="291" viewBox="0.00 0.00 981.00 291.00">
+<g id="graph-string" class="graph" transform="scale(1 1) rotate(0) translate(14.4 276.64)">
+<title>string</title>
+<!-- ST&#45;&gt;ST -->
+<g id="transition&#45;ST&#45;ST" class="edge">
+<title>ST&#45;&gt;ST</title>
+<g id="a_transition&#45;ST&#45;ST"><a xlink:title="ST + C_SPACE | C_LCURB | C_RCURB | C_LSQRB | C_RSQRB | C_COLON | C_COMMA | C_SLASH | C_PLUS | C_MINUS | C_POINT | C_ZERO | C_DIGIT | C_LOW_A | C_LOW_B | C_LOW_C | C_LOW_D | C_LOW_E | C_LOW_F | C_LOW_L | C_LOW_N | C_LOW_R | C_LOW_S | C_LOW_T | C_LOW_U | C_ABCDF | C_E | C_ETC → ST">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M20.24,-168.3C17.26,-187.28 21.55,-205.24 33.12,-205.24 42.61,-205.24 47.2,-193.15 46.9,-178.33"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="49.69,-178.13 46.19,-170.41 44.12,-178.63 49.69,-178.13"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="33.12" y="-210.04" font-family="Arial" font-size="16.00" fill="#334155">CHAR</text>
+</g>
+<!-- ST&#45;&gt;ES -->
+<g id="transition&#45;ST&#45;ES" class="edge">
+<title>ST&#45;&gt;ES</title>
+<g id="a_transition&#45;ST&#45;ES"><a xlink:title="ST + C_BACKS → ES">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M57.35,-160.81C66.97,-169.8 78.6,-179.65 90.24,-187.12 105.44,-196.87 123.48,-205.28 139.34,-211.77"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="137.95,-214.23 146.41,-214.58 140.01,-209.03 137.95,-214.23"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="106.69" y="-209.54" font-family="Arial" font-size="16.00" fill="#334155">\</text>
+</g>
+<!-- ST&#45;&gt;action4 -->
+<g id="transition&#45;ST&#45;action4" class="edge">
+<title>ST&#45;&gt;action4</title>
+<g id="a_transition&#45;ST&#45;action4"><a xlink:title="ST + C_QUOTE → &#45;4">
+<path fill="none" stroke="#b77937" stroke-width="1.4" d="M60.84,-118.02C69.76,-112.7 80.04,-107.64 90.24,-104.92 106.18,-100.67 124.28,-100.52 139.98,-101.79"/>
+<polygon fill="#b77937" stroke="#b77937" stroke-width="1.4" points="139.56,-104.56 147.8,-102.58 140.13,-98.99 139.56,-104.56"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="106.69" y="-109.72" font-family="Arial" font-size="16.00" fill="#334155">&quot;</text>
+</g>
+<!-- ES&#45;&gt;ST -->
+<g id="transition&#45;ES&#45;ST" class="edge">
+<title>ES&#45;&gt;ST</title>
+<g id="a_transition&#45;ES&#45;ST"><a xlink:title="ES + C_QUOTE | C_BACKS | C_SLASH | C_LOW_B | C_LOW_F | C_LOW_N | C_LOW_R | C_LOW_T → ST">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M161.55,-198.04C151.75,-184.66 138.47,-169.51 123.14,-159.92 109.16,-151.17 91.96,-145.77 76.41,-142.44"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="76.96,-139.69 68.57,-140.94 75.9,-145.19 76.96,-139.69"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="106.69" y="-164.72" font-family="Arial" font-size="16.00" fill="#334155">ESC</text>
+</g>
+<!-- ES&#45;&gt;U1 -->
+<g id="transition&#45;ES&#45;U1" class="edge">
+<title>ES&#45;&gt;U1</title>
+<g id="a_transition&#45;ES&#45;U1"><a xlink:title="ES + C_LOW_U → U1">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M213.97,-226.46C266.66,-227 370.32,-228.08 428.72,-228.68"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="428.58,-231.48 436.6,-228.76 428.63,-225.88 428.58,-231.48"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="323.41" y="-233.27" font-family="Arial" font-size="16.00" fill="#334155">u</text>
+</g>
+<!-- U1&#45;&gt;U2 -->
+<g id="transition&#45;U1&#45;U2" class="edge">
+<title>U1&#45;&gt;U2</title>
+<g id="a_transition&#45;U1&#45;U2"><a xlink:title="U1 + C_ZERO | C_DIGIT | C_LOW_A | C_LOW_B | C_LOW_C | C_LOW_D | C_LOW_E | C_LOW_F | C_ABCDF | C_E → U2">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M503.13,-215.29C526.69,-204.36 559.76,-189.02 585.39,-177.13"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="586.46,-179.72 592.54,-173.81 584.1,-174.64 586.46,-179.72"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="551.64" y="-205.19" font-family="Arial" font-size="16.00" fill="#334155">HEX</text>
+</g>
+<!-- U2&#45;&gt;U3 -->
+<g id="transition&#45;U2&#45;U3" class="edge">
+<title>U2&#45;&gt;U3</title>
+<g id="a_transition&#45;U2&#45;U3"><a xlink:title="U2 + C_ZERO | C_DIGIT | C_LOW_A | C_LOW_B | C_LOW_C | C_LOW_D | C_LOW_E | C_LOW_F | C_ABCDF | C_E → U3">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M655.93,-144.99C678.14,-134.43 708.69,-119.91 732.78,-108.46"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="733.73,-111.1 739.75,-105.14 731.33,-106.05 733.73,-111.1"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="698.78" y="-135.6" font-family="Arial" font-size="16.00" fill="#334155">HEX</text>
+</g>
+<!-- U3&#45;&gt;U4 -->
+<g id="transition&#45;U3&#45;U4" class="edge">
+<title>U3&#45;&gt;U4</title>
+<g id="a_transition&#45;U3&#45;U4"><a xlink:title="U3 + C_ZERO | C_DIGIT | C_LOW_A | C_LOW_B | C_LOW_C | C_LOW_D | C_LOW_E | C_LOW_F | C_ABCDF | C_E → U4">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M803.78,-78.17C825.55,-69.62 855.06,-58.03 878.7,-48.75"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="879.71,-51.36 886.13,-45.83 877.66,-46.15 879.71,-51.36"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="845.92" y="-71.53" font-family="Arial" font-size="16.00" fill="#334155">HEX</text>
+</g>
+<!-- U4&#45;&gt;ST -->
+<g id="transition&#45;U4&#45;ST" class="edge">
+<title>U4&#45;&gt;ST</title>
+<g id="a_transition&#45;U4&#45;ST"><a xlink:title="U4 + C_ZERO | C_DIGIT | C_LOW_A | C_LOW_B | C_LOW_C | C_LOW_D | C_LOW_E | C_LOW_F | C_ABCDF | C_E → ST">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M887.14,-23.14C857.98,-14.75 813.18,-4.12 773.35,-4.12 179.26,-4.12 179.26,-4.12 179.26,-4.12 122.7,-4.12 78.62,-59.7 54.51,-99"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="52.16,-97.48 50.47,-105.78 56.97,-100.34 52.16,-97.48"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="551.64" y="-8.92" font-family="Arial" font-size="16.00" fill="#334155">HEX</text>
+</g>
+<!-- action4&#45;&gt;ref_string_CO -->
+<g id="result&#45;action4&#45;CO" class="edge">
+<title>action4&#45;&gt;ref_string_CO</title>
+<path fill="none" stroke="#b77937" stroke-width="1.4" stroke-dasharray="5,2" d="M211.75,-111.9C262.07,-118.15 362.91,-130.67 423.01,-138.13"/>
+<polygon fill="#b77937" stroke="#b77937" stroke-width="1.4" points="422.63,-140.9 430.92,-139.11 423.32,-135.34 422.63,-140.9"/>
+<text xml:space="preserve" text-anchor="middle" x="323.41" y="-141.14" font-family="Arial" font-size="16.00" fill="#935719">top = KEY</text>
+</g>
+<!-- action4&#45;&gt;ref_string_OK -->
+<g id="result&#45;action4&#45;OK" class="edge">
+<title>action4&#45;&gt;ref_string_OK</title>
+<path fill="none" stroke="#b77937" stroke-width="1.4" stroke-dasharray="5,2" d="M205.06,-94.41C214.77,-89.52 226.29,-84.57 237.38,-81.92 299.97,-66.93 374.65,-67.5 422.51,-70.12"/>
+<polygon fill="#b77937" stroke="#b77937" stroke-width="1.4" points="422.33,-72.91 430.48,-70.6 422.66,-67.32 422.33,-72.91"/>
+<text xml:space="preserve" text-anchor="middle" x="323.41" y="-86.72" font-family="Arial" font-size="16.00" fill="#935719">top = ARRAY / OBJECT</text>
+</g>
+<!-- ST -->
+<g id="state&#45;ST" class="node">
+<title>ST</title>
+<ellipse fill="#e4f5ef" stroke="#25826c" stroke-width="1.7" cx="33.12" cy="-137.12" rx="33.12" ry="33.12"/>
+<text xml:space="preserve" text-anchor="middle" x="33.12" y="-130.22" font-family="Arial" font-size="23.00">ST</text>
+</g>
+<!-- ES -->
+<g id="state&#45;ES" class="node">
+<title>ES</title>
+<ellipse fill="#e4f5ef" stroke="#25826c" stroke-width="1.7" cx="180.26" cy="-226.12" rx="33.12" ry="33.12"/>
+<text xml:space="preserve" text-anchor="middle" x="180.26" y="-219.22" font-family="Arial" font-size="23.00">ES</text>
+</g>
+<!-- U1 -->
+<g id="state&#45;U1" class="node">
+<title>U1</title>
+<ellipse fill="#e4f5ef" stroke="#25826c" stroke-width="1.7" cx="472.31" cy="-229.12" rx="33.12" ry="33.12"/>
+<text xml:space="preserve" text-anchor="middle" x="472.31" y="-222.22" font-family="Arial" font-size="23.00">U1</text>
+</g>
+<!-- U2 -->
+<g id="state&#45;U2" class="node">
+<title>U2</title>
+<ellipse fill="#e4f5ef" stroke="#25826c" stroke-width="1.7" cx="625.21" cy="-159.12" rx="33.12" ry="33.12"/>
+<text xml:space="preserve" text-anchor="middle" x="625.21" y="-152.22" font-family="Arial" font-size="23.00">U2</text>
+</g>
+<!-- U3 -->
+<g id="state&#45;U3" class="node">
+<title>U3</title>
+<ellipse fill="#e4f5ef" stroke="#25826c" stroke-width="1.7" cx="772.35" cy="-90.12" rx="33.12" ry="33.12"/>
+<text xml:space="preserve" text-anchor="middle" x="772.35" y="-83.22" font-family="Arial" font-size="23.00">U3</text>
+</g>
+<!-- U4 -->
+<g id="state&#45;U4" class="node">
+<title>U4</title>
+<ellipse fill="#e4f5ef" stroke="#25826c" stroke-width="1.7" cx="919.49" cy="-33.12" rx="33.12" ry="33.12"/>
+<text xml:space="preserve" text-anchor="middle" x="919.49" y="-26.22" font-family="Arial" font-size="23.00">U4</text>
+</g>
+<!-- action4 -->
+<g id="action&#45;4" class="node">
+<title>action4</title>
+<polygon fill="#fff5e6" stroke="#b77937" stroke-width="1.7" points="180.26,-156.92 147.14,-108.12 180.26,-59.32 213.38,-108.12 180.26,-156.92"/>
+<text xml:space="preserve" text-anchor="middle" x="180.26" y="-113.22" font-family="Arial" font-size="17.00">&#45;4</text>
+<text xml:space="preserve" text-anchor="middle" x="180.26" y="-92.82" font-family="Arial" font-size="17.00">&quot;</text>
+</g>
+<!-- ref_string_CO -->
+<g id="reference&#45;string&#45;CO" class="node">
+<title>ref_string_CO</title>
+<g id="a_reference&#45;string&#45;CO"><a xlink:href="#state-CO" xlink:title="跨区引用：CO，不是新状态">
+<path fill="#ffffff" stroke="#3564a5" stroke-width="1.7" stroke-dasharray="5,2" d="M499.67,-161.4C499.67,-161.4 444.95,-161.4 444.95,-161.4 439.19,-161.4 433.43,-155.64 433.43,-149.88 433.43,-149.88 433.43,-138.36 433.43,-138.36 433.43,-132.6 439.19,-126.84 444.95,-126.84 444.95,-126.84 499.67,-126.84 499.67,-126.84 505.43,-126.84 511.19,-132.6 511.19,-138.36 511.19,-138.36 511.19,-149.88 511.19,-149.88 511.19,-155.64 505.43,-161.4 499.67,-161.4"/>
+<text xml:space="preserve" text-anchor="middle" x="472.31" y="-138.72" font-family="Arial" font-size="18.00">→ CO</text>
+</a>
+</g>
+</g>
+<!-- ref_string_OK -->
+<g id="reference&#45;string&#45;OK" class="node">
+<title>ref_string_OK</title>
+<g id="a_reference&#45;string&#45;OK"><a xlink:href="#state-OK" xlink:title="跨区引用：OK，不是新状态">
+<path fill="#ffffff" stroke="#3564a5" stroke-width="1.7" stroke-dasharray="5,2" d="M499.67,-91.4C499.67,-91.4 444.95,-91.4 444.95,-91.4 439.19,-91.4 433.43,-85.64 433.43,-79.88 433.43,-79.88 433.43,-68.36 433.43,-68.36 433.43,-62.6 439.19,-56.84 444.95,-56.84 444.95,-56.84 499.67,-56.84 499.67,-56.84 505.43,-56.84 511.19,-62.6 511.19,-68.36 511.19,-68.36 511.19,-79.88 511.19,-79.88 511.19,-85.64 505.43,-91.4 499.67,-91.4"/>
+<text xml:space="preserve" text-anchor="middle" x="472.31" y="-68.72" font-family="Arial" font-size="18.00">→ OK</text>
+</a>
+</g>
+</g>
+</g>
+</svg><rect x="2019" y="1642" width="1165" height="454" rx="12" fill="#fbfcfe" stroke="#dfe5ed"/><text x="2047" y="1680" font-size="25" fill="#172b4d" font-weight="700">字面量 · 10 个状态</text><text x="2047" y="1710" font-size="17" fill="#334155" >入口 t / f / n 来自 AR 或 VA；逐字符匹配后转入 OK。</text><svg x="2302" y="1763" width="599" height="297" viewBox="0.00 0.00 599.00 297.00">
+<g id="graph-literal" class="graph" transform="scale(1 1) rotate(0) translate(14.4 282.64)">
+<title>literal</title>
+<!-- T1&#45;&gt;T2 -->
+<g id="transition&#45;T1&#45;T2" class="edge">
+<title>T1&#45;&gt;T2</title>
+<g id="a_transition&#45;T1&#45;T2"><a xlink:title="T1 + C_LOW_R → T2">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M190.04,-235.12C204.05,-235.12 220.58,-235.12 235.54,-235.12"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="235.47,-237.92 243.47,-235.12 235.47,-232.32 235.47,-237.92"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="217.83" y="-239.92" font-family="Arial" font-size="16.00" fill="#334155">r</text>
+</g>
+<!-- T2&#45;&gt;T3 -->
+<g id="transition&#45;T2&#45;T3" class="edge">
+<title>T2&#45;&gt;T3</title>
+<g id="a_transition&#45;T2&#45;T3"><a xlink:title="T2 + C_LOW_U → T3">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M313.18,-235.12C327.18,-235.12 343.72,-235.12 358.68,-235.12"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="358.61,-237.92 366.61,-235.12 358.61,-232.32 358.61,-237.92"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="340.97" y="-239.92" font-family="Arial" font-size="16.00" fill="#334155">u</text>
+</g>
+<!-- T3&#45;&gt;ref_literal_OK -->
+<g id="transition&#45;T3&#45;OK" class="edge">
+<title>T3&#45;&gt;ref_literal_OK</title>
+<g id="a_transition&#45;T3&#45;OK"><a xlink:title="T3 + C_LOW_E → OK">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M429.22,-214.68C449.64,-198.43 478.26,-175.64 499.87,-158.45"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="501.6,-160.65 506.11,-153.48 498.11,-156.27 501.6,-160.65"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="464.1" y="-192.45" font-family="Arial" font-size="16.00" fill="#334155">e</text>
+</g>
+<!-- F1&#45;&gt;F2 -->
+<g id="transition&#45;F1&#45;F2" class="edge">
+<title>F1&#45;&gt;F2</title>
+<g id="a_transition&#45;F1&#45;F2"><a xlink:title="F1 + C_LOW_A → F2">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M66.9,-134.12C80.91,-134.12 97.44,-134.12 112.4,-134.12"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="112.33,-136.92 120.33,-134.12 112.33,-131.32 112.33,-136.92"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="94.69" y="-138.92" font-family="Arial" font-size="16.00" fill="#334155">a</text>
+</g>
+<!-- F2&#45;&gt;F3 -->
+<g id="transition&#45;F2&#45;F3" class="edge">
+<title>F2&#45;&gt;F3</title>
+<g id="a_transition&#45;F2&#45;F3"><a xlink:title="F2 + C_LOW_L → F3">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M190.04,-134.12C204.05,-134.12 220.58,-134.12 235.54,-134.12"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="235.47,-136.92 243.47,-134.12 235.47,-131.32 235.47,-136.92"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="217.83" y="-138.92" font-family="Arial" font-size="16.00" fill="#334155">l</text>
+</g>
+<!-- F3&#45;&gt;F4 -->
+<g id="transition&#45;F3&#45;F4" class="edge">
+<title>F3&#45;&gt;F4</title>
+<g id="a_transition&#45;F3&#45;F4"><a xlink:title="F3 + C_LOW_S → F4">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M313.18,-134.12C327.18,-134.12 343.72,-134.12 358.68,-134.12"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="358.61,-136.92 366.61,-134.12 358.61,-131.32 358.61,-136.92"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="340.97" y="-138.92" font-family="Arial" font-size="16.00" fill="#334155">s</text>
+</g>
+<!-- F4&#45;&gt;ref_literal_OK -->
+<g id="transition&#45;F4&#45;OK" class="edge">
+<title>F4&#45;&gt;ref_literal_OK</title>
+<g id="a_transition&#45;F4&#45;OK"><a xlink:title="F4 + C_LOW_E → OK">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M436.21,-134.12C450.19,-134.12 466.79,-134.12 482.14,-134.12"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="481.89,-136.92 489.89,-134.12 481.89,-131.32 481.89,-136.92"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="464.1" y="-138.92" font-family="Arial" font-size="16.00" fill="#334155">e</text>
+</g>
+<!-- N1&#45;&gt;N2 -->
+<g id="transition&#45;N1&#45;N2" class="edge">
+<title>N1&#45;&gt;N2</title>
+<g id="a_transition&#45;N1&#45;N2"><a xlink:title="N1 + C_LOW_U → N2">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M190.04,-33.12C204.05,-33.12 220.58,-33.12 235.54,-33.12"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="235.47,-35.92 243.47,-33.12 235.47,-30.32 235.47,-35.92"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="217.83" y="-37.92" font-family="Arial" font-size="16.00" fill="#334155">u</text>
+</g>
+<!-- N2&#45;&gt;N3 -->
+<g id="transition&#45;N2&#45;N3" class="edge">
+<title>N2&#45;&gt;N3</title>
+<g id="a_transition&#45;N2&#45;N3"><a xlink:title="N2 + C_LOW_L → N3">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M313.18,-33.12C327.18,-33.12 343.72,-33.12 358.68,-33.12"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="358.61,-35.92 366.61,-33.12 358.61,-30.32 358.61,-35.92"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="340.97" y="-37.92" font-family="Arial" font-size="16.00" fill="#334155">l</text>
+</g>
+<!-- N3&#45;&gt;ref_literal_OK -->
+<g id="transition&#45;N3&#45;OK" class="edge">
+<title>N3&#45;&gt;ref_literal_OK</title>
+<g id="a_transition&#45;N3&#45;OK"><a xlink:title="N3 + C_LOW_L → OK">
+<path fill="none" stroke="#64748b" stroke-width="1.4" d="M429.22,-53.56C449.64,-69.81 478.26,-92.6 499.87,-109.79"/>
+<polygon fill="#64748b" stroke="#64748b" stroke-width="1.4" points="498.11,-111.97 506.11,-114.76 501.6,-107.59 498.11,-111.97"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="middle" x="464.1" y="-88.42" font-family="Arial" font-size="16.00" fill="#334155">l</text>
+</g>
+<!-- T1 -->
+<g id="state&#45;T1" class="node">
+<title>T1</title>
+<ellipse fill="#f0eaff" stroke="#7955a3" stroke-width="1.7" cx="156.26" cy="-235.12" rx="33.12" ry="33.12"/>
+<text xml:space="preserve" text-anchor="middle" x="156.26" y="-228.22" font-family="Arial" font-size="23.00">T1</text>
+</g>
+<!-- T2 -->
+<g id="state&#45;T2" class="node">
+<title>T2</title>
+<ellipse fill="#f0eaff" stroke="#7955a3" stroke-width="1.7" cx="279.4" cy="-235.12" rx="33.12" ry="33.12"/>
+<text xml:space="preserve" text-anchor="middle" x="279.4" y="-228.22" font-family="Arial" font-size="23.00">T2</text>
+</g>
+<!-- T3 -->
+<g id="state&#45;T3" class="node">
+<title>T3</title>
+<ellipse fill="#f0eaff" stroke="#7955a3" stroke-width="1.7" cx="402.54" cy="-235.12" rx="33.12" ry="33.12"/>
+<text xml:space="preserve" text-anchor="middle" x="402.54" y="-228.22" font-family="Arial" font-size="23.00">T3</text>
+</g>
+<!-- F1 -->
+<g id="state&#45;F1" class="node">
+<title>F1</title>
+<ellipse fill="#f0eaff" stroke="#7955a3" stroke-width="1.7" cx="33.12" cy="-134.12" rx="33.12" ry="33.12"/>
+<text xml:space="preserve" text-anchor="middle" x="33.12" y="-127.22" font-family="Arial" font-size="23.00">F1</text>
+</g>
+<!-- F2 -->
+<g id="state&#45;F2" class="node">
+<title>F2</title>
+<ellipse fill="#f0eaff" stroke="#7955a3" stroke-width="1.7" cx="156.26" cy="-134.12" rx="33.12" ry="33.12"/>
+<text xml:space="preserve" text-anchor="middle" x="156.26" y="-127.22" font-family="Arial" font-size="23.00">F2</text>
+</g>
+<!-- F3 -->
+<g id="state&#45;F3" class="node">
+<title>F3</title>
+<ellipse fill="#f0eaff" stroke="#7955a3" stroke-width="1.7" cx="279.4" cy="-134.12" rx="33.12" ry="33.12"/>
+<text xml:space="preserve" text-anchor="middle" x="279.4" y="-127.22" font-family="Arial" font-size="23.00">F3</text>
+</g>
+<!-- F4 -->
+<g id="state&#45;F4" class="node">
+<title>F4</title>
+<ellipse fill="#f0eaff" stroke="#7955a3" stroke-width="1.7" cx="402.54" cy="-134.12" rx="33.12" ry="33.12"/>
+<text xml:space="preserve" text-anchor="middle" x="402.54" y="-127.22" font-family="Arial" font-size="23.00">F4</text>
+</g>
+<!-- N1 -->
+<g id="state&#45;N1" class="node">
+<title>N1</title>
+<ellipse fill="#f0eaff" stroke="#7955a3" stroke-width="1.7" cx="156.26" cy="-33.12" rx="33.12" ry="33.12"/>
+<text xml:space="preserve" text-anchor="middle" x="156.26" y="-26.22" font-family="Arial" font-size="23.00">N1</text>
+</g>
+<!-- N2 -->
+<g id="state&#45;N2" class="node">
+<title>N2</title>
+<ellipse fill="#f0eaff" stroke="#7955a3" stroke-width="1.7" cx="279.4" cy="-33.12" rx="33.12" ry="33.12"/>
+<text xml:space="preserve" text-anchor="middle" x="279.4" y="-26.22" font-family="Arial" font-size="23.00">N2</text>
+</g>
+<!-- N3 -->
+<g id="state&#45;N3" class="node">
+<title>N3</title>
+<ellipse fill="#f0eaff" stroke="#7955a3" stroke-width="1.7" cx="402.54" cy="-33.12" rx="33.12" ry="33.12"/>
+<text xml:space="preserve" text-anchor="middle" x="402.54" y="-26.22" font-family="Arial" font-size="23.00">N3</text>
+</g>
+<!-- ref_literal_OK -->
+<g id="reference&#45;literal&#45;OK" class="node">
+<title>ref_literal_OK</title>
+<g id="a_reference&#45;literal&#45;OK"><a xlink:href="#state-OK" xlink:title="跨区引用：OK，不是新状态">
+<path fill="#ffffff" stroke="#3564a5" stroke-width="1.7" stroke-dasharray="5,2" d="M558.79,-151.4C558.79,-151.4 504.07,-151.4 504.07,-151.4 498.31,-151.4 492.55,-145.64 492.55,-139.88 492.55,-139.88 492.55,-128.36 492.55,-128.36 492.55,-122.6 498.31,-116.84 504.07,-116.84 504.07,-116.84 558.79,-116.84 558.79,-116.84 564.55,-116.84 570.31,-122.6 570.31,-128.36 570.31,-128.36 570.31,-139.88 570.31,-139.88 570.31,-145.64 564.55,-151.4 558.79,-151.4"/>
+<text xml:space="preserve" text-anchor="middle" x="531.43" y="-128.72" font-family="Arial" font-size="18.00">→ OK</text>
+</a>
+</g>
+</g>
+</g>
+</svg><rect x="48" y="2138" width="1066" height="785" rx="12" fill="#f8fafc" stroke="#dfe5ed"/><rect x="1138" y="2138" width="1160" height="785" rx="12" fill="#fffbf5" stroke="#e8d8c4"/><rect x="2322" y="2138" width="862" height="785" rx="12" fill="#f6faf8" stroke="#d8e7dd"/><text x="70" y="2176" font-size="24" fill="#172b4d" font-weight="700">字符条件与原始分类</text><text x="70" y="2214" font-size="18" fill="#1f5c70" font-weight="700">WS</text><text x="150" y="2214" font-size="17" fill="#334155" >空格 / TAB / LF / CR</text><text x="70" y="2247" font-size="18" fill="#1f5c70" font-weight="700">0–9</text><text x="150" y="2247" font-size="17" fill="#334155" >C_ZERO ∪ C_DIGIT</text><text x="70" y="2280" font-size="18" fill="#1f5c70" font-weight="700">HEX</text><text x="150" y="2280" font-size="17" fill="#334155" >0–9 / a–f / A–F</text><text x="70" y="2313" font-size="18" fill="#1f5c70" font-weight="700">ESC</text><text x="150" y="2313" font-size="17" fill="#334155" >{ &quot; , \ , / , b , f , n , r , t }</text><text x="70" y="2346" font-size="18" fill="#1f5c70" font-weight="700">CHAR</text><text x="150" y="2346" font-size="17" fill="#334155" >除 C_WHITE、C_QUOTE、C_BACKS 外的全部类别</text><text x="70" y="2398" font-size="17" fill="#334155" >边上的字符是“当前输入字符”。</text><text x="70" y="2426" font-size="17" fill="#334155" >ES 的 ESC 指反斜线之后的字符，不是两个字符。</text><text x="70" y="2468" font-size="19" fill="#172b4d" font-weight="700">原始 31 类（按原枚举顺序）</text><text x="70" y="2499" font-size="14" fill="#475569" font-family="Menlo, Consolas, monospace">C_SPACE</text><text x="205" y="2499" font-size="14" fill="#334155" >SP</text><text x="70" y="2523" font-size="14" fill="#475569" font-family="Menlo, Consolas, monospace">C_WHITE</text><text x="205" y="2523" font-size="14" fill="#334155" >TAB / LF / CR</text><text x="70" y="2547" font-size="14" fill="#475569" font-family="Menlo, Consolas, monospace">C_LCURB</text><text x="205" y="2547" font-size="14" fill="#334155" >{</text><text x="70" y="2571" font-size="14" fill="#475569" font-family="Menlo, Consolas, monospace">C_RCURB</text><text x="205" y="2571" font-size="14" fill="#334155" >}</text><text x="70" y="2595" font-size="14" fill="#475569" font-family="Menlo, Consolas, monospace">C_LSQRB</text><text x="205" y="2595" font-size="14" fill="#334155" >[</text><text x="70" y="2619" font-size="14" fill="#475569" font-family="Menlo, Consolas, monospace">C_RSQRB</text><text x="205" y="2619" font-size="14" fill="#334155" >]</text><text x="70" y="2643" font-size="14" fill="#475569" font-family="Menlo, Consolas, monospace">C_COLON</text><text x="205" y="2643" font-size="14" fill="#334155" >:</text><text x="70" y="2667" font-size="14" fill="#475569" font-family="Menlo, Consolas, monospace">C_COMMA</text><text x="205" y="2667" font-size="14" fill="#334155" >,</text><text x="70" y="2691" font-size="14" fill="#475569" font-family="Menlo, Consolas, monospace">C_QUOTE</text><text x="205" y="2691" font-size="14" fill="#334155" >&quot;</text><text x="70" y="2715" font-size="14" fill="#475569" font-family="Menlo, Consolas, monospace">C_BACKS</text><text x="205" y="2715" font-size="14" fill="#334155" >\</text><text x="70" y="2739" font-size="14" fill="#475569" font-family="Menlo, Consolas, monospace">C_SLASH</text><text x="205" y="2739" font-size="14" fill="#334155" >/</text><text x="70" y="2763" font-size="14" fill="#475569" font-family="Menlo, Consolas, monospace">C_PLUS</text><text x="205" y="2763" font-size="14" fill="#334155" >+</text><text x="70" y="2787" font-size="14" fill="#475569" font-family="Menlo, Consolas, monospace">C_MINUS</text><text x="205" y="2787" font-size="14" fill="#334155" >-</text><text x="70" y="2811" font-size="14" fill="#475569" font-family="Menlo, Consolas, monospace">C_POINT</text><text x="205" y="2811" font-size="14" fill="#334155" >.</text><text x="70" y="2835" font-size="14" fill="#475569" font-family="Menlo, Consolas, monospace">C_ZERO</text><text x="205" y="2835" font-size="14" fill="#334155" >0</text><text x="70" y="2859" font-size="14" fill="#475569" font-family="Menlo, Consolas, monospace">C_DIGIT</text><text x="205" y="2859" font-size="14" fill="#334155" >1–9</text><text x="581" y="2499" font-size="14" fill="#475569" font-family="Menlo, Consolas, monospace">C_LOW_A</text><text x="716" y="2499" font-size="14" fill="#334155" >a</text><text x="581" y="2523" font-size="14" fill="#475569" font-family="Menlo, Consolas, monospace">C_LOW_B</text><text x="716" y="2523" font-size="14" fill="#334155" >b</text><text x="581" y="2547" font-size="14" fill="#475569" font-family="Menlo, Consolas, monospace">C_LOW_C</text><text x="716" y="2547" font-size="14" fill="#334155" >c</text><text x="581" y="2571" font-size="14" fill="#475569" font-family="Menlo, Consolas, monospace">C_LOW_D</text><text x="716" y="2571" font-size="14" fill="#334155" >d</text><text x="581" y="2595" font-size="14" fill="#475569" font-family="Menlo, Consolas, monospace">C_LOW_E</text><text x="716" y="2595" font-size="14" fill="#334155" >e</text><text x="581" y="2619" font-size="14" fill="#475569" font-family="Menlo, Consolas, monospace">C_LOW_F</text><text x="716" y="2619" font-size="14" fill="#334155" >f</text><text x="581" y="2643" font-size="14" fill="#475569" font-family="Menlo, Consolas, monospace">C_LOW_L</text><text x="716" y="2643" font-size="14" fill="#334155" >l</text><text x="581" y="2667" font-size="14" fill="#475569" font-family="Menlo, Consolas, monospace">C_LOW_N</text><text x="716" y="2667" font-size="14" fill="#334155" >n</text><text x="581" y="2691" font-size="14" fill="#475569" font-family="Menlo, Consolas, monospace">C_LOW_R</text><text x="716" y="2691" font-size="14" fill="#334155" >r</text><text x="581" y="2715" font-size="14" fill="#475569" font-family="Menlo, Consolas, monospace">C_LOW_S</text><text x="716" y="2715" font-size="14" fill="#334155" >s</text><text x="581" y="2739" font-size="14" fill="#475569" font-family="Menlo, Consolas, monospace">C_LOW_T</text><text x="716" y="2739" font-size="14" fill="#334155" >t</text><text x="581" y="2763" font-size="14" fill="#475569" font-family="Menlo, Consolas, monospace">C_LOW_U</text><text x="716" y="2763" font-size="14" fill="#334155" >u</text><text x="581" y="2787" font-size="14" fill="#475569" font-family="Menlo, Consolas, monospace">C_ABCDF</text><text x="716" y="2787" font-size="14" fill="#334155" >A B C D F</text><text x="581" y="2811" font-size="14" fill="#475569" font-family="Menlo, Consolas, monospace">C_E</text><text x="716" y="2811" font-size="14" fill="#334155" >E</text><text x="581" y="2835" font-size="14" fill="#475569" font-family="Menlo, Consolas, monospace">C_ETC</text><text x="716" y="2835" font-size="14" fill="#334155" >other</text><text x="1160" y="2176" font-size="24" fill="#172b4d" font-weight="700">栈动作的完整含义</text><text x="1160" y="2220" font-size="19" fill="#935719" font-weight="700">-9</text><text x="1208" y="2220" font-size="17" fill="#334155" >pop(MODE_KEY) 成功 → OK</text><text x="1160" y="2259" font-size="19" fill="#935719" font-weight="700">-8</text><text x="1208" y="2259" font-size="17" fill="#334155" >pop(MODE_OBJECT) 成功 → OK</text><text x="1160" y="2298" font-size="19" fill="#935719" font-weight="700">-7</text><text x="1208" y="2298" font-size="17" fill="#334155" >pop(MODE_ARRAY) 成功 → OK</text><text x="1160" y="2337" font-size="19" fill="#935719" font-weight="700">-6</text><text x="1208" y="2337" font-size="17" fill="#334155" >push(MODE_KEY) 成功 → OB</text><text x="1160" y="2376" font-size="19" fill="#935719" font-weight="700">-5</text><text x="1208" y="2376" font-size="17" fill="#334155" >push(MODE_ARRAY) 成功 → AR</text><text x="1160" y="2415" font-size="19" fill="#935719" font-weight="700">-4</text><text x="1208" y="2415" font-size="17" fill="#334155" >栈顶 MODE_KEY → CO；</text><text x="1160" y="2454" font-size="19" fill="#935719" font-weight="700"></text><text x="1208" y="2454" font-size="17" fill="#334155" >栈顶 MODE_ARRAY / MODE_OBJECT → OK</text><text x="1160" y="2493" font-size="19" fill="#935719" font-weight="700">-3</text><text x="1208" y="2493" font-size="17" fill="#334155" >栈顶 MODE_OBJECT：</text><text x="1160" y="2532" font-size="19" fill="#935719" font-weight="700"></text><text x="1208" y="2532" font-size="17" fill="#334155" >pop(MODE_OBJECT) 且 push(MODE_KEY) 成功 → KE；</text><text x="1160" y="2571" font-size="19" fill="#935719" font-weight="700"></text><text x="1208" y="2571" font-size="17" fill="#334155" >栈顶 MODE_ARRAY → VA</text><text x="1160" y="2610" font-size="19" fill="#935719" font-weight="700">-2</text><text x="1208" y="2610" font-size="17" fill="#334155" >pop(MODE_KEY) 且 push(MODE_OBJECT) 成功 → VA</text><text x="1160" y="2696" font-size="19" fill="#172b4d" font-weight="700">图中的缩写</text><text x="1160" y="2733" font-size="17" fill="#334155" >KEY = MODE_KEY</text><text x="1160" y="2764" font-size="17" fill="#334155" >OBJECT = MODE_OBJECT</text><text x="1160" y="2795" font-size="17" fill="#334155" >ARRAY = MODE_ARRAY</text><text x="1160" y="2826" font-size="17" fill="#334155" >DONE = MODE_DONE</text><text x="1160" y="2882" font-size="17" fill="#334155" >模式切换由 pop + push 完成，沿用原文行为。</text><text x="2344" y="2176" font-size="24" fill="#172b4d" font-weight="700">拒绝与输入结束</text><text x="2344" y="2219" font-size="18" fill="#2d6144" font-weight="700">未列出的字符转移</text><text x="2344" y="2246" font-size="16" fill="#334155" >一律为 __（原表的 -1）→ REJECT。</text><text x="2344" y="2290" font-size="18" fill="#2d6144" font-weight="700">栈动作失败</text><text x="2344" y="2317" font-size="16" fill="#334155" >push 溢出、pop 下溢或模式不匹配 → REJECT。</text><text x="2344" y="2361" font-size="18" fill="#2d6144" font-weight="700">-4 / -3 的其他栈模式</text><text x="2344" y="2388" font-size="16" fill="#334155" >一律 REJECT。</text><text x="2344" y="2432" font-size="18" fill="#2d6144" font-weight="700">字符分类阶段</text><text x="2344" y="2459" font-size="16" fill="#334155" >next_char &lt; 0 → REJECT；</text><text x="2344" y="2503" font-size="16" fill="#334155" >U+0000–001F 中除 TAB / LF / CR 外均拒绝；</text><text x="2344" y="2547" font-size="16" fill="#334155" >next_char ≥ 128 映射到 C_ETC。</text><text x="2344" y="2591" font-size="18" fill="#2d6144" font-weight="700">EOF 接受条件</text><text x="2344" y="2618" font-size="16" fill="#334155" >state == OK 且 pop(MODE_DONE) 成功。</text><text x="2344" y="2662" font-size="18" fill="#2d6144" font-weight="700">EOF 其他情况</text><text x="2344" y="2689" font-size="16" fill="#334155" >REJECT。OK 本身不是无条件接受。</text><text x="2344" y="2733" font-size="18" fill="#2d6144" font-weight="700">原文件有效性检查</text><text x="2344" y="2760" font-size="16" fill="#334155" >valid != GOOD 返回 FALSE。</text><text x="2344" y="2819" font-size="16" fill="#334155" >图仅分区排版，所有节点属于同一个状态机。</text><text x="2344" y="2851" font-size="16" fill="#334155" >原状态名称、数量及转移均未更改。</text><text x="2344" y="2883" font-size="16" fill="#334155" >定义文档与 TypeScript 实现均保持原样。</text><text x="48" y="2953" font-size="15" fill="#64748b" font-family="Menlo, Consolas, monospace">原文 SHA-256：52ad1349b5ffb5bf4ea52ea64f2dc3b877ece16f909c11d5e69813a96418c279</text><text x="48" y="2978" font-size="15" fill="#64748b" >来源：https://github.com/douglascrockford/JSON-c/blob/master/JSON_checker.c · 依据 docs/JSON_STATE_MACHINE.md 自动生成</text></g>
+</svg>
