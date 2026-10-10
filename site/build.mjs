@@ -6,7 +6,7 @@ await rm(output, { recursive: true, force: true });
 await mkdir(new URL("assets/", output), { recursive: true });
 const html = await readFile(new URL("./index.html", import.meta.url), "utf8");
 await writeFile(new URL("index.html", output), html.replaceAll("__PACKAGE_VERSION__", pkg.version));
-for (const file of ["style.css", "app.js", "favicon.svg"]) {
+for (const file of ["style.css", "app.js", "logo.svg", "favicon.svg"]) {
   await cp(new URL(file, import.meta.url), new URL(file, output));
 }
 await cp(new URL("../dist/parser.js", import.meta.url), new URL("assets/parser.js", output));

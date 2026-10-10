@@ -1,1 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="15" fill="#d1f781"/><g stroke="#2f643d" stroke-width="4" stroke-linecap="round" fill="none"><path d="M24 15c-8 0-8 4-8 10 0 5-3 7-6 7 3 0 6 2 6 7 0 6 0 10 8 10M40 15c8 0 8 4 8 10 0 5 3 7 6 7-3 0-6 2-6 7 0 6 0 10-8 10"/></g><circle cx="32" cy="32" r="5" fill="#2f643d"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="15" fill="#d1f781"/>
+  <g fill="#2f643d" transform="translate(6 6) scale(.8125)">
+    <path d="M26 6h-4c-8 0-12 4-12 12h6c0-4 2-6 6-6h4Zm-16 12h6v5h-6Zm0 5c0 4-2 6-6 6v3h8c2-2 4-5 4-9ZM4 32h8c2 2 4 5 4 9h-6c0-4-2-6-6-6Zm6 9h6v5h-6Zm0 5c0 8 4 12 12 12h4v-6h-4c-4 0-6-2-6-6Z"/>
+    <path transform="translate(64 0) scale(-1 1)" d="M26 6h-4c-8 0-12 4-12 12h6c0-4 2-6 6-6h4Zm-16 12h6v5h-6Zm0 5c0 4-2 6-6 6v3h8c2-2 4-5 4-9ZM4 32h8c2 2 4 5 4 9h-6c0-4-2-6-6-6Zm6 9h6v5h-6Zm0 5c0 8 4 12 12 12h4v-6h-4c-4 0-6-2-6-6Z"/>
+  </g>
+</svg>
