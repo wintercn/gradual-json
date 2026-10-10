@@ -12,7 +12,7 @@ python3 -m http.server 8080 --bind 127.0.0.1
 
 打开 <http://127.0.0.1:8080/>，点击“开始接收”。默认逐字符输入；可以选择 8 / 24 字符块、不同速度、Unicode 转义和非法 JSON。
 
-页面从 jsDelivr 加载固定版本的 Vue 3.5.22 和 gradual-json 0.1.0，需要联网，无需安装依赖或构建。项目中的 Vue 代码也可以使用 npm 导入：
+页面从 jsDelivr 加载固定版本的 Vue 3.5.22 和 gradual-json 0.1.1，需要联网，无需安装依赖或构建。项目中的 Vue 代码也可以使用 npm 导入：
 
 ```js
 import { computed, reactive } from "vue";

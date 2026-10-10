@@ -519,8 +519,27 @@ export async function parse(
     return OK;
   }
 
+  const ordinaryCharacters = /[^"\\\x00-\x1f]+/y;
   for await (const chunk of chunks) {
     for (let i = 0; i < chunk.length; i++) {
+      if (state === ST || state === KST) {
+        // shortcut: consume continuous ordinary string characters without changing state.
+        ordinaryCharacters.lastIndex = i;
+        const match = ordinaryCharacters.exec(chunk);
+        if (match !== null) {
+          literal += match[0];
+          if (state === ST) {
+            const parent = containers[containers.length - 1]!;
+            if (Array.isArray(parent)) {
+              parent[parent.length - 1] = literal;
+            } else {
+              parent[pendingKey!] = literal;
+            }
+          }
+          i = ordinaryCharacters.lastIndex - 1;
+          continue;
+        }
+      }
       state = state(chunk[i]!);
     }
   }
