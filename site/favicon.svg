@@ -1,26 +1,21 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <rect width="64" height="64" rx="15" fill="#d1f781"/>
-  <defs>
-    <clipPath id="right-build" clipPathUnits="userSpaceOnUse">
-      <rect x="40" y="0" width="40" height="27"/>
-      <rect x="60" y="31" width="9" height="5"/>
-      <rect x="66" y="39" width="13" height="5"/>
-      <rect x="62" y="48" width="9" height="5"/>
-      <rect x="60" y="57" width="9" height="5"/>
-      <rect x="57" y="66" width="11" height="9"/>
-      <rect x="48" y="66" width="6" height="9"/>
-    </clipPath>
-  </defs>
   <g transform="translate(6 6) scale(.65)">
     <g fill="none" stroke="#2f643d" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
       <path d="M29 10h-3c-8 0-10 4-10 11v7c0 7-3 12-9 12c6 0 9 5 9 12v7c0 7 2 11 10 11h3"/>
-      <path d="M51 10h3c8 0 10 4 10 11v7c0 7 3 12 9 12c-6 0-9 5-9 12v7c0 7-2 11-10 11h-3" clip-path="url(#right-build)"/>
+      <path d="M51 10h3c8 0 10 4 10 11v3"/>
     </g>
     <g fill="#2f643d">
-      <rect x="72" y="55" width="4.5" height="4.5" rx=".7"/>
-      <rect x="70" y="65" width="4" height="4" rx=".6"/>
-      <rect x="63" y="75" width="3" height="3" rx=".5"/>
-      <rect x="74" y="74" width="2.5" height="2.5" rx=".4"/>
+      <rect x="61" y="32" width="6" height="6" rx=".8"/>
+      <rect x="69" y="40" width="5.5" height="5.5" rx=".8"/>
+      <rect x="62" y="44" width="5.5" height="5.5" rx=".8"/>
+      <rect x="73" y="49" width="4.5" height="4.5" rx=".7"/>
+      <rect x="65" y="54" width="4.5" height="4.5" rx=".7"/>
+      <rect x="71" y="61" width="4" height="4" rx=".6"/>
+      <rect x="61" y="64" width="3.5" height="3.5" rx=".6"/>
+      <rect x="76" y="67" width="3" height="3" rx=".5"/>
+      <rect x="68" y="72" width="3" height="3" rx=".5"/>
+      <rect x="75" y="76" width="2.5" height="2.5" rx=".4"/>
     </g>
   </g>
 </svg>
