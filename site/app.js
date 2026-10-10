@@ -46,6 +46,10 @@ createApp({
       '输入结束并校验通过，返回这个完整对象。',
     ];
     const step = ref(0);
+    const input = ref();
+    watch(step, () => {
+      input.value.scrollTop = input.value.scrollHeight;
+    }, { flush: "post" });
     const constructed = shallowRef();
     const revision = ref(0);
     const complete = ref(false);
@@ -111,7 +115,7 @@ createApp({
     }
 
     onMounted(start);
-    return { parts, notes, step, constructed, revision, complete, playing, waiting, error, advance, togglePlay, start };
+    return { parts, notes, step, input, constructed, revision, complete, playing, waiting, error, advance, togglePlay, start };
   },
 }).component("ObjectInspector", ObjectInspector).mount("#construction-demo");
 

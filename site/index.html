@@ -11,7 +11,7 @@
   <meta property="og:url" content="https://wintercn.github.io/gradual-json/">
   <title>gradual-json · 渐进式 JSON 解析器</title>
   <link rel="icon" href="./favicon.svg?v=6" type="image/svg+xml">
-  <link rel="stylesheet" href="./style.css?v=13">
+  <link rel="stylesheet" href="./style.css?v=14">
 </head>
 <body>
   <a class="skip-link" href="#main">跳到正文</a>
@@ -51,7 +51,7 @@ console.log(result.title); // "渐进式 JSON 对象构造"</code></pre>
       </div>
       <div class="construction-demo" id="construction-demo" v-cloak aria-label="JSON 对象渐进构造演示">
         <div class="construction-heading"><span><i class="live-dot"></i> 输入字符串块</span><span>{{ step }} / {{ parts.length }} 块</span></div>
-        <pre class="construction-input"><code>{{ parts.slice(0, Math.max(0, step - 1)).join('') }}</code><code class="current-chunk">{{ parts[step - 1] }}</code></pre>
+        <pre class="construction-input" ref="input"><code>{{ parts.slice(0, Math.max(0, step - 1)).join('') }}</code><code class="current-chunk">{{ parts[step - 1] }}</code></pre>
         <div class="construction-flow"><span aria-hidden="true">↓</span><code>parse(chunks(), host, "data")</code></div>
         <div class="construction-object">
           <div class="construction-object-heading"><code>host.data</code><span>{{ complete ? '完整对象' : '正在构造' }}</span></div>
@@ -240,6 +240,6 @@ const result = await parse(chunks());</code></pre></div></noscript>
     <section class="closing wrap"><p>源码与文档<br><span>GitHub · MIT 许可证</span></p><a class="button primary" href="https://github.com/wintercn/gradual-json" target="_blank" rel="noopener">查看仓库 <span aria-hidden="true">↗</span></a></section>
   </main>
   <footer class="footer wrap"><a class="brand" href="#"><img class="brand-mark" src="./logo.svg?v=6" alt="" width="37" height="37">gradual-json</a><span>一个渐进式 JSON 解析器。</span><div><a href="https://www.npmjs.com/package/gradual-json" target="_blank" rel="noopener">npm ↗</a><a href="https://github.com/wintercn/gradual-json" target="_blank" rel="noopener">GitHub ↗</a><a href="https://github.com/wintercn/gradual-json/blob/main/LICENSE" target="_blank" rel="noopener">MIT</a></div></footer>
-  <script type="module" src="./app.js?v=8"></script>
+  <script type="module" src="./app.js?v=9"></script>
 </body>
 </html>

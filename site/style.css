@@ -377,7 +377,8 @@ section {
 }
 
 .construction-input {
-  min-height: 85px;
+  height: 120px;
+  overflow: auto;
   padding: 13px 15px;
   margin-top: 12px;
   background: var(--paper);
@@ -444,7 +445,7 @@ section {
 .object-value.string { color: #d1f781; }
 .object-value.number,.object-value.boolean { color: #c8adf2; }
 .object-value.null { color: #85967d; }
-.construction-object>.object-view { background: transparent; border-radius: 0; min-height: 240px; max-height: 345px; }
+.construction-object>.object-view { background: transparent; border-radius: 0; height: 345px; }
 .object-inspector .object-view { margin-top: 12px; min-height: 0; max-height: 300px; }
 .scenario-input .object-view { min-height: 0; margin-bottom: 16px; }
 
