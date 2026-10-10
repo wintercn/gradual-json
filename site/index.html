@@ -11,7 +11,7 @@
   <meta property="og:url" content="https://wintercn.github.io/gradual-json/">
   <title>gradual-json · 渐进式 JSON 解析器</title>
   <link rel="icon" href="./favicon.svg?v=6" type="image/svg+xml">
-  <link rel="stylesheet" href="./style.css?v=11">
+  <link rel="stylesheet" href="./style.css?v=12">
 </head>
 <body>
   <a class="skip-link" href="#main">跳到正文</a>
@@ -101,12 +101,44 @@ await pending;</code></pre>
       <p class="quality-test-note">Node 24.21.0 · 全部测试执行断言，覆盖 JSON 语法、输入解码错误、分块、Vue 协同与发布包。<a href="https://github.com/wintercn/gradual-json/blob/main/test/README.md#jsontestsuite" target="_blank" rel="noopener">测试范围 ↗</a></p>
       <div class="quality-performance">
         <div class="performance-heading"><h3>性能对比</h3><span>4,096 字符块</span></div>
-        <div class="benchmark-scroll"><table class="benchmark-table competitor-table"><caption>完整解析耗时 · ms，越低越好</caption><thead><tr><th scope="col">输入</th><th scope="col">gradual-json<small>0.1.1</small></th><th scope="col">jsonriver<small>1.1.1</small></th><th scope="col">@streamparser/json<small>0.0.26 · partial</small></th></tr></thead><tbody>
-          <tr><th scope="row">2,500 条嵌套记录<small>485,421 B</small></th><td class="benchmark-current">3.924</td><td>4.837</td><td>6.035</td></tr>
-          <tr><th scope="row">长字符串<small>262,155 B</small></th><td class="benchmark-current">0.157</td><td>0.479</td><td>0.430</td></tr>
-          <tr><th scope="row">50,000 个数字<small>328,901 B</small></th><td class="benchmark-current">6.103</td><td>5.230</td><td>7.887</td></tr>
-        </tbody></table></div>
-        <p class="performance-note">各库的中间更新粒度与语法语义不同；表格比较有效输入的完整解析耗时。</p>
+        <figure class="benchmark-chart">
+          <figcaption>完整解析耗时 · 条形越短，耗时越低 · 各组独立刻度</figcaption>
+          <div class="benchmark-legend" aria-label="库与版本">
+            <span class="benchmark-gradual"><i aria-hidden="true"></i><code>gradual-json</code><small>0.1.1</small></span>
+            <span class="benchmark-river"><i aria-hidden="true"></i><code>jsonriver</code><small>1.1.1</small></span>
+            <span class="benchmark-streamparser"><i aria-hidden="true"></i><code>@streamparser/json</code><small>0.0.26 · partial</small></span>
+          </div>
+          <div class="benchmark-cases">
+            <div class="benchmark-case" data-benchmark="records">
+              <h4>2,500 条嵌套记录<small>485,421 B</small></h4>
+              <div class="benchmark-bars">
+                <div class="benchmark-bar benchmark-gradual"><div class="benchmark-bar-label"><code>gradual-json</code><span>3.924 ms</span></div><div class="benchmark-track" aria-hidden="true"><i style="width:56.0595%"></i></div></div>
+                <div class="benchmark-bar benchmark-river"><div class="benchmark-bar-label"><code>jsonriver</code><span>4.837 ms</span></div><div class="benchmark-track" aria-hidden="true"><i style="width:69.0958%"></i></div></div>
+                <div class="benchmark-bar benchmark-streamparser"><div class="benchmark-bar-label"><code>@streamparser/json</code><span>6.035 ms</span></div><div class="benchmark-track" aria-hidden="true"><i style="width:86.2101%"></i></div></div>
+              </div>
+              <div class="benchmark-axis" aria-hidden="true"><span>0</span><span>3.5</span><span>7 ms</span></div>
+            </div>
+            <div class="benchmark-case" data-benchmark="long_string">
+              <h4>长字符串<small>262,155 B</small></h4>
+              <div class="benchmark-bars">
+                <div class="benchmark-bar benchmark-gradual"><div class="benchmark-bar-label"><code>gradual-json</code><span>0.157 ms</span></div><div class="benchmark-track" aria-hidden="true"><i style="width:31.475%"></i></div></div>
+                <div class="benchmark-bar benchmark-river"><div class="benchmark-bar-label"><code>jsonriver</code><span>0.479 ms</span></div><div class="benchmark-track" aria-hidden="true"><i style="width:95.875%"></i></div></div>
+                <div class="benchmark-bar benchmark-streamparser"><div class="benchmark-bar-label"><code>@streamparser/json</code><span>0.430 ms</span></div><div class="benchmark-track" aria-hidden="true"><i style="width:85.95%"></i></div></div>
+              </div>
+              <div class="benchmark-axis" aria-hidden="true"><span>0</span><span>0.25</span><span>0.5 ms</span></div>
+            </div>
+            <div class="benchmark-case" data-benchmark="numbers">
+              <h4>50,000 个数字<small>328,901 B</small></h4>
+              <div class="benchmark-bars">
+                <div class="benchmark-bar benchmark-gradual"><div class="benchmark-bar-label"><code>gradual-json</code><span>6.103 ms</span></div><div class="benchmark-track" aria-hidden="true"><i style="width:76.2896%"></i></div></div>
+                <div class="benchmark-bar benchmark-river"><div class="benchmark-bar-label"><code>jsonriver</code><span>5.230 ms</span></div><div class="benchmark-track" aria-hidden="true"><i style="width:65.3755%"></i></div></div>
+                <div class="benchmark-bar benchmark-streamparser"><div class="benchmark-bar-label"><code>@streamparser/json</code><span>7.887 ms</span></div><div class="benchmark-track" aria-hidden="true"><i style="width:98.5839%"></i></div></div>
+              </div>
+              <div class="benchmark-axis" aria-hidden="true"><span>0</span><span>4</span><span>8 ms</span></div>
+            </div>
+          </div>
+        </figure>
+        <p class="performance-note">各库的中间更新粒度与语法语义不同；图中比较有效输入的完整解析耗时。</p>
       </div>
       <div class="quality-method"><p>测量于 2026-10-10 · Node 24.21.0 / macOS arm64 / Apple M3 Max。ASCII JSON，4,096 字符块，预热 3 次、轮换顺序测量 11 次，取中位数。先核对完整结果；耗时包含完整解析，不含网络等待、解码或 Vue 更新。</p><div><a href="https://github.com/wintercn/gradual-json/blob/main/bench/README.md" target="_blank" rel="noopener">测量方法与复现 ↗</a><a href="https://github.com/wintercn/gradual-json/blob/main/bench/results.json" target="_blank" rel="noopener">原始数据 ↗</a></div></div>
     </section>
