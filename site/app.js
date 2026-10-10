@@ -26,7 +26,7 @@ createApp({
     const error = ref("");
     let runId = 0;
     const samples = {
-      card: '{"title":"每一段，都有进展。","description":"把等待变成看得见的更新。","tags":["异步流","Vue 响应式","零运行依赖"],"ready":true}',
+      card: '{"title":"流式解析示例","description":"字符串值随输入逐步写入宿主对象。","tags":["异步字符串块","Vue 响应式","部分结果"],"ready":true}',
       unicode: '{"title":"Unicode \\u6e10\\u8fdb 🌱","description":"换行\\n与引号：\\"JSON\\"，完整解码后写入。","tags":["\\u4f60\\u597d","跨块转义"],"ready":true}',
       invalid: '{"title":"已写入的内容会保留","description":"末尾的多余逗号让这个输入无效。","tags":["部分结果"],"ready":true,}',
     };
@@ -95,8 +95,8 @@ createApp({
     const copyMessage = ref("");
     let feedbackId = 0;
     const examples = [
-      { id: "basic", label: "基础", note: "一个 async iterable，一个 parse 调用。", code: 'import { parse } from "gradual-json";\n\nasync function* chunks() {\n  yield \'{"title":"渐进\';\n  yield \'式 JSON"}\';\n}\n\nconst result = await parse(chunks());\n// { title: "渐进式 JSON" }' },
-      { id: "vue", label: "Vue", note: "继续使用 Vue 自己的响应式与界面调度。", code: 'import { reactive } from "vue";\nimport { parse } from "gradual-json";\n\ninterface Data { title: string }\nconst host = reactive<{ data?: Data }>({});\n\n// chunks() 是上一个示例的异步生成器\nconst pending = parse(chunks(), host, "data");\n// host.data 随输入逐步更新\nconst result = await pending;\n// result === host.data' },
+      { id: "basic", label: "基础", note: "输入结束并校验通过后返回完整结果。", code: 'import { parse } from "gradual-json";\n\nasync function* chunks() {\n  yield \'{"title":"渐进\';\n  yield \'式 JSON"}\';\n}\n\nconst result = await parse(chunks());\n// { title: "渐进式 JSON" }' },
+      { id: "vue", label: "Vue", note: "host.data 的写入由 Vue 响应式系统观察。", code: 'import { reactive } from "vue";\nimport { parse } from "gradual-json";\n\ninterface Data { title: string }\nconst host = reactive<{ data?: Data }>({});\n\n// chunks() 是上一个示例的异步生成器\nconst pending = parse(chunks(), host, "data");\n// host.data 随输入逐步更新\nconst result = await pending;\n// result === host.data' },
       { id: "node", label: "Node.js", note: "设定 utf8 编码的 Node Readable 可直接传入。", code: 'import { createReadStream } from "node:fs";\nimport { parse } from "gradual-json";\n\nconst stream = createReadStream("data.json", {\n  encoding: "utf8",\n});\n\nconst result = await parse(stream);\n// 输入结束并校验完整后，返回根值' },
     ];
     const currentExample = computed(() => examples.find(item => item.id === tab.value));

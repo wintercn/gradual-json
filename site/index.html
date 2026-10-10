@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f7f8f2">
-  <meta name="description" content="gradual-json：从异步字符串块渐进式构造 JSON。容器即时创建，字符串逐步写入，与 Vue 响应式对象自然协同。TypeScript，零运行依赖。">
-  <meta property="og:title" content="gradual-json · JSON 还在传输，界面已经更新">
-  <meta property="og:description" content="一个渐进式 JSON 解析器。边接收，边构造，让每一段数据都变成看得见的进展。">
+  <meta name="description" content="gradual-json：TypeScript 渐进式 JSON 解析器。接收异步字符串块，逐步写入指定对象属性，输入结束后返回完整结果。无运行时依赖。">
+  <meta property="og:title" content="gradual-json · 渐进式 JSON 解析器">
+  <meta property="og:description" content="接收异步字符串块，逐步构造 JSON 值。支持指定宿主对象和属性名，兼容 Vue 深层响应式代理。">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://wintercn.github.io/gradual-json/">
   <title>gradual-json · 渐进式 JSON 解析器</title>
@@ -27,22 +27,22 @@
     <section class="hero wrap" aria-labelledby="hero-title">
       <div class="hero-copy">
         <p class="eyebrow"><span class="small-dot"></span> 渐进式 JSON 解析器 <span class="version">v__PACKAGE_VERSION__</span></p>
-        <h1 id="hero-title">JSON 还在传输，<br>界面<span class="ink-underline">已经更新。</span></h1>
-        <p class="hero-description">把异步字符串块，直接构造成对象。<br>容器即时创建，字符串逐步生长，<br>让每一段数据都变成看得见的进展。</p>
-        <div class="hero-actions"><a class="button primary" href="#playground">亲眼看看 <span aria-hidden="true">↘</span></a><a class="text-link" href="#start">开始使用 <span aria-hidden="true">→</span></a></div>
+        <h1 id="hero-title">渐进式<br><span class="ink-underline">JSON 解析器</span></h1>
+        <p class="hero-description">接收异步字符串块，逐步构造 JSON 值。<br>可将部分结果写入指定对象属性，<br>输入结束并校验通过后返回完整结果。</p>
+        <div class="hero-actions"><a class="button primary" href="#playground">运行演示 <span aria-hidden="true">↘</span></a><a class="text-link" href="#start">使用示例 <span aria-hidden="true">→</span></a></div>
         <div class="install-command"><span class="prompt" aria-hidden="true">$</span><code>npm install gradual-json</code><button class="copy-install" type="button" aria-label="复制安装命令"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V4H4v12h4"></path></svg></button><span class="copy-feedback" role="status"></span></div>
-        <p class="hero-meta">TypeScript <span>·</span> ESM <span>·</span> 零运行依赖 <span>·</span> MIT</p>
+        <p class="hero-meta">TypeScript <span>·</span> ESM <span>·</span> 无运行时依赖 <span>·</span> MIT</p>
       </div>
       <div class="hero-visual" aria-label="示意：输入还未结束，字符串和数组已开始构造">
-        <div class="stream-caption"><span class="small-dot"></span> INPUT IS STILL ARRIVING <span class="stream-number">01 — 03</span></div>
+        <div class="stream-caption"><span class="small-dot"></span> 输入字符串块 <span class="stream-number">01 — 03</span></div>
         <div class="stream-fragments"><span>{ "items": [],</span><span>"title":"渐进式</span><span class="fragment-muted"> JSON", …</span></div>
         <div class="flow-connector"><span></span><code>await parse(chunks, host, "data")</code><span></span></div>
         <div class="object-window">
           <div class="window-bar"><span><i></i><i></i><i></i></span><code>host.data</code><span class="window-label">正在构造</span></div>
           <div class="object-code"><div><span class="code-dim">{</span></div><div class="indent"><span class="code-key">"title"</span>: <span class="code-string">"渐进式<span class="typing-caret"></span>"</span>,</div><div class="indent"><span class="code-key">"items"</span>: <span class="code-dim">[]</span></div><div><span class="code-dim">}</span></div></div>
-          <div class="object-note"><span class="live-dot"></span> 一个对象，随着输入逐渐完整。</div>
+          <div class="object-note"><span class="live-dot"></span> 后续输入继续写入 host.data。</div>
         </div>
-        <div class="visual-footer"><span>无需等到最后一个 <code>}</code></span><span class="visual-brace" aria-hidden="true">→ { }</span></div>
+        <div class="visual-footer"><span>输入结束前可读取部分结果</span><span class="visual-brace" aria-hidden="true">→ { }</span></div>
       </div>
     </section>
 
@@ -50,7 +50,7 @@
 
     <section class="playground-section" id="playground" aria-labelledby="playground-title">
       <div class="wrap">
-        <div class="section-heading"><div><p class="eyebrow light">SEE IT HAPPEN</p><h2 id="playground-title">数据在路上，结果在眼前。</h2></div><p>点击开始，观察真实解析器的每一次推进。<br>右侧界面直接读取 Vue 响应式对象。</p></div>
+        <div class="section-heading"><div><p class="eyebrow light">在线演示</p><h2 id="playground-title">输入与解析结果</h2></div><p>选择分块大小和速度，观察部分结果。<br>预览界面读取 Vue 响应式对象。</p></div>
         <div id="demo" v-cloak>
           <div class="demo-toolbar">
             <div class="demo-controls">
@@ -62,29 +62,29 @@
           </div>
           <div class="demo-panels">
             <div class="input-panel"><div class="panel-heading"><span><i class="live-dot" :class="{ active: running }"></i> 输入流</span><code>AsyncIterable&lt;string&gt;</code></div><pre class="stream-code"><code>{{ received || '等待第一个输入块…' }}</code><span class="stream-caret" v-if="running" aria-hidden="true">▍</span></pre><div class="chunks-heading"><span>最近收到的块</span><span>{{ chunkCount }} 块</span></div><div class="chunk-list"><code v-for="chunk in latestChunks" :key="chunk.id">{{ JSON.stringify(chunk.text) }}</code><span v-if="!latestChunks.length" class="chunk-empty">每个块可以是一个字符，也可以是一段字符串。</span></div></div>
-            <div class="output-panel"><div class="panel-heading"><span><i class="output-dot"></i> 响应式界面</span><code>Vue · host.data</code></div><div class="preview-card"><p class="preview-eyebrow">LIVE PREVIEW <span v-if="host.data !== undefined">对象已挂载 <i></i></span></p><h3>{{ host.data?.title ?? '内容即将到达' }}<span class="preview-caret" v-if="running && host.data?.title !== undefined" aria-hidden="true"></span></h3><p class="preview-description">{{ host.data?.description ?? '根容器创建后，界面会随着字符串的写入自然更新。' }}</p><div class="preview-tags"><span v-for="tag in host.data?.tags ?? []" :key="tag">{{ tag }}</span></div><div class="preview-bottom"><span :class="{ ready: host.data?.ready === true }">{{ host.data?.ready === true ? 'ready: true' : '等待 ready 值' }}</span><span>{{ status === 'complete' ? '输入结束 · 完整返回' : '直接读取同一个对象' }}</span></div></div><details class="object-inspector" open><summary>查看正在构造的对象 <span aria-hidden="true">↗</span></summary><pre><code>{{ constructed }}</code></pre></details></div>
+            <div class="output-panel"><div class="panel-heading"><span><i class="output-dot"></i> 响应式界面</span><code>Vue · host.data</code></div><div class="preview-card"><p class="preview-eyebrow">对象预览 <span v-if="host.data !== undefined">对象已挂载 <i></i></span></p><h3>{{ host.data?.title ?? '等待 title 字段' }}<span class="preview-caret" v-if="running && host.data?.title !== undefined" aria-hidden="true"></span></h3><p class="preview-description">{{ host.data?.description ?? '读到根对象的 { 后创建 host.data；字符串值随输入逐步写入。' }}</p><div class="preview-tags"><span v-for="tag in host.data?.tags ?? []" :key="tag">{{ tag }}</span></div><div class="preview-bottom"><span :class="{ ready: host.data?.ready === true }">{{ host.data?.ready === true ? 'ready: true' : '等待 ready 值' }}</span><span>{{ status === 'complete' ? '输入结束 · 完整返回' : '直接读取同一个对象' }}</span></div></div><details class="object-inspector" open><summary>查看正在构造的对象 <span aria-hidden="true">↗</span></summary><pre><code>{{ constructed }}</code></pre></details></div>
           </div>
           <div class="demo-footer"><div class="demo-status" :class="status" role="status" aria-live="polite"><i></i>{{ statusLabel }}</div><div class="progress-info"><span>{{ received.length }} / {{ input.length }}</span><div class="progress-track" role="progressbar" aria-label="输入接收进度" :aria-valuenow="progress" aria-valuemin="0" aria-valuemax="100"><span :style="{ width: progress + '%' }"></span></div></div></div>
           <p class="demo-error" v-if="error" role="alert">{{ error }}<span>解析拒绝，此前构造的部分结果保留在宿主中。</span></p>
         </div>
-        <noscript><p class="noscript-note">开启 JavaScript 即可运行真实的流式演示。解析器的 API 与示例见下方。</p></noscript>
+        <noscript><p class="noscript-note">此演示需要 JavaScript。解析器的 API 与示例见下方。</p></noscript>
         <p class="demo-note">演示使用本地异步来源模拟分块到达。页面运行项目解析器与 Vue 3.5.22；Vue 仅用于此演示。</p>
       </div>
     </section>
 
     <section class="features wrap" id="features" aria-labelledby="features-title">
-      <div class="section-heading"><div><p class="eyebrow">A SMALL API. A DIFFERENT EXPERIENCE.</p><h2 id="features-title">让解析跟上数据的节奏。</h2></div><p>一个 <code>parse</code> 入口，<br>贯穿输入、构造与完整校验。</p></div>
+      <div class="section-heading"><div><p class="eyebrow">解析行为</p><h2 id="features-title">写入时机与输入格式</h2></div><p><code>parse</code> 接收异步字符串块，<br>构造结果并校验 JSON 语法。</p></div>
       <div class="feature-grid">
-        <article><span class="feature-symbol" aria-hidden="true">{ }</span><span class="feature-number">01</span><h3>容器，即刻就位。</h3><p>读到 <code>{</code> 或 <code>[</code>，就创建并挂载空对象或数组。后续内容直接填入这个容器。</p><div class="feature-example"><code>{</code><span>→</span><code>host.data = {}</code></div></article>
-        <article><span class="feature-symbol string-symbol" aria-hidden="true">"ab<span>c</span>"</span><span class="feature-number">02</span><h3>字符串，一点点生长。</h3><p>从空字符串开始，随着输入逐步写回。转义完成解码后才添加，数字与布尔值完整后写入。</p><div class="feature-example"><code>""</code><span>→</span><code>"渐"</code><span>→</span><code>"渐进"</code></div></article>
-        <article><span class="feature-symbol proxy-symbol" aria-hidden="true">↔</span><span class="feature-number">03</span><h3>把你的对象，接进来。</h3><p>指定宿主对象和属性名，边解析边填充。兼容 Vue 深层响应式代理，让界面直接跟随数据更新。</p><div class="feature-example"><code>parse(chunks, host, "data")</code></div></article>
-        <article><span class="feature-symbol chunk-symbol" aria-hidden="true"><i></i><i></i><i></i></span><span class="feature-number">04</span><h3>字符或块，同一个入口。</h3><p>输入是异步字符串迭代器。单字符、长字符串、跨块转义，都可以交给同一套状态函数处理。</p><div class="feature-example"><code>yield '{"ti'</code><span>→</span><code>yield 'tle":'</code></div></article>
+        <article><span class="feature-symbol" aria-hidden="true">{ }</span><span class="feature-number">01</span><h3>对象与数组</h3><p>读到 <code>{</code> 或 <code>[</code> 时创建并写入空对象或数组。后续内容继续写入该容器。</p><div class="feature-example"><code>{</code><span>→</span><code>host.data = {}</code></div></article>
+        <article><span class="feature-symbol string-symbol" aria-hidden="true">"ab<span>c</span>"</span><span class="feature-number">02</span><h3>字符串值</h3><p>读到开引号时写入空字符串，普通字符逐步追加。转义完整解码后添加，数字、布尔值和 null 在完整读出后写入。</p><div class="feature-example"><code>""</code><span>→</span><code>"渐"</code><span>→</span><code>"渐进"</code></div></article>
+        <article><span class="feature-symbol proxy-symbol" aria-hidden="true">↔</span><span class="feature-number">03</span><h3>宿主对象与 Proxy</h3><p>可指定宿主对象和属性名。先赋值，再读回子容器继续写入，兼容 Vue 深层响应式代理。</p><div class="feature-example"><code>parse(chunks, host, "data")</code></div></article>
+        <article><span class="feature-symbol chunk-symbol" aria-hidden="true"><i></i><i></i><i></i></span><span class="feature-number">04</span><h3>异步字符串块</h3><p>每个输入项可以是单字符或长字符串。块边界可位于字符串、转义或数字内部，解析状态跨块保留。</p><div class="feature-example"><code>yield '{"ti'</code><span>→</span><code>yield 'tle":'</code></div></article>
       </div>
-      <div class="completion-note"><span class="check-mark" aria-hidden="true">✓</span><div><strong>逐步可见，完整后返回。</strong><p><code>parse</code> 等待来源结束，通过 EOF 语法校验后返回根值。非法 JSON 或未完成输入会以 <code>SyntaxError</code> 拒绝。</p></div><a href="https://github.com/wintercn/gradual-json#错误与语义边界" target="_blank" rel="noopener">了解语义边界 <span aria-hidden="true">↗</span></a></div>
+      <div class="completion-note"><span class="check-mark" aria-hidden="true">✓</span><div><strong>输入结束后返回完整结果</strong><p><code>parse</code> 等待来源结束，通过 EOF 语法校验后返回根值。非法 JSON 或未完成输入会以 <code>SyntaxError</code> 拒绝。</p></div><a href="https://github.com/wintercn/gradual-json#错误与语义边界" target="_blank" rel="noopener">错误与语义边界 <span aria-hidden="true">↗</span></a></div>
     </section>
 
     <section class="getting-started wrap" id="start" aria-labelledby="start-title">
-      <div class="start-intro"><p class="eyebrow">START WITH ONE FUNCTION</p><h2 id="start-title">接上你的流，<br>剩下的交给 <code>parse</code>。</h2><p>Node Readable、解码后的 HTTP 响应，<br>或你自己的异步生成器。<br>只要每一块是字符串，就能开始。</p><a class="text-link" href="https://github.com/wintercn/gradual-json#api" target="_blank" rel="noopener">阅读完整 API <span aria-hidden="true">↗</span></a><div class="signature"><code>parse(chunks, host?, property?)<br><span>→ Promise&lt;JsonValue&gt;</span></code></div></div>
+      <div class="start-intro"><p class="eyebrow">API 示例</p><h2 id="start-title"><code>parse</code> 使用示例</h2><p>输入必须是产出字符串的异步迭代器。<br>可使用设置了编码的 Node Readable、<br>解码后的 HTTP 响应或异步生成器。</p><a class="text-link" href="https://github.com/wintercn/gradual-json#api" target="_blank" rel="noopener">阅读完整 API <span aria-hidden="true">↗</span></a><div class="signature"><code>parse(chunks, host?, property?)<br><span>→ Promise&lt;JsonValue&gt;</span></code></div></div>
       <div class="code-example" id="examples" v-cloak><div class="code-tabs" role="tablist" aria-label="使用示例"><button v-for="item in examples" :key="item.id" :id="'tab-' + item.id" :class="{ selected: tab === item.id }" role="tab" :aria-selected="tab === item.id" :tabindex="tab === item.id ? 0 : -1" aria-controls="example-code" @click="tab = item.id" @keydown="navigateTabs($event, item.id)">{{ item.label }}</button><button class="copy-code" type="button" @click="copy" aria-label="复制当前示例">{{ copied ? '已复制 ✓' : '复制代码' }}</button></div><pre id="example-code" role="tabpanel" :aria-labelledby="'tab-' + tab" tabindex="0"><code>{{ currentExample.code }}</code></pre><div class="code-example-footer"><span class="small-dot"></span>{{ currentExample.note }}</div><span class="sr-only" role="status">{{ copyMessage }}</span></div>
       <noscript><div class="code-example"><pre><code>import { parse } from "gradual-json";
 
@@ -96,8 +96,8 @@ async function* chunks() {
 const result = await parse(chunks());</code></pre></div></noscript>
     </section>
 
-    <section class="assurance wrap" aria-labelledby="assurance-title"><div><p class="eyebrow">BUILT WITH CARE</p><h2 id="assurance-title">小入口，认真对待每个边界。</h2><p>从 JSON 语法，到分块位置，再到 Vue 代理的实际写入。<br>测试覆盖上游套组、Unicode 转义、错误输入和安装包使用。</p></div><div class="test-sources"><a href="https://github.com/nst/JSONTestSuite" target="_blank" rel="noopener"><span>语法与边界输入</span><strong>JSONTestSuite <i aria-hidden="true">↗</i></strong></a><a href="https://github.com/tc39/test262" target="_blank" rel="noopener"><span>JavaScript JSON 语法用例</span><strong>Test262 <i aria-hidden="true">↗</i></strong></a><a href="https://github.com/wintercn/gradual-json/blob/main/test/README.md" target="_blank" rel="noopener"><span>项目验证与测试来源</span><strong>查看测试说明 <i aria-hidden="true">↗</i></strong></a></div></section>
-    <section class="closing wrap"><p>不用等一切完整，<br><span>就能看见进展。</span></p><a class="button primary" href="https://github.com/wintercn/gradual-json" target="_blank" rel="noopener">在 GitHub 上探索 <span aria-hidden="true">↗</span></a></section>
+    <section class="assurance wrap" aria-labelledby="assurance-title"><div><p class="eyebrow">测试来源</p><h2 id="assurance-title">测试覆盖与来源</h2><p>测试包含 JSON 语法、分块边界、Unicode 转义、<br>错误输入、Vue 代理写入和安装包使用。</p></div><div class="test-sources"><a href="https://github.com/nst/JSONTestSuite" target="_blank" rel="noopener"><span>语法与边界输入</span><strong>JSONTestSuite <i aria-hidden="true">↗</i></strong></a><a href="https://github.com/tc39/test262" target="_blank" rel="noopener"><span>JavaScript JSON 语法用例</span><strong>Test262 <i aria-hidden="true">↗</i></strong></a><a href="https://github.com/wintercn/gradual-json/blob/main/test/README.md" target="_blank" rel="noopener"><span>项目验证与测试来源</span><strong>查看测试说明 <i aria-hidden="true">↗</i></strong></a></div></section>
+    <section class="closing wrap"><p>源码与文档<br><span>GitHub · MIT 许可证</span></p><a class="button primary" href="https://github.com/wintercn/gradual-json" target="_blank" rel="noopener">查看仓库 <span aria-hidden="true">↗</span></a></section>
   </main>
   <footer class="footer wrap"><a class="brand" href="#"><span class="brand-mark" aria-hidden="true">{<i></i>}</span>gradual-json</a><span>一个渐进式 JSON 解析器。</span><div><a href="https://www.npmjs.com/package/gradual-json" target="_blank" rel="noopener">npm ↗</a><a href="https://github.com/wintercn/gradual-json" target="_blank" rel="noopener">GitHub ↗</a><a href="https://github.com/wintercn/gradual-json/blob/main/LICENSE" target="_blank" rel="noopener">MIT</a></div></footer>
   <script type="module" src="./app.js"></script>
