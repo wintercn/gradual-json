@@ -228,22 +228,26 @@ section {
 }
 
 .hero-api { margin-top: 22px; padding-block: 16px; border-block: 1px solid var(--line); }
-.hero-api-label { font-size: 10px; color: var(--green); }
-.hero-api-signature { margin-top: 8px; font: 14px/1.65 var(--mono); color: #406135; }
-.hero-api-params { margin: 12px 0 0; display: grid; gap: 7px; font-size: 12px; line-height: 1.8; }
-.hero-api-params>div { display: grid; grid-template-columns: 76px minmax(0,1fr); gap: 10px; }
+.hero-api-label { font-size: 14px; color: var(--green); }
+.hero-api-signature,.hero-api-types { margin-top: 12px; font: 16px/1.6 var(--mono); color: #406135; }
+.hero-api-types { margin-top: 16px; }
+.hero-api code { font-size: inherit; }
+.hero-api-params { margin: 16px 0 0; display: grid; gap: 9px; font-size: 16px; line-height: 1.7; }
+.hero-api-params>div { display: grid; grid-template-columns: 96px minmax(0,1fr); gap: 12px; }
 .hero-api-params dt { color: #406135; }
 .hero-api-params dd { margin: 0; color: var(--muted); overflow-wrap: anywhere; }
-.hero-api-return { margin-top: 12px; font-size: 12px; line-height: 1.8; color: var(--muted); }
+.hero-api-return { margin-top: 16px; font-size: 16px; line-height: 1.7; color: var(--muted); }
 
 .hero-core {
   border-left: 2px solid #b7cba2;
   padding: 1px 0 1px 16px;
   margin-top: 24px;
   color: #53664a;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.9;
 }
+
+.hero-core code { font-size: inherit; }
 
 .hero-actions {
   display: flex;
@@ -352,6 +356,7 @@ section {
 }
 
 .construction-demo {
+  align-self: start;
   padding: 22px;
   background: #e9eddf;
   border: 1px solid #dce2d0;
@@ -1694,7 +1699,6 @@ section {
     font-size: 11px;
   }
   .hero-core {
-    font-size: 11px;
     padding-left: 12px;
   }
   .eyebrow {

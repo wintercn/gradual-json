@@ -11,7 +11,7 @@
   <meta property="og:url" content="https://wintercn.github.io/gradual-json/">
   <title>gradual-json · 渐进式 JSON 解析器</title>
   <link rel="icon" href="./favicon.svg?v=6" type="image/svg+xml">
-  <link rel="stylesheet" href="./style.css?v=17">
+  <link rel="stylesheet" href="./style.css?v=18">
 </head>
 <body>
   <a class="skip-link" href="#main">跳到正文</a>
@@ -37,14 +37,21 @@
         <p class="hero-description">输入还在继续，对象已经可以读取。</p>
         <div class="hero-api" aria-label="parse 接口">
           <p class="hero-api-label">唯一接口</p>
-          <pre class="hero-api-signature"><code>parse(chunks, host?, property?)
-  → Promise&lt;JsonValue&gt;</code></pre>
+          <pre class="hero-api-signature"><code>function parse(
+  chunks: AsyncIterable&lt;string&gt;,
+  host?: object,
+  property?: string
+): Promise&lt;JsonValue&gt;;</code></pre>
+          <pre class="hero-api-types"><code>type JsonValue =
+  | string | number | boolean | null
+  | JsonValue[]
+  | { [key: string]: JsonValue };</code></pre>
           <dl class="hero-api-params">
-            <div><dt><code>chunks</code></dt><dd><code>AsyncIterable&lt;string&gt;</code>，异步输入字符串块。</dd></div>
-            <div><dt><code>host?</code></dt><dd>接收根值的对象或 Proxy，默认新建 <code>{}</code>。</dd></div>
+            <div><dt><code>chunks</code></dt><dd>异步产出字符串块，支持单字符或整块输入。</dd></div>
+            <div><dt><code>host?</code></dt><dd>接收根值的普通对象或 Proxy，默认新建 <code>{}</code>。</dd></div>
             <div><dt><code>property?</code></dt><dd>根值写入的属性名，默认 <code>"root"</code>。</dd></div>
           </dl>
-          <p class="hero-api-return">解析期间逐步写入 <code>host[property]</code>。输入结束并校验通过后，返回完整 JSON 根值；非法 JSON 以 <code>SyntaxError</code> 拒绝。</p>
+          <p class="hero-api-return">解析期间逐步写入 <code>host[property]</code>。输入结束并校验通过后，Promise 返回完整 JSON 根值；非法 JSON 以 <code>SyntaxError</code> 拒绝。</p>
         </div>
         <pre class="hero-core"><code>import { parse } from "gradual-json";
 const host = {};
