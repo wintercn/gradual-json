@@ -14,4 +14,8 @@ python3 -m http.server 4174 --bind 127.0.0.1 --directory .pages-dist
 
 演示用本地异步生成器模拟输入块到达，实际调用项目的 `parse`，将根值写入 Vue 深层响应式宿主。支持字符或块输入、不同速度、跨块转义、错误输入、停止与重播。它不模拟网络性能，也不提供服务端 HTTP 流。
 
+首页并排展示核心脚本、Vue 模板与运行效果。书单示例包含嵌套作者、数组项、逐步增长的名称和说明，以及按已读价格自动更新的 `computed` 合计。未收到的字段保持空白，输入 JSON 与对象结构可以展开查看。
+
+[完整可运行示例与运行说明](https://gist.github.com/wintercn/b4c381987f7d70d849a62d471486935f) 已发布到 Gist，本地副本在 `demos/vue-gist/`。独立示例使用固定版本的 CDN 模块；首页仍从本站加载解析器和 Vue。
+
 `.github/workflows/pages.yml` 在 `main` 上相关文件变更时重新构建并部署，也可以手动运行。所有本地资源使用相对路径，支持 GitHub Pages 项目子路径。

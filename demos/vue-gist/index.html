@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>gradual-json 与 Vue：渐进式书单</title>
+  <link rel="icon" href="data:,">
+  <style>
+    :root { color-scheme: light; font-family: system-ui, -apple-system, "PingFang SC", sans-serif; color: #243323; background: #f4f6ee; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    [v-cloak] { display: none; }
+    main { max-width: 1060px; margin: auto; padding: 40px 24px; }
+    h1 { font-size: 28px; margin: 0 0 12px; }
+    header p, footer { color: #67745d; font-size: 13px; line-height: 1.8; }
+    header { margin-bottom: 24px; }
+    .controls { display: flex; align-items: end; flex-wrap: wrap; gap: 14px; margin-bottom: 16px; }
+    label { display: grid; gap: 6px; font-size: 12px; color: #647359; }
+    select, button { font: inherit; font-size: 12px; min-height: 36px; padding: 7px 12px; border: 1px solid #c8d5bc; border-radius: 6px; color: #293d23; background: #fff; }
+    button { cursor: pointer; }
+    button.start { background: #d1f781; }
+    button:disabled, select:disabled { opacity: .5; cursor: default; }
+    :focus-visible { outline: 3px solid #9abb77; outline-offset: 3px; }
+    .buttons { display: flex; gap: 8px; margin-left: auto; }
+    .status { display: flex; justify-content: space-between; gap: 20px; font-size: 12px; color: #647359; margin: 18px 0; }
+    .panels { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: start; }
+    .panel { min-width: 0; background: #fff; border: 1px solid #d6dfcb; border-radius: 9px; overflow: hidden; }
+    .panel-heading { padding: 15px 20px; border-bottom: 1px solid #e3e9db; font-size: 12px; display: flex; justify-content: space-between; gap: 12px; }
+    .panel-heading code { font-size: 10px; color: #7b8b6d; }
+    pre { margin: 0; padding: 20px; white-space: pre-wrap; overflow-wrap: anywhere; font: 11px/1.9 ui-monospace, SFMono-Regular, Consolas, monospace; }
+    .input pre { background: #122016; color: #c3dbab; min-height: 360px; }
+    .card { padding: 22px; }
+    .card h3 { font-size: 23px; line-height: 1.4; margin: 0 0 12px; min-height: 33px; white-space: pre-wrap; overflow-wrap: anywhere; }
+    .description { color: #69725f; font-size: 12px; line-height: 1.8; min-height: 23px; margin: 0; white-space: pre-wrap; }
+    .author { display: flex; flex-wrap: wrap; gap: 8px; color: #69725f; font-size: 10px; margin-top: 14px; }
+    .author-active { color: #447236; }
+    .items { margin-top: 18px; }
+    .item { display: flex; align-items: start; gap: 10px; padding: 15px 0; border-top: 1px solid #e3e8dc; }
+    .number { font: 10px ui-monospace, monospace; color: #89997a; padding-top: 3px; }
+    .item-body { flex: 1; min-width: 0; }
+    .item h4 { margin: 0; font-size: 13px; line-height: 1.6; min-height: 20px; white-space: pre-wrap; }
+    .item p { margin: 4px 0 0; font-size: 10px; line-height: 1.8; color: #69725f; white-space: pre-wrap; }
+    .price { white-space: nowrap; font: 11px ui-monospace, monospace; color: #47693d; padding-top: 3px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 5px; margin: 8px 0 0; }
+    .tags span { padding: 4px 7px; background: #edf3e3; border: 1px solid #d5dfc9; border-radius: 4px; font-size: 10px; color: #62794e; }
+    .tags .availability { background: transparent; border-color: transparent; padding-inline: 0; color: #7a826e; }
+    .totals, .ready { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; padding-top: 14px; margin-top: 16px; border-top: 1px solid #e3e8dc; font-size: 10px; color: #69725f; }
+    .totals strong { color: #34552b; font: 13px ui-monospace, monospace; margin-left: 5px; }
+    details { padding: 0 22px 20px; color: #607151; }
+    summary { cursor: pointer; font-size: 11px; }
+    details pre { padding: 12px 0 0; max-height: 240px; overflow-y: auto; }
+    .error { font-size: 12px; color: #a14c39; line-height: 1.8; }
+    footer { margin-top: 20px; }
+    @media (max-width: 700px) { main { padding: 26px 16px; } .panels { grid-template-columns: 1fr; } .preview { order: -1; } .buttons { margin-left: 0; } .input pre { min-height: 180px; } }
+  </style>
+</head>
+<body>
+  <main id="app" v-cloak>
+    <header>
+      <h1>gradual-json 与 Vue</h1>
+      <p>解析器直接写入深层响应式宿主。字符串逐步显示，嵌套对象和数组继续更新，computed 自动重算已读金额。</p>
+    </header>
+    <section class="controls" aria-label="演示控制">
+      <label>示例 <select v-model="sample" :disabled="running"><option value="card">书单 · 嵌套对象与数组</option><option value="unicode">转义与 Unicode</option><option value="invalid">非法 JSON</option></select></label>
+      <label>输入 <select v-model="chunkSize" :disabled="running"><option :value="1">逐字符</option><option :value="8">8 字符块</option><option :value="24">24 字符块</option></select></label>
+      <label>速度 <select v-model="pace" :disabled="running"><option value="slow">慢速</option><option value="normal">正常</option><option value="fast">快速</option></select></label>
+      <div class="buttons"><button type="button" @click="stop" v-if="running">停止</button><button class="start" type="button" @click="start" :disabled="running">{{ status === 'idle' ? '开始接收' : '重新演示' }}</button></div>
+    </section>
+    <div class="status"><span role="status" aria-live="polite">{{ statusLabel }}</span><span>{{ received.length }} / {{ input.length }}</span></div>
+    <div class="panels">
+      <section class="panel input"><div class="panel-heading"><span>输入 JSON</span><code>{{ chunkCount }} 块</code></div><pre>{{ received }}</pre></section>
+      <section class="panel preview">
+        <div class="panel-heading"><span>运行效果</span><code>Vue · host.data</code></div>
+        <div class="card">
+          <h3>{{ host.data?.title }}</h3>
+          <p class="description">{{ host.data?.description }}</p>
+          <div class="author"><span>{{ host.data?.author?.name }}</span><span v-if="host.data?.author?.role !== undefined">{{ host.data.author.role }}</span><span class="author-active" v-if="host.data?.author?.active === true">已确认</span></div>
+          <div class="items">
+            <article class="item" v-for="(item, index) in items" :key="index">
+              <span class="number">{{ String(index + 1).padStart(2, '0') }}</span>
+              <div class="item-body"><h4>{{ item.label }}</h4><p>{{ item.description }}</p><div class="tags"><span v-for="(tag, tagIndex) in item.tags ?? []" :key="tagIndex">{{ tag }}</span><span class="availability" v-if="item.available !== undefined">{{ item.available ? '可借阅' : '暂缺' }}</span></div></div>
+              <span class="price" v-if="item.price !== undefined">¥ {{ item.price }}</span>
+            </article>
+          </div>
+          <div class="totals" v-if="host.data?.items !== undefined"><span>{{ items.length }} 项</span><span v-if="items.some(item => item.price !== undefined)">已读金额 <strong>¥ {{ total.toFixed(2) }}</strong></span></div>
+          <div class="tags"><span v-for="(tag, index) in host.data?.tags ?? []" :key="index">{{ tag }}</span></div>
+          <div class="ready" v-if="host.data?.ready !== undefined">ready: {{ host.data.ready }}</div>
+        </div>
+        <details><summary>查看正在构造的对象</summary><pre>{{ constructed }}</pre></details>
+      </section>
+    </div>
+    <p class="error" v-if="error" role="alert">{{ error }}。此前构造的部分结果保留在宿主中。</p>
+    <footer>未收到的字段留空。字符串逐步追加；数字、布尔值与 null 完整后写入。输入结束并通过 EOF 校验后，parse 才返回完整结果。</footer>
+  </main>
+  <script type="module">
+    import { computed, createApp, reactive, ref, watch } from "https://cdn.jsdelivr.net/npm/vue@3.5.22/dist/vue.esm-browser.prod.js";
+    import { parse } from "https://cdn.jsdelivr.net/npm/gradual-json@0.1.0/dist/parser.js";
+
+    createApp({
+      setup() {
+        const host = reactive({});
+        const items = computed(() => host.data?.items ?? []);
+        const total = computed(() => items.value.reduce((sum, item) => sum + (item.price ?? 0), 0));
+        const sample = ref("card");
+        const chunkSize = ref(1);
+        const pace = ref("normal");
+        const received = ref("");
+        const chunkCount = ref(0);
+        const status = ref("idle");
+        const error = ref("");
+        let runId = 0;
+        const samples = {
+          card: '{"title":"周末书单","description":"周六读随笔，周日整理语言学习笔记。","author":{"name":"小林","role":"整理者","active":true},"items":[{"label":"语言与文字","description":"阅读第一至三章，记录词汇。","price":38.5,"tags":["语言","纸质"],"available":true},{"label":"城市散步","description":"周日下午阅读。","price":0,"tags":["随笔"],"available":false},{"label":"日常记录","description":"摘录与笔记。","price":24,"tags":["笔记"],"available":true}],"tags":["周末","阅读"],"ready":true}',
+          unicode: '{"title":"Unicode \\u6e10\\u8fdb 🌱","description":"换行\\n与引号：\\"JSON\\"，完整解码后写入。","tags":["\\u4f60\\u597d","跨块转义"],"ready":true}',
+          invalid: '{"title":"已写入的内容会保留","description":"末尾的多余逗号让这个输入无效。","tags":["部分结果"],"ready":true,}',
+        };
+        const input = computed(() => samples[sample.value]);
+        const running = computed(() => status.value === "streaming");
+        const constructed = computed(() => JSON.stringify(host.data, null, 2));
+        const statusLabel = computed(() => ({ idle: "准备接收", streaming: "正在接收 · 结果逐步构造", complete: "解析完成 · EOF 校验通过", stopped: "已停止 · 保留部分结果", error: "解析失败 · 无效 JSON" })[status.value]);
+
+        watch(sample, () => {
+          runId++;
+          delete host.data;
+          received.value = "";
+          chunkCount.value = 0;
+          error.value = "";
+          status.value = "idle";
+        });
+
+        function stop() {
+          runId++;
+          status.value = "stopped";
+        }
+
+        async function start() {
+          const id = ++runId;
+          const text = input.value;
+          const size = chunkSize.value;
+          const delay = { slow: 90, normal: 45, fast: 8 }[pace.value] * Math.min(size, 8);
+          delete host.data;
+          received.value = "";
+          chunkCount.value = 0;
+          error.value = "";
+          status.value = "streaming";
+
+          async function* chunks() {
+            for (let index = 0; index < text.length; index += size) {
+              await new Promise(resolve => setTimeout(resolve, delay));
+              if (id !== runId) throw new DOMException("输入已停止", "AbortError");
+              const chunk = text.slice(index, index + size);
+              received.value += chunk;
+              chunkCount.value++;
+              yield chunk;
+            }
+            if (id !== runId) throw new DOMException("输入已停止", "AbortError");
+          }
+
+          try {
+            await parse(chunks(), host, "data");
+            if (id === runId) status.value = "complete";
+          } catch (cause) {
+            if (id !== runId) return;
+            error.value = cause.message;
+            status.value = "error";
+          }
+        }
+
+        return { host, items, total, sample, chunkSize, pace, received, chunkCount, status, error, input, running, constructed, statusLabel, start, stop };
+      },
+    }).mount("#app");
+  </script>
+</body>
+</html>

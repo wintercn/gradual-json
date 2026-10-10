@@ -22,6 +22,8 @@ npm run demo:node
 
 ## Vue 页面与真实 HTTP 响应
 
+首页的书单示例并排显示核心代码与 Vue 运行效果，包含嵌套作者、数组项和自动计算金额。[完整代码与运行说明在 Gist](https://gist.github.com/wintercn/b4c381987f7d70d849a62d471486935f)，本地副本位于 `vue-gist/`；这个独立 HTML 从 CDN 加载固定版本的依赖。下面的本地演示服务还提供真实 HTTP 分块响应，全部依赖从项目目录加载。
+
 ```sh
 npm run demo:vue
 ```

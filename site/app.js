@@ -17,7 +17,7 @@ createApp({
   setup() {
     const host = reactive({});
     const sample = ref("card");
-    const chunkSize = ref(8);
+    const chunkSize = ref(1);
     const pace = ref("normal");
     const received = ref("");
     const latestChunks = ref([]);
@@ -26,7 +26,7 @@ createApp({
     const error = ref("");
     let runId = 0;
     const samples = {
-      card: '{"title":"流式解析示例","description":"字符串值随输入逐步写入宿主对象。","tags":["异步字符串块","Vue 响应式","部分结果"],"ready":true}',
+      card: '{"title":"周末书单","description":"周六读随笔，周日整理语言学习笔记。","author":{"name":"小林","role":"整理者","active":true},"items":[{"label":"语言与文字","description":"阅读第一至三章，记录词汇。","price":38.5,"tags":["语言","纸质"],"available":true},{"label":"城市散步","description":"周日下午阅读。","price":0,"tags":["随笔"],"available":false},{"label":"日常记录","description":"摘录与笔记。","price":24,"tags":["笔记"],"available":true}],"tags":["周末","阅读"],"ready":true}',
       unicode: '{"title":"Unicode \\u6e10\\u8fdb 🌱","description":"换行\\n与引号：\\"JSON\\"，完整解码后写入。","tags":["\\u4f60\\u597d","跨块转义"],"ready":true}',
       invalid: '{"title":"已写入的内容会保留","description":"末尾的多余逗号让这个输入无效。","tags":["部分结果"],"ready":true,}',
     };
@@ -34,6 +34,8 @@ createApp({
     const running = computed(() => status.value === "streaming");
     const progress = computed(() => Math.round(received.value.length / input.value.length * 100));
     const constructed = computed(() => JSON.stringify(host.data, null, 2));
+    const items = computed(() => host.data?.items ?? []);
+    const total = computed(() => items.value.reduce((sum, item) => sum + (item.price ?? 0), 0));
     const statusLabel = computed(() => ({ idle: "准备接收 · 点击开始运行", streaming: "正在接收 · 结果逐步构造", complete: "解析完成 · EOF 校验通过", stopped: "已停止 · 保留部分结果", error: "解析失败 · 无效 JSON" })[status.value]);
 
     watch(sample, () => {
@@ -84,7 +86,7 @@ createApp({
       }
     }
 
-    return { host, sample, chunkSize, pace, received, latestChunks, chunkCount, status, error, input, running, progress, constructed, statusLabel, start, stop };
+    return { host, sample, chunkSize, pace, received, latestChunks, chunkCount, status, error, input, running, progress, constructed, items, total, statusLabel, start, stop };
   },
 }).mount("#demo");
 
