@@ -11,7 +11,7 @@ createApp({
     const completed = ref(false);
     const status = ref("准备开始");
     const receivedCount = computed(() => received.value.length);
-    const constructed = computed(() => host.data === undefined ? "等待根容器创建…" : JSON.stringify(host.data, null, 2));
+    const constructed = computed(() => JSON.stringify(host.data, null, 2));
     const items = computed(() => host.data?.items ?? []);
     const noteReady = computed(() => host.data !== undefined && Object.hasOwn(host.data, "note"));
     let runId = 0;

@@ -44,7 +44,7 @@
       <section class="panels">
         <article class="panel">
           <div class="panel-heading"><h2>已收到的输入</h2><span>随字符到达</span></div>
-          <pre>{{ received || '等待输入…' }}</pre>
+          <pre>{{ received }}</pre>
         </article>
         <article class="panel">
           <div class="panel-heading"><h2>正在构造的对象</h2><span>同一个响应式引用</span></div>
@@ -54,9 +54,9 @@
 
       <section class="content-card">
         <div class="panel-heading"><h2>随数据出现的内容</h2><span>{{ items.length }} 个数组项</span></div>
-        <h3>{{ host.data?.title ?? '标题仍在接收…' }}</h3>
+        <h3>{{ host.data?.title }}</h3>
         <div class="author">
-          <span>{{ host.data?.author?.name ?? '等待作者信息' }}</span>
+          <span>{{ host.data?.author?.name }}</span>
           <span class="tag" v-if="host.data?.author?.active === true">作者已启用</span>
           <span class="muted" v-if="noteReady">备注：空值</span>
         </div>
@@ -64,13 +64,12 @@
           <article class="item" v-for="(item, index) in items" :key="index">
             <span class="item-number">{{ String(index + 1).padStart(2, '0') }}</span>
             <div class="item-body">
-              <h4>{{ item.label ?? '项目已创建，等待名称…' }}</h4>
+              <h4>{{ item.label }}</h4>
               <div class="tags"><span class="tag" v-for="tag in item.tags ?? []" :key="tag">{{ tag }}</span></div>
               <span class="muted" v-if="item.available === false">暂未上架</span>
             </div>
-            <span class="price">{{ item.price === undefined ? '等待价格' : '¥ ' + item.price }}</span>
+            <span class="price" v-if="item.price !== undefined">¥ {{ item.price }}</span>
           </article>
-          <p class="empty" v-if="items.length === 0">数组项一创建，就会出现在这里。</p>
         </div>
       </section>
       <footer>停止会保留已构造的部分；只有输入结束且校验通过，才显示“解析完成”。</footer>

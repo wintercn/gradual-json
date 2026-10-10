@@ -738,13 +738,6 @@ section {
   overflow-wrap: anywhere;
 }
 
-.chunk-empty {
-  color: #91a584;
-  font-size: 11px;
-  line-height: 1.9;
-  padding-top: 9px;
-}
-
 .output-panel {
   background: #f1f4ea;
   color: var(--ink);

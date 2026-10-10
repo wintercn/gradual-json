@@ -44,7 +44,6 @@ h4 { margin: 0 0 5px; font-size: 14px; font-weight: 550; }
 .tags { display: flex; gap: 5px; flex-wrap: wrap; }
 .muted { color: #8b9a8e; font-size: 11px; }
 .price { color: #4a6c58; font-size: 13px; white-space: nowrap; }
-.empty { color: #8b9a8e; font-size: 13px; padding: 4px 0 14px; }
 footer { margin: 20px 2px 0; font-size: 12px; }
 @keyframes pulse { 50% { opacity: .35; } }
 @media (prefers-reduced-motion: reduce) { .dot.running { animation: none; } }

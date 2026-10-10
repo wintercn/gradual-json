@@ -33,7 +33,7 @@ createApp({
     const input = computed(() => samples[sample.value]);
     const running = computed(() => status.value === "streaming");
     const progress = computed(() => Math.round(received.value.length / input.value.length * 100));
-    const constructed = computed(() => host.data === undefined ? "等待根容器创建…" : JSON.stringify(host.data, null, 2));
+    const constructed = computed(() => JSON.stringify(host.data, null, 2));
     const statusLabel = computed(() => ({ idle: "准备接收 · 点击开始运行", streaming: "正在接收 · 结果逐步构造", complete: "解析完成 · EOF 校验通过", stopped: "已停止 · 保留部分结果", error: "解析失败 · 无效 JSON" })[status.value]);
 
     watch(sample, () => {
