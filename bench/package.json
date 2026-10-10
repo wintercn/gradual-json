@@ -1,0 +1,12 @@
+{
+  "name": "gradual-json-benchmarks",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "compare": "node compare.mjs"
+  },
+  "dependencies": {
+    "@streamparser/json": "0.0.26",
+    "jsonriver": "1.1.1"
+  }
+}

@@ -11,14 +11,14 @@
   <meta property="og:url" content="https://wintercn.github.io/gradual-json/">
   <title>gradual-json · 渐进式 JSON 解析器</title>
   <link rel="icon" href="./favicon.svg?v=6" type="image/svg+xml">
-  <link rel="stylesheet" href="./style.css?v=5">
+  <link rel="stylesheet" href="./style.css?v=6">
 </head>
 <body>
   <a class="skip-link" href="#main">跳到正文</a>
   <header class="header wrap">
     <a class="brand" href="#" aria-label="gradual-json 首页"><img class="brand-mark" src="./logo.svg?v=6" alt="" width="37" height="37">gradual-json</a>
     <nav aria-label="主导航">
-      <a href="#construction">构造过程</a><a href="#scenarios">场景适配</a><a href="#start">使用方式</a>
+      <a href="#construction">构造过程</a><a href="#scenarios">场景适配</a><a href="#quality">测试与性能</a><a href="#start">使用方式</a>
       <a class="repo-link" href="https://github.com/wintercn/gradual-json" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
     </nav>
   </header>
@@ -85,6 +85,40 @@ await pending;</code></pre>
         </div>
       </div>
       <noscript><p>Vue：传入 reactive 宿主对象；HTTP：解码响应体后输入；SSE：按消息顺序输入 JSON 片段；Proxy：在 get / set 中代理子对象并记录赋值。</p></noscript>
+    </section>
+
+    <section class="quality wrap" id="quality" aria-labelledby="quality-title">
+      <div class="section-heading"><div><p class="eyebrow">验证与调优</p><h2 id="quality-title">测试与性能</h2></div><p>验证语法、分块、Vue 代理和发布包。<br>性能变化用相同输入、相同分块方式测量。</p></div>
+      <div class="quality-stats" aria-label="v0.1.1 测试结果">
+        <div><strong>1,096</strong><span>测试通过</span></div><div><strong>0</strong><span>测试失败</span></div><div><strong>28</strong><span>明确跳过</span></div><div><strong>373</strong><span>上游原始测试文件</span></div>
+      </div>
+      <p class="quality-test-note">v0.1.1 · Node 24.21.0 · 共 1,124 项测试。28 项跳过对应非法 UTF-8 字节输入，字符串接口不处理原始字节；跳过不计为通过。</p>
+      <div class="quality-grid">
+        <div class="quality-coverage">
+          <h3>验证哪些行为</h3>
+          <div class="coverage-grid">
+            <article><span class="coverage-index">01</span><h4>JSON 语法与值</h4><p>JSONTestSuite 340 个文件，Test262 JSON 语法子集 33 个文件。固定上游内容并核验摘要，适用输入按单字符与 4,096 字符块解析。</p><a href="https://github.com/wintercn/gradual-json/blob/main/test/README.md#上游套组" target="_blank" rel="noopener">套组来源与范围 ↗</a></article>
+            <article><span class="coverage-index">02</span><h4>分块边界与错误</h4><p>每个两块切分位置、空块、跨块转义和数字。校验非法输入、未完成输入与 EOF，错误时关闭输入源。</p><a href="https://github.com/wintercn/gradual-json/blob/main/test/chunks.test.mjs" target="_blank" rel="noopener">分块测试 ↗</a></article>
+            <article><span class="coverage-index">03</span><h4>真实 Vue 代理</h4><p>Vue 3.5.22 的对象与数组嵌套、代理身份、逐步字符串写入，以及 effect、watchEffect 和 nextTick 的更新。</p><a href="https://github.com/wintercn/gradual-json/blob/main/test/vue.test.mjs" target="_blank" rel="noopener">Vue 协同测试 ↗</a></article>
+            <article><span class="coverage-index">04</span><h4>发布包与调用方</h4><p>离线打包安装、包根导入、Node Readable、ESM 与 TypeScript 类型。每次提交和 PR 都运行类型检查与完整测试。</p><a href="https://github.com/wintercn/gradual-json/actions/workflows/ci.yml" target="_blank" rel="noopener">查看 CI 结果 ↗</a></article>
+          </div>
+        </div>
+        <div class="quality-performance">
+          <div class="performance-heading"><h3>连续普通字符，整段处理</h3><span>v0.1.0 → v0.1.1</span></div>
+          <p>在主循环用正则读取连续普通字符；字符串值整段追加后写回。减少状态调用与拼接；引号、转义和控制字符继续由原状态函数处理。</p>
+          <div class="benchmark-scroll"><table class="benchmark-table"><caption>完整解析耗时 · ms，越低越好</caption><thead><tr><th scope="col">输入</th><th scope="col">调优前</th><th scope="col">调优后</th></tr></thead><tbody>
+            <tr><th scope="row">2,500 条嵌套记录<small>485,421 B</small></th><td>8.317</td><td class="benchmark-current">3.924</td></tr>
+            <tr><th scope="row">长字符串<small>262,155 B</small></th><td>3.929</td><td class="benchmark-current">0.157</td></tr>
+            <tr><th scope="row">50,000 个数字<small>328,901 B</small></th><td>5.844</td><td class="benchmark-current">6.103</td></tr>
+          </tbody></table></div>
+          <p class="performance-result">长字符串耗时约为原来的 1/25，嵌套记录约为 1/2。数字数组没有改善，仍保留在对照中。</p>
+          <details class="performance-details"><summary>与 jsonriver、@streamparser/json 的同场测量</summary><div class="benchmark-scroll"><table class="benchmark-table competitor-table"><caption>同一轮测量 · ms，越低越好</caption><thead><tr><th scope="col">输入</th><th scope="col">gradual-json<small>0.1.1</small></th><th scope="col">jsonriver<small>1.1.1</small></th><th scope="col">@streamparser/json<small>0.0.26 · partial</small></th></tr></thead><tbody>
+            <tr><th scope="row">嵌套记录</th><td class="benchmark-current">3.924</td><td>4.837</td><td>6.035</td></tr><tr><th scope="row">长字符串</th><td class="benchmark-current">0.157</td><td>0.479</td><td>0.430</td></tr><tr><th scope="row">数字数组</th><td class="benchmark-current">6.103</td><td>5.230</td><td>7.887</td></tr>
+          </tbody></table></div><p>这三个输入中，数字数组慢于 jsonriver。各库的中间更新粒度与语法语义不同，表格比较有效输入的完整解析耗时。</p></details>
+          <a class="performance-source" href="https://github.com/wintercn/gradual-json/blob/main/src/parser.ts#L522" target="_blank" rel="noopener">查看主循环中的 shortcut ↗</a>
+        </div>
+      </div>
+      <div class="quality-method"><p>测量于 2026-10-10 · Node 24.21.0 / macOS arm64 / Apple M3 Max。ASCII JSON，4,096 字符块，预热 3 次、轮换顺序测量 11 次，取中位数。先核对完整结果；耗时包含完整解析，不含网络等待、解码或 Vue 更新。</p><div><a href="https://github.com/wintercn/gradual-json/blob/main/bench/README.md" target="_blank" rel="noopener">测量方法与复现 ↗</a><a href="https://github.com/wintercn/gradual-json/blob/main/bench/results.json" target="_blank" rel="noopener">原始数据 ↗</a></div></div>
     </section>
 
     <section class="features wrap" id="features" aria-labelledby="features-title">
@@ -187,7 +221,6 @@ const result = await parse(chunks());</code></pre></div></noscript>
     </section>
 
     <div class="facts wrap" aria-label="项目概览"><div><strong>0</strong><span>运行时依赖</span></div><div><strong>1</strong><span>异步解析入口</span></div><div><strong>8.1 <small>kB</small></strong><span>v0.1.1 npm 压缩包</span></div><div><strong>MIT</strong><span>开放源码许可</span></div></div>
-    <section class="assurance wrap" aria-labelledby="assurance-title"><div><p class="eyebrow">测试来源</p><h2 id="assurance-title">测试覆盖与来源</h2><p>测试包含 JSON 语法、分块边界、Unicode 转义、<br>错误输入、Vue 代理写入和安装包使用。</p></div><div class="test-sources"><a href="https://github.com/nst/JSONTestSuite" target="_blank" rel="noopener"><span>语法与边界输入</span><strong>JSONTestSuite <i aria-hidden="true">↗</i></strong></a><a href="https://github.com/tc39/test262" target="_blank" rel="noopener"><span>JavaScript JSON 语法用例</span><strong>Test262 <i aria-hidden="true">↗</i></strong></a><a href="https://github.com/wintercn/gradual-json/blob/main/test/README.md" target="_blank" rel="noopener"><span>项目验证与测试来源</span><strong>查看测试说明 <i aria-hidden="true">↗</i></strong></a></div></section>
     <section class="closing wrap"><p>源码与文档<br><span>GitHub · MIT 许可证</span></p><a class="button primary" href="https://github.com/wintercn/gradual-json" target="_blank" rel="noopener">查看仓库 <span aria-hidden="true">↗</span></a></section>
   </main>
   <footer class="footer wrap"><a class="brand" href="#"><img class="brand-mark" src="./logo.svg?v=6" alt="" width="37" height="37">gradual-json</a><span>一个渐进式 JSON 解析器。</span><div><a href="https://www.npmjs.com/package/gradual-json" target="_blank" rel="noopener">npm ↗</a><a href="https://github.com/wintercn/gradual-json" target="_blank" rel="noopener">GitHub ↗</a><a href="https://github.com/wintercn/gradual-json/blob/main/LICENSE" target="_blank" rel="noopener">MIT</a></div></footer>
