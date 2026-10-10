@@ -511,7 +511,7 @@ section {
 .facts {
   border-bottom: 1px solid var(--line);
   display: grid;
-  grid-template-columns: .75fr 1fr 1.15fr 1.4fr .7fr;
+  grid-template-columns: .75fr 1fr 1.4fr .7fr;
   padding: 25px 0 24px;
 }
 
@@ -1496,8 +1496,6 @@ section {
   .facts strong {
     min-height: 34px;
   }
-  .facts>div:last-child { grid-column: 1/-1; display: flex; align-items: center; gap: 20px; border-top: 1px solid var(--line); padding-top: 17px; }
-  .facts>div:last-child span { margin-top: 0; }
   .facts-environment strong { line-height: 1.8; }
   .section-heading {
     align-items: flex-start;
@@ -1704,6 +1702,7 @@ section {
   .facts strong {
     font-size: 25px;
   }
+  .facts-environment strong { font-size: 16px; }
   .section-heading h2 {
     font-size: 24px;
   }
