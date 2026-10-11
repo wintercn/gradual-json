@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 80 80" role="img" aria-labelledby="title">
   <title id="title">gradual-json Logo</title>
-  <g fill="none" stroke="#2f643d" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+  <g fill="none" stroke="#2563eb" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
     <path d="M29 10h-3c-8 0-10 4-10 11v7c0 7-3 12-9 12c6 0 9 5 9 12v7c0 7 2 11 10 11h3"/>
     <path d="M51 10h3c8 0 10 4 10 11v3"/>
   </g>
-  <g fill="#2f643d">
+  <g fill="#2563eb">
     <rect x="61" y="32" width="6" height="6" rx=".8"/>
     <rect x="68" y="40" width="5.5" height="5.5" rx=".8"/>
     <rect x="60" y="44" width="5.5" height="5.5" rx=".8"/>
