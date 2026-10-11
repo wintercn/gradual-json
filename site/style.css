@@ -231,17 +231,6 @@ section {
 .hero-api-signature { font: 16px/1.6 var(--mono); color: #406135; }
 .hero-api code { font-size: inherit; }
 
-.hero-core {
-  border-left: 2px solid #b7cba2;
-  padding: 1px 0 1px 16px;
-  margin-top: 24px;
-  color: #53664a;
-  font-size: 14px;
-  line-height: 1.9;
-}
-
-.hero-core code { font-size: inherit; }
-
 .hero-actions {
   display: flex;
   align-items: center;
@@ -908,9 +897,6 @@ section {
   }
   .construction-input {
     font-size: 11px;
-  }
-  .hero-core {
-    padding-left: 12px;
   }
   .eyebrow {
     font-size: 9px;
