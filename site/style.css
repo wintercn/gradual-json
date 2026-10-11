@@ -231,43 +231,6 @@ section {
 .hero-api-signature { font: 16px/1.6 var(--mono); color: #406135; }
 .hero-api code { font-size: inherit; }
 
-.hero-actions {
-  display: flex;
-  align-items: center;
-  gap: 28px;
-  margin: 30px 0 25px;
-}
-
-.button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 26px;
-  font-size: 14px;
-  font-weight: 550;
-  min-height: 46px;
-  padding: 0 21px;
-  border-radius: 7px;
-  transition: background .15s,transform .15s;
-}
-
-.button:hover:not(:disabled) {
-  transform: translateY(-2px);
-}
-
-.primary {
-  background: var(--ink);
-  color: #fff;
-}
-
-.primary:hover {
-  background: var(--green);
-}
-
-.button span[aria-hidden] {
-  font-size: 19px;
-}
-
 .text-link {
   font-size: 14px;
   font-weight: 550;
@@ -282,6 +245,7 @@ section {
 
 .install-command {
   display: flex;
+  margin-top: 25px;
   align-items: center;
   gap: 11px;
   position: relative;
@@ -927,8 +891,5 @@ section {
   *,*:before,*:after {
     transition: none!important;
     animation: none!important;
-  }
-  .button:hover:not(:disabled) {
-    transform: none;
   }
 }
