@@ -57,11 +57,9 @@
 const host = {};
 async function* chunks() {
   yield '{"title":"渐进式 JSON';
-  console.log(host.data.title); // "渐进式 JSON"
   yield ' 对象构造"}';
 }
-const result = await parse(chunks(), host, "data");
-console.log(result === host.data); // true</code></pre>
+const result = await parse(chunks(), host, "data");</code></pre>
         <div class="hero-actions"><a class="button primary" href="#scenarios">查看场景示例 <span aria-hidden="true">↘</span></a><a class="text-link" href="#start">使用方式 <span aria-hidden="true">→</span></a></div>
         <div class="install-command"><span class="prompt" aria-hidden="true">$</span><code>npm install gradual-json</code><button class="copy-install" type="button" aria-label="复制安装命令"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V4H4v12h4"></path></svg></button><span class="copy-feedback" role="status"></span></div>
       </div>
