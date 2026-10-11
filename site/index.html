@@ -11,14 +11,14 @@
   <meta property="og:url" content="https://wintercn.github.io/gradual-json/">
   <title>gradual-json · 渐进式 JSON 解析器</title>
   <link rel="icon" href="./favicon.svg?v=6" type="image/svg+xml">
-  <link rel="stylesheet" href="./style.css?v=18">
+  <link rel="stylesheet" href="./style.css?v=19">
 </head>
 <body>
   <a class="skip-link" href="#main">跳到正文</a>
   <header class="header wrap">
     <a class="brand" href="#" aria-label="gradual-json 首页"><img class="brand-mark" src="./logo.svg?v=6" alt="" width="37" height="37">gradual-json</a>
     <nav aria-label="主导航">
-      <a href="#construction">构造过程</a><a href="#scenarios">场景适配</a><a href="#quality">测试与性能</a><a href="#start">使用方式</a>
+      <a href="#construction">构造过程</a><a href="#scenarios">场景适配</a><a href="#quality">测试与性能</a>
       <a class="repo-link" href="https://github.com/wintercn/gradual-json" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
     </nav>
   </header>
@@ -60,7 +60,7 @@ async function* chunks() {
   yield ' 对象构造"}';
 }
 const result = await parse(chunks(), host, "data");</code></pre>
-        <div class="hero-actions"><a class="button primary" href="#scenarios">查看场景示例 <span aria-hidden="true">↘</span></a><a class="text-link" href="#start">使用方式 <span aria-hidden="true">→</span></a></div>
+        <div class="hero-actions"><a class="button primary" href="#scenarios">查看场景示例 <span aria-hidden="true">↘</span></a></div>
         <div class="install-command"><span class="prompt" aria-hidden="true">$</span><code>npm install gradual-json</code><button class="copy-install" type="button" aria-label="复制安装命令"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V4H4v12h4"></path></svg></button><span class="copy-feedback" role="status"></span></div>
       </div>
       <div class="construction-demo" id="construction-demo" v-cloak aria-label="JSON 对象渐进构造演示">
@@ -95,7 +95,7 @@ const result = await parse(chunks(), host, "data");</code></pre>
             <div class="scenario-code">
               <div class="scenario-panel-heading"><span>接入代码</span><a href="https://gist.github.com/wintercn/b4c381987f7d70d849a62d471486935f#file-scenarios-html" target="_blank" rel="noopener">完整代码 · Gist ↗</a></div>
               <pre><code>{{ current.code }}</code></pre>
-              <template v-if="current.template"><p class="scenario-code-label">Vue 模板</p><pre><code>{{ current.template }}</code></pre><a class="scenario-detail-link" href="#playground">查看包含嵌套对象与 computed 的完整 Vue 示例 →</a></template>
+              <template v-if="current.template"><p class="scenario-code-label">Vue 模板</p><pre><code>{{ current.template }}</code></pre></template>
               <details class="scenario-adapter" v-if="current.adapter" :key="scenario" :open="scenario === 'proxy'"><summary>{{ scenario === 'proxy' ? 'Proxy 的 get / set 实现' : '展开输入适配代码' }}</summary><pre><code>{{ current.adapter }}</code></pre></details>
             </div>
             <div class="scenario-output">
@@ -154,97 +154,8 @@ const result = await parse(chunks(), host, "data");</code></pre>
       <noscript><p>启用 JavaScript 后，可在当前浏览器中运行性能测试。</p></noscript>
     </section>
 
-    <section class="playground-section" id="playground" aria-labelledby="playground-title">
-      <div class="wrap">
-        <div class="section-heading"><div><p class="eyebrow light">Vue 流式 JSON 示例</p><h2 id="playground-title">把正在构造的对象显示到页面</h2></div><p>模板直接读取对象，字符串和数组项逐步显示。<br><code>computed</code> 随价格写入重新计算金额。</p></div>
-        <div id="demo" v-cloak>
-          <div class="demo-toolbar">
-            <div class="demo-controls">
-              <label>示例 <select v-model="sample" :disabled="running"><option value="card">书单 · 嵌套对象与数组</option><option value="unicode">转义与 Unicode</option><option value="invalid">非法 JSON</option></select></label>
-              <label>输入 <select v-model="chunkSize" :disabled="running"><option :value="1">逐字符</option><option :value="8">8 字符块</option><option :value="24">24 字符块</option></select></label>
-              <label>速度 <select v-model="pace" :disabled="running"><option value="slow">慢速</option><option value="normal">正常</option><option value="fast">快速</option></select></label>
-            </div>
-            <div class="run-controls"><button class="button demo-stop" type="button" v-if="running" @click="stop">停止</button><button class="button demo-start" type="button" @click="start" :disabled="running"><span aria-hidden="true">▶</span> {{ status === 'idle' ? '开始接收' : '重新演示' }}</button></div>
-          </div>
-          <div class="demo-panels">
-            <div class="input-panel core-panel">
-              <div class="panel-heading"><span>核心代码</span><a class="gist-link" href="https://gist.github.com/wintercn/b4c381987f7d70d849a62d471486935f" target="_blank" rel="noopener">完整代码 · Gist ↗</a></div>
-              <div class="core-code">
-                <p class="code-label">JavaScript</p>
-                <pre v-pre><code>import { computed, reactive } from "vue";
-import { parse } from "gradual-json";
-
-const host = reactive({});
-const items = computed(() =&gt; host.data?.items ?? []);
-const total = computed(() =&gt;
-  items.value.reduce((sum, item) =&gt;
-    sum + (item.price ?? 0), 0)
-);
-
-async function start() {
-  await parse(chunks(), host, "data");
-}</code></pre>
-                <p class="code-label">Vue 模板</p>
-                <pre v-pre><code>&lt;h3&gt;{{ host.data?.title }}&lt;/h3&gt;
-&lt;p&gt;{{ host.data?.author?.name }}&lt;/p&gt;
-&lt;article v-for="(item, i) in items" :key="i"&gt;
-  &lt;h4&gt;{{ item.label }}&lt;/h4&gt;
-  &lt;span v-if="item.price !== undefined"&gt;
-    ¥ {{ item.price }}
-  &lt;/span&gt;
-&lt;/article&gt;
-&lt;p v-if="items.some(item =&gt; item.price !== undefined)"&gt;
-  已读金额：¥ {{ total.toFixed(2) }}
-&lt;/p&gt;</code></pre>
-                <p class="core-note"><code>chunks()</code> 产出异步字符串块。模板直接读取宿主对象，金额由 Vue 自动重算。</p>
-              </div>
-            </div>
-            <div class="output-panel">
-              <div class="panel-heading"><span><i class="output-dot"></i> 运行效果</span><code>Vue · host.data</code></div>
-              <div class="preview-card">
-                <p class="preview-eyebrow">书单 <span v-if="host.data !== undefined">对象已挂载 <i></i></span></p>
-                <h3>{{ host.data?.title }}<span class="preview-caret" v-if="running && host.data?.title !== undefined" aria-hidden="true"></span></h3>
-                <p class="preview-description">{{ host.data?.description }}</p>
-                <div class="preview-author"><span>{{ host.data?.author?.name }}</span><span v-if="host.data?.author?.role !== undefined">{{ host.data.author.role }}</span><span class="author-active" v-if="host.data?.author?.active === true">已确认</span></div>
-                <div class="preview-items">
-                  <article class="preview-item" v-for="(item, index) in items" :key="index">
-                    <span class="preview-item-number">{{ String(index + 1).padStart(2, '0') }}</span>
-                    <div class="preview-item-body"><h4>{{ item.label }}</h4><p>{{ item.description }}</p><div class="preview-tags item-tags"><span v-for="(tag, tagIndex) in item.tags ?? []" :key="tagIndex">{{ tag }}</span><span class="item-availability" v-if="item.available !== undefined">{{ item.available ? '可借阅' : '暂缺' }}</span></div></div>
-                    <span class="preview-price" v-if="item.price !== undefined">¥ {{ item.price }}</span>
-                  </article>
-                </div>
-                <div class="preview-totals" v-if="host.data?.items !== undefined"><span>{{ items.length }} 项</span><span v-if="items.some(item => item.price !== undefined)">已读金额 <strong>¥ {{ total.toFixed(2) }}</strong></span></div>
-                <div class="preview-tags"><span v-for="(tag, index) in host.data?.tags ?? []" :key="index">{{ tag }}</span></div>
-                <div class="preview-bottom"><span v-if="host.data?.ready !== undefined" :class="{ ready: host.data.ready === true }">ready: {{ host.data.ready }}</span><span>{{ status === 'complete' ? '输入结束 · 完整返回' : '直接读取同一个对象' }}</span></div>
-              </div>
-              <details class="object-inspector"><summary>查看正在构造的对象 <span aria-hidden="true">↗</span></summary><div class="object-view"><object-inspector :value="host.data"></object-inspector></div></details>
-            </div>
-          </div>
-          <details class="demo-input"><summary><span><i class="live-dot" :class="{ active: running }"></i> 查看输入 JSON 与分块</span><span>{{ chunkCount }} 块</span></summary><pre class="stream-code"><code>{{ received }}</code><span class="stream-caret" v-if="running" aria-hidden="true">▍</span></pre><div class="chunks-heading"><span>最近收到的块</span><span>{{ received.length }} 个 UTF-16 单元</span></div><div class="chunk-list"><code v-for="chunk in latestChunks" :key="chunk.id">{{ JSON.stringify(chunk.text) }}</code></div></details>
-          <div class="demo-footer"><div class="demo-status" :class="status" role="status" aria-live="polite"><i></i>{{ statusLabel }}</div><div class="progress-info"><span>{{ received.length }} / {{ input.length }}</span><div class="progress-track" role="progressbar" aria-label="输入接收进度" :aria-valuenow="progress" aria-valuemin="0" aria-valuemax="100"><span :style="{ width: progress + '%' }"></span></div></div></div>
-          <p class="demo-error" v-if="error" role="alert">{{ error }}<span>解析拒绝，此前构造的部分结果保留在宿主中。</span></p>
-        </div>
-        <noscript><p class="noscript-note">此演示需要 JavaScript。解析器的 API 与示例见下方。</p></noscript>
-        <p class="demo-note">演示使用本地异步生成器模拟输入，实际调用解析器并写入 Vue 3.5.22 深层响应式对象。完整可运行示例包含数据、分块、停止与重播。</p>
-      </div>
-    </section>
-
-    <section class="getting-started wrap" id="start" aria-labelledby="start-title">
-      <div class="start-intro"><p class="eyebrow">API 示例</p><h2 id="start-title"><code>parse</code> 使用示例</h2><p>输入必须是产出字符串的异步迭代器。<br>可使用设置了编码的 Node Readable、<br>解码后的 HTTP 响应或异步生成器。</p><a class="text-link" href="https://github.com/wintercn/gradual-json#api" target="_blank" rel="noopener">阅读完整 API <span aria-hidden="true">↗</span></a><div class="signature"><code>parse(chunks, host?, property?)<br><span>→ Promise&lt;JsonValue&gt;</span></code></div></div>
-      <div class="code-example" id="examples" v-cloak><div class="code-tabs" role="tablist" aria-label="使用示例"><button v-for="item in examples" :key="item.id" :id="'tab-' + item.id" :class="{ selected: tab === item.id }" role="tab" :aria-selected="tab === item.id" :tabindex="tab === item.id ? 0 : -1" aria-controls="example-code" @click="tab = item.id" @keydown="navigateTabs($event, item.id)">{{ item.label }}</button><button class="copy-code" type="button" @click="copy" aria-label="复制当前示例">{{ copied ? '已复制 ✓' : '复制代码' }}</button></div><pre id="example-code" role="tabpanel" :aria-labelledby="'tab-' + tab" tabindex="0"><code>{{ currentExample.code }}</code></pre><div class="code-example-footer"><span class="small-dot"></span>{{ currentExample.note }}</div><span class="sr-only" role="status">{{ copyMessage }}</span></div>
-      <noscript><div class="code-example"><pre><code>import { parse } from "gradual-json";
-
-async function* chunks() {
-  yield '{"title":"渐进';
-  yield '式 JSON"}';
-}
-
-const result = await parse(chunks());</code></pre></div></noscript>
-    </section>
-
-    <section class="closing wrap"><p>源码与文档<br><span>GitHub · MIT 许可证</span></p><a class="button primary" href="https://github.com/wintercn/gradual-json" target="_blank" rel="noopener">查看仓库 <span aria-hidden="true">↗</span></a></section>
   </main>
   <footer class="footer wrap"><a class="brand" href="#"><img class="brand-mark" src="./logo.svg?v=6" alt="" width="37" height="37">gradual-json</a><span>一个渐进式 JSON 解析器。</span><div><a href="https://www.npmjs.com/package/gradual-json" target="_blank" rel="noopener">npm ↗</a><a href="https://github.com/wintercn/gradual-json" target="_blank" rel="noopener">GitHub ↗</a><a href="https://github.com/wintercn/gradual-json/blob/main/LICENSE" target="_blank" rel="noopener">MIT</a></div></footer>
-  <script type="module" src="./app.js?v=11"></script>
+  <script type="module" src="./app.js?v=12"></script>
 </body>
 </html>
