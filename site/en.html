@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f9fc">
+  <meta name="description" content="gradual-json builds JSON objects progressively from async string chunks. Objects, arrays, and strings update as input arrives; parsing returns the complete result. TypeScript, zero runtime dependencies.">
+  <meta property="og:title" content="gradual-json · Progressive JSON parser">
+  <meta property="og:description" content="Build JSON objects progressively. Read properties, strings, and array items before the input has finished.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://wintercn.github.io/gradual-json/en.html">
+  <link rel="canonical" href="https://wintercn.github.io/gradual-json/en.html">
+  <link rel="alternate" hreflang="zh-CN" href="https://wintercn.github.io/gradual-json/">
+  <link rel="alternate" hreflang="en" href="https://wintercn.github.io/gradual-json/en.html">
+  <link rel="alternate" hreflang="x-default" href="https://wintercn.github.io/gradual-json/">
+  <title>gradual-json · Progressive JSON parser</title>
+  <link rel="icon" href="./favicon.svg?v=7" type="image/svg+xml">
+  <link rel="stylesheet" href="./style.css?v=24">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="header wrap">
+    <a class="brand" href="#" aria-label="gradual-json home"><img class="brand-mark" src="./logo.svg?v=7" alt="" width="37" height="37">gradual-json</a>
+    <nav aria-label="Main navigation">
+      <a href="#construction">Construction</a><a href="#scenarios">Examples</a><a href="#quality">Tests &amp; performance</a>
+      <a class="repo-link" href="https://github.com/wintercn/gradual-json" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
+      <a class="language-switch" href="./" lang="zh-CN" hreflang="zh-CN" aria-label="Switch to Chinese">中文</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="facts wrap" aria-label="Package facts">
+      <div><strong>0</strong><span>Runtime dependencies</span></div>
+      <div><strong>8.1 <small>kB</small></strong><span>npm tarball · v0.1.1</span></div>
+      <div class="facts-environment"><strong>Browser <small>/</small> Node.js</strong><span>One ESM implementation</span></div>
+      <div><strong>MIT</strong><span><a href="https://github.com/wintercn/gradual-json/blob/main/LICENSE" target="_blank" rel="noopener">Open source license ↗</a></span></div>
+    </div>
+    <section class="hero wrap" id="construction" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="small-dot"></span> Progressive JSON parser <span class="version">v__PACKAGE_VERSION__</span></p>
+        <h1 id="hero-title">Build JSON objects<br><span class="ink-underline">progressively</span></h1>
+        <p class="hero-description">Read the object while input is still arriving.</p>
+        <div class="hero-api" aria-label="parse API">
+          <pre class="hero-api-signature"><code>function parse(
+  chunks: AsyncIterable&lt;string&gt;,
+  host?: object,
+  property?: string
+): Promise&lt;JsonValue&gt;;</code></pre>
+        </div>
+        <div class="install-command"><span class="prompt" aria-hidden="true">$</span><code>npm install gradual-json</code><button class="copy-install" type="button" aria-label="Copy install command"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V4H4v12h4"></path></svg></button><span class="copy-feedback" role="status"></span></div>
+      </div>
+      <div class="construction-demo" id="construction-demo" v-cloak aria-label="Progressive JSON object construction demo">
+        <div class="construction-heading"><span><i class="live-dot"></i> Input string chunks</span><span>{{ step }} / {{ parts.length }} chunks</span></div>
+        <pre class="construction-input" ref="input"><code>{{ parts.slice(0, Math.max(0, step - 1)).join('') }}</code><code class="current-chunk">{{ parts[step - 1] }}</code></pre>
+        <div class="construction-flow"><span aria-hidden="true">↓</span><code>parse(chunks(), host, "data")</code></div>
+        <div class="construction-object">
+          <div class="construction-object-heading"><code>host.data</code><span>{{ complete ? 'Complete object' : 'Building' }}</span></div>
+          <div class="object-view"><object-inspector :value="constructed" :revision="revision"></object-inspector></div>
+        </div>
+        <div class="construction-controls">
+          <span class="construction-status">{{ complete ? 'Input ended · returns host.data' : 'Input continues · partial result available' }}</span>
+          <div><button type="button" @click="togglePlay">{{ playing ? 'Pause' : 'Resume' }}</button><button type="button" @click="advance" :disabled="complete || !waiting">Next chunk</button><button type="button" @click="start">Replay</button></div>
+        </div>
+        <p class="construction-error" v-if="error" role="alert">{{ error }}</p>
+      </div>
+      <noscript><div class="construction-demo"><p>As chunks arrive, the same object grows:</p><pre><code>{}
+→ { "title": "Progressive JSON" }
+→ { "title": "Progressive JSON construction", "description": "Input arrives in chunks. " }
+→ { "title": "Progressive JSON construction", "description": "Input arrives in chunks. Strings grow as more text arrives, and objects appear one by one in the array.", "items": [] }</code></pre></div></noscript>
+    </section>
+
+    <section class="scenarios wrap" id="scenarios" aria-labelledby="scenarios-title">
+      <div class="section-heading"><div><p class="eyebrow">Integration examples</p><h2 id="scenarios-title">Use it in different scenarios</h2></div><p>Receive input from HTTP or SSE.<br>Write into Vue objects or record commands with a Proxy.</p></div>
+      <div id="scenarios-demo" v-cloak>
+        <div class="scenario-tabs" role="tablist" aria-label="Integration scenarios">
+          <button v-for="item in examples" :key="item.id" :id="'scenario-tab-' + item.id" role="tab" :aria-selected="scenario === item.id" :tabindex="scenario === item.id ? 0 : -1" aria-controls="scenario-panel" :class="{ selected: scenario === item.id }" @click="scenario = item.id" @keydown="navigate($event, item.id)"><span>{{ item.label }}</span><small>{{ item.flow[0] }} → {{ item.flow[item.flow.length - 1] }}</small></button>
+        </div>
+        <div id="scenario-panel" class="scenario-panel" role="tabpanel" :aria-labelledby="'scenario-tab-' + scenario">
+          <div class="scenario-intro"><h3>{{ current.title }}</h3><p>{{ current.description }}</p><div class="scenario-flow"><template v-for="(part, index) in current.flow" :key="index"><span v-if="index" class="scenario-arrow" aria-hidden="true">→</span><code>{{ part }}</code></template></div></div>
+          <div class="scenario-columns">
+            <div class="scenario-code">
+              <div class="scenario-panel-heading"><span>Integration code</span><a href="https://gist.github.com/wintercn/b4c381987f7d70d849a62d471486935f#file-scenarios-html" target="_blank" rel="noopener">Full code · Gist ↗</a></div>
+              <pre><code>{{ current.code }}</code></pre>
+              <template v-if="current.template"><p class="scenario-code-label">Vue template</p><pre><code>{{ current.template }}</code></pre></template>
+              <details class="scenario-adapter" v-if="current.adapter" :key="scenario" :open="scenario === 'proxy'"><summary>{{ scenario === 'proxy' ? 'Proxy get / set implementation' : 'Show input adapter code' }}</summary><pre><code>{{ current.adapter }}</code></pre></details>
+            </div>
+            <div class="scenario-output">
+              <div class="scenario-panel-heading"><span>Live output</span><div class="scenario-run"><button type="button" v-if="running" @click="stop">Stop</button><button type="button" @click="start" :disabled="running">{{ status === 'idle' ? 'Run example' : 'Run again' }}</button></div></div>
+              <div class="scenario-vue-view" v-if="scenario === 'vue'"><h4>{{ host.data?.title }}</h4><ul><li v-for="(item, index) in host.data?.items" :key="index">{{ item.name }}</li></ul></div>
+              <div class="scenario-result"><p>{{ scenario === 'proxy' ? 'Commands generated as input arrives' : 'host.data' }}</p><ol class="command-list" v-if="scenario === 'proxy'"><li v-for="(entry, index) in commands" :key="index"><code>{{ entry.op }} {{ JSON.stringify(entry.path) }} = {{ JSON.stringify(entry.value) }}</code></li></ol><div class="object-view" v-else><object-inspector :value="constructed" :revision="revision"></object-inspector></div></div>
+              <details class="scenario-input"><summary>{{ scenario === 'http' ? 'Show byte chunks and decoded text' : scenario === 'sse' ? 'Show SSE messages and JSON fragments' : 'Show input and object' }}</summary><template v-if="wire.length"><p>{{ scenario === 'http' ? 'UTF-8 byte chunks (hex)' : 'Simulated SSE messages' }}</p><pre><code>{{ wire.join(scenario === 'http' ? '\n' : '') }}</code></pre></template><p>String input passed to parse</p><pre><code>{{ received }}</code></pre><template v-if="scenario === 'proxy'"><p>host.data</p><div class="object-view"><object-inspector :value="constructed" :revision="revision"></object-inspector></div></template></details>
+              <div class="scenario-status" role="status">{{ statusLabel }}</div><p class="scenario-error" v-if="error" role="alert">{{ error }}</p>
+            </div>
+          </div>
+          <p class="scenario-note">{{ current.note }}</p>
+        </div>
+      </div>
+      <noscript><p>Vue: pass a reactive host object. HTTP: decode the response body. SSE: feed JSON fragments in message order. Proxy: proxy nested objects in get and record assignments in set.</p></noscript>
+    </section>
+
+    <section class="quality wrap" id="quality" aria-labelledby="quality-title">
+      <div class="section-heading"><div><p class="eyebrow">Tests and measurement</p><h2 id="quality-title">Tests &amp; performance</h2></div><p>Validate syntax, chunk boundaries, Vue proxies, and the published package.<br>Compare complete parsing times using the same input and chunks.</p></div>
+      <div class="quality-stats" aria-label="Test results">
+        <div><strong>1,096</strong><span>Tests passed</span></div><div><strong>0</strong><span>Tests failed</span></div><div><strong>345</strong><span>Upstream string test files</span></div>
+      </div>
+      <p class="quality-test-note">Node 24.21.0 · JSON syntax, chunk boundaries, Vue integration, and package installation.<a href="https://github.com/wintercn/gradual-json/blob/main/test/README.md#jsontestsuite" target="_blank" rel="noopener">Test coverage ↗</a></p>
+      <div id="benchmark-demo" v-cloak>
+        <div class="quality-performance" :aria-busy="running">
+          <div class="performance-heading"><h3>Benchmark on your device</h3><span>4,096-character chunks</span></div>
+          <div class="benchmark-controls">
+            <button type="button" class="benchmark-run" :disabled="running" @click="start">{{ running ? 'Running…' : status === 'idle' ? 'Start local benchmark' : 'Run again' }}</button>
+            <button type="button" v-if="running" @click="stop">Stop</button>
+            <button type="button" v-if="results" @click="download">Download trial data</button>
+            <span role="status" :class="{ 'benchmark-error': status === 'error' }">{{ message }}</span>
+          </div>
+          <figure class="benchmark-chart">
+            <figcaption>Complete parsing time · shorter bars mean less time · each group has its own scale</figcaption>
+            <div class="benchmark-legend" aria-label="Libraries and versions">
+              <span class="benchmark-gradual"><i aria-hidden="true"></i><code>gradual-json</code><small>__PACKAGE_VERSION__</small></span>
+              <span class="benchmark-river"><i aria-hidden="true"></i><code>jsonriver</code><small>1.1.1</small></span>
+              <span class="benchmark-streamparser"><i aria-hidden="true"></i><code>@streamparser/json</code><small>0.0.26 · partial</small></span>
+            </div>
+            <div class="benchmark-cases">
+              <div class="benchmark-case" v-for="item in cases" :key="item.id" :data-benchmark="item.id">
+                <h4>{{ item.title }}<small>{{ item.bytes ? item.bytes.toLocaleString('en-US') + ' B' : '—' }}</small></h4>
+                <div class="benchmark-bars">
+                  <div class="benchmark-bar" v-for="method in methods" :key="method.id" :class="method.className">
+                    <div class="benchmark-bar-label"><code>{{ method.label }}</code><span>{{ item.medianMs ? item.medianMs[method.id].toFixed(3) + ' ms' : '—' }}</span></div>
+                    <div class="benchmark-track" aria-hidden="true"><i :style="{ width: (item.medianMs ? item.medianMs[method.id] / scale(item) * 100 : 0) + '%' }"></i></div>
+                  </div>
+                </div>
+                <div class="benchmark-axis" aria-hidden="true"><span>0</span><span>{{ item.medianMs ? Number((scale(item) / 2).toPrecision(3)) : '—' }}</span><span>{{ item.medianMs ? Number(scale(item).toPrecision(3)) + ' ms' : '—' }}</span></div>
+              </div>
+            </div>
+          </figure>
+          <p class="performance-note">Libraries differ in partial update granularity and parsing semantics. This chart compares complete parsing times for valid input.</p>
+        </div>
+        <div class="quality-method"><p>Runs in this browser on your device. ASCII JSON, 4,096-character chunks, 3 warmups, and 11 trials with rotating library order; reports the median. Complete results are checked before timing. Excludes library loading, network waits, input decoding, and Vue updates.<span v-if="measuredAt">Measured on this device: {{ measuredAt }}.</span></p><div><a href="https://github.com/wintercn/gradual-json/blob/main/site/performance-worker.js" target="_blank" rel="noopener">Benchmark source ↗</a></div></div>
+      </div>
+      <noscript><p>Enable JavaScript to run the benchmark in this browser.</p></noscript>
+    </section>
+
+  </main>
+  <footer class="footer wrap"><a class="brand" href="#"><img class="brand-mark" src="./logo.svg?v=7" alt="" width="37" height="37">gradual-json</a><span>A progressive JSON parser.</span><div><a href="https://www.npmjs.com/package/gradual-json" target="_blank" rel="noopener">npm ↗</a><a href="https://github.com/wintercn/gradual-json" target="_blank" rel="noopener">GitHub ↗</a><a href="https://github.com/wintercn/gradual-json/blob/main/LICENSE" target="_blank" rel="noopener">MIT</a></div></footer>
+  <script type="module" src="./app.js?v=13"></script>
+</body>
+</html>

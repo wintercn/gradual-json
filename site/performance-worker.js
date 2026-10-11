@@ -25,14 +25,15 @@ const methods = [
 
 self.onmessage = async ({ data }) => {
   if (data.type !== "start") return;
+  const english = data.language === "en";
   try {
     const inputs = [
-      ["records", "2,500 条嵌套记录", JSON.stringify(Array.from({ length: 2500 }, (_, i) => ({
+      ["records", english ? "2,500 nested records" : "2,500 条嵌套记录", JSON.stringify(Array.from({ length: 2500 }, (_, i) => ({
         id: i, title: `item-${i}-abcdefghijk`, tags: ["a", "b", "c"],
         details: { enabled: i % 2 === 0, price: i + 0.25 }, description: "sample ".repeat(10),
       })))],
-      ["long_string", "长字符串", JSON.stringify({ text: "x".repeat(262144) })],
-      ["numbers", "50,000 个数字", JSON.stringify(Array.from({ length: 50000 }, (_, i) => i / 10))],
+      ["long_string", english ? "Long string" : "长字符串", JSON.stringify({ text: "x".repeat(262144) })],
+      ["numbers", english ? "50,000 numbers" : "50,000 个数字", JSON.stringify(Array.from({ length: 50000 }, (_, i) => i / 10))],
     ];
     const results = {
       measuredAt: new Date().toISOString(),
@@ -48,10 +49,10 @@ self.onmessage = async ({ data }) => {
       timings: [],
     };
     for (const [id, title, input] of inputs) {
-      self.postMessage({ type: "progress", message: `${title} · 校验结果与预热` });
+      self.postMessage({ type: "progress", message: title + (english ? " · validating and warming up" : " · 校验结果与预热") });
       const expected = JSON.stringify(JSON.parse(input));
       for (const [key, run] of methods) {
-        if (JSON.stringify(await run(input)) !== expected) throw new Error(`${title}：${key} 的解析结果不一致`);
+        if (JSON.stringify(await run(input)) !== expected) throw new Error(english ? `${title}: output mismatch for ${key}` : `${title}：${key} 的解析结果不一致`);
         for (let i = 0; i < 3; i++) await run(input);
       }
       const samples = Object.fromEntries(methods.map(([key]) => [key, []]));
@@ -62,7 +63,7 @@ self.onmessage = async ({ data }) => {
           await run(input);
           samples[key].push(performance.now() - start);
         }
-        self.postMessage({ type: "progress", message: `${title} · 第 ${trial + 1} / 11 轮` });
+        self.postMessage({ type: "progress", message: english ? `${title} · trial ${trial + 1} / 11` : `${title} · 第 ${trial + 1} / 11 轮` });
       }
       const medianMs = Object.fromEntries(Object.entries(samples).map(([key, values]) => [key, [...values].sort((a, b) => a - b)[5]]));
       const result = { id, title, codeUnits: input.length, bytes: input.length, medianMs, samples };

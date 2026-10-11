@@ -1,24 +1,43 @@
 import { createApp, onMounted, ref, shallowRef, watch } from "./assets/vue.js";
 import { parse } from "./assets/parser.js";
-import scenarios from "./scenarios.js?v=2";
-import ObjectInspector from "./object-inspector.js?v=1";
-import performanceBenchmark from "./performance.js?v=1";
+import scenarios from "./scenarios.js?v=3";
+import ObjectInspector from "./object-inspector.js?v=2";
+import performanceBenchmark from "./performance.js?v=2";
+
+const english = document.documentElement.lang === "en";
+const languageSwitch = document.querySelector(".language-switch");
+const languageHref = languageSwitch.getAttribute("href");
+languageSwitch.href = languageHref + location.hash;
+window.addEventListener("hashchange", () => { languageSwitch.href = languageHref + location.hash; });
 
 const copyInstall = document.querySelector(".copy-install");
 copyInstall.addEventListener("click", async () => {
   const feedback = document.querySelector(".copy-feedback");
   try {
     await navigator.clipboard.writeText("npm install gradual-json");
-    feedback.textContent = "已复制";
+    feedback.textContent = english ? "Copied" : "已复制";
   } catch {
-    feedback.textContent = "请选择并复制安装命令";
+    feedback.textContent = english ? "Select and copy the install command" : "请选择并复制安装命令";
   }
   setTimeout(() => { feedback.textContent = ""; }, 2200);
 });
 
 createApp({
   setup() {
-    const parts = [
+    const parts = english ? [
+      '{',
+      '"title":"Progressive JSON',
+      ' construction","description":"Input arrives in chunks. ',
+      'Strings grow as more text arrives, ',
+      'and objects appear one by one in the array.","items":[',
+      '{"name":"Receive async ',
+      'string chunks","count":3},',
+      '{"name":"Read the object ',
+      'while it is being built","count":2},',
+      '{"name":"Return when the JSON ',
+      'is complete","count":1}',
+      ']}',
+    ] : [
       '{',
       '"title":"渐进式 JSON',
       ' 对象构造","description":"输入按顺序到达，',
@@ -82,7 +101,7 @@ createApp({
               if (playing.value) timer = setTimeout(advance, 1200);
             });
           }
-          if (id !== runId) throw new DOMException("演示已重新开始", "AbortError");
+          if (id !== runId) throw new DOMException(english ? "Demo restarted" : "演示已重新开始", "AbortError");
           yield parts[index];
           // 解析器消费当前块后，读取普通宿主对象的实际内容用于展示。
           constructed.value = host.data;

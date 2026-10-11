@@ -9,6 +9,7 @@ export default {
     revision: { default: 0 },
   },
   setup(props) {
+    const english = document.documentElement.lang === "en";
     const expanded = ref(props.depth < 3);
     const isContainer = computed(() => props.value !== null && typeof props.value === "object");
     const isArray = computed(() => Array.isArray(props.value));
@@ -25,12 +26,12 @@ export default {
     const primitive = computed(() => typeof props.value === "string"
       ? JSON.stringify(props.value)
       : Object.is(props.value, -0) ? "-0" : String(props.value));
-    return { expanded, isContainer, isArray, entries, kind, valueType, primitive };
+    return { english, expanded, isContainer, isArray, entries, kind, valueType, primitive };
   },
   template: `
     <div class="object-node" v-if="value !== undefined">
       <template v-if="isContainer">
-        <button class="object-row object-branch" type="button" :aria-expanded="expanded" :aria-label="(expanded ? '收起 ' : '展开 ') + (name ?? '根对象')" @click="expanded = !expanded">
+        <button class="object-row object-branch" type="button" :aria-expanded="expanded" :aria-label="(expanded ? (english ? 'Collapse ' : '收起 ') : (english ? 'Expand ' : '展开 ')) + (name ?? (english ? 'root object' : '根对象'))" @click="expanded = !expanded">
           <span class="object-arrow" aria-hidden="true">{{ expanded ? '▾' : '▸' }}</span>
           <span class="object-key" v-if="name !== null">{{ name }}:</span>
           <span class="object-kind">{{ kind }}</span>

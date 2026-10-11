@@ -2,21 +2,22 @@ import { computed, ref, shallowRef } from "./assets/vue.js";
 
 export default {
   setup() {
+    const english = document.documentElement.lang === "en";
     const methods = [
       { id: "gradual", label: "gradual-json", className: "benchmark-gradual" },
       { id: "river", label: "jsonriver", className: "benchmark-river" },
       { id: "streamparser", label: "@streamparser/json", className: "benchmark-streamparser" },
     ];
     const cases = ref([
-      { id: "records", title: "2,500 条嵌套记录" },
-      { id: "long_string", title: "长字符串" },
-      { id: "numbers", title: "50,000 个数字" },
+      { id: "records", title: english ? "2,500 nested records" : "2,500 条嵌套记录" },
+      { id: "long_string", title: english ? "Long string" : "长字符串" },
+      { id: "numbers", title: english ? "50,000 numbers" : "50,000 个数字" },
     ]);
     const status = ref("idle");
-    const message = ref("点击开始，在当前浏览器中测量。");
+    const message = ref(english ? "Click Start to measure in this browser." : "点击开始，在当前浏览器中测量。");
     const results = shallowRef();
     const running = computed(() => status.value === "running");
-    const measuredAt = computed(() => results.value ? new Date(results.value.measuredAt).toLocaleString("zh-CN", { hour12: false }) : "");
+    const measuredAt = computed(() => results.value ? new Date(results.value.measuredAt).toLocaleString(english ? "en-US" : "zh-CN", { hour12: false }) : "");
     let worker;
 
     function start() {
@@ -24,9 +25,9 @@ export default {
       results.value = undefined;
       cases.value = cases.value.map(({ id, title }) => ({ id, title }));
       status.value = "running";
-      message.value = "正在加载测试库…";
+      message.value = english ? "Loading benchmark libraries…" : "正在加载测试库…";
       try {
-        const current = new Worker(new URL("./performance-worker.js?v=1", import.meta.url), { type: "module" });
+        const current = new Worker(new URL("./performance-worker.js?v=2", import.meta.url), { type: "module" });
         worker = current;
         current.onmessage = ({ data }) => {
           if (worker !== current) return;
@@ -35,12 +36,12 @@ export default {
           else if (data.type === "complete") {
             results.value = data.results;
             status.value = "complete";
-            message.value = "本机测试完成";
+            message.value = english ? "Local benchmark complete" : "本机测试完成";
             current.terminate();
             worker = undefined;
           } else if (data.type === "error") {
             status.value = "error";
-            message.value = `测试失败：${data.message}`;
+            message.value = (english ? "Benchmark failed: " : "测试失败：") + data.message;
             current.terminate();
             worker = undefined;
           }
@@ -49,16 +50,16 @@ export default {
           event.preventDefault();
           if (worker !== current) return;
           status.value = "error";
-          message.value = `测试失败：${event.message || "测试脚本加载失败"}`;
+          message.value = (english ? "Benchmark failed: " : "测试失败：") + (event.message || (english ? "Could not load the benchmark script" : "测试脚本加载失败"));
           current.terminate();
           worker = undefined;
         };
-        current.postMessage({ type: "start" });
+        current.postMessage({ type: "start", language: english ? "en" : "zh-CN" });
       } catch (cause) {
         worker?.terminate();
         worker = undefined;
         status.value = "error";
-        message.value = `测试失败：${cause.message}`;
+        message.value = (english ? "Benchmark failed: " : "测试失败：") + cause.message;
       }
     }
 
@@ -66,7 +67,7 @@ export default {
       worker?.terminate();
       worker = undefined;
       status.value = "stopped";
-      message.value = "测试已停止";
+      message.value = english ? "Benchmark stopped" : "测试已停止";
     }
 
     function scale(item) {

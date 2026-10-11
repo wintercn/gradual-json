@@ -2,7 +2,7 @@ import { computed, reactive, ref, shallowRef, watch } from "./assets/vue.js";
 import { parse } from "./assets/parser.js";
 
 export async function* httpChunks(response) {
-  if (!response.ok || !response.body) throw new Error("无法读取 JSON 响应");
+  if (!response.ok || !response.body) throw new Error(document.documentElement.lang === "en" ? "Cannot read the JSON response" : "无法读取 JSON 响应");
   const reader = response.body.pipeThrough(new TextDecoderStream()).getReader();
   try {
     while (true) {
@@ -23,7 +23,7 @@ export async function* sseChunks(source) {
   let failure;
   const message = event => { queue.push(event.data); wake?.(); };
   const end = () => { ended = true; source.close(); wake?.(); };
-  const error = () => { failure = new Error("SSE 输入中断"); end(); };
+  const error = () => { failure = new Error(document.documentElement.lang === "en" ? "SSE input interrupted" : "SSE 输入中断"); end(); };
   source.addEventListener("message", message);
   source.addEventListener("end", end);
   source.addEventListener("error", error);
@@ -71,6 +71,7 @@ export function commandProxy(commands) {
 
 export default {
   setup() {
+    const english = document.documentElement.lang === "en";
     const scenario = ref("vue");
     const host = shallowRef({});
     const constructed = shallowRef();
@@ -81,44 +82,48 @@ export default {
     const status = ref("idle");
     const error = ref("");
     let runId = 0;
-    const parts = ['{', '"title":"渐', '进式 JSON","items":[', '{"name":"第一', '项"},', '{"name":"第二项"}', '],"ready":true}'];
+    const parts = english
+      ? ['{', '"title":"Progressive', ' JSON café","items":[', '{"name":"First ', 'item"},', '{"name":"Second item"}', '],"ready":true}']
+      : ['{', '"title":"渐', '进式 JSON","items":[', '{"name":"第一', '项"},', '{"name":"第二项"}', '],"ready":true}'];
     const examples = [
       {
-        id: "vue", label: "Vue", title: "对象写入，页面随之更新",
-        description: "把 reactive 对象传入解析器。模板读取同一个对象，字符串逐步显示，数组项逐步加入。",
-        flow: ["字符串块", "parse", "reactive 对象", "Vue 模板"],
-        note: "本地异步生成器逐块输入，实际写入 Vue 深层响应式对象。",
+        id: "vue", label: "Vue", title: english ? "Update the page as the object grows" : "对象写入，页面随之更新",
+        description: english ? "Pass a reactive object to the parser. The template reads that same object as strings grow and array items appear." : "把 reactive 对象传入解析器。模板读取同一个对象，字符串逐步显示，数组项逐步加入。",
+        flow: english ? ["String chunks", "parse", "reactive object", "Vue template"] : ["字符串块", "parse", "reactive 对象", "Vue 模板"],
+        note: english ? "A local async generator supplies chunks to the parser, which writes into a deeply reactive Vue object." : "本地异步生成器逐块输入，实际写入 Vue 深层响应式对象。",
         code: 'import { reactive } from "vue";\nimport { parse } from "gradual-json";\n\nconst host = reactive({});\nawait parse(chunks(), host, "data");',
         template: '<h3>{{ host.data?.title }}</h3>\n<ul>\n  <li v-for="(item, i) in host.data?.items" :key="i">\n    {{ item.name }}\n  </li>\n</ul>',
       },
       {
-        id: "http", label: "HTTP", title: "响应还在传输，对象开始构造",
-        description: "读取 fetch 的响应体，用 TextDecoderStream 解码字节，再把字符串块交给 parse。中文的 UTF-8 字节可以跨块到达。",
-        flow: ["response.body", "UTF-8 解码", "parse", "host.data"],
-        note: "演示在浏览器内模拟延时响应体，刻意拆开中文的 UTF-8 字节；实际调用解码器和解析器。",
+        id: "http", label: "HTTP", title: english ? "Build the object while the response arrives" : "响应还在传输，对象开始构造",
+        description: english ? "Read the fetch response body, decode bytes with TextDecoderStream, and pass string chunks to parse. A UTF-8 character can span byte chunks." : "读取 fetch 的响应体，用 TextDecoderStream 解码字节，再把字符串块交给 parse。中文的 UTF-8 字节可以跨块到达。",
+        flow: english ? ["response.body", "UTF-8 decoding", "parse", "host.data"] : ["response.body", "UTF-8 解码", "parse", "host.data"],
+        note: english ? "The demo simulates a delayed response body in the browser and splits a UTF-8 character across chunks. It runs the actual decoder and parser." : "演示在浏览器内模拟延时响应体，刻意拆开中文的 UTF-8 字节；实际调用解码器和解析器。",
         code: 'import { parse } from "gradual-json";\n\nconst response = await fetch("/data.json");\nconst host = {};\nawait parse(httpChunks(response), host, "data");',
         adapter: httpChunks.toString(),
       },
       {
-        id: "sse", label: "SSE", title: "把消息中的 JSON 片段接成输入流",
-        description: "EventSource 处理 SSE 协议，应用把每条 message.data 中的 JSON 文本片段按顺序送入 parse。",
+        id: "sse", label: "SSE", title: english ? "Feed JSON fragments from successive messages" : "把消息中的 JSON 片段接成输入流",
+        description: english ? "EventSource handles the SSE protocol. The application passes JSON text fragments from each message.data to parse in order." : "EventSource 处理 SSE 协议，应用把每条 message.data 中的 JSON 文本片段按顺序送入 parse。",
         flow: ["EventSource", "message.data", "parse", "host.data"],
-        note: "演示模拟 message 和 end 事件。此例约定每条 message 携带同一份 JSON 的一个片段，服务端用 end 事件结束输入。",
+        note: english ? "The demo simulates message and end events. Each message carries a fragment of one JSON document; an end event signals the end of input." : "演示模拟 message 和 end 事件。此例约定每条 message 携带同一份 JSON 的一个片段，服务端用 end 事件结束输入。",
         code: 'import { parse } from "gradual-json";\n\nconst source = new EventSource("/events");\nconst host = {};\nawait parse(sseChunks(source), host, "data");',
         adapter: sseChunks.toString(),
       },
       {
-        id: "proxy", label: "Proxy → 命令", title: "把深层赋值记录为命令序列",
-        description: "用 Proxy 的 set 记录路径和值，get 返回子对象的代理。对象创建、字符串追加和数组写入都能转成命令。",
-        flow: ["字符串块", "parse", "Proxy.set", "命令序列"],
-        note: "命令由应用层 Proxy 生成。每条命令保存写入当时的值，可按顺序重放到另一个对象。",
-        code: 'import { parse } from "gradual-json";\n\nconst commands = [];\nconst host = commandProxy(commands);\nawait parse(chunks(), host, "data");\n\n// { op: "set", path: ["data", "title"], value: "渐" }',
+        id: "proxy", label: english ? "Proxy → commands" : "Proxy → 命令", title: english ? "Record nested assignments as commands" : "把深层赋值记录为命令序列",
+        description: english ? "Use Proxy.set to record paths and values, and Proxy.get to return proxies for nested objects. Record object creation, string updates, and array writes as commands." : "用 Proxy 的 set 记录路径和值，get 返回子对象的代理。对象创建、字符串追加和数组写入都能转成命令。",
+        flow: english ? ["String chunks", "parse", "Proxy.set", "Commands"] : ["字符串块", "parse", "Proxy.set", "命令序列"],
+        note: english ? "The application's Proxy generates the commands. Each command captures the value at the time of the write and can be replayed in order on another object." : "命令由应用层 Proxy 生成。每条命令保存写入当时的值，可按顺序重放到另一个对象。",
+        code: 'import { parse } from "gradual-json";\n\nconst commands = [];\nconst host = commandProxy(commands);\nawait parse(chunks(), host, "data");\n\n// { op: "set", path: ["data", "title"], value: ' + (english ? '"Progressive"' : '"渐"') + ' }',
         adapter: commandProxy.toString(),
       },
     ];
     const current = computed(() => examples.find(item => item.id === scenario.value));
     const running = computed(() => status.value === "streaming");
-    const statusLabel = computed(() => ({ idle: "点击运行此例", streaming: "正在输入 · 逐步写入", stopped: "已停止 · 保留部分结果", complete: "输入结束 · 完整返回", error: "输入失败" })[status.value]);
+    const statusLabel = computed(() => (english
+      ? { idle: "Click Run example", streaming: "Receiving input · updating the object", stopped: "Stopped · partial result retained", complete: "Input ended · complete result returned", error: "Input failed" }
+      : { idle: "点击运行此例", streaming: "正在输入 · 逐步写入", stopped: "已停止 · 保留部分结果", complete: "输入结束 · 完整返回", error: "输入失败" })[status.value]);
 
     function stop() {
       runId++;
@@ -165,7 +170,7 @@ export default {
 
       async function pause() {
         await new Promise(resolve => setTimeout(resolve, 450));
-        if (id !== runId) throw new DOMException("输入已停止", "AbortError");
+        if (id !== runId) throw new DOMException(english ? "Input stopped" : "输入已停止", "AbortError");
       }
 
       async function* localChunks() {
@@ -175,7 +180,8 @@ export default {
       let source;
       if (mode === "http") {
         const bytes = new TextEncoder().encode(parts.join(""));
-        const sizes = [11, 1, 5, 9, 7, 10, 8];
+        // 两份示例都在多字节 UTF-8 字符内部切块。
+        const sizes = english ? [11, 1, 5, 14, 7, 10, 8] : [11, 1, 5, 9, 7, 10, 8];
         let offset = 0;
         let index = 0;
         let canceled = false;
@@ -217,7 +223,7 @@ export default {
 
       async function* chunks() {
         for await (const chunk of source) {
-          if (id !== runId) throw new DOMException("输入已停止", "AbortError");
+          if (id !== runId) throw new DOMException(english ? "Input stopped" : "输入已停止", "AbortError");
           received.value += chunk;
           yield chunk;
           if (id === runId) {
